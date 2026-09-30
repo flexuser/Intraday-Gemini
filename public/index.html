@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institutional Stock Attribution Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <header class="flex justify-between items-center border-b border-slate-800 pb-6 mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-white">Institutional Movement Attribution & Prediction</h1>
+                <p class="text-slate-400 text-sm mt-1">Cross-Exchange Disclosure Analytics & Institutional Deal Correlation</p>
+            </div>
+            <span class="px-3 py-1 text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full">
+                ● Live Local Feed
+            </span>
+        </header>
+
+        <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-6 mb-8 shadow-xl">
+            <h2 class="text-xs font-bold uppercase text-slate-400 mb-2">Primary Driver</h2>
+            <p id="primaryDriver" class="text-2xl font-bold text-blue-400 mb-4">Loading data...</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-slate-800/50 border border-slate-700/60 rounded-xl p-6">
+                <h2 class="text-lg font-bold text-white mb-4">📄 Announcements</h2>
+                <div id="filingsContainer"></div>
+            </div>
+            <div class="bg-slate-800/50 border border-slate-700/60 rounded-xl p-6">
+                <h2 class="text-lg font-bold text-white mb-4">🏛️ Bulk & Block Deals</h2>
+                <div id="dealsContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function loadData() {
+            const annRes = await fetch('./data_store/MUTHOOTFIN_announcements.json');
+            const announcements = await annRes.json();
+            const dealRes = await fetch('./data_store/MUTHOOTFIN_bulk_block.json');
+            const deals = await dealRes.json();
+
+            document.getElementById("primaryDriver").innerText = `Institutional Deal (${deals[0].client_name} - ${deals[0].buy_sell})`;
+            
+            document.getElementById("filingsContainer").innerHTML = announcements.map(a => `
+                <div class="p-4 bg-slate-900/60 rounded border border-slate-700/40 mb-2">
+                    <span class="text-xs text-blue-400 font-bold">${a.category}</span>
+                    <p class="text-sm text-slate-200 mt-1">${a.caption}</p>
+                </div>
+            `).join('');
+
+            document.getElementById("dealsContainer").innerHTML = deals.map(d => `
+                <div class="p-4 bg-slate-900/60 rounded border border-slate-700/40 mb-2 flex justify-between">
+                    <div>
+                        <span class="font-bold text-sm">${d.client_name}</span>
+                        <div class="text-xs text-slate-400">Qty: ${d.quantity} @ ₹${d.price}</div>
+                    </div>
+                    <span class="text-xs font-bold text-emerald-400">${d.buy_sell}</span>
+                </div>
+            `).join('');
+        }
+        loadData();
+    </script>
+</body>
+</html>
