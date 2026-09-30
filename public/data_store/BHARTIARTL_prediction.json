@@ -2,16 +2,16 @@
   "prediction": {
     "symbol": "BHARTIARTL",
     "predicted_bias": "BULLISH",
-    "confidence_pct": 83.3,
-    "learning_adjusted_weight": "Calibrated using 80.8% past accuracy score.",
+    "confidence_pct": 82.5,
+    "learning_adjusted_weight": "Calibrated using 80.0% past accuracy score.",
     "primary_driver": "Positive disclosure alignment & institutional VWAP support for BHARTIARTL."
   },
   "spike": {
-    "has_spike": true,
+    "has_spike": false,
     "volume_surge": "Normal",
-    "price_impulse_5m": "1.25% in 5 mins",
-    "severity": "MEDIUM",
-    "description": "Surge of 2.05x volume detected on BHARTIARTL with a 1.25% price impulse."
+    "price_impulse_5m": "0.36% in 5 mins",
+    "severity": "NONE",
+    "description": "No unusual spike detected."
   },
   "curves": {
     "symbol": "BHARTIARTL",
@@ -28,33 +28,33 @@
       "15:30"
     ],
     "actual_curve": [
-      571.17,
-      570.48,
-      568.48,
-      574.06,
-      573.44,
-      575.9,
-      576.52,
-      575.33,
-      574.72,
-      574.93
+      855.32,
+      851.86,
+      857.31,
+      859.55,
+      857.63,
+      856.98,
+      856.49,
+      856.17,
+      853.36,
+      850.12
     ],
     "predicted_curve": [
-      572.91,
-      574.03,
-      575.45,
-      578.73,
-      581.0,
-      581.72,
-      582.99,
-      583.88,
-      586.38,
-      588.92
+      850.64,
+      847.49,
+      845.96,
+      843.43,
+      842.63,
+      841.53,
+      839.51,
+      836.72,
+      833.55,
+      832.94
     ],
-    "bias": "BULLISH",
-    "final_actual": 574.93,
-    "final_pred": 588.92,
-    "error_pct": 2.43,
+    "bias": "BEARISH",
+    "final_actual": 850.12,
+    "final_pred": 832.94,
+    "error_pct": 2.02,
     "verdict": "SUCCESS"
   }
 }

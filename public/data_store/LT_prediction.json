@@ -2,16 +2,16 @@
   "prediction": {
     "symbol": "LT",
     "predicted_bias": "BEARISH",
-    "confidence_pct": 83.3,
-    "learning_adjusted_weight": "Calibrated using 80.8% past accuracy score.",
+    "confidence_pct": 82.5,
+    "learning_adjusted_weight": "Calibrated using 80.0% past accuracy score.",
     "primary_driver": "Positive disclosure alignment & institutional VWAP support for LT."
   },
   "spike": {
-    "has_spike": true,
+    "has_spike": false,
     "volume_surge": "Normal",
-    "price_impulse_5m": "1.5% in 5 mins",
-    "severity": "MEDIUM",
-    "description": "Surge of 2.31x volume detected on LT with a 1.5% price impulse."
+    "price_impulse_5m": "0.11% in 5 mins",
+    "severity": "NONE",
+    "description": "No unusual spike detected."
   },
   "curves": {
     "symbol": "LT",
@@ -28,33 +28,33 @@
       "15:30"
     ],
     "actual_curve": [
-      1187.72,
-      1188.14,
-      1190.44,
-      1189.1,
-      1194.15,
-      1197.45,
-      1200.6,
-      1200.77,
-      1202.02,
-      1204.29
+      1462.77,
+      1461.33,
+      1461.54,
+      1462.93,
+      1462.96,
+      1466.73,
+      1463.83,
+      1460.12,
+      1465.68,
+      1466.57
     ],
     "predicted_curve": [
-      1191.76,
-      1194.13,
-      1194.69,
-      1195.95,
-      1198.6,
-      1202.94,
-      1205.09,
-      1209.28,
-      1210.73,
-      1213.03
+      1469.29,
+      1472.6,
+      1475.25,
+      1479.45,
+      1481.9,
+      1486.22,
+      1486.99,
+      1489.4,
+      1492.83,
+      1493.88
     ],
     "bias": "BULLISH",
-    "final_actual": 1204.29,
-    "final_pred": 1213.03,
-    "error_pct": 0.73,
+    "final_actual": 1466.57,
+    "final_pred": 1493.88,
+    "error_pct": 1.86,
     "verdict": "SUCCESS"
   }
 }

@@ -1,0 +1,60 @@
+{
+  "prediction": {
+    "symbol": "SUNPHARMA",
+    "predicted_bias": "BEARISH",
+    "confidence_pct": 82.5,
+    "learning_adjusted_weight": "Calibrated using 80.0% past accuracy score.",
+    "primary_driver": "Positive disclosure alignment & institutional VWAP support for SUNPHARMA."
+  },
+  "spike": {
+    "has_spike": true,
+    "volume_surge": "Normal",
+    "price_impulse_5m": "-0.95% in 5 mins",
+    "severity": "MEDIUM",
+    "description": "Surge of 1.8x volume detected on SUNPHARMA with a -0.95% price impulse."
+  },
+  "curves": {
+    "symbol": "SUNPHARMA",
+    "timeframes": [
+      "09:15",
+      "09:45",
+      "10:30",
+      "11:15",
+      "12:00",
+      "12:45",
+      "13:30",
+      "14:15",
+      "15:00",
+      "15:30"
+    ],
+    "actual_curve": [
+      1767.54,
+      1771.41,
+      1776.67,
+      1774.38,
+      1776.45,
+      1777.34,
+      1777.41,
+      1774.03,
+      1772.79,
+      1770.45
+    ],
+    "predicted_curve": [
+      1768.97,
+      1770.49,
+      1774.59,
+      1775.95,
+      1779.62,
+      1782.57,
+      1783.79,
+      1787.31,
+      1788.8,
+      1792.21
+    ],
+    "bias": "BULLISH",
+    "final_actual": 1770.45,
+    "final_pred": 1792.21,
+    "error_pct": 1.23,
+    "verdict": "SUCCESS"
+  }
+}

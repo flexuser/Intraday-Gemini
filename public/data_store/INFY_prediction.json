@@ -2,16 +2,16 @@
   "prediction": {
     "symbol": "INFY",
     "predicted_bias": "BULLISH",
-    "confidence_pct": 83.3,
-    "learning_adjusted_weight": "Calibrated using 80.8% past accuracy score.",
+    "confidence_pct": 82.5,
+    "learning_adjusted_weight": "Calibrated using 80.0% past accuracy score.",
     "primary_driver": "Positive disclosure alignment & institutional VWAP support for INFY."
   },
   "spike": {
-    "has_spike": false,
-    "volume_surge": "Normal",
-    "price_impulse_5m": "-0.44% in 5 mins",
-    "severity": "NONE",
-    "description": "No unusual spike detected."
+    "has_spike": true,
+    "volume_surge": "3.71x avg volume",
+    "price_impulse_5m": "0.99% in 5 mins",
+    "severity": "MEDIUM",
+    "description": "Surge of 3.71x volume detected on INFY with a 0.99% price impulse."
   },
   "curves": {
     "symbol": "INFY",
@@ -28,33 +28,33 @@
       "15:30"
     ],
     "actual_curve": [
-      406.34,
-      407.27,
-      406.05,
-      409.09,
-      405.57,
-      409.06,
-      409.74,
-      413.75,
-      417.22,
-      421.97
+      1399.21,
+      1398.09,
+      1403.18,
+      1408.71,
+      1406.66,
+      1407.47,
+      1406.92,
+      1404.21,
+      1403.82,
+      1410.11
     ],
     "predicted_curve": [
-      406.52,
-      408.64,
-      411.27,
-      412.15,
-      413.05,
-      417.39,
-      420.39,
-      422.4,
-      423.43,
-      424.93
+      1400.29,
+      1401.3,
+      1403.45,
+      1406.95,
+      1410.78,
+      1413.88,
+      1417.97,
+      1420.29,
+      1423.21,
+      1426.79
     ],
     "bias": "BULLISH",
-    "final_actual": 421.97,
-    "final_pred": 424.93,
-    "error_pct": 0.7,
+    "final_actual": 1410.11,
+    "final_pred": 1426.79,
+    "error_pct": 1.18,
     "verdict": "SUCCESS"
   }
 }
