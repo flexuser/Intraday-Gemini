@@ -2,16 +2,9 @@
   "prediction": {
     "symbol": "TMPV",
     "predicted_bias": "BEARISH",
-    "confidence_pct": 81.5,
-    "learning_adjusted_weight": "Calibrated using 79.0% past accuracy score.",
+    "confidence_pct": 81.1,
+    "learning_adjusted_weight": "Calibrated using 78.6% past accuracy score.",
     "primary_driver": "Positive disclosure alignment & institutional VWAP support for TMPV."
-  },
-  "spike": {
-    "has_spike": true,
-    "volume_surge": "2.67x avg volume",
-    "price_impulse_5m": "-0.89% in 5 mins",
-    "severity": "MEDIUM",
-    "description": "Surge of 2.67x volume detected on TMPV with a -0.89% price impulse."
   },
   "curves": {
     "symbol": "TMPV",
@@ -41,20 +34,20 @@
     ],
     "predicted_curve": [
       281.7,
-      281.98,
-      282.27,
-      282.55,
-      282.83,
-      283.12,
-      283.4,
-      283.68,
-      283.97,
-      284.25
+      281.7,
+      281.7,
+      281.7,
+      281.7,
+      281.7,
+      281.7,
+      281.7,
+      281.7,
+      281.7
     ],
-    "bias": "BULLISH",
+    "bias": "NEUTRAL",
     "final_actual": 284.7,
-    "final_pred": 284.25,
-    "error_pct": 0.16,
+    "final_pred": 281.7,
+    "error_pct": 1.05,
     "verdict": "SUCCESS"
   }
 }

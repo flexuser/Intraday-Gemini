@@ -24,7 +24,11 @@ WATCHLIST = [
 
 TIMEFRAMES = ['09:15', '09:45', '10:30', '11:15', '12:00', '12:45', '13:30', '14:15', '15:00', '15:30']
 
-def fetch_real_stock_curve(symbol: str):
+def fetch_actual_prices(symbol: str) -> list[float]:
+    """
+    Fetches real market intraday 30-minute close prices from Yahoo Finance.
+    Pads or truncates to match the length of TIMEFRAMES.
+    """
     nse_symbol = f"{symbol}.NS"
     logger.info(f"Fetching real market prices for {nse_symbol}...")
     
@@ -39,76 +43,101 @@ def fetch_real_stock_curve(symbol: str):
 
         actual_prices = [round(float(p), 2) for p in df['Close'].tolist()]
         
+        if not actual_prices:
+            actual_prices = [1000.0] * len(TIMEFRAMES)
+
         # Match timeframes length
         if len(actual_prices) > len(TIMEFRAMES):
             actual_prices = actual_prices[:len(TIMEFRAMES)]
         elif len(actual_prices) < len(TIMEFRAMES):
-            last_p = actual_prices[-1] if actual_prices else 1000.0
+            last_p = actual_prices[-1]
             actual_prices += [last_p] * (len(TIMEFRAMES) - len(actual_prices))
+
+        return actual_prices
 
     except Exception as e:
         logger.error(f"Failed to fetch market data for {symbol}: {e}")
-        actual_prices = [1000.0] * len(TIMEFRAMES)
+        return [1000.0] * len(TIMEFRAMES)
 
-    base_price = actual_prices[0]
-    final_actual = actual_prices[-1]
-
-    # Generate model prediction curve based on actual base price
-    bias = "BULLISH" if final_actual >= base_price else "BEARISH"
-    drift = (final_actual - base_price) * 0.85  # Model prediction trajectory
+def generate_morning_prediction_curve(symbol: str, base_price: float, ai_sentiment: str, confidence_score: float) -> list[float]:
+    """
+    Generates a forecast curve based on AI sentiment and confidence score.
+    """
+    # Convert AI sentiment + confidence into expected percentage drift (-2.0% to +2.0%)
+    multiplier = 1 if ai_sentiment == "BULLISH" else (-1 if ai_sentiment == "BEARISH" else 0)
+    expected_return_pct = multiplier * (confidence_score / 100.0) * 0.02
+    
+    target_price = base_price * (1 + expected_return_pct)
     
     predicted_prices = []
-    for i, p in enumerate(actual_prices):
-        pred_val = base_price + (drift * (i / max(1, len(actual_prices) - 1)))
+    total_steps = max(1, len(TIMEFRAMES) - 1)
+    
+    for i in range(len(TIMEFRAMES)):
+        progress = i / total_steps
+        pred_val = base_price + ((target_price - base_price) * progress)
         predicted_prices.append(round(pred_val, 2))
-
-    final_pred = predicted_prices[-1]
-    error_pct = round(abs((final_actual - final_pred) / final_actual) * 100, 2)
-    direction_matched = (final_actual >= base_price and final_pred >= base_price) or (final_actual < base_price and final_pred < base_price)
-
-    return {
-        "symbol": symbol,
-        "timeframes": TIMEFRAMES[:len(actual_prices)],
-        "actual_curve": actual_prices,
-        "predicted_curve": predicted_prices,
-        "bias": bias,
-        "final_actual": final_actual,
-        "final_pred": final_pred,
-        "error_pct": error_pct,
-        "verdict": "SUCCESS" if direction_matched and error_pct <= 3.0 else ("PARTIAL" if direction_matched else "FAIL")
-    }
+        
+    return predicted_prices
 
 def run_archive_cycle():
-    logger.info("Running Real Market Data Archival Engine...")
+    logger.info("Running Real Market Data & AI Prediction Cycle...")
     os.makedirs("public/data_store", exist_ok=True)
     
     eod_summary = []
 
     for symbol in WATCHLIST:
+        # 1. Fetch morning news/announcements and classify sentiment
         announcements = fetch_corporate_announcements(symbol)
         clean_ann = deduplicate_announcements(announcements)
-        deals = fetch_nse_bulk_block_deals(symbol)
-        spikes = detect_intraday_spikes(symbol)
-        
-        curve_data = fetch_real_stock_curve(symbol)
         prediction_res = classify_event_and_predict(symbol, clean_ann)
+        
+        ai_bias = prediction_res.get("sentiment", "NEUTRAL")
+        confidence = prediction_res.get("confidence", 50.0)
 
-        payload = {
-            "prediction": prediction_res,
-            "spike": spikes,
-            "curves": curve_data
+        # 2. Fetch actual price history
+        actual_prices = fetch_actual_prices(symbol)
+        base_price = actual_prices[0]
+        final_actual = actual_prices[-1]
+
+        # 3. Generate predicted curve
+        predicted_prices = generate_morning_prediction_curve(
+            symbol=symbol,
+            base_price=base_price,
+            ai_sentiment=ai_bias,
+            confidence_score=confidence
+        )
+        final_pred = predicted_prices[-1]
+
+        # Calculate error & directional match
+        error_pct = round(abs((final_actual - final_pred) / final_actual) * 100, 2)
+        direction_matched = (
+            (final_actual >= base_price and ai_bias == "BULLISH") or
+            (final_actual < base_price and ai_bias == "BEARISH") or
+            (ai_bias == "NEUTRAL" and error_pct <= 1.5)
+        )
+
+        verdict = "SUCCESS" if direction_matched and error_pct <= 3.0 else ("PARTIAL" if direction_matched else "FAIL")
+
+        # 4. Construct payload and save JSON
+        curve_data = {
+            "symbol": symbol,
+            "timeframes": TIMEFRAMES[:len(actual_prices)],
+            "actual_curve": actual_prices,
+            "predicted_curve": predicted_prices,
+            "bias": ai_bias,
+            "final_actual": final_actual,
+            "final_pred": final_pred,
+            "error_pct": error_pct,
+            "verdict": verdict
         }
 
         with open(f"public/data_store/{symbol}_prediction.json", "w") as f:
-            json.dump(payload, f, indent=2)
+            json.dump({"prediction": prediction_res, "curves": curve_data}, f, indent=2)
 
         eod_summary.append(curve_data)
 
     with open("public/data_store/eod_evaluation.json", "w") as f:
         json.dump(eod_summary, f, indent=2)
-
-    update_model_memory(WATCHLIST)
-    logger.info("Archival cycle complete. Real market data stored.")
 
 if __name__ == "__main__":
     run_archive_cycle()

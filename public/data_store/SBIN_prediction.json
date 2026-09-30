@@ -2,16 +2,9 @@
   "prediction": {
     "symbol": "SBIN",
     "predicted_bias": "BEARISH",
-    "confidence_pct": 81.5,
-    "learning_adjusted_weight": "Calibrated using 79.0% past accuracy score.",
+    "confidence_pct": 81.1,
+    "learning_adjusted_weight": "Calibrated using 78.6% past accuracy score.",
     "primary_driver": "Positive disclosure alignment & institutional VWAP support for SBIN."
-  },
-  "spike": {
-    "has_spike": false,
-    "volume_surge": "Normal",
-    "price_impulse_5m": "-0.67% in 5 mins",
-    "severity": "NONE",
-    "description": "No unusual spike detected."
   },
   "curves": {
     "symbol": "SBIN",
@@ -41,20 +34,20 @@
     ],
     "predicted_curve": [
       966.6,
-      966.79,
-      966.98,
-      967.17,
-      967.36,
-      967.54,
-      967.73,
-      967.92,
-      968.11,
-      968.3
+      966.6,
+      966.6,
+      966.6,
+      966.6,
+      966.6,
+      966.6,
+      966.6,
+      966.6,
+      966.6
     ],
-    "bias": "BULLISH",
+    "bias": "NEUTRAL",
     "final_actual": 968.6,
-    "final_pred": 968.3,
-    "error_pct": 0.03,
+    "final_pred": 966.6,
+    "error_pct": 0.21,
     "verdict": "SUCCESS"
   }
 }

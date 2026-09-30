@@ -2,16 +2,9 @@
   "prediction": {
     "symbol": "ICICIBANK",
     "predicted_bias": "BEARISH",
-    "confidence_pct": 81.5,
-    "learning_adjusted_weight": "Calibrated using 79.0% past accuracy score.",
+    "confidence_pct": 81.1,
+    "learning_adjusted_weight": "Calibrated using 78.6% past accuracy score.",
     "primary_driver": "Positive disclosure alignment & institutional VWAP support for ICICIBANK."
-  },
-  "spike": {
-    "has_spike": true,
-    "volume_surge": "Normal",
-    "price_impulse_5m": "-0.89% in 5 mins",
-    "severity": "MEDIUM",
-    "description": "Surge of 1.81x volume detected on ICICIBANK with a -0.89% price impulse."
   },
   "curves": {
     "symbol": "ICICIBANK",
@@ -41,20 +34,20 @@
     ],
     "predicted_curve": [
       1307.1,
-      1309.2,
-      1311.29,
-      1313.39,
-      1315.49,
-      1317.58,
-      1319.68,
-      1321.78,
-      1323.87,
-      1325.97
+      1307.1,
+      1307.1,
+      1307.1,
+      1307.1,
+      1307.1,
+      1307.1,
+      1307.1,
+      1307.1,
+      1307.1
     ],
-    "bias": "BULLISH",
+    "bias": "NEUTRAL",
     "final_actual": 1329.3,
-    "final_pred": 1325.97,
-    "error_pct": 0.25,
-    "verdict": "SUCCESS"
+    "final_pred": 1307.1,
+    "error_pct": 1.67,
+    "verdict": "FAIL"
   }
 }

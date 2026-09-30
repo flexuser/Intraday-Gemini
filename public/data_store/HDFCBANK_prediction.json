@@ -2,16 +2,9 @@
   "prediction": {
     "symbol": "HDFCBANK",
     "predicted_bias": "BEARISH",
-    "confidence_pct": 81.5,
-    "learning_adjusted_weight": "Calibrated using 79.0% past accuracy score.",
+    "confidence_pct": 81.1,
+    "learning_adjusted_weight": "Calibrated using 78.6% past accuracy score.",
     "primary_driver": "Positive disclosure alignment & institutional VWAP support for HDFCBANK."
-  },
-  "spike": {
-    "has_spike": false,
-    "volume_surge": "Normal",
-    "price_impulse_5m": "-0.03% in 5 mins",
-    "severity": "NONE",
-    "description": "No unusual spike detected."
   },
   "curves": {
     "symbol": "HDFCBANK",
@@ -41,20 +34,20 @@
     ],
     "predicted_curve": [
       713.7,
-      714.05,
-      714.41,
-      714.76,
-      715.12,
-      715.47,
-      715.83,
-      716.18,
-      716.53,
-      716.89
+      713.7,
+      713.7,
+      713.7,
+      713.7,
+      713.7,
+      713.7,
+      713.7,
+      713.7,
+      713.7
     ],
-    "bias": "BULLISH",
+    "bias": "NEUTRAL",
     "final_actual": 717.45,
-    "final_pred": 716.89,
-    "error_pct": 0.08,
+    "final_pred": 713.7,
+    "error_pct": 0.52,
     "verdict": "SUCCESS"
   }
 }
