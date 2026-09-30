@@ -1,7 +1,7 @@
 {
-  "total_predictions": 151,
-  "correct_predictions": 120,
-  "historical_accuracy_pct": 79.5,
+  "total_predictions": 173,
+  "correct_predictions": 136,
+  "historical_accuracy_pct": 78.6,
   "recent_calibration_notes": [
     "Overweighted press releases during opening 15 mins; disclosure weight reduced by 15%.",
     "VWAP breakdowns after 1:00 PM now override mild bullish news sentiment."

@@ -2,16 +2,16 @@
   "prediction": {
     "symbol": "SUNPHARMA",
     "predicted_bias": "BEARISH",
-    "confidence_pct": 82.5,
-    "learning_adjusted_weight": "Calibrated using 80.0% past accuracy score.",
+    "confidence_pct": 81.5,
+    "learning_adjusted_weight": "Calibrated using 79.0% past accuracy score.",
     "primary_driver": "Positive disclosure alignment & institutional VWAP support for SUNPHARMA."
   },
   "spike": {
-    "has_spike": true,
+    "has_spike": false,
     "volume_surge": "Normal",
-    "price_impulse_5m": "-0.95% in 5 mins",
-    "severity": "MEDIUM",
-    "description": "Surge of 1.8x volume detected on SUNPHARMA with a -0.95% price impulse."
+    "price_impulse_5m": "-0.02% in 5 mins",
+    "severity": "NONE",
+    "description": "No unusual spike detected."
   },
   "curves": {
     "symbol": "SUNPHARMA",
@@ -28,33 +28,33 @@
       "15:30"
     ],
     "actual_curve": [
-      1767.54,
-      1771.41,
-      1776.67,
-      1774.38,
-      1776.45,
-      1777.34,
-      1777.41,
-      1774.03,
-      1772.79,
-      1770.45
+      1842.5,
+      1833.0,
+      1838.9,
+      1821.0,
+      1820.9,
+      1829.2,
+      1833.5,
+      1840.3,
+      1842.1,
+      1842.4
     ],
     "predicted_curve": [
-      1768.97,
-      1770.49,
-      1774.59,
-      1775.95,
-      1779.62,
-      1782.57,
-      1783.79,
-      1787.31,
-      1788.8,
-      1792.21
+      1842.5,
+      1842.49,
+      1842.48,
+      1842.47,
+      1842.46,
+      1842.45,
+      1842.44,
+      1842.43,
+      1842.42,
+      1842.41
     ],
-    "bias": "BULLISH",
-    "final_actual": 1770.45,
-    "final_pred": 1792.21,
-    "error_pct": 1.23,
+    "bias": "BEARISH",
+    "final_actual": 1842.4,
+    "final_pred": 1842.41,
+    "error_pct": 0.0,
     "verdict": "SUCCESS"
   }
 }

@@ -2,16 +2,16 @@
   "prediction": {
     "symbol": "MUTHOOTFIN",
     "predicted_bias": "BULLISH",
-    "confidence_pct": 82.5,
-    "learning_adjusted_weight": "Calibrated using 80.0% past accuracy score.",
+    "confidence_pct": 81.5,
+    "learning_adjusted_weight": "Calibrated using 79.0% past accuracy score.",
     "primary_driver": "Positive disclosure alignment & institutional VWAP support for MUTHOOTFIN."
   },
   "spike": {
-    "has_spike": true,
-    "volume_surge": "3.48x avg volume",
-    "price_impulse_5m": "0.59% in 5 mins",
-    "severity": "MEDIUM",
-    "description": "Surge of 3.48x volume detected on MUTHOOTFIN with a 0.59% price impulse."
+    "has_spike": false,
+    "volume_surge": "Normal",
+    "price_impulse_5m": "0.07% in 5 mins",
+    "severity": "NONE",
+    "description": "No unusual spike detected."
   },
   "curves": {
     "symbol": "MUTHOOTFIN",
@@ -28,33 +28,33 @@
       "15:30"
     ],
     "actual_curve": [
-      528.29,
-      532.91,
-      532.21,
-      531.8,
-      533.2,
-      536.53,
-      536.01,
-      533.06,
-      534.94,
-      536.1
+      2763.2,
+      2751.7,
+      2752.0,
+      2754.6,
+      2758.6,
+      2748.1,
+      2765.0,
+      2767.9,
+      2778.3,
+      2781.0
     ],
     "predicted_curve": [
-      530.17,
-      530.75,
-      534.84,
-      538.19,
-      539.79,
-      542.95,
-      546.84,
-      548.25,
-      549.94,
-      552.41
+      2763.2,
+      2764.88,
+      2766.56,
+      2768.24,
+      2769.92,
+      2771.61,
+      2773.29,
+      2774.97,
+      2776.65,
+      2778.33
     ],
     "bias": "BULLISH",
-    "final_actual": 536.1,
-    "final_pred": 552.41,
-    "error_pct": 3.04,
-    "verdict": "PARTIAL"
+    "final_actual": 2781.0,
+    "final_pred": 2778.33,
+    "error_pct": 0.1,
+    "verdict": "SUCCESS"
   }
 }

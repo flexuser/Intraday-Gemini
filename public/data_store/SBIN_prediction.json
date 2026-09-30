@@ -2,14 +2,14 @@
   "prediction": {
     "symbol": "SBIN",
     "predicted_bias": "BEARISH",
-    "confidence_pct": 82.5,
-    "learning_adjusted_weight": "Calibrated using 80.0% past accuracy score.",
+    "confidence_pct": 81.5,
+    "learning_adjusted_weight": "Calibrated using 79.0% past accuracy score.",
     "primary_driver": "Positive disclosure alignment & institutional VWAP support for SBIN."
   },
   "spike": {
     "has_spike": false,
     "volume_surge": "Normal",
-    "price_impulse_5m": "0.73% in 5 mins",
+    "price_impulse_5m": "-0.67% in 5 mins",
     "severity": "NONE",
     "description": "No unusual spike detected."
   },
@@ -28,33 +28,33 @@
       "15:30"
     ],
     "actual_curve": [
-      1205.34,
-      1210.02,
-      1213.82,
-      1213.42,
-      1216.15,
-      1214.61,
-      1213.86,
-      1213.17,
-      1212.42,
-      1218.29
+      966.6,
+      966.9,
+      968.9,
+      968.6,
+      968.7,
+      968.5,
+      969.4,
+      970.7,
+      970.7,
+      968.6
     ],
     "predicted_curve": [
-      1201.23,
-      1202.47,
-      1206.65,
-      1210.97,
-      1214.57,
-      1217.77,
-      1219.4,
-      1221.84,
-      1225.88,
-      1226.93
+      966.6,
+      966.79,
+      966.98,
+      967.17,
+      967.36,
+      967.54,
+      967.73,
+      967.92,
+      968.11,
+      968.3
     ],
     "bias": "BULLISH",
-    "final_actual": 1218.29,
-    "final_pred": 1226.93,
-    "error_pct": 0.71,
+    "final_actual": 968.6,
+    "final_pred": 968.3,
+    "error_pct": 0.03,
     "verdict": "SUCCESS"
   }
 }

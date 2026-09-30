@@ -2,16 +2,16 @@
   "prediction": {
     "symbol": "RELIANCE",
     "predicted_bias": "BULLISH",
-    "confidence_pct": 82.5,
-    "learning_adjusted_weight": "Calibrated using 80.0% past accuracy score.",
+    "confidence_pct": 81.5,
+    "learning_adjusted_weight": "Calibrated using 79.0% past accuracy score.",
     "primary_driver": "Positive disclosure alignment & institutional VWAP support for RELIANCE."
   },
   "spike": {
-    "has_spike": true,
+    "has_spike": false,
     "volume_surge": "Normal",
-    "price_impulse_5m": "1.38% in 5 mins",
-    "severity": "MEDIUM",
-    "description": "Surge of 2.27x volume detected on RELIANCE with a 1.38% price impulse."
+    "price_impulse_5m": "0.01% in 5 mins",
+    "severity": "NONE",
+    "description": "No unusual spike detected."
   },
   "curves": {
     "symbol": "RELIANCE",
@@ -28,33 +28,33 @@
       "15:30"
     ],
     "actual_curve": [
-      1406.91,
-      1405.3,
-      1410.84,
-      1417.22,
-      1414.24,
-      1411.17,
-      1407.52,
-      1411.38,
-      1409.44,
-      1411.11
+      1192.8,
+      1191.4,
+      1193.6,
+      1188.5,
+      1191.6,
+      1192.5,
+      1191.9,
+      1192.6,
+      1193.0,
+      1190.7
     ],
     "predicted_curve": [
-      1406.31,
-      1410.79,
-      1414.79,
-      1415.44,
-      1417.83,
-      1418.87,
-      1420.2,
-      1422.04,
-      1423.05,
-      1424.25
+      1192.8,
+      1192.6,
+      1192.4,
+      1192.2,
+      1192.01,
+      1191.81,
+      1191.61,
+      1191.41,
+      1191.21,
+      1191.02
     ],
-    "bias": "BULLISH",
-    "final_actual": 1411.11,
-    "final_pred": 1424.25,
-    "error_pct": 0.93,
+    "bias": "BEARISH",
+    "final_actual": 1190.7,
+    "final_pred": 1191.02,
+    "error_pct": 0.03,
     "verdict": "SUCCESS"
   }
 }
