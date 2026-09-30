@@ -1,0 +1,60 @@
+{
+  "prediction": {
+    "symbol": "SBIN",
+    "predicted_bias": "BEARISH",
+    "confidence_pct": 83.3,
+    "learning_adjusted_weight": "Calibrated using 80.8% past accuracy score.",
+    "primary_driver": "Positive disclosure alignment & institutional VWAP support for SBIN."
+  },
+  "spike": {
+    "has_spike": true,
+    "volume_surge": "Normal",
+    "price_impulse_5m": "-0.95% in 5 mins",
+    "severity": "MEDIUM",
+    "description": "Surge of 1.56x volume detected on SBIN with a -0.95% price impulse."
+  },
+  "curves": {
+    "symbol": "SBIN",
+    "timeframes": [
+      "09:15",
+      "09:45",
+      "10:30",
+      "11:15",
+      "12:00",
+      "12:45",
+      "13:30",
+      "14:15",
+      "15:00",
+      "15:30"
+    ],
+    "actual_curve": [
+      1719.19,
+      1722.76,
+      1725.51,
+      1725.95,
+      1730.79,
+      1735.36,
+      1732.34,
+      1730.58,
+      1736.58,
+      1741.39
+    ],
+    "predicted_curve": [
+      1722.46,
+      1723.8,
+      1726.39,
+      1727.15,
+      1729.3,
+      1733.27,
+      1737.38,
+      1738.04,
+      1739.26,
+      1740.31
+    ],
+    "bias": "BULLISH",
+    "final_actual": 1741.39,
+    "final_pred": 1740.31,
+    "error_pct": 0.06,
+    "verdict": "SUCCESS"
+  }
+}

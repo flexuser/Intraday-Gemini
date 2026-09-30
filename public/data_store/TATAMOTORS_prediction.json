@@ -1,0 +1,60 @@
+{
+  "prediction": {
+    "symbol": "TATAMOTORS",
+    "predicted_bias": "BEARISH",
+    "confidence_pct": 83.3,
+    "learning_adjusted_weight": "Calibrated using 80.8% past accuracy score.",
+    "primary_driver": "Positive disclosure alignment & institutional VWAP support for TATAMOTORS."
+  },
+  "spike": {
+    "has_spike": true,
+    "volume_surge": "Normal",
+    "price_impulse_5m": "-0.96% in 5 mins",
+    "severity": "MEDIUM",
+    "description": "Surge of 1.65x volume detected on TATAMOTORS with a -0.96% price impulse."
+  },
+  "curves": {
+    "symbol": "TATAMOTORS",
+    "timeframes": [
+      "09:15",
+      "09:45",
+      "10:30",
+      "11:15",
+      "12:00",
+      "12:45",
+      "13:30",
+      "14:15",
+      "15:00",
+      "15:30"
+    ],
+    "actual_curve": [
+      460.03,
+      463.24,
+      469.23,
+      472.88,
+      474.98,
+      472.65,
+      478.2,
+      484.18,
+      484.84,
+      485.4
+    ],
+    "predicted_curve": [
+      466.22,
+      468.35,
+      470.32,
+      471.35,
+      472.36,
+      476.08,
+      478.84,
+      479.81,
+      483.45,
+      487.42
+    ],
+    "bias": "BULLISH",
+    "final_actual": 485.4,
+    "final_pred": 487.42,
+    "error_pct": 0.42,
+    "verdict": "SUCCESS"
+  }
+}

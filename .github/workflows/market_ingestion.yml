@@ -2,7 +2,8 @@ name: Automated Market Data Ingestion & Prediction Engine
 
 on:
   schedule:
-    - cron: '*/15 3-10 * * 1-5'
+    # Runs every 5 minutes from 03:00 UTC to 10:00 UTC (8:30 AM to 3:30 PM IST), Mon-Fri
+    - cron: '*/5 3-10 * * 1-5'
   workflow_dispatch:
 
 jobs:

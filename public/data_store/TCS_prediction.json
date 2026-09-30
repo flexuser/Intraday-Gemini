@@ -1,0 +1,60 @@
+{
+  "prediction": {
+    "symbol": "TCS",
+    "predicted_bias": "BULLISH",
+    "confidence_pct": 83.3,
+    "learning_adjusted_weight": "Calibrated using 80.8% past accuracy score.",
+    "primary_driver": "Positive disclosure alignment & institutional VWAP support for TCS."
+  },
+  "spike": {
+    "has_spike": true,
+    "volume_surge": "2.93x avg volume",
+    "price_impulse_5m": "0.06% in 5 mins",
+    "severity": "MEDIUM",
+    "description": "Surge of 2.93x volume detected on TCS with a 0.06% price impulse."
+  },
+  "curves": {
+    "symbol": "TCS",
+    "timeframes": [
+      "09:15",
+      "09:45",
+      "10:30",
+      "11:15",
+      "12:00",
+      "12:45",
+      "13:30",
+      "14:15",
+      "15:00",
+      "15:30"
+    ],
+    "actual_curve": [
+      1766.24,
+      1762.36,
+      1763.31,
+      1767.5,
+      1765.92,
+      1763.45,
+      1764.04,
+      1760.22,
+      1764.57,
+      1768.46
+    ],
+    "predicted_curve": [
+      1768.33,
+      1771.35,
+      1772.2,
+      1773.23,
+      1775.96,
+      1778.74,
+      1779.54,
+      1783.95,
+      1785.88,
+      1789.07
+    ],
+    "bias": "BULLISH",
+    "final_actual": 1768.46,
+    "final_pred": 1789.07,
+    "error_pct": 1.17,
+    "verdict": "SUCCESS"
+  }
+}

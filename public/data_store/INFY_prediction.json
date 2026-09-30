@@ -1,0 +1,60 @@
+{
+  "prediction": {
+    "symbol": "INFY",
+    "predicted_bias": "BULLISH",
+    "confidence_pct": 83.3,
+    "learning_adjusted_weight": "Calibrated using 80.8% past accuracy score.",
+    "primary_driver": "Positive disclosure alignment & institutional VWAP support for INFY."
+  },
+  "spike": {
+    "has_spike": false,
+    "volume_surge": "Normal",
+    "price_impulse_5m": "-0.44% in 5 mins",
+    "severity": "NONE",
+    "description": "No unusual spike detected."
+  },
+  "curves": {
+    "symbol": "INFY",
+    "timeframes": [
+      "09:15",
+      "09:45",
+      "10:30",
+      "11:15",
+      "12:00",
+      "12:45",
+      "13:30",
+      "14:15",
+      "15:00",
+      "15:30"
+    ],
+    "actual_curve": [
+      406.34,
+      407.27,
+      406.05,
+      409.09,
+      405.57,
+      409.06,
+      409.74,
+      413.75,
+      417.22,
+      421.97
+    ],
+    "predicted_curve": [
+      406.52,
+      408.64,
+      411.27,
+      412.15,
+      413.05,
+      417.39,
+      420.39,
+      422.4,
+      423.43,
+      424.93
+    ],
+    "bias": "BULLISH",
+    "final_actual": 421.97,
+    "final_pred": 424.93,
+    "error_pct": 0.7,
+    "verdict": "SUCCESS"
+  }
+}
