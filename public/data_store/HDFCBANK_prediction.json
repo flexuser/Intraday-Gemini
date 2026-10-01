@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "HDFCBANK",
     "date": "2026-10-01",
-    "generated_at": "03:00 PM IST",
+    "generated_at": "03:05 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -75,7 +75,7 @@
       716.15,
       717.9,
       714.1,
-      720.05,
+      719.85,
       null
     ],
     "actual_volume": [
@@ -87,11 +87,11 @@
       633505,
       579657,
       466504,
-      0,
+      952229,
       null
     ],
     "final_pred": 717.5,
-    "final_actual": 720.05,
-    "error_pct": 0.36
+    "final_actual": 719.85,
+    "error_pct": 0.33
   }
 }

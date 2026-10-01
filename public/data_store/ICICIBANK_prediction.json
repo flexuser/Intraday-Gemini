@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "ICICIBANK",
     "date": "2026-10-01",
-    "generated_at": "03:00 PM IST",
+    "generated_at": "03:05 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -75,7 +75,7 @@
       1317.6,
       1314.0,
       1310.3,
-      1313.7,
+      1313.4,
       null
     ],
     "actual_volume": [
@@ -87,11 +87,11 @@
       253127,
       136922,
       104758,
-      0,
+      224561,
       null
     ],
     "final_pred": 1321.6,
-    "final_actual": 1313.7,
-    "error_pct": 0.6
+    "final_actual": 1313.4,
+    "error_pct": 0.62
   }
 }

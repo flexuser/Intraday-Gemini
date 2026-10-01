@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "TCS",
     "date": "2026-10-01",
-    "generated_at": "03:00 PM IST",
+    "generated_at": "03:05 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -75,7 +75,7 @@
       2054.1,
       2053.9,
       2054.6,
-      2074.2,
+      2074.1,
       null
     ],
     "actual_volume": [
@@ -87,11 +87,11 @@
       36333,
       26101,
       34720,
-      0,
+      68564,
       null
     ],
     "final_pred": 2078.4,
-    "final_actual": 2074.2,
-    "error_pct": 0.2
+    "final_actual": 2074.1,
+    "error_pct": 0.21
   }
 }

@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "INFY",
     "date": "2026-10-01",
-    "generated_at": "03:00 PM IST",
+    "generated_at": "03:05 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -75,7 +75,7 @@
       1003.5,
       1003.8,
       1007.75,
-      1021.8,
+      1021.5,
       null
     ],
     "actual_volume": [
@@ -87,11 +87,11 @@
       137378,
       95220,
       201352,
-      0,
+      377786,
       null
     ],
     "final_pred": 1014.5,
-    "final_actual": 1021.8,
-    "error_pct": 0.72
+    "final_actual": 1021.5,
+    "error_pct": 0.69
   }
 }

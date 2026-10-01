@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "BHARTIARTL",
     "date": "2026-10-01",
-    "generated_at": "03:00 PM IST",
+    "generated_at": "03:05 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -75,7 +75,7 @@
       1745.0,
       1736.5,
       1735.5,
-      1742.1,
+      1742.0,
       null
     ],
     "actual_volume": [
@@ -87,11 +87,11 @@
       89533,
       129288,
       41298,
-      0,
+      81044,
       null
     ],
     "final_pred": 1742.6,
-    "final_actual": 1742.1,
+    "final_actual": 1742.0,
     "error_pct": 0.03
   }
 }

@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "RELIANCE",
     "date": "2026-10-01",
-    "generated_at": "03:00 PM IST",
+    "generated_at": "03:05 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -75,7 +75,7 @@
       1170.9,
       1169.7,
       1163.9,
-      1167.1,
+      1167.2,
       null
     ],
     "actual_volume": [
@@ -87,11 +87,11 @@
       332112,
       122802,
       185796,
-      0,
+      443825,
       null
     ],
     "final_pred": 1180.2,
-    "final_actual": 1167.1,
-    "error_pct": 1.11
+    "final_actual": 1167.2,
+    "error_pct": 1.1
   }
 }

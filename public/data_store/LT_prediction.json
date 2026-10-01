@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "LT",
     "date": "2026-10-01",
-    "generated_at": "03:00 PM IST",
+    "generated_at": "03:05 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -75,7 +75,7 @@
       3683.6,
       3680.0,
       3667.3,
-      3687.8,
+      3689.4,
       null
     ],
     "actual_volume": [
@@ -87,11 +87,11 @@
       88174,
       18667,
       29179,
-      0,
+      70636,
       null
     ],
     "final_pred": 3717.1,
-    "final_actual": 3687.8,
-    "error_pct": 0.79
+    "final_actual": 3689.4,
+    "error_pct": 0.75
   }
 }
