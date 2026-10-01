@@ -1,8 +1,8 @@
 {
   "prediction": {
     "bias": "BULLISH",
-    "reasoning": "Intraday outlook based on live volume (0.15x) and order flow evaluation.",
-    "volume_ratio": 0.15,
+    "reasoning": "Intraday outlook based on live volume (0.0x) and order flow evaluation.",
+    "volume_ratio": 0.0,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -10,6 +10,16 @@
         "publisher": "Quartz",
         "link": {
           "url": "https://qz.com/apple-pay-launches-india-axis-bank-093026",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Asian Equities Traded in the US as American Depositary Receipts Rise in Friday Trading; Down for Week",
+        "publisher": "MT Newswires",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/world-indices/articles/asian-equities-traded-us-american-144123090.html",
           "site": "finance",
           "region": "US",
           "lang": "en-US"
@@ -24,23 +34,13 @@
           "region": "US",
           "lang": "en-US"
         }
-      },
-      {
-        "title": "Microsoft Drops as Three-Zone Hyderabad Region Goes Live",
-        "publisher": "GuruFocus.com",
-        "link": {
-          "url": "https://finance.yahoo.com/technology/ai/articles/microsoft-drops-three-zone-hyderabad-155029074.html",
-          "site": "finance",
-          "region": "US",
-          "lang": "en-US"
-        }
       }
     ]
   },
   "curves": {
     "symbol": "HDFCBANK",
     "date": "2026-10-01",
-    "generated_at": "12:33 PM IST",
+    "generated_at": "12:45 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -72,7 +72,7 @@
       715.5,
       715.15,
       714.3,
-      null,
+      715.0,
       null,
       null,
       null,
@@ -84,14 +84,14 @@
       872518,
       893442,
       1899653,
-      null,
+      1080163,
       null,
       null,
       null,
       null
     ],
     "final_pred": 728.64,
-    "final_actual": 714.3,
-    "error_pct": 2.01
+    "final_actual": 715.0,
+    "error_pct": 1.91
   }
 }

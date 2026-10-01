@@ -3,56 +3,56 @@
     "symbol": "MUTHOOTFIN",
     "bias": "BEARISH",
     "final_pred": 2652.1,
-    "final_actual": 2740.5,
-    "error_pct": 3.24,
+    "final_actual": 2756.7,
+    "error_pct": 3.83,
     "verdict": "FAILED"
   },
   {
     "symbol": "RELIANCE",
     "bias": "BULLISH",
     "final_pred": 1204.82,
-    "final_actual": 1180.8,
-    "error_pct": 2.03,
+    "final_actual": 1182.1,
+    "error_pct": 1.92,
     "verdict": "FAILED"
   },
   {
     "symbol": "TMPV",
     "bias": "BULLISH",
     "final_pred": 284.73,
-    "final_actual": 279.3,
-    "error_pct": 1.95,
+    "final_actual": 279.4,
+    "error_pct": 1.91,
     "verdict": "FAILED"
   },
   {
     "symbol": "INFY",
     "bias": "BEARISH",
     "final_pred": 981.43,
-    "final_actual": 1016.0,
-    "error_pct": 3.42,
+    "final_actual": 1016.5,
+    "error_pct": 3.47,
     "verdict": "FAILED"
   },
   {
     "symbol": "HDFCBANK",
     "bias": "BULLISH",
     "final_pred": 728.64,
-    "final_actual": 714.3,
-    "error_pct": 2.01,
+    "final_actual": 715.0,
+    "error_pct": 1.91,
     "verdict": "FAILED"
   },
   {
     "symbol": "ICICIBANK",
     "bias": "BEARISH",
     "final_pred": 1288.48,
-    "final_actual": 1322.0,
-    "error_pct": 2.53,
+    "final_actual": 1321.3,
+    "error_pct": 2.48,
     "verdict": "FAILED"
   },
   {
     "symbol": "TCS",
     "bias": "BULLISH",
     "final_pred": 2113.54,
-    "final_actual": 2083.5,
-    "error_pct": 1.45,
+    "final_actual": 2083.6,
+    "error_pct": 1.44,
     "verdict": "PARTIAL"
   },
   {
@@ -67,24 +67,24 @@
     "symbol": "BHARTIARTL",
     "bias": "NEUTRAL",
     "final_pred": 1750.2,
-    "final_actual": 1760.5,
-    "error_pct": 0.59,
+    "final_actual": 1760.1,
+    "error_pct": 0.57,
     "verdict": "SUCCESS"
   },
   {
     "symbol": "LT",
     "bias": "BEARISH",
     "final_pred": 3604.37,
-    "final_actual": 3724.6,
-    "error_pct": 3.24,
+    "final_actual": 3722.3,
+    "error_pct": 3.18,
     "verdict": "FAILED"
   },
   {
     "symbol": "SUNPHARMA",
     "bias": "BULLISH",
     "final_pred": 1846.3,
-    "final_actual": 1827.0,
-    "error_pct": 1.07,
+    "final_actual": 1825.1,
+    "error_pct": 1.17,
     "verdict": "PARTIAL"
   }
 ]
