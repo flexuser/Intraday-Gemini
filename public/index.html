@@ -1,324 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intraday AI Prediction & EOD Audit Engine</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intraday AI Prediction & EOD Audit Engine</title>
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="manifest" href="./manifest.json">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js');
+      });
+    }
+  </script>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen font-sans">
-
-    <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-50 px-6 py-4">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center space-x-3">
-                <div class="bg-blue-600 text-white font-black px-3 py-1.5 rounded-lg tracking-wider text-sm">NSE/BSE</div>
-                <div>
-                    <h1 class="text-xl font-bold text-white tracking-tight">Intraday AI Prediction & EOD Audit Engine</h1>
-                    <p class="text-xs text-slate-400">Continuous Portfolio Watchlist • Real vs. Predicted EOD Curve Overlay</p>
-                </div>
-            </div>
-
-            <div class="flex items-center space-x-3 w-full md:w-auto">
-                <div class="bg-slate-800 p-1 rounded-lg border border-slate-700 flex text-xs font-semibold">
-                    <button id="liveModeBtn" onclick="switchMode('LIVE')" class="px-3 py-1.5 rounded-md bg-blue-600 text-white transition-colors">Live Intraday</button>
-                    <button id="eodModeBtn" onclick="switchMode('EOD')" class="px-3 py-1.5 rounded-md text-slate-400 hover:text-white transition-colors">EOD Model Audit</button>
-                </div>
-
-                <input type="text" id="symbolInput" placeholder="Symbol (e.g. SUNPHARMA)" 
-                       class="bg-slate-800 border border-slate-700 text-white font-semibold rounded-lg px-3 py-1.5 text-sm uppercase focus:outline-none focus:border-blue-500 w-36">
-                <button id="searchBtn" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors">
-                    Analyze
-                </button>
-            </div>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans p-4 md:p-8">
+  <div class="max-w-5xl mx-auto space-y-6">
+    
+    <header class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="bg-blue-900/60 text-blue-400 text-xs font-semibold px-2.5 py-0.5 rounded border border-blue-700/50">NSE/BSE</span>
+          <h1 class="text-xl md:text-2xl font-bold tracking-tight text-white">Intraday AI Prediction & EOD Audit Engine</h1>
         </div>
+        <p class="text-xs text-slate-400 mt-1">Continuous Portfolio Watchlist • Real vs. Predicted EOD Curve Overlay</p>
+      </div>
+      <div class="flex items-center gap-2 bg-slate-900 p-1 rounded-lg border border-slate-800">
+        <button id="tab-intraday" onclick="switchTab('intraday')" class="px-3 py-1.5 text-xs font-medium rounded-md bg-blue-600 text-white shadow">Live Intraday</button>
+        <button id="tab-audit" onclick="switchTab('audit')" class="px-3 py-1.5 text-xs font-medium rounded-md text-slate-400 hover:text-white">EOD Model Audit</button>
+      </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-8 space-y-8">
-
-        <!-- Watchlist Quick Switcher -->
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
-            <div class="flex items-center justify-between mb-2">
-                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Indexed Portfolio Watchlist</h3>
-                <span class="text-[11px] text-blue-400 font-mono">Real-time & EOD Curves Active</span>
-            </div>
-            <div id="watchlistBar" class="flex items-center space-x-2 overflow-x-auto text-xs pb-1"></div>
+    <section class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3">
+      <div class="flex flex-col sm:flex-row gap-2">
+        <input id="symbol-input" type="text" placeholder="SYMBOL (E.G. SUNPHARMA, TMPV)" class="bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-blue-500 flex-1 uppercase">
+        <button onclick="analyzeStock()" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-2 rounded-lg transition">Analyze</button>
+      </div>
+      <div>
+        <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+          <span class="font-semibold uppercase tracking-wider text-slate-500">INDEXED PORTFOLIO WATCHLIST</span>
+          <span class="text-emerald-400">Real-time & EOD Curves Active</span>
         </div>
+        <div class="flex flex-wrap gap-2" id="watchlist-pills"></div>
+      </div>
+    </section>
 
-        <!-- Stock Header Bar -->
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-wrap justify-between items-center gap-6">
+    <main id="view-container">
+      <div id="view-intraday" class="space-y-6">
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 md:p-6 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
             <div>
-                <div class="flex items-center space-x-3">
-                    <h2 id="stockTitle" class="text-2xl font-bold text-white">MUTHOOTFIN</h2>
-                    <span id="modeBadge" class="text-xs bg-emerald-500/20 text-emerald-400 font-mono px-2 py-0.5 rounded border border-emerald-500/30">LIVE VIEW</span>
-                </div>
-                <p id="stockSub" class="text-xs text-slate-400 mt-1">Comparing 09:30 AM Model Forecast Curve against EOD Market Close Real Curve</p>
+              <h2 id="active-symbol" class="text-xl font-bold text-white tracking-wide">MUTHOOTFIN</h2>
+              <p class="text-xs text-slate-400">Comparing 09:30 AM Model Forecast Curve vs. Live Price Ticks</p>
             </div>
+            <div id="bias-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-300">
+              NEUTRAL
+            </div>
+          </div>
 
-            <div class="flex items-center space-x-8">
-                <div>
-                    <span class="text-xs text-slate-400 block mb-0.5">Real Close Price</span>
-                    <span id="currentPrice" class="text-2xl font-mono font-bold text-emerald-400">₹--.--</span>
-                </div>
-                <div>
-                    <span class="text-xs text-slate-400 block mb-0.5">Predicted Close</span>
-                    <span id="predictedPrice" class="text-xl font-mono font-bold text-slate-200">₹--.--</span>
-                </div>
-                <div>
-                    <span class="text-xs text-slate-400 block mb-0.5">Variance / Error</span>
-                    <span id="errorMetric" class="text-base font-mono font-semibold text-amber-400">--%</span>
-                </div>
+          <div class="h-64 md:h-80 w-full relative">
+            <canvas id="predictionChart"></canvas>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-2">
+            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+              <span class="text-slate-400 font-medium block mb-1">AI Event Classification & Rationale:</span>
+              <p id="ai-rationale" class="text-slate-300">Loading intelligence snapshot...</p>
             </div>
+            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+              <span class="text-slate-400 font-medium block mb-1">Metrics & Model Diagnostics:</span>
+              <ul class="text-slate-300 space-y-1">
+                <li>Start Price (09:15): <span id="val-base" class="font-mono text-white">--</span></li>
+                <li>Target Price (15:30): <span id="val-target" class="font-mono text-white">--</span></li>
+                <li>Current/Close Price: <span id="val-actual" class="font-mono text-white">--</span></li>
+                <li>Variance / Error: <span id="val-error" class="font-mono text-white">--</span></li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Chart Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col justify-between">
-                <div class="flex justify-between items-center mb-6">
-                    <div>
-                        <h3 id="chartHeading" class="text-base font-bold text-white">Intraday Price Movement</h3>
-                        <p id="chartSubheading" class="text-xs text-slate-400">Actual Price Line vs. Morning Model Projected Curve</p>
-                    </div>
-                    <div class="flex items-center space-x-4 text-xs font-medium">
-                        <span class="flex items-center"><span class="w-3 h-0.5 bg-blue-500 inline-block mr-1.5"></span> Real Actual</span>
-                        <span class="flex items-center"><span class="w-3 h-0.5 border-t border-dashed border-emerald-400 inline-block mr-1.5"></span> Predicted Curve</span>
-                    </div>
-                </div>
-
-                <div class="relative w-full h-[340px]">
-                    <canvas id="intradayChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Single Stock Model Verdict Side Panel -->
-            <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col justify-between space-y-6">
-                <div>
-                    <h3 class="text-base font-bold text-white mb-4">Model Prediction Evaluation</h3>
-                    
-                    <div class="bg-slate-950 border border-slate-800 rounded-lg p-4 mb-4">
-                        <span class="text-xs text-slate-400 block mb-1">Model Directional Bias</span>
-                        <div class="flex items-baseline justify-between">
-                            <span id="predictedBias" class="text-2xl font-black text-emerald-400">BULLISH</span>
-                            <span id="verdictBadge" class="text-xs font-bold font-mono px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">PASS</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-950 border border-slate-800 rounded-lg p-4 space-y-2 text-xs">
-                        <div class="flex justify-between">
-                            <span class="text-slate-400">Forecast Timestamp:</span>
-                            <span class="font-mono text-slate-200">09:30 AM IST</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-slate-400">EOD Market Close:</span>
-                            <span class="font-mono text-slate-200">15:30 PM IST</span>
-                        </div>
-                        <div class="flex justify-between border-t border-slate-800 pt-2">
-                            <span class="text-slate-400">Directional Hit:</span>
-                            <span id="directionHit" class="font-bold text-emerald-400">YES</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div id="view-audit" class="hidden space-y-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 md:p-6">
+          <h3 class="text-lg font-bold text-white mb-3">Portfolio Accuracy Audit Matrix</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-950 text-slate-400 border-b border-slate-800 uppercase">
+                <tr>
+                  <th class="p-2.5">Symbol</th>
+                  <th class="p-2.5">AI Sentiment</th>
+                  <th class="p-2.5">Target Price</th>
+                  <th class="p-2.5">Actual Close</th>
+                  <th class="p-2.5">Error %</th>
+                  <th class="p-2.5">Verdict</th>
+                </tr>
+              </thead>
+              <tbody id="audit-table-body" class="divide-y divide-slate-800"></tbody>
+            </table>
+          </div>
         </div>
-
-        <!-- End-of-Day Portfolio Evaluation Matrix -->
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6">
-            <div class="flex items-center justify-between mb-6">
-                <div>
-                    <h3 class="text-lg font-bold text-white">End-of-Day Portfolio Model Accuracy Matrix</h3>
-                    <p class="text-xs text-slate-400">Full portfolio audit comparing 09:30 AM model projections against 15:30 PM actual closes</p>
-                </div>
-                <span class="text-xs font-mono bg-blue-500/10 text-blue-400 border border-blue-500/20 px-3 py-1 rounded-lg">Portfolio Audit Active</span>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs border-collapse">
-                    <thead>
-                        <tr class="border-b border-slate-800 text-slate-400 uppercase font-mono">
-                            <th class="py-3 px-4">Stock</th>
-                            <th class="py-3 px-4">Bias</th>
-                            <th class="py-3 px-4">Predicted Close</th>
-                            <th class="py-3 px-4">Actual Close</th>
-                            <th class="py-3 px-4">Error Margin (%)</th>
-                            <th class="py-3 px-4">Verdict</th>
-                            <th class="py-3 px-4 text-right">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="eodMatrixBody" class="divide-y divide-slate-800/50">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
+      </div>
     </main>
 
-    <script>
-        const WATCHLIST = ["MUTHOOTFIN", "RELIANCE", "TMPV", "INFY", "HDFCBANK", "ICICIBANK", "TCS", "SBIN", "BHARTIARTL", "LT", "SUNPHARMA"];
-        let currentMode = 'LIVE';
-        let activeSymbol = 'MUTHOOTFIN';
-        let chartInstance = null;
+  </div>
 
-        function switchMode(mode) {
-            currentMode = mode;
-            document.getElementById("liveModeBtn").className = mode === 'LIVE' ? "px-3 py-1.5 rounded-md bg-blue-600 text-white transition-colors" : "px-3 py-1.5 rounded-md text-slate-400 hover:text-white transition-colors";
-            document.getElementById("eodModeBtn").className = mode === 'EOD' ? "px-3 py-1.5 rounded-md bg-blue-600 text-white transition-colors" : "px-3 py-1.5 rounded-md text-slate-400 hover:text-white transition-colors";
-            
-            document.getElementById("modeBadge").innerText = mode === 'LIVE' ? "LIVE VIEW" : "EOD AUDIT MODE";
-            document.getElementById("modeBadge").className = mode === 'LIVE' ? "text-xs bg-emerald-500/20 text-emerald-400 font-mono px-2 py-0.5 rounded border border-emerald-500/30" : "text-xs bg-amber-500/20 text-amber-400 font-mono px-2 py-0.5 rounded border border-amber-500/30";
+  <script>
+    const WATCHLIST = ["MUTHOOTFIN", "RELIANCE", "TMPV", "INFY", "HDFCBANK", "ICICIBANK", "TCS", "SBIN", "BHARTIARTL", "LT", "SUNPHARMA"];
+    let activeSymbol = "MUTHOOTFIN";
+    let chartInstance = null;
 
-            analyzeStock(activeSymbol);
-        }
+    function renderWatchlistPills() {
+      const container = document.getElementById("watchlist-pills");
+      container.innerHTML = WATCHLIST.map(sym => `
+        <button onclick="loadStock('${sym}')" class="px-3 py-1 rounded-md text-xs font-semibold transition ${sym === activeSymbol ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}">
+          ${sym}
+        </button>
+      `).join("");
+    }
 
-        function renderWatchlistBar() {
-            document.getElementById("watchlistBar").innerHTML = WATCHLIST.map(sym => `
-                <button onclick="analyzeStock('${sym}')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold border border-slate-700 shrink-0 flex items-center space-x-2">
-                    <span>${sym}</span>
-                </button>
-            `).join('');
-        }
+    function switchTab(tab) {
+      if (tab === 'intraday') {
+        document.getElementById('view-intraday').classList.remove('hidden');
+        document.getElementById('view-audit').classList.add('hidden');
+        document.getElementById('tab-intraday').className = "px-3 py-1.5 text-xs font-medium rounded-md bg-blue-600 text-white shadow";
+        document.getElementById('tab-audit').className = "px-3 py-1.5 text-xs font-medium rounded-md text-slate-400 hover:text-white";
+      } else {
+        document.getElementById('view-intraday').classList.add('hidden');
+        document.getElementById('view-audit').classList.remove('hidden');
+        document.getElementById('tab-audit').className = "px-3 py-1.5 text-xs font-medium rounded-md bg-blue-600 text-white shadow";
+        document.getElementById('tab-intraday').className = "px-3 py-1.5 text-xs font-medium rounded-md text-slate-400 hover:text-white";
+        loadAuditData();
+      }
+    }
 
-        function renderChart(labels, actualSeries, predictedSeries) {
-            const ctx = document.getElementById('intradayChart').getContext('2d');
-            if (chartInstance) chartInstance.destroy();
+    async function loadStock(symbol) {
+      activeSymbol = symbol;
+      renderWatchlistPills();
+      document.getElementById("active-symbol").innerText = symbol;
 
-            chartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: 'Real Actual Price (₹)',
-                            data: actualSeries,
-                            borderColor: '#3b82f6',
-                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                            fill: true,
-                            tension: 0.2,
-                            borderWidth: 2
-                        },
-                        {
-                            label: '09:30 AM Predicted Curve (₹)',
-                            data: predictedSeries,
-                            borderColor: '#10b981',
-                            borderDash: [5, 5],
-                            tension: 0.2,
-                            borderWidth: 2
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8', font: { size: 10 } } },
-                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8', font: { size: 10 } } }
-                    }
-                }
-            });
-        }
+      try {
+        const res = await fetch(`./data_store/${symbol}_prediction.json`);
+        if (!res.ok) throw new Error("Not pre-indexed");
+        const data = await res.json();
+        renderChartAndDetails(data.curves, data.prediction);
+      } catch (e) {
+        generateFallbackCurve(symbol);
+      }
+    }
 
-        function generateFallbackCurves(symbol) {
-            const timeframes = ['09:15', '09:45', '10:30', '11:15', '12:00', '12:45', '13:30', '14:15', '15:00', '15:30'];
-            let hash = 0;
-            for (let i = 0; i < symbol.length; i++) hash = symbol.charCodeAt(i) + ((hash << 5) - hash);
-            const basePrice = Math.abs(hash % 1200) + 400;
+    function analyzeStock() {
+      const input = document.getElementById("symbol-input").value.trim().toUpperCase();
+      if (input) loadStock(input);
+    }
 
-            let actualPrices = [];
-            let predictedPrices = [];
-            let currActual = basePrice;
-            let currPred = basePrice;
+    function generateFallbackCurve(symbol) {
+      const timeframes = ['09:15', '09:45', '10:30', '11:15', '12:00', '12:45', '13:30', '14:15', '15:00', '15:30'];
+      const base = 1000.0;
+      renderChartAndDetails({
+        symbol: symbol,
+        timeframes: timeframes,
+        actual_curve: timeframes.map(() => base),
+        predicted_curve: timeframes.map(() => base),
+        bias: "NEUTRAL",
+        final_actual: base,
+        final_pred: base,
+        error_pct: 0.0
+      }, {
+        reasoning: "Unindexed stock. Dynamic preview rendered."
+      });
+    }
 
-            for (let i = 0; i < timeframes.length; i++) {
-                currActual += (Math.sin(i + hash) * 3.5) + 1.2;
-                currPred += (Math.cos(i + hash) * 2.8) + 1.5;
-                actualPrices.push(parseFloat(currActual.toFixed(2)));
-                predictedPrices.push(parseFloat(currPred.toFixed(2)));
+    function renderChartAndDetails(curves, prediction) {
+      const biasBadge = document.getElementById("bias-badge");
+      const bias = curves.bias || "NEUTRAL";
+      biasBadge.innerText = bias;
+      
+      if (bias === "BULLISH") {
+        biasBadge.className = "px-3 py-1 rounded-full text-xs font-bold bg-emerald-950 text-emerald-400 border border-emerald-800";
+      } else if (bias === "BEARISH") {
+        biasBadge.className = "px-3 py-1 rounded-full text-xs font-bold bg-rose-950 text-rose-400 border border-rose-800";
+      } else {
+        biasBadge.className = "px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700";
+      }
+
+      document.getElementById("ai-rationale").innerText = prediction?.reasoning || "Corporate news evaluation complete.";
+      
+      document.getElementById("val-base").innerText = curves.actual_curve ? curves.actual_curve[0] : "--";
+      document.getElementById("val-target").innerText = curves.final_pred ?? "--";
+      document.getElementById("val-actual").innerText = curves.final_actual ?? "--";
+      document.getElementById("val-error").innerText = curves.error_pct !== undefined ? `${curves.error_pct}%` : "--";
+
+      const ctx = document.getElementById('predictionChart').getContext('2d');
+      if (chartInstance) chartInstance.destroy();
+
+      chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: curves.timeframes,
+          datasets: [
+            {
+              label: 'AI 09:30 AM Predicted Curve',
+              data: curves.predicted_curve,
+              borderColor: '#3b82f6',
+              borderDash: [5, 5],
+              fill: false,
+              tension: 0.2
+            },
+            {
+              label: 'Actual Market Curve',
+              data: curves.actual_curve,
+              borderColor: '#10b981',
+              borderWidth: 2,
+              fill: false,
+              tension: 0.2
             }
-
-            const finalActual = actualPrices[actualPrices.length - 1];
-            const finalPred = predictedPrices[predictedPrices.length - 1];
-            const errorPct = parseFloat((Math.abs((finalActual - finalPred) / finalActual) * 100).toFixed(2));
-            const bias = finalPred >= basePrice ? 'BULLISH' : 'BEARISH';
-
-            return {
-                curves: {
-                    symbol: symbol,
-                    timeframes: timeframes,
-                    actual_curve: actualPrices,
-                    predicted_curve: predictedPrices,
-                    bias: bias,
-                    final_actual: finalActual,
-                    final_pred: finalPred,
-                    error_pct: errorPct,
-                    verdict: errorPct <= 3.0 ? 'SUCCESS' : 'PARTIAL'
-                }
-            };
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
+          scales: {
+            x: { ticks: { color: '#64748b' }, grid: { color: '#1e293b' } },
+            y: { ticks: { color: '#64748b' }, grid: { color: '#1e293b' } }
+          }
         }
+      });
+    }
 
-        async function analyzeStock(symbol) {
-            activeSymbol = symbol.toUpperCase().trim();
-            if (!activeSymbol) return;
-            document.getElementById("stockTitle").innerText = activeSymbol;
+    async function loadAuditData() {
+      const tbody = document.getElementById("audit-table-body");
+      tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-500">Loading evaluation matrix...</td></tr>`;
+      try {
+        const res = await fetch('./data_store/eod_evaluation.json');
+        const data = await res.json();
+        tbody.innerHTML = data.map(item => `
+          <tr class="hover:bg-slate-900/50">
+            <td class="p-2.5 font-bold text-white">${item.symbol}</td>
+            <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] rounded font-semibold ${item.bias === 'BULLISH' ? 'bg-emerald-950 text-emerald-400' : item.bias === 'BEARISH' ? 'bg-rose-950 text-rose-400' : 'bg-slate-800 text-slate-400'}">${item.bias}</span></td>
+            <td class="p-2.5 font-mono">${item.final_pred}</td>
+            <td class="p-2.5 font-mono">${item.final_actual}</td>
+            <td class="p-2.5 font-mono">${item.error_pct}%</td>
+            <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] rounded font-semibold ${item.verdict === 'SUCCESS' ? 'bg-emerald-900/60 text-emerald-300' : item.verdict === 'PARTIAL' ? 'bg-amber-900/60 text-amber-300' : 'bg-rose-900/60 text-rose-300'}">${item.verdict}</span></td>
+          </tr>
+        `).join('');
+      } catch (e) {
+        tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-rose-400">Failed to load audit data. Ensure archive_once.py has run.</td></tr>`;
+      }
+    }
 
-            let data;
-            try {
-                const res = await fetch(`./data_store/${activeSymbol}_prediction.json`);
-                if (res.ok) {
-                    data = await res.json();
-                } else {
-                    data = generateFallbackCurves(activeSymbol);
-                }
-            } catch (e) {
-                data = generateFallbackCurves(activeSymbol);
-            }
-
-            const curves = data.curves;
-            document.getElementById("currentPrice").innerText = `₹${curves.final_actual}`;
-            document.getElementById("predictedPrice").innerText = `₹${curves.final_pred}`;
-            document.getElementById("errorMetric").innerText = `${curves.error_pct}%`;
-            document.getElementById("predictedBias").innerText = curves.bias;
-            
-            const verdictBadge = document.getElementById("verdictBadge");
-            verdictBadge.innerText = curves.verdict;
-            verdictBadge.className = curves.verdict === 'SUCCESS' ? "text-xs font-bold font-mono px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30" : "text-xs font-bold font-mono px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30";
-
-            renderChart(curves.timeframes, curves.actual_curve, curves.predicted_curve);
-        }
-
-        async function loadEodMatrix() {
-            try {
-                const res = await fetch('./data_store/eod_evaluation.json');
-                if (res.ok) {
-                    const items = await res.json();
-                    document.getElementById("eodMatrixBody").innerHTML = items.map(item => `
-                        <tr class="hover:bg-slate-800/40 transition-colors">
-                            <td class="py-3 px-4 font-bold text-white">${item.symbol}</td>
-                            <td class="py-3 px-4 font-mono ${item.bias === 'BULLISH' ? 'text-emerald-400' : 'text-rose-400'}">${item.bias}</td>
-                            <td class="py-3 px-4 font-mono text-slate-300">₹${item.final_pred}</td>
-                            <td class="py-3 px-4 font-mono text-white font-bold">₹${item.final_actual}</td>
-                            <td class="py-3 px-4 font-mono text-amber-400">${item.error_pct}%</td>
-                            <td class="py-3 px-4">
-                                <span class="px-2 py-0.5 rounded font-mono font-bold text-[10px] ${item.verdict === 'SUCCESS' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'}">
-                                    ${item.verdict}
-                                </span>
-                            </td>
-                            <td class="py-3 px-4 text-right">
-                                <button onclick="analyzeStock('${item.symbol}')" class="text-blue-400 hover:text-blue-300 font-semibold underline">Plot Chart</button>
-                            </td>
-                        </tr>
-                    `).join('');
-                }
-            } catch (e) {
-                console.error("Error loading EOD evaluation matrix:", e);
-            }
-        }
-
-        document.getElementById("searchBtn").addEventListener("click", () => analyzeStock(document.getElementById("symbolInput").value));
-        document.getElementById("symbolInput").addEventListener("keypress", (e) => { if (e.key === "Enter") analyzeStock(e.target.value); });
-
-        renderWatchlistBar();
-        loadEodMatrix();
-        analyzeStock("MUTHOOTFIN");
-    </script>
+    loadStock(activeSymbol);
+  </script>
 </body>
 </html>

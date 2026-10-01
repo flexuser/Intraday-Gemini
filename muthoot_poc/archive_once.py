@@ -24,20 +24,14 @@ WATCHLIST = [
 
 TIMEFRAMES = ['09:15', '09:45', '10:30', '11:15', '12:00', '12:45', '13:30', '14:15', '15:00', '15:30']
 
-def fetch_actual_prices(symbol: str) -> list[float]:
-    """
-    Fetches real market intraday 30-minute close prices from Yahoo Finance.
-    Pads or truncates to match the length of TIMEFRAMES.
-    """
+def fetch_actual_prices(symbol: str) -> list:
     nse_symbol = f"{symbol}.NS"
     logger.info(f"Fetching real market prices for {nse_symbol}...")
     
     try:
         ticker = yf.Ticker(nse_symbol)
-        # Fetch 1-day 30-minute intraday candles
         df = ticker.history(period="1d", interval="30m")
         
-        # Fallback to last available trading session if market is closed or weekend
         if df.empty or len(df) < 5:
             df = ticker.history(period="5d", interval="30m").tail(10)
 
@@ -46,7 +40,6 @@ def fetch_actual_prices(symbol: str) -> list[float]:
         if not actual_prices:
             actual_prices = [1000.0] * len(TIMEFRAMES)
 
-        # Match timeframes length
         if len(actual_prices) > len(TIMEFRAMES):
             actual_prices = actual_prices[:len(TIMEFRAMES)]
         elif len(actual_prices) < len(TIMEFRAMES):
@@ -59,11 +52,7 @@ def fetch_actual_prices(symbol: str) -> list[float]:
         logger.error(f"Failed to fetch market data for {symbol}: {e}")
         return [1000.0] * len(TIMEFRAMES)
 
-def generate_morning_prediction_curve(symbol: str, base_price: float, ai_sentiment: str, confidence_score: float) -> list[float]:
-    """
-    Generates a forecast curve based on AI sentiment and confidence score.
-    """
-    # Convert AI sentiment + confidence into expected percentage drift (-2.0% to +2.0%)
+def generate_morning_prediction_curve(symbol: str, base_price: float, ai_sentiment: str, confidence_score: float) -> list:
     multiplier = 1 if ai_sentiment == "BULLISH" else (-1 if ai_sentiment == "BEARISH" else 0)
     expected_return_pct = multiplier * (confidence_score / 100.0) * 0.02
     
@@ -86,7 +75,6 @@ def run_archive_cycle():
     eod_summary = []
 
     for symbol in WATCHLIST:
-        # 1. Fetch morning news/announcements and classify sentiment
         announcements = fetch_corporate_announcements(symbol)
         clean_ann = deduplicate_announcements(announcements)
         prediction_res = classify_event_and_predict(symbol, clean_ann)
@@ -94,12 +82,10 @@ def run_archive_cycle():
         ai_bias = prediction_res.get("sentiment", "NEUTRAL")
         confidence = prediction_res.get("confidence", 50.0)
 
-        # 2. Fetch actual price history
         actual_prices = fetch_actual_prices(symbol)
         base_price = actual_prices[0]
         final_actual = actual_prices[-1]
 
-        # 3. Generate predicted curve
         predicted_prices = generate_morning_prediction_curve(
             symbol=symbol,
             base_price=base_price,
@@ -108,7 +94,6 @@ def run_archive_cycle():
         )
         final_pred = predicted_prices[-1]
 
-        # Calculate error & directional match
         error_pct = round(abs((final_actual - final_pred) / final_actual) * 100, 2)
         direction_matched = (
             (final_actual >= base_price and ai_bias == "BULLISH") or
@@ -118,7 +103,6 @@ def run_archive_cycle():
 
         verdict = "SUCCESS" if direction_matched and error_pct <= 3.0 else ("PARTIAL" if direction_matched else "FAIL")
 
-        # 4. Construct payload and save JSON
         curve_data = {
             "symbol": symbol,
             "timeframes": TIMEFRAMES[:len(actual_prices)],
