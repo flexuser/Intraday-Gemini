@@ -38,10 +38,10 @@
     ],
     "quant_signals": {
       "vwap": 1770.64,
-      "rsi": 62.07,
+      "rsi": 61.25,
       "atr": 2.94,
-      "bb_upper": 1745.95,
-      "bb_lower": 1727.54,
+      "bb_upper": 1745.82,
+      "bb_lower": 1727.62,
       "pcr": 1.0,
       "implied_volatility": 18.5,
       "past_verdict": "SUCCESS"
@@ -50,7 +50,7 @@
   "curves": {
     "symbol": "BHARTIARTL",
     "date": "2026-10-01",
-    "generated_at": "03:25 PM IST",
+    "generated_at": "03:30 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -86,7 +86,7 @@
       1736.5,
       1735.5,
       1742.0,
-      null
+      1745.7
     ],
     "actual_volume": [
       163804,
@@ -98,10 +98,10 @@
       129288,
       41298,
       81044,
-      null
+      218546
     ],
     "final_pred": 1742.6,
-    "final_actual": 1742.0,
-    "error_pct": 0.03
+    "final_actual": 1745.7,
+    "error_pct": 0.18
   }
 }

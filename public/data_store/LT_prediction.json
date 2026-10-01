@@ -37,11 +37,11 @@
       }
     ],
     "quant_signals": {
-      "vwap": 3764.25,
-      "rsi": 66.81,
-      "atr": 8.13,
-      "bb_upper": 3701.04,
-      "bb_lower": 3652.6,
+      "vwap": 3764.56,
+      "rsi": 59.01,
+      "atr": 7.87,
+      "bb_upper": 3698.33,
+      "bb_lower": 3654.26,
       "pcr": 1.0,
       "implied_volatility": 18.5,
       "past_verdict": "SUCCESS"
@@ -50,7 +50,7 @@
   "curves": {
     "symbol": "LT",
     "date": "2026-10-01",
-    "generated_at": "03:25 PM IST",
+    "generated_at": "03:30 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -86,10 +86,10 @@
       3680.0,
       3667.3,
       3689.4,
-      null
+      3694.1
     ],
     "actual_volume": [
-      66543,
+      0,
       43055,
       14210,
       14999,
@@ -98,10 +98,10 @@
       18667,
       29179,
       70636,
-      null
+      92052
     ],
     "final_pred": 3717.1,
-    "final_actual": 3689.4,
-    "error_pct": 0.75
+    "final_actual": 3694.1,
+    "error_pct": 0.62
   }
 }

@@ -2,8 +2,8 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for HDFCBANK.",
-    "volume_ratio": 0.0,
-    "has_volume_spike": false,
+    "volume_ratio": 3.32,
+    "has_volume_spike": true,
     "news_feed": [
       {
         "title": "Apple Pay launches in India with Axis Bank partnership",
@@ -37,11 +37,11 @@
       }
     ],
     "quant_signals": {
-      "vwap": 718.11,
-      "rsi": 68.87,
-      "atr": 1.42,
-      "bb_upper": 722.31,
-      "bb_lower": 710.65,
+      "vwap": 718.14,
+      "rsi": 69.51,
+      "atr": 1.58,
+      "bb_upper": 721.67,
+      "bb_lower": 710.87,
       "pcr": 1.0,
       "implied_volatility": 18.5,
       "past_verdict": "SUCCESS"
@@ -50,7 +50,7 @@
   "curves": {
     "symbol": "HDFCBANK",
     "date": "2026-10-01",
-    "generated_at": "03:25 PM IST",
+    "generated_at": "03:30 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -86,10 +86,10 @@
       717.9,
       714.1,
       719.85,
-      null
+      721.3
     ],
     "actual_volume": [
-      1026096,
+      0,
       425939,
       290425,
       227297,
@@ -98,10 +98,10 @@
       579657,
       466504,
       952229,
-      null
+      1410965
     ],
     "final_pred": 717.5,
-    "final_actual": 719.85,
-    "error_pct": 0.33
+    "final_actual": 721.3,
+    "error_pct": 0.53
   }
 }
