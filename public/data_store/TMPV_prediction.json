@@ -1,8 +1,8 @@
 {
   "prediction": {
     "bias": "BULLISH",
-    "reasoning": "Intraday outlook based on live volume (0.3x) and order flow evaluation.",
-    "volume_ratio": 0.3,
+    "reasoning": "Intraday outlook based on live volume (0.47x) and order flow evaluation.",
+    "volume_ratio": 0.47,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "TMPV",
     "date": "2026-10-01",
-    "generated_at": "01:20 PM IST",
+    "generated_at": "01:25 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
