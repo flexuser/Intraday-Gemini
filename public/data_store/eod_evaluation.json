@@ -1,5 +1,13 @@
 [
   {
+    "symbol": "TMPV",
+    "bias": "NEUTRAL",
+    "final_pred": 280.45,
+    "final_actual": 279.0,
+    "error_pct": 0.52,
+    "verdict": "SUCCESS"
+  },
+  {
     "symbol": "RELIANCE",
     "bias": "NEUTRAL",
     "final_pred": 1180.2,
@@ -16,10 +24,10 @@
     "verdict": "FAILED"
   },
   {
-    "symbol": "TMPV",
+    "symbol": "HDFCBANK",
     "bias": "NEUTRAL",
-    "final_pred": 280.45,
-    "final_actual": 279.0,
+    "final_pred": 717.5,
+    "final_actual": 721.2,
     "error_pct": 0.52,
     "verdict": "SUCCESS"
   },
@@ -27,24 +35,16 @@
     "symbol": "MUTHOOTFIN",
     "bias": "NEUTRAL",
     "final_pred": 2729.7,
-    "final_actual": 2698.0,
-    "error_pct": 1.16,
+    "final_actual": 2697.1,
+    "error_pct": 1.19,
     "verdict": "PARTIAL"
-  },
-  {
-    "symbol": "HDFCBANK",
-    "bias": "NEUTRAL",
-    "final_pred": 717.5,
-    "final_actual": 721.3,
-    "error_pct": 0.53,
-    "verdict": "SUCCESS"
   },
   {
     "symbol": "TCS",
     "bias": "NEUTRAL",
     "final_pred": 2078.4,
-    "final_actual": 2074.0,
-    "error_pct": 0.21,
+    "final_actual": 2075.0,
+    "error_pct": 0.16,
     "verdict": "SUCCESS"
   },
   {
@@ -56,12 +56,12 @@
     "verdict": "SUCCESS"
   },
   {
-    "symbol": "LT",
+    "symbol": "ICICIBANK",
     "bias": "NEUTRAL",
-    "final_pred": 3717.1,
-    "final_actual": 3694.1,
-    "error_pct": 0.62,
-    "verdict": "SUCCESS"
+    "final_pred": 1321.6,
+    "final_actual": 1310.6,
+    "error_pct": 0.83,
+    "verdict": "PARTIAL"
   },
   {
     "symbol": "SBIN",
@@ -72,12 +72,12 @@
     "verdict": "SUCCESS"
   },
   {
-    "symbol": "ICICIBANK",
+    "symbol": "LT",
     "bias": "NEUTRAL",
-    "final_pred": 1321.6,
-    "final_actual": 1310.6,
-    "error_pct": 0.83,
-    "verdict": "PARTIAL"
+    "final_pred": 3717.1,
+    "final_actual": 3694.1,
+    "error_pct": 0.62,
+    "verdict": "SUCCESS"
   },
   {
     "symbol": "SUNPHARMA",

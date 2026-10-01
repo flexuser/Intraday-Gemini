@@ -2,8 +2,8 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for MUTHOOTFIN.",
-    "volume_ratio": 1.35,
-    "has_volume_spike": false,
+    "volume_ratio": 1.97,
+    "has_volume_spike": true,
     "news_feed": [
       {
         "title": "Muthoot Finance Ltd (BOM:533398) (Q1 2027) Earnings Call Highlights: AUM Surges 43% to ...",
@@ -37,11 +37,11 @@
       }
     ],
     "quant_signals": {
-      "vwap": 2757.24,
-      "rsi": 46.22,
-      "atr": 7.34,
-      "bb_upper": 2709.28,
-      "bb_lower": 2679.14,
+      "vwap": 2757.13,
+      "rsi": 45.47,
+      "atr": 7.53,
+      "bb_upper": 2709.2,
+      "bb_lower": 2679.13,
       "pcr": 1.0,
       "implied_volatility": 18.5,
       "past_verdict": "PARTIAL"
@@ -50,7 +50,7 @@
   "curves": {
     "symbol": "MUTHOOTFIN",
     "date": "2026-10-01",
-    "generated_at": "03:45 PM IST",
+    "generated_at": "03:50 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -86,7 +86,7 @@
       2703.3,
       2686.9,
       2698.5,
-      2698.0
+      2697.1
     ],
     "actual_volume": [
       0,
@@ -98,10 +98,10 @@
       6337,
       6636,
       12159,
-      11959
+      17440
     ],
     "final_pred": 2729.7,
-    "final_actual": 2698.0,
-    "error_pct": 1.16
+    "final_actual": 2697.1,
+    "error_pct": 1.19
   }
 }

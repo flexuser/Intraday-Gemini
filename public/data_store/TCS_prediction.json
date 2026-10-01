@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for TCS.",
-    "volume_ratio": 4.94,
+    "volume_ratio": 2.51,
     "has_volume_spike": true,
     "news_feed": [
       {
@@ -37,11 +37,11 @@
       }
     ],
     "quant_signals": {
-      "vwap": 2065.62,
-      "rsi": 66.67,
-      "atr": 5.17,
-      "bb_upper": 2084.61,
-      "bb_lower": 2037.8,
+      "vwap": 2065.69,
+      "rsi": 67.77,
+      "atr": 4.88,
+      "bb_upper": 2086.14,
+      "bb_lower": 2038.51,
       "pcr": 1.0,
       "implied_volatility": 18.5,
       "past_verdict": "SUCCESS"
@@ -50,7 +50,7 @@
   "curves": {
     "symbol": "TCS",
     "date": "2026-10-01",
-    "generated_at": "03:45 PM IST",
+    "generated_at": "03:50 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -86,7 +86,7 @@
       2053.9,
       2054.6,
       2074.1,
-      2074.0
+      2075.0
     ],
     "actual_volume": [
       0,
@@ -98,10 +98,10 @@
       26101,
       34720,
       68564,
-      228169
+      115816
     ],
     "final_pred": 2078.4,
-    "final_actual": 2074.0,
-    "error_pct": 0.21
+    "final_actual": 2075.0,
+    "error_pct": 0.16
   }
 }
