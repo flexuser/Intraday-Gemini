@@ -37,11 +37,11 @@
       }
     ],
     "quant_signals": {
-      "vwap": 1002.1,
-      "rsi": 77.08,
-      "atr": 4.46,
-      "bb_upper": 1030.91,
-      "bb_lower": 996.78,
+      "vwap": 1001.96,
+      "rsi": 73.75,
+      "atr": 4.28,
+      "bb_upper": 1030.13,
+      "bb_lower": 997.2,
       "pcr": 1.0,
       "implied_volatility": 18.5,
       "past_verdict": "SUCCESS"
@@ -50,7 +50,7 @@
   "curves": {
     "symbol": "INFY",
     "date": "2026-10-01",
-    "generated_at": "03:25 PM IST",
+    "generated_at": "03:30 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -86,10 +86,10 @@
       1003.8,
       1007.75,
       1021.5,
-      null
+      1025.3
     ],
     "actual_volume": [
-      504956,
+      0,
       74176,
       46965,
       266853,
@@ -98,10 +98,10 @@
       95220,
       201352,
       377786,
-      null
+      787831
     ],
     "final_pred": 1014.5,
-    "final_actual": 1021.5,
-    "error_pct": 0.69
+    "final_actual": 1025.3,
+    "error_pct": 1.06
   }
 }

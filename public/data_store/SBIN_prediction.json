@@ -2,8 +2,8 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for SBIN.",
-    "volume_ratio": 0.0,
-    "has_volume_spike": false,
+    "volume_ratio": 3.47,
+    "has_volume_spike": true,
     "news_feed": [
       {
         "title": "SBI and Kyobo Test Japan-Korea Stablecoin Settlement Model",
@@ -37,11 +37,11 @@
       }
     ],
     "quant_signals": {
-      "vwap": 962.26,
-      "rsi": 63.19,
-      "atr": 1.84,
-      "bb_upper": 957.15,
-      "bb_lower": 945.37,
+      "vwap": 962.28,
+      "rsi": 62.15,
+      "atr": 2.06,
+      "bb_upper": 956.24,
+      "bb_lower": 945.67,
       "pcr": 1.0,
       "implied_volatility": 18.5,
       "past_verdict": "SUCCESS"
@@ -50,7 +50,7 @@
   "curves": {
     "symbol": "SBIN",
     "date": "2026-10-01",
-    "generated_at": "03:25 PM IST",
+    "generated_at": "03:30 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -86,10 +86,10 @@
       952.45,
       949.8,
       954.35,
-      null
+      956.4
     ],
     "actual_volume": [
-      192796,
+      0,
       64772,
       54238,
       33855,
@@ -98,10 +98,10 @@
       69555,
       81760,
       179474,
-      null
+      511875
     ],
     "final_pred": 958.15,
-    "final_actual": 954.35,
-    "error_pct": 0.4
+    "final_actual": 956.4,
+    "error_pct": 0.18
   }
 }

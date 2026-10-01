@@ -2,8 +2,8 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for RELIANCE.",
-    "volume_ratio": 0.0,
-    "has_volume_spike": false,
+    "volume_ratio": 2.63,
+    "has_volume_spike": true,
     "news_feed": [
       {
         "title": "Oil Refiners In Focus After Saudi Exports Rise and Brent Nears $110",
@@ -38,10 +38,10 @@
     ],
     "quant_signals": {
       "vwap": 1193.33,
-      "rsi": 55.52,
-      "atr": 2.01,
-      "bb_upper": 1171.47,
-      "bb_lower": 1161.86,
+      "rsi": 54.76,
+      "atr": 2.26,
+      "bb_upper": 1171.24,
+      "bb_lower": 1161.97,
       "pcr": 1.0,
       "implied_volatility": 18.5,
       "past_verdict": "PARTIAL"
@@ -50,7 +50,7 @@
   "curves": {
     "symbol": "RELIANCE",
     "date": "2026-10-01",
-    "generated_at": "03:25 PM IST",
+    "generated_at": "03:30 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -86,7 +86,7 @@
       1169.7,
       1163.9,
       1167.2,
-      null
+      1170.1
     ],
     "actual_volume": [
       391610,
@@ -98,10 +98,10 @@
       122802,
       185796,
       443825,
-      null
+      582139
     ],
     "final_pred": 1180.2,
-    "final_actual": 1167.2,
-    "error_pct": 1.1
+    "final_actual": 1170.1,
+    "error_pct": 0.86
   }
 }

@@ -50,7 +50,7 @@
   "curves": {
     "symbol": "MUTHOOTFIN",
     "date": "2026-10-01",
-    "generated_at": "03:25 PM IST",
+    "generated_at": "03:30 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -86,7 +86,7 @@
       2703.3,
       2686.9,
       2698.5,
-      null
+      2698.0
     ],
     "actual_volume": [
       8690,
@@ -98,10 +98,10 @@
       6337,
       6636,
       12159,
-      null
+      11959
     ],
     "final_pred": 2729.7,
-    "final_actual": 2698.5,
-    "error_pct": 1.14
+    "final_actual": 2698.0,
+    "error_pct": 1.16
   }
 }

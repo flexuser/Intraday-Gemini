@@ -2,8 +2,8 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for ICICIBANK.",
-    "volume_ratio": 0.0,
-    "has_volume_spike": false,
+    "volume_ratio": 2.62,
+    "has_volume_spike": true,
     "news_feed": [
       {
         "title": "Apple Pay launches in India with Axis Bank partnership",
@@ -38,10 +38,10 @@
     ],
     "quant_signals": {
       "vwap": 1314.81,
-      "rsi": 58.27,
-      "atr": 2.61,
-      "bb_upper": 1317.79,
-      "bb_lower": 1308.12,
+      "rsi": 58.54,
+      "atr": 2.86,
+      "bb_upper": 1316.96,
+      "bb_lower": 1308.47,
       "pcr": 1.0,
       "implied_volatility": 18.5,
       "past_verdict": "SUCCESS"
@@ -50,7 +50,7 @@
   "curves": {
     "symbol": "ICICIBANK",
     "date": "2026-10-01",
-    "generated_at": "03:25 PM IST",
+    "generated_at": "03:30 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -86,7 +86,7 @@
       1314.0,
       1310.3,
       1313.4,
-      null
+      1318.0
     ],
     "actual_volume": [
       332875,
@@ -98,10 +98,10 @@
       136922,
       104758,
       224561,
-      null
+      408982
     ],
     "final_pred": 1321.6,
-    "final_actual": 1313.4,
-    "error_pct": 0.62
+    "final_actual": 1318.0,
+    "error_pct": 0.27
   }
 }
