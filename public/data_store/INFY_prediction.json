@@ -2,8 +2,8 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for INFY.",
-    "volume_ratio": 0.0,
-    "has_volume_spike": false,
+    "volume_ratio": 4.95,
+    "has_volume_spike": true,
     "news_feed": [
       {
         "title": "Accenture (ACN): A 50% Rally Into Earnings, and a Street That Cannot Agree on What It Means",
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "INFY",
     "date": "2026-10-01",
-    "generated_at": "03:10 PM IST",
+    "generated_at": "03:15 PM IST",
     "timeframes": [
       "09:15",
       "09:45",

@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for MUTHOOTFIN.",
-    "volume_ratio": 0.0,
+    "volume_ratio": 1.35,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "MUTHOOTFIN",
     "date": "2026-10-01",
-    "generated_at": "03:10 PM IST",
+    "generated_at": "03:15 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
