@@ -1,8 +1,8 @@
 {
   "prediction": {
     "bias": "BEARISH",
-    "reasoning": "Intraday outlook based on live volume (0.3x) and order flow evaluation.",
-    "volume_ratio": 0.3,
+    "reasoning": "Intraday outlook based on live volume (0.0x) and order flow evaluation.",
+    "volume_ratio": 0.0,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "ICICIBANK",
     "date": "2026-10-01",
-    "generated_at": "01:25 PM IST",
+    "generated_at": "01:30 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -73,7 +73,7 @@
       1318.5,
       1322.0,
       1321.3,
-      null,
+      1320.9,
       null,
       null,
       null
@@ -85,13 +85,13 @@
       253196,
       218006,
       188834,
-      null,
+      238957,
       null,
       null,
       null
     ],
     "final_pred": 1288.48,
-    "final_actual": 1321.3,
-    "error_pct": 2.48
+    "final_actual": 1320.9,
+    "error_pct": 2.45
   }
 }
