@@ -1,15 +1,16 @@
-import os
+import datetime
 import json
 import math
-import datetime
+import os
 import pytz
 import yfinance as yf
 
 try:
-    import google.generativeai as genai
-    GEMINI_AVAILABLE = True
+  import google.generativeai as genai
+
+  GEMINI_AVAILABLE = True
 except ImportError:
-    GEMINI_AVAILABLE = False
+  GEMINI_AVAILABLE = False
 
 WATCHLIST = [
     {"symbol": "MUTHOOTFIN", "ticker": "MUTHOOTFIN.NS"},
@@ -22,10 +23,21 @@ WATCHLIST = [
     {"symbol": "SBIN", "ticker": "SBIN.NS"},
     {"symbol": "BHARTIARTL", "ticker": "BHARTIARTL.NS"},
     {"symbol": "LT", "ticker": "LT.NS"},
-    {"symbol": "SUNPHARMA", "ticker": "SUNPHARMA.NS"}
+    {"symbol": "SUNPHARMA", "ticker": "SUNPHARMA.NS"},
 ]
 
-TIMEFRAMES = ["09:15", "09:45", "10:30", "11:15", "12:00", "12:45", "13:30", "14:15", "15:00", "15:30"]
+TIMEFRAMES = [
+    "09:15",
+    "09:45",
+    "10:30",
+    "11:15",
+    "12:00",
+    "12:45",
+    "13:30",
+    "14:15",
+    "15:00",
+    "15:30",
+]
 
 SLOT_MINUTES = {
     "09:15": 9 * 60 + 15,
@@ -37,77 +49,105 @@ SLOT_MINUTES = {
     "13:30": 13 * 60 + 30,
     "14:15": 14 * 60 + 15,
     "15:00": 15 * 60 + 0,
-    "15:30": 15 * 60 + 30
+    "15:30": 15 * 60 + 30,
 }
 
+
 def get_ist_now():
-    ist = pytz.timezone('Asia/Kolkata')
-    return datetime.datetime.now(ist)
+  ist = pytz.timezone("Asia/Kolkata")
+  return datetime.datetime.now(ist)
+
 
 def get_fallback_shape(bias: str) -> list[float]:
-    if bias == "BULLISH":
-        return [1.0, 0.996, 0.993, 0.998, 1.004, 1.008, 1.011, 1.014, 1.016, 1.020]
-    elif bias == "BEARISH":
-        return [1.0, 1.004, 0.998, 0.990, 0.985, 0.982, 0.980, 0.978, 0.976, 0.972]
-    else:
-        return [1.0, 1.002, 0.998, 1.001, 0.997, 1.002, 0.998, 1.001, 0.999, 1.000]
+  if bias == "BULLISH":
+    return [1.0, 0.996, 0.993, 0.998, 1.004, 1.008, 1.011, 1.014, 1.016, 1.020]
+  elif bias == "BEARISH":
+    return [1.0, 1.004, 0.998, 0.990, 0.985, 0.982, 0.980, 0.978, 0.976, 0.972]
+  else:
+    return [1.0, 1.002, 0.998, 1.001, 0.997, 1.002, 0.998, 1.001, 0.999, 1.000]
+
 
 def fetch_live_news_and_volume(ticker_symbol: str):
-    news_items = []
-    volume_ratio = 1.0
-    has_volume_spike = False
-    
-    try:
-        t = yf.Ticker(ticker_symbol)
-        
-        raw_news = t.news or []
-        for n in raw_news[:3]:
-            title = n.get('title') or n.get('content', {}).get('title', '')
-            publisher = n.get('publisher') or n.get('content', {}).get('provider', {}).get('displayName', 'Market News')
-            link = n.get('link') or n.get('content', {}).get('canonicalUrl', '#')
-            if title:
-                news_items.append({"title": title, "publisher": publisher, "link": link})
+  news_items = []
+  volume_ratio = 1.0
+  has_volume_spike = False
 
-        hist = t.history(period="5d", interval="1d")
-        intraday = t.history(period="1d", interval="15m")
-        if not hist.empty and not intraday.empty:
-            avg_daily_vol = float(hist['Volume'].mean() / 25)
-            latest_vol = float(intraday['Volume'].iloc[-1]) if len(intraday['Volume']) > 0 else 0.0
-            if avg_daily_vol > 0:
-                volume_ratio = float(round(latest_vol / avg_daily_vol, 2))
-                has_volume_spike = bool(volume_ratio >= 1.5)
+  try:
+    t = yf.Ticker(ticker_symbol)
 
-    except Exception as e:
-        print(f"News/Volume fetch info for {ticker_symbol}: {e}")
+    raw_news = t.news or []
+    for n in raw_news[:3]:
+      title = n.get("title") or n.get("content", {}).get("title", "")
+      publisher = n.get("publisher") or n.get("content", {}).get(
+          "provider", {}
+      ).get("displayName", "Market News")
+      link = n.get("link") or n.get("content", {}).get("canonicalUrl", "#")
+      if title:
+        news_items.append(
+            {"title": title, "publisher": publisher, "link": link}
+        )
 
-    if not news_items:
-        news_items = [{"title": f"No major structural announcements recorded for {ticker_symbol}.", "publisher": "NSE Surveillance", "link": "#"}]
+    hist = t.history(period="5d", interval="1d")
+    # Fetch 5-minute candles
+    intraday = t.history(period="1d", interval="5m")
 
-    return news_items, volume_ratio, has_volume_spike
+    if not hist.empty and not intraday.empty:
+      # 375 trading minutes / 5 = 75 bars per day
+      avg_daily_vol = float(hist["Volume"].mean() / 75)
+      latest_vol = (
+          float(intraday["Volume"].iloc[-1])
+          if len(intraday["Volume"]) > 0
+          else 0.0
+      )
+      if avg_daily_vol > 0:
+        volume_ratio = float(round(latest_vol / avg_daily_vol, 2))
+        has_volume_spike = bool(volume_ratio >= 1.5)
 
-def query_gemini_curve(symbol: str, news_items: list, volume_ratio: float, has_spike: bool) -> dict:
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not GEMINI_AVAILABLE or not api_key:
-        biases = ["BULLISH", "BEARISH", "NEUTRAL"]
-        symbol_bias = biases[sum(ord(c) for c in symbol) % 3]
-        return {
-            "bias": symbol_bias,
-            "reasoning": f"Intraday outlook based on live volume ({volume_ratio}x) and order flow evaluation.",
-            "shape_multipliers": get_fallback_shape(symbol_bias)
-        }
+  except Exception as e:
+    print(f"News/Volume fetch info for {ticker_symbol}: {e}")
 
-    try:
-        genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-2.5-flash')
-        
-        news_summary = "\n".join([f"- {n['title']} ({n['publisher']})" for n in news_items])
-        
-        prompt = f"""
+  if not news_items:
+    news_items = [{
+        "title": (
+            f"No major structural announcements recorded for {ticker_symbol}."
+        ),
+        "publisher": "NSE Surveillance",
+        "link": "#",
+    }]
+
+  return news_items, volume_ratio, has_volume_spike
+
+
+def query_gemini_curve(
+    symbol: str, news_items: list, volume_ratio: float, has_spike: bool
+) -> dict:
+  api_key = os.environ.get("GEMINI_API_KEY")
+  if not GEMINI_AVAILABLE or not api_key:
+    biases = ["BULLISH", "BEARISH", "NEUTRAL"]
+    symbol_bias = biases[sum(ord(c) for c in symbol) % 3]
+    return {
+        "bias": symbol_bias,
+        "reasoning": (
+            f"Intraday outlook based on live volume ({volume_ratio}x) and order"
+            " flow evaluation."
+        ),
+        "shape_multipliers": get_fallback_shape(symbol_bias),
+    }
+
+  try:
+    genai.configure(api_key=api_key)
+    model = genai.GenerativeModel("gemini-2.5-flash")
+
+    news_summary = "\n".join(
+        [f"- {n['title']} ({n['publisher']})" for n in news_items]
+    )
+
+    prompt = f"""
         Act as an expert intraday quantitative trader for Indian Stock Market (NSE).
         Analyze Ticker: {symbol}
         
         Live Market Signals:
-        - Latest Volume Spike Ratio: {volume_ratio}x relative to average 15m volume. (Spike Active: {has_spike})
+        - Latest Volume Spike Ratio: {volume_ratio}x relative to average 5m volume. (Spike Active: {has_spike})
         - Real-Time News Feed:
         {news_summary}
 
@@ -122,131 +162,168 @@ def query_gemini_curve(symbol: str, news_items: list, volume_ratio: float, has_s
 
         Raw JSON only without markdown formatting.
         """
-        
-        res = model.generate_content(prompt)
-        text = res.text.strip().replace("```json", "").replace("```", "")
-        data = json.loads(text)
-        if "shape_multipliers" in data and len(data["shape_multipliers"]) == 10:
-            return data
-    except Exception as e:
-        print(f"Gemini API warning for {symbol}: {e}")
 
-    symbol_bias = "NEUTRAL"
-    return {
-        "bias": symbol_bias,
-        "reasoning": f"Market dynamics evaluation active for {symbol}.",
-        "shape_multipliers": get_fallback_shape(symbol_bias)
-    }
+    res = model.generate_content(prompt)
+    text = res.text.strip().replace("```json", "").replace("```", "")
+    data = json.loads(text)
+    if "shape_multipliers" in data and len(data["shape_multipliers"]) == 10:
+      return data
+  except Exception as e:
+    print(f"Gemini API warning for {symbol}: {e}")
+
+  symbol_bias = "NEUTRAL"
+  return {
+      "bias": symbol_bias,
+      "reasoning": f"Market dynamics evaluation active for {symbol}.",
+      "shape_multipliers": get_fallback_shape(symbol_bias),
+  }
+
 
 def fetch_actual_intraday_prices_and_volumes(ticker: str):
-    actuals = [None] * 10
-    volumes = [None] * 10
-    ist_now = get_ist_now()
-    current_minutes = ist_now.hour * 60 + ist_now.minute
+  actuals = [None] * len(TIMEFRAMES)
+  volumes = [None] * len(TIMEFRAMES)
+  ist_now = get_ist_now()
+  current_minutes = ist_now.hour * 60 + ist_now.minute
 
-    try:
-        df = yf.download(ticker, period="1d", interval="15m", progress=False)
-        if not df.empty:
-            prices = df['Close'].iloc[:, 0].tolist() if hasattr(df['Close'], 'columns') else df['Close'].tolist()
-            vols = df['Volume'].iloc[:, 0].tolist() if hasattr(df['Volume'], 'columns') else df['Volume'].tolist()
-            
-            for idx, slot in enumerate(TIMEFRAMES):
-                slot_min = SLOT_MINUTES[slot]
-                if current_minutes >= slot_min:
-                    if idx < len(prices) and prices[idx] is not None:
-                        val = float(prices[idx])
-                        if not math.isnan(val):
-                            actuals[idx] = round(val, 2)
-                    if idx < len(vols) and vols[idx] is not None:
-                        v_val = float(vols[idx])
-                        if not math.isnan(v_val):
-                            volumes[idx] = int(v_val)
-                else:
-                    actuals[idx] = None
-                    volumes[idx] = None
+  try:
+    # Request 5-minute interval data
+    df = yf.download(ticker, period="1d", interval="5m", progress=False)
 
-    except Exception as e:
-        print(f"yfinance fetch error for {ticker}: {e}")
-        
-    return actuals, volumes
+    if not df.empty:
+      if df.index.tz is None:
+        df.index = df.index.tz_localize("UTC").tz_convert("Asia/Kolkata")
+      else:
+        df.index = df.index.tz_convert("Asia/Kolkata")
+
+      close_series = (
+          df["Close"].iloc[:, 0]
+          if hasattr(df["Close"], "columns")
+          else df["Close"]
+      )
+      vol_series = (
+          df["Volume"].iloc[:, 0]
+          if hasattr(df["Volume"], "columns")
+          else df["Volume"]
+      )
+
+      for idx, slot in enumerate(TIMEFRAMES):
+        slot_min = SLOT_MINUTES[slot]
+        if current_minutes >= slot_min:
+          slot_time = datetime.time(slot_min // 60, slot_min % 60)
+
+          filtered_close = close_series[close_series.index.time <= slot_time]
+          filtered_vol = vol_series[vol_series.index.time <= slot_time]
+
+          if not filtered_close.empty:
+            val = float(filtered_close.iloc[-1])
+            if not math.isnan(val):
+              actuals[idx] = round(val, 2)
+
+          if not filtered_vol.empty:
+            v_val = float(filtered_vol.iloc[-1])
+            if not math.isnan(v_val):
+              volumes[idx] = int(v_val)
+
+  except Exception as e:
+    print(f"yfinance fetch error for {ticker}: {e}")
+
+  return actuals, volumes
+
 
 def run_archive():
-    output_dir = os.path.join(os.getcwd(), "public", "data_store")
-    os.makedirs(output_dir, exist_ok=True)
-    
-    ist_now = get_ist_now()
-    today_str = ist_now.strftime("%Y-%m-%d")
-    now_str = ist_now.strftime("%I:%M %p IST")
-    eod_matrix = []
+  output_dir = os.path.join(os.getcwd(), "public", "data_store")
+  os.makedirs(output_dir, exist_ok=True)
 
-    print(f"--- Running Dynamic Intraday AI Sync ({today_str} {now_str}) ---")
+  ist_now = get_ist_now()
+  today_str = ist_now.strftime("%Y-%m-%d")
+  now_str = ist_now.strftime("%I:%M %p IST")
+  eod_matrix = []
 
-    for item in WATCHLIST:
-        symbol = item["symbol"]
-        ticker = item["ticker"]
-        
-        actual_curve, actual_volume = fetch_actual_intraday_prices_and_volumes(ticker)
-        valid_actuals = [p for p in actual_curve if p is not None]
-        base_price = valid_actuals[0] if valid_actuals else 1000.0
+  print(f"--- Running Dynamic Intraday AI Sync ({today_str} {now_str}) ---")
 
-        news_items, volume_ratio, has_spike = fetch_live_news_and_volume(ticker)
+  for item in WATCHLIST:
+    symbol = item["symbol"]
+    ticker = item["ticker"]
 
-        ai_data = query_gemini_curve(symbol, news_items, volume_ratio, has_spike)
-        multipliers = ai_data.get("shape_multipliers", get_fallback_shape(ai_data.get("bias", "NEUTRAL")))
-        predicted_curve = [round(float(base_price * m), 2) for m in multipliers]
+    actual_curve, actual_volume = fetch_actual_intraday_prices_and_volumes(
+        ticker
+    )
+    valid_actuals = [p for p in actual_curve if p is not None]
+    base_price = valid_actuals[0] if valid_actuals else 1000.0
 
-        final_pred = predicted_curve[-1]
-        final_actual = valid_actuals[-1] if valid_actuals else None
-        
-        error_pct = 0.0
-        verdict = "IN_PROGRESS"
-        if final_actual and base_price:
-            error_pct = round(float(abs(final_actual - final_pred) / base_price * 100), 2)
-            verdict = "SUCCESS" if error_pct <= 0.8 else ("PARTIAL" if error_pct <= 1.8 else "FAILED")
+    news_items, volume_ratio, has_spike = fetch_live_news_and_volume(ticker)
 
-        payload = {
-            "prediction": {
-                "bias": str(ai_data.get("bias", "NEUTRAL")),
-                "reasoning": str(ai_data.get("reasoning", "Analysis active.")),
-                "volume_ratio": float(volume_ratio),
-                "has_volume_spike": bool(has_spike),
-                "news_feed": news_items
-            },
-            "curves": {
-                "symbol": symbol,
-                "date": today_str,
-                "generated_at": now_str,
-                "timeframes": TIMEFRAMES,
-                "bias": str(ai_data.get("bias", "NEUTRAL")),
-                "predicted_curve": predicted_curve,
-                "actual_curve": actual_curve,
-                "actual_volume": actual_volume,
-                "final_pred": float(final_pred),
-                "final_actual": float(final_actual) if final_actual else None,
-                "error_pct": float(error_pct)
-            }
-        }
+    ai_data = query_gemini_curve(symbol, news_items, volume_ratio, has_spike)
+    multipliers = ai_data.get(
+        "shape_multipliers",
+        get_fallback_shape(ai_data.get("bias", "NEUTRAL")),
+    )
+    predicted_curve = [
+        round(float(base_price * m), 2) for m in multipliers
+    ]
 
-        file_path = os.path.join(output_dir, f"{symbol}_prediction.json")
-        with open(file_path, "w", encoding="utf-8") as f:
-            json.dump(payload, f, indent=2)
+    final_pred = predicted_curve[-1]
+    final_actual = valid_actuals[-1] if valid_actuals else None
 
-        eod_matrix.append({
-            "symbol": symbol,
+    error_pct = 0.0
+    verdict = "IN_PROGRESS"
+    if final_actual and base_price:
+      error_pct = round(
+          float(abs(final_actual - final_pred) / base_price * 100), 2
+      )
+      verdict = (
+          "SUCCESS"
+          if error_pct <= 0.8
+          else ("PARTIAL" if error_pct <= 1.8 else "FAILED")
+      )
+
+    payload = {
+        "prediction": {
             "bias": str(ai_data.get("bias", "NEUTRAL")),
+            "reasoning": str(ai_data.get("reasoning", "Analysis active.")),
+            "volume_ratio": float(volume_ratio),
+            "has_volume_spike": bool(has_spike),
+            "news_feed": news_items,
+        },
+        "curves": {
+            "symbol": symbol,
+            "date": today_str,
+            "generated_at": now_str,
+            "timeframes": TIMEFRAMES,
+            "bias": str(ai_data.get("bias", "NEUTRAL")),
+            "predicted_curve": predicted_curve,
+            "actual_curve": actual_curve,
+            "actual_volume": actual_volume,
             "final_pred": float(final_pred),
-            "final_actual": float(final_actual) if final_actual else "--",
+            "final_actual": float(final_actual) if final_actual else None,
             "error_pct": float(error_pct),
-            "verdict": verdict
-        })
-        
-        print(f" Synced {symbol:12} | Bias: {ai_data.get('bias'):7} | Last Sync: {now_str} | Spike: {has_spike}")
+        },
+    }
 
-    audit_file = os.path.join(output_dir, "eod_evaluation.json")
-    with open(audit_file, "w", encoding="utf-8") as f:
-        json.dump(eod_matrix, f, indent=2)
+    file_path = os.path.join(output_dir, f"{symbol}_prediction.json")
+    with open(file_path, "w", encoding="utf-8") as f:
+      json.dump(payload, f, indent=2)
 
-    print("--- Sync Complete ---")
+    eod_matrix.append({
+        "symbol": symbol,
+        "bias": str(ai_data.get("bias", "NEUTRAL")),
+        "final_pred": float(final_pred),
+        "final_actual": float(final_actual) if final_actual else "--",
+        "error_pct": float(error_pct),
+        "verdict": verdict,
+    })
+
+    print(
+        f" Synced {symbol:12} | Bias: {ai_data.get('bias'):7} | Last Sync:"
+        f" {now_str} | Spike: {has_spike}"
+    )
+
+  audit_file = os.path.join(output_dir, "eod_evaluation.json")
+  with open(audit_file, "w", encoding="utf-8") as f:
+    json.dump(eod_matrix, f, indent=2)
+
+  print("--- Sync Complete ---")
+
 
 if __name__ == "__main__":
-    run_archive()
+  run_archive()

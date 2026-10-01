@@ -251,7 +251,7 @@
           datasets: [
             {
               type: 'bar',
-              label: '15m Volume',
+              label: '5m Volume',
               data: curves.actual_volume || [],
               backgroundColor: 'rgba(51, 65, 85, 0.45)',
               borderColor: 'rgba(100, 116, 139, 0.6)',
@@ -335,7 +335,17 @@
       }
     }
 
+    // Initial Load
     loadStock(activeSymbol);
+
+    // Auto-refresh active symbol and audit data every 5 minutes (300,000 ms)
+    setInterval(() => {
+      loadStock(activeSymbol);
+      const auditTab = document.getElementById("view-audit");
+      if (auditTab && !auditTab.classList.contains("hidden")) {
+        loadAuditData();
+      }
+    }, 5 * 60 * 1000);
   </script>
 </body>
 </html>

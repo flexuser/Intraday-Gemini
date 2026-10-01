@@ -1,13 +1,9 @@
 name: Intraday Live Market Sync
 
 on:
-  schedule:
-    # Indian Market Hours: 09:15 AM - 03:30 PM IST (Mon-Fri)
-    # UTC Equivalents: 03:45 UTC - 10:00 UTC
-    - cron: '45 3 * * 1-5'      # 09:15 IST (Market Open)
-    - cron: '*/15 4-9 * * 1-5'  # Every 15 mins from 09:30 IST to 15:15 IST
-    - cron: '0 10 * * 1-5'      # 15:30 IST (Market Close)
-  workflow_dispatch:            # Enables "Run workflow" button in GitHub UI for manual testing
+  workflow_dispatch: # Allows manual trigger & external API calls
+  repository_dispatch: # Allows payload-based external webhook triggers
+    types: [run-intraday-sync]
 
 permissions:
   contents: write
