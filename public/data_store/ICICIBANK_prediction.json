@@ -1,12 +1,46 @@
 {
   "prediction": {
     "bias": "BEARISH",
-    "reasoning": "Intraday sentiment for ICICIBANK derived from order flow & technical levels."
+    "reasoning": "Intraday outlook based on live volume (0.29x) and order flow evaluation.",
+    "volume_ratio": 0.29,
+    "has_volume_spike": false,
+    "news_feed": [
+      {
+        "title": "Apple Pay launches in India with Axis Bank partnership",
+        "publisher": "Quartz",
+        "link": {
+          "url": "https://qz.com/apple-pay-launches-india-axis-bank-093026",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Apple Pay to launch in India next month with Axis Bank- report",
+        "publisher": "Electronic Payments",
+        "link": {
+          "url": "https://www.electronicpaymentsinternational.com/news/apple-pay-to-launch-in-india-next-month-with-axis-bank-report/",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "India and Russia Are Finding Another Way Around the Dollar",
+        "publisher": "Moby",
+        "link": {
+          "url": "https://app.moby.co/home/news/news-india-and-russia-are-finding-another-way-around-the-dollar?utm_source=yahoo_finance&utm_medium=rss",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      }
+    ]
   },
   "curves": {
     "symbol": "ICICIBANK",
     "date": "2026-10-01",
-    "generated_at": "09:30 AM IST",
+    "generated_at": "10:36 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -36,8 +70,8 @@
       1325.6,
       1323.4,
       1324.6,
-      1318.5,
-      1319.4,
+      null,
+      null,
       null,
       null,
       null,
@@ -45,7 +79,7 @@
       null
     ],
     "final_pred": 1288.48,
-    "final_actual": 1319.4,
-    "error_pct": 2.33
+    "final_actual": 1324.6,
+    "error_pct": 2.72
   }
 }

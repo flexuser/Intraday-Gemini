@@ -1,12 +1,46 @@
 {
   "prediction": {
     "bias": "BEARISH",
-    "reasoning": "Intraday sentiment for LT derived from order flow & technical levels."
+    "reasoning": "Intraday outlook based on live volume (0.29x) and order flow evaluation.",
+    "volume_ratio": 0.29,
+    "has_volume_spike": false,
+    "news_feed": [
+      {
+        "title": "India Begins Tokenizing Its $620 Billion Corporate Bond Market",
+        "publisher": "decrypt",
+        "link": {
+          "url": "https://decrypt.co/378120/india-begins-tokenizing-its-620-billion-corporate-bond-market",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "L&T and MHI to build 50km people mover system at Al Maktoum Airport",
+        "publisher": "World Construction Network",
+        "link": {
+          "url": "https://www.worldconstructionnetwork.com/news/lt-mhi-al-maktoum-airport-contract/",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "What Does Nvidia (NVDA) Gain From Its New AI Factory Push In India?",
+        "publisher": "Simply Wall St.",
+        "link": {
+          "url": "https://finance.yahoo.com/technology/ai/articles/does-nvidia-nvda-gain-ai-101028140.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      }
+    ]
   },
   "curves": {
     "symbol": "LT",
     "date": "2026-10-01",
-    "generated_at": "09:30 AM IST",
+    "generated_at": "10:36 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -36,8 +70,8 @@
       3708.2,
       3722.2,
       3723.2,
-      3730.1,
-      3726.4,
+      null,
+      null,
       null,
       null,
       null,
@@ -45,7 +79,7 @@
       null
     ],
     "final_pred": 3604.37,
-    "final_actual": 3726.4,
-    "error_pct": 3.29
+    "final_actual": 3723.2,
+    "error_pct": 3.2
   }
 }

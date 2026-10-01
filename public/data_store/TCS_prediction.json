@@ -1,12 +1,46 @@
 {
   "prediction": {
     "bias": "BULLISH",
-    "reasoning": "Intraday sentiment for TCS derived from order flow & technical levels."
+    "reasoning": "Intraday outlook based on live volume (0.3x) and order flow evaluation.",
+    "volume_ratio": 0.3,
+    "has_volume_spike": false,
+    "news_feed": [
+      {
+        "title": "Becoming \u2018AI native\u2019 might not be as profitable as you think. Unless your company does it right",
+        "publisher": "FastCompany",
+        "link": {
+          "url": "https://www.fastcompany.com/91589386/being-ai-native-is-only-profitable-when-done-right",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Trump administration proposes axing grace period for H-1B visa holders after job loss",
+        "publisher": "Reuters",
+        "link": {
+          "url": "https://finance.yahoo.com/news/trump-administration-proposes-waiving-grace-152322715.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Rezolve\u2019s (RZLV) Revenue Surge Is Turning Heads, but at What Cost?",
+        "publisher": "Insider Monkey",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/rezolve-rzlv-revenue-surge-turning-084132796.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      }
+    ]
   },
   "curves": {
     "symbol": "TCS",
     "date": "2026-10-01",
-    "generated_at": "09:30 AM IST",
+    "generated_at": "10:36 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -36,8 +70,8 @@
       2072.1,
       2067.8,
       2070.5,
-      2091.0,
-      2083.8,
+      null,
+      null,
       null,
       null,
       null,
@@ -45,7 +79,7 @@
       null
     ],
     "final_pred": 2113.54,
-    "final_actual": 2083.8,
-    "error_pct": 1.44
+    "final_actual": 2070.5,
+    "error_pct": 2.08
   }
 }

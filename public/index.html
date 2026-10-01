@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Intraday AI Prediction & EOD Audit Engine</title>
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Intraday AI Prediction & News Intelligence</title>
   <meta name="theme-color" content="#0f172a">
   <link rel="manifest" href="./manifest.json">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -25,9 +23,9 @@
       <div>
         <div class="flex items-center gap-2">
           <span class="bg-blue-900/60 text-blue-400 text-xs font-semibold px-2.5 py-0.5 rounded border border-blue-700/50">NSE/BSE</span>
-          <h1 class="text-xl md:text-2xl font-bold tracking-tight text-white">Intraday AI Prediction & EOD Audit Engine</h1>
+          <h1 class="text-xl md:text-2xl font-bold tracking-tight text-white">Intraday AI Prediction & News Intelligence</h1>
         </div>
-        <p class="text-xs text-slate-400 mt-1">Continuous Portfolio Watchlist • Real vs. Predicted EOD Curve Overlay</p>
+        <p class="text-xs text-slate-400 mt-1">Real-Time Market Trajectory • Volume Spikes • Corporate Catalysts</p>
       </div>
       <div class="flex items-center gap-2 bg-slate-900 p-1 rounded-lg border border-slate-800">
         <button id="tab-intraday" onclick="switchTab('intraday')" class="px-3 py-1.5 text-xs font-medium rounded-md bg-blue-600 text-white shadow">Live Intraday</button>
@@ -43,7 +41,7 @@
       <div>
         <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
           <span class="font-semibold uppercase tracking-wider text-slate-500">INDEXED PORTFOLIO WATCHLIST</span>
-          <span class="text-emerald-400">Real-time & EOD Curves Active</span>
+          <span class="text-emerald-400">Strict IST Time-Gated Curves Active</span>
         </div>
         <div class="flex flex-wrap gap-2" id="watchlist-pills"></div>
       </div>
@@ -56,9 +54,12 @@
           <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 pb-3">
             <div>
               <div class="flex items-center gap-3">
-                <h2 id="active-symbol" class="text-2xl font-bold text-white tracking-wide">MUTHOOTFIN</h2>
+                <h2 id="active-symbol" class="text-2xl font-bold text-white tracking-wide">SBIN</h2>
                 <div id="bias-badge" class="px-3 py-0.5 rounded-full text-xs font-bold bg-slate-800 text-slate-300">
                   NEUTRAL
+                </div>
+                <div id="volume-badge" class="px-2.5 py-0.5 rounded text-xs font-semibold bg-slate-800 text-slate-400">
+                  Vol: --
                 </div>
               </div>
               
@@ -83,17 +84,23 @@
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-2">
-            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
-              <span class="text-slate-400 font-medium block mb-1">AI Event Classification & Rationale:</span>
-              <p id="ai-rationale" class="text-slate-300">Loading intelligence snapshot...</p>
+            <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800 space-y-2">
+              <span class="text-slate-400 font-semibold block uppercase tracking-wider text-[11px]">AI Event Classification & Rationale:</span>
+              <p id="ai-rationale" class="text-slate-300 leading-relaxed">Loading intelligence snapshot...</p>
+              
+              <div id="news-container" class="pt-2 border-t border-slate-800/80 space-y-1.5">
+                <span class="text-slate-400 font-semibold block text-[11px]">Corporate & Government Catalysts:</span>
+                <ul id="news-list" class="space-y-1 text-slate-300"></ul>
+              </div>
             </div>
-            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
-              <span class="text-slate-400 font-medium block mb-1">Metrics & Model Diagnostics:</span>
-              <ul class="text-slate-300 space-y-1">
-                <li>Start Price (09:15): <span id="val-base" class="font-mono text-white">--</span></li>
-                <li>Target Price (15:30): <span id="val-target" class="font-mono text-white">--</span></li>
-                <li>Current/Close Price: <span id="val-actual" class="font-mono text-white">--</span></li>
-                <li>Variance / Error: <span id="val-error" class="font-mono text-white">--</span></li>
+
+            <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800 space-y-2">
+              <span class="text-slate-400 font-semibold block uppercase tracking-wider text-[11px]">Metrics & Model Diagnostics:</span>
+              <ul class="text-slate-300 space-y-1.5">
+                <li class="flex justify-between border-b border-slate-900 pb-1"><span>Start Price (09:15):</span> <span id="val-base" class="font-mono text-white">--</span></li>
+                <li class="flex justify-between border-b border-slate-900 pb-1"><span>Target Price (15:30):</span> <span id="val-target" class="font-mono text-white">--</span></li>
+                <li class="flex justify-between border-b border-slate-900 pb-1"><span>Latest Actual Price:</span> <span id="val-actual" class="font-mono text-white">--</span></li>
+                <li class="flex justify-between"><span>Variance / Error:</span> <span id="val-error" class="font-mono text-white">--</span></li>
               </ul>
             </div>
           </div>
@@ -130,7 +137,7 @@
   <script>
     const WATCHLIST = ["MUTHOOTFIN", "RELIANCE", "TMPV", "INFY", "HDFCBANK", "ICICIBANK", "TCS", "SBIN", "BHARTIARTL", "LT", "SUNPHARMA"];
     const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/flexuser/Intraday-Gemini/main/public/data_store";
-    let activeSymbol = "MUTHOOTFIN";
+    let activeSymbol = "SBIN";
     let chartInstance = null;
 
     function renderWatchlistPills() {
@@ -184,8 +191,6 @@
         document.getElementById("meta-date").innerText = data.curves.date || new Date().toISOString().split('T')[0];
         document.getElementById("meta-time").innerText = data.curves.generated_at || "Just Now";
         renderChartAndDetails(data.curves, data.prediction);
-      } else {
-        generateFallbackCurve(symbol);
       }
     }
 
@@ -194,27 +199,9 @@
       if (input) loadStock(input);
     }
 
-    function generateFallbackCurve(symbol) {
-      const timeframes = ['09:15', '09:45', '10:30', '11:15', '12:00', '12:45', '13:30', '14:15', '15:00', '15:30'];
-      const base = 1000.0;
-      document.getElementById("meta-date").innerText = new Date().toISOString().split('T')[0];
-      document.getElementById("meta-time").innerText = "Live Preview";
-      renderChartAndDetails({
-        symbol: symbol,
-        timeframes: timeframes,
-        actual_curve: timeframes.map(() => base),
-        predicted_curve: timeframes.map(() => base),
-        bias: "NEUTRAL",
-        final_actual: base,
-        final_pred: base,
-        error_pct: 0.0
-      }, {
-        reasoning: "Unindexed stock. Dynamic preview rendered."
-      });
-    }
-
     function renderChartAndDetails(curves, prediction) {
       const biasBadge = document.getElementById("bias-badge");
+      const volumeBadge = document.getElementById("volume-badge");
       const bias = curves.bias || "NEUTRAL";
       biasBadge.innerText = bias;
       
@@ -226,8 +213,27 @@
         biasBadge.className = "px-3 py-0.5 rounded-full text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700";
       }
 
-      document.getElementById("ai-rationale").innerText = prediction?.reasoning || "Corporate news evaluation complete.";
-      
+      const volRatio = prediction?.volume_ratio || 1.0;
+      const hasSpike = prediction?.has_volume_spike || false;
+      volumeBadge.innerText = `Vol Ratio: ${volRatio}x`;
+      volumeBadge.className = hasSpike 
+        ? "px-2.5 py-0.5 rounded text-xs font-bold bg-amber-950 text-amber-400 border border-amber-800 animate-pulse" 
+        : "px-2.5 py-0.5 rounded text-xs font-semibold bg-slate-800 text-slate-400";
+
+      document.getElementById("ai-rationale").innerText = prediction?.reasoning || "Market analysis active.";
+
+      const newsList = document.getElementById("news-list");
+      if (prediction?.news_feed && prediction.news_feed.length > 0) {
+        newsList.innerHTML = prediction.news_feed.map(item => `
+          <li class="bg-slate-900 p-2 rounded border border-slate-800/80">
+            <a href="${item.link}" target="_blank" class="text-blue-400 hover:underline font-medium block leading-snug">${item.title}</a>
+            <span class="text-[10px] text-slate-500 block mt-0.5">Source: ${item.publisher}</span>
+          </li>
+        `).join('');
+      } else {
+        newsList.innerHTML = `<li class="text-slate-500 italic">No direct catalysts reported.</li>`;
+      }
+
       const validActuals = curves.actual_curve ? curves.actual_curve.filter(v => v !== null) : [];
       document.getElementById("val-base").innerText = validActuals.length > 0 ? validActuals[0] : "--";
       document.getElementById("val-target").innerText = curves.final_pred ?? "--";
@@ -243,7 +249,7 @@
           labels: curves.timeframes,
           datasets: [
             {
-              label: 'AI 09:30 AM Predicted Curve',
+              label: 'AI Predicted Trajectory',
               data: curves.predicted_curve,
               borderColor: '#3b82f6',
               borderDash: [5, 5],

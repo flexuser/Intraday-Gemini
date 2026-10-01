@@ -1,12 +1,46 @@
 {
   "prediction": {
     "bias": "NEUTRAL",
-    "reasoning": "Intraday sentiment for BHARTIARTL derived from order flow & technical levels."
+    "reasoning": "Intraday outlook based on live volume (0.17x) and order flow evaluation.",
+    "volume_ratio": 0.17,
+    "has_volume_spike": false,
+    "news_feed": [
+      {
+        "title": "India's Airtel Payments Bank names Shabnam Sinha chairperson",
+        "publisher": "Reuters",
+        "link": {
+          "url": "https://sg.finance.yahoo.com/news/indias-airtel-payments-bank-names-124642016.html",
+          "site": "finance",
+          "region": "SG",
+          "lang": "en-SG"
+        }
+      },
+      {
+        "title": "Singtel's quarterly profit tops estimates on Optus, digital services strength",
+        "publisher": "Reuters",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/singtel-posts-21-rise-first-234459872.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "India's Vodafone Idea narrows quarterly loss on bigger per-user revenue",
+        "publisher": "Reuters",
+        "link": {
+          "url": "https://sg.finance.yahoo.com/news/indias-vodafone-idea-narrows-quarterly-134758108.html",
+          "site": "finance",
+          "region": "SG",
+          "lang": "en-SG"
+        }
+      }
+    ]
   },
   "curves": {
     "symbol": "BHARTIARTL",
     "date": "2026-10-01",
-    "generated_at": "09:30 AM IST",
+    "generated_at": "10:36 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -36,8 +70,8 @@
       1750.2,
       1753.9,
       1757.0,
-      1763.0,
-      1763.9,
+      null,
+      null,
       null,
       null,
       null,
@@ -45,7 +79,7 @@
       null
     ],
     "final_pred": 1750.2,
-    "final_actual": 1763.9,
-    "error_pct": 0.78
+    "final_actual": 1757.0,
+    "error_pct": 0.39
   }
 }

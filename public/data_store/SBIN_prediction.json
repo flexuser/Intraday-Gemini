@@ -1,12 +1,46 @@
 {
   "prediction": {
     "bias": "BULLISH",
-    "reasoning": "Intraday sentiment for SBIN derived from order flow & technical levels."
+    "reasoning": "Intraday outlook based on live volume (0.14x) and order flow evaluation.",
+    "volume_ratio": 0.14,
+    "has_volume_spike": false,
+    "news_feed": [
+      {
+        "title": "SBI and Kyobo Test Japan-Korea Stablecoin Settlement Model",
+        "publisher": "Coinspeaker",
+        "link": {
+          "url": "https://www.coinspeaker.com/ripple-news-japan-korea-stablecoin-test/",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Ripple XRP News: Circle Arc Launch Puts SBI\u2019s Dual-Rail Strategy in Focus",
+        "publisher": "99bitcoins",
+        "link": {
+          "url": "https://99bitcoins.com/news/altcoins/circle-arc-sbi-settlement-ripple-xrp/",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "India\u2019s National Stock Exchange Seeks $46 Billion Valuation in IPO",
+        "publisher": "The Wall Street Journal",
+        "link": {
+          "url": "https://www.wsj.com/business/national-stock-exchange-of-india-seeks-2-36-billion-in-pared-back-ipo-19cf72eb?siteid=yhoof2&yptr=yahoo",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      }
+    ]
   },
   "curves": {
     "symbol": "SBIN",
     "date": "2026-10-01",
-    "generated_at": "09:30 AM IST",
+    "generated_at": "10:36 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -36,8 +70,8 @@
       959.95,
       963.5,
       963.9,
-      961.9,
-      961.45,
+      null,
+      null,
       null,
       null,
       null,
@@ -45,7 +79,7 @@
       null
     ],
     "final_pred": 979.15,
-    "final_actual": 961.45,
-    "error_pct": 1.84
+    "final_actual": 963.9,
+    "error_pct": 1.59
   }
 }

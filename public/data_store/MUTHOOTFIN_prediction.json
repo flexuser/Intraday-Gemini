@@ -1,12 +1,46 @@
 {
   "prediction": {
     "bias": "BEARISH",
-    "reasoning": "Intraday sentiment for MUTHOOTFIN derived from order flow & technical levels."
+    "reasoning": "Intraday outlook based on live volume (0.6x) and order flow evaluation.",
+    "volume_ratio": 0.6,
+    "has_volume_spike": false,
+    "news_feed": [
+      {
+        "title": "Muthoot Finance Ltd (BOM:533398) (Q1 2027) Earnings Call Highlights: AUM Surges 43% to ...",
+        "publisher": "GuruFocus.com",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/muthoot-finance-ltd-bom-533398-010148679.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Muthoot Finance Ltd (BOM:533398) Q4 2026 Earnings Call Highlights: Record Growth and Strategic ...",
+        "publisher": "GuruFocus.com",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/muthoot-finance-ltd-bom-533398-230353356.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Indian gold-loan financier Muthoot Finance's profit doubles on strong loan growth",
+        "publisher": "Reuters",
+        "link": {
+          "url": "https://sg.finance.yahoo.com/news/indian-gold-loan-financier-muthoot-123529478.html",
+          "site": "finance",
+          "region": "SG",
+          "lang": "en-SG"
+        }
+      }
+    ]
   },
   "curves": {
     "symbol": "MUTHOOTFIN",
     "date": "2026-10-01",
-    "generated_at": "09:30 AM IST",
+    "generated_at": "10:36 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -36,8 +70,8 @@
       2728.5,
       2728.9,
       2730.2,
-      2737.4,
-      2740.0,
+      null,
+      null,
       null,
       null,
       null,
@@ -45,7 +79,7 @@
       null
     ],
     "final_pred": 2652.1,
-    "final_actual": 2740.0,
-    "error_pct": 3.22
+    "final_actual": 2730.2,
+    "error_pct": 2.86
   }
 }

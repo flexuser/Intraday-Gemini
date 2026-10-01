@@ -1,12 +1,46 @@
 {
   "prediction": {
     "bias": "BULLISH",
-    "reasoning": "Intraday sentiment for TMPV derived from order flow & technical levels."
+    "reasoning": "Intraday outlook based on live volume (0.41x) and order flow evaluation.",
+    "volume_ratio": 0.41,
+    "has_volume_spike": false,
+    "news_feed": [
+      {
+        "title": "Tata Motors Q1 profit falls 80.2% despite revenue rise",
+        "publisher": "Just Auto",
+        "link": {
+          "url": "https://www.just-auto.com/news/tata-motors-q1-profit-falls-80-2/",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "India's Tata Motors Passenger Vehicles falls on persistent margin, demand concerns at JLR",
+        "publisher": "Reuters",
+        "link": {
+          "url": "https://sg.finance.yahoo.com/news/indias-tata-motors-passenger-vehicles-035612911.html",
+          "site": "finance",
+          "region": "SG",
+          "lang": "en-SG"
+        }
+      },
+      {
+        "title": "Tata Motors Passenger Vehicles Ltd (BOM:500570) (Q1 2027) Earnings Call Highlights: Record EV ...",
+        "publisher": "GuruFocus.com",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/tata-motors-passenger-vehicles-ltd-230555605.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      }
+    ]
   },
   "curves": {
     "symbol": "TMPV",
     "date": "2026-10-01",
-    "generated_at": "09:30 AM IST",
+    "generated_at": "10:36 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -21,21 +55,21 @@
     ],
     "bias": "BULLISH",
     "predicted_curve": [
-      1000.0,
-      996.0,
-      993.0,
-      998.0,
-      1004.0,
-      1008.0,
-      1011.0,
-      1014.0,
-      1016.0,
-      1020.0
+      279.15,
+      278.03,
+      277.2,
+      278.59,
+      280.27,
+      281.38,
+      282.22,
+      283.06,
+      283.62,
+      284.73
     ],
     "actual_curve": [
-      null,
-      null,
-      null,
+      279.15,
+      279.4,
+      279.7,
       null,
       null,
       null,
@@ -44,8 +78,8 @@
       null,
       null
     ],
-    "final_pred": 1020.0,
-    "final_actual": null,
-    "error_pct": 0.0
+    "final_pred": 284.73,
+    "final_actual": 279.7,
+    "error_pct": 1.8
   }
 }

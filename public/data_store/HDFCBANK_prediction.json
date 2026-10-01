@@ -1,12 +1,46 @@
 {
   "prediction": {
     "bias": "BULLISH",
-    "reasoning": "Intraday sentiment for HDFCBANK derived from order flow & technical levels."
+    "reasoning": "Intraday outlook based on live volume (0.34x) and order flow evaluation.",
+    "volume_ratio": 0.34,
+    "has_volume_spike": false,
+    "news_feed": [
+      {
+        "title": "Apple Pay launches in India with Axis Bank partnership",
+        "publisher": "Quartz",
+        "link": {
+          "url": "https://qz.com/apple-pay-launches-india-axis-bank-093026",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Asian Equities Traded in the US as American Depositary Receipts Rise in Friday Trading; Down for Week",
+        "publisher": "MT Newswires",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/world-indices/articles/asian-equities-traded-us-american-144123090.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "WF vs. HDB: Which Stock Should Value Investors Buy Now?",
+        "publisher": "Zacks",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/wf-vs-hdb-stock-value-144002894.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      }
+    ]
   },
   "curves": {
     "symbol": "HDFCBANK",
     "date": "2026-10-01",
-    "generated_at": "09:30 AM IST",
+    "generated_at": "10:36 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -36,8 +70,8 @@
       714.35,
       714.8,
       715.5,
-      715.15,
-      714.85,
+      null,
+      null,
       null,
       null,
       null,
@@ -45,7 +79,7 @@
       null
     ],
     "final_pred": 728.64,
-    "final_actual": 714.85,
-    "error_pct": 1.93
+    "final_actual": 715.5,
+    "error_pct": 1.84
   }
 }

@@ -1,12 +1,46 @@
 {
   "prediction": {
     "bias": "BULLISH",
-    "reasoning": "Intraday sentiment for SUNPHARMA derived from order flow & technical levels."
+    "reasoning": "Intraday outlook based on live volume (0.12x) and order flow evaluation.",
+    "volume_ratio": 0.12,
+    "has_volume_spike": false,
+    "news_feed": [
+      {
+        "title": "Here's How Trump's Drug Deals Are Likely to Impact Healthcare ETFs",
+        "publisher": "Zacks",
+        "link": {
+          "url": "https://finance.yahoo.com/healthcare/articles/heres-trumps-drug-deals-likely-151500696.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Trump Expands Drug Pricing Deals With 9 Pharma Companies, Bringing Total to 26 \u2014 RFK Jr. Details 'Very, Very Emotional' Conversations With President",
+        "publisher": "Benzinga",
+        "link": {
+          "url": "https://finance.yahoo.com/healthcare/articles/trump-expands-drug-pricing-deals-220007792.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Trump's MFN Push Goes Beyond Big Pharma, Adds 9 Mid-Sized Drugmakers",
+        "publisher": "Zacks",
+        "link": {
+          "url": "https://finance.yahoo.com/healthcare/articles/trumps-mfn-push-goes-beyond-163500680.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      }
+    ]
   },
   "curves": {
     "symbol": "SUNPHARMA",
     "date": "2026-10-01",
-    "generated_at": "09:30 AM IST",
+    "generated_at": "10:36 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -36,8 +70,8 @@
       1810.1,
       1817.1,
       1817.4,
-      1824.7,
-      1825.3,
+      null,
+      null,
       null,
       null,
       null,
@@ -45,7 +79,7 @@
       null
     ],
     "final_pred": 1846.3,
-    "final_actual": 1825.3,
-    "error_pct": 1.16
+    "final_actual": 1817.4,
+    "error_pct": 1.6
   }
 }
