@@ -1,9 +1,9 @@
 {
   "prediction": {
-    "bias": "BULLISH",
-    "reasoning": "Intraday outlook based on live volume (0.0x) and order flow evaluation.",
-    "volume_ratio": 1.53,
-    "has_volume_spike": true,
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for TCS.",
+    "volume_ratio": 0.0,
+    "has_volume_spike": false,
     "news_feed": [
       {
         "title": "Becoming \u2018AI native\u2019 might not be as profitable as you think. Unless your company does it right",
@@ -35,19 +35,12 @@
           "lang": "en-US"
         }
       }
-    ],
-    "quant_signals": {
-      "vwap": 2069.52,
-      "rsi": 72.03,
-      "pcr": 1.0,
-      "implied_volatility": 18.5,
-      "past_verdict": "FAILED"
-    }
+    ]
   },
   "curves": {
     "symbol": "TCS",
     "date": "2026-10-01",
-    "generated_at": "02:58 PM IST",
+    "generated_at": "03:15 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -60,18 +53,18 @@
       "15:00",
       "15:30"
     ],
-    "bias": "BULLISH",
+    "bias": "NEUTRAL",
     "predicted_curve": [
       2078.4,
-      2070.09,
-      2063.85,
+      2082.56,
       2074.24,
-      2086.71,
-      2095.03,
-      2101.26,
-      2107.5,
-      2111.65,
-      2119.97
+      2080.48,
+      2072.16,
+      2082.56,
+      2074.24,
+      2080.48,
+      2076.32,
+      2078.4
     ],
     "actual_curve": [
       2078.4,
@@ -82,7 +75,7 @@
       2054.1,
       2053.9,
       2054.6,
-      null,
+      2074.1,
       null
     ],
     "actual_volume": [
@@ -94,11 +87,11 @@
       36333,
       26101,
       34720,
-      null,
+      68564,
       null
     ],
-    "final_pred": 2119.97,
-    "final_actual": 2054.6,
-    "error_pct": 3.15
+    "final_pred": 2078.4,
+    "final_actual": 2074.1,
+    "error_pct": 0.21
   }
 }

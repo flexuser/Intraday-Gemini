@@ -1,9 +1,9 @@
 {
   "prediction": {
-    "bias": "BEARISH",
-    "reasoning": "Intraday outlook based on live volume (0.0x) and order flow evaluation.",
-    "volume_ratio": 0.88,
-    "has_volume_spike": false,
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for INFY.",
+    "volume_ratio": 4.95,
+    "has_volume_spike": true,
     "news_feed": [
       {
         "title": "Accenture (ACN): A 50% Rally Into Earnings, and a Street That Cannot Agree on What It Means",
@@ -35,19 +35,12 @@
           "lang": "en-US"
         }
       }
-    ],
-    "quant_signals": {
-      "vwap": 1013.39,
-      "rsi": 72.13,
-      "pcr": 1.0,
-      "implied_volatility": 18.5,
-      "past_verdict": "FAILED"
-    }
+    ]
   },
   "curves": {
     "symbol": "INFY",
     "date": "2026-10-01",
-    "generated_at": "02:58 PM IST",
+    "generated_at": "03:15 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -60,18 +53,18 @@
       "15:00",
       "15:30"
     ],
-    "bias": "BEARISH",
+    "bias": "NEUTRAL",
     "predicted_curve": [
       1014.5,
-      1018.56,
+      1016.53,
       1012.47,
-      1004.36,
-      999.28,
-      996.24,
-      994.21,
-      992.18,
-      990.15,
-      986.09
+      1015.51,
+      1011.46,
+      1016.53,
+      1012.47,
+      1015.51,
+      1013.49,
+      1014.5
     ],
     "actual_curve": [
       1014.5,
@@ -82,7 +75,7 @@
       1003.5,
       1003.8,
       1007.75,
-      null,
+      1021.5,
       null
     ],
     "actual_volume": [
@@ -94,11 +87,11 @@
       137378,
       95220,
       201352,
-      null,
+      377786,
       null
     ],
-    "final_pred": 986.09,
-    "final_actual": 1007.75,
-    "error_pct": 2.14
+    "final_pred": 1014.5,
+    "final_actual": 1021.5,
+    "error_pct": 0.69
   }
 }

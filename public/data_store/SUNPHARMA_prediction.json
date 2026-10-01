@@ -1,9 +1,9 @@
 {
   "prediction": {
-    "bias": "BULLISH",
-    "reasoning": "Intraday outlook based on live volume (0.0x) and order flow evaluation.",
-    "volume_ratio": 3.07,
-    "has_volume_spike": true,
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for SUNPHARMA.",
+    "volume_ratio": 0.0,
+    "has_volume_spike": false,
     "news_feed": [
       {
         "title": "Here's How Trump's Drug Deals Are Likely to Impact Healthcare ETFs",
@@ -35,19 +35,12 @@
           "lang": "en-US"
         }
       }
-    ],
-    "quant_signals": {
-      "vwap": 1808.02,
-      "rsi": 56.17,
-      "pcr": 1.0,
-      "implied_volatility": 18.5,
-      "past_verdict": "FAILED"
-    }
+    ]
   },
   "curves": {
     "symbol": "SUNPHARMA",
     "date": "2026-10-01",
-    "generated_at": "02:58 PM IST",
+    "generated_at": "03:15 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -60,18 +53,18 @@
       "15:00",
       "15:30"
     ],
-    "bias": "BULLISH",
+    "bias": "NEUTRAL",
     "predicted_curve": [
       1808.5,
-      1801.27,
-      1795.84,
+      1812.12,
       1804.88,
-      1815.73,
-      1822.97,
-      1828.39,
-      1833.82,
-      1837.44,
-      1844.67
+      1810.31,
+      1803.07,
+      1812.12,
+      1804.88,
+      1810.31,
+      1806.69,
+      1808.5
     ],
     "actual_curve": [
       1808.5,
@@ -82,7 +75,7 @@
       1800.4,
       1799.7,
       1796.5,
-      null,
+      1803.3,
       null
     ],
     "actual_volume": [
@@ -94,11 +87,11 @@
       21216,
       20631,
       16539,
-      null,
+      46347,
       null
     ],
-    "final_pred": 1844.67,
-    "final_actual": 1796.5,
-    "error_pct": 2.66
+    "final_pred": 1808.5,
+    "final_actual": 1803.3,
+    "error_pct": 0.29
   }
 }

@@ -1,9 +1,9 @@
 {
   "prediction": {
     "bias": "NEUTRAL",
-    "reasoning": "Intraday outlook based on live volume (0.0x) and order flow evaluation.",
-    "volume_ratio": 0.54,
-    "has_volume_spike": false,
+    "reasoning": "Market dynamics evaluation active for BHARTIARTL.",
+    "volume_ratio": 2.51,
+    "has_volume_spike": true,
     "news_feed": [
       {
         "title": "India's Airtel Payments Bank names Shabnam Sinha chairperson",
@@ -35,19 +35,12 @@
           "lang": "en-SG"
         }
       }
-    ],
-    "quant_signals": {
-      "vwap": 1749.52,
-      "rsi": 55.32,
-      "pcr": 1.0,
-      "implied_volatility": 18.5,
-      "past_verdict": "SUCCESS"
-    }
+    ]
   },
   "curves": {
     "symbol": "BHARTIARTL",
     "date": "2026-10-01",
-    "generated_at": "02:58 PM IST",
+    "generated_at": "03:15 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -82,7 +75,7 @@
       1745.0,
       1736.5,
       1735.5,
-      null,
+      1742.0,
       null
     ],
     "actual_volume": [
@@ -94,11 +87,11 @@
       89533,
       129288,
       41298,
-      null,
+      81044,
       null
     ],
     "final_pred": 1742.6,
-    "final_actual": 1735.5,
-    "error_pct": 0.41
+    "final_actual": 1742.0,
+    "error_pct": 0.03
   }
 }
