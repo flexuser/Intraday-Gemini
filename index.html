@@ -45,7 +45,7 @@
           <span class="font-semibold uppercase tracking-wider text-slate-500">INDEXED PORTFOLIO WATCHLIST</span>
           <span class="text-emerald-400">Strict IST Time-Gated Curves Active</span>
         </div>
-        <div class="flex flex-wrap gap-2" id="watchlist-pills"></div>
+        <div class="flex overflow-x-auto whitespace-nowrap gap-2 pb-2 scrollbar-none" id="watchlist-pills"></div>
       </div>
     </section>
 
@@ -77,7 +77,7 @@
             </div>
             
             <button onclick="loadStock(activeSymbol)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition">
-              ðŸ”„ Force Refresh
+              🔄 Force Refresh
             </button>
           </div>
 
@@ -296,7 +296,7 @@
               position: 'left',
               ticks: { color: '#94a3b8' },
               grid: { color: '#1e293b' },
-              title: { display: true, text: 'Price (â‚¹)', color: '#64748b', font: { size: 10 } }
+              title: { display: true, text: 'Price (₹)', color: '#64748b', font: { size: 10 } }
             },
             y1: {
               type: 'linear',

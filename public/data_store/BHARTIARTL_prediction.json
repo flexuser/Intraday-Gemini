@@ -1,8 +1,8 @@
 {
   "prediction": {
     "bias": "NEUTRAL",
-    "reasoning": "Intraday outlook based on live volume (0.12x) and order flow evaluation.",
-    "volume_ratio": 0.12,
+    "reasoning": "Intraday outlook based on live volume (0.1x) and order flow evaluation.",
+    "volume_ratio": 0.1,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "BHARTIARTL",
     "date": "2026-10-01",
-    "generated_at": "11:19 AM IST",
+    "generated_at": "11:49 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
