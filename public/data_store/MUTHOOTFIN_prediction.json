@@ -1,9 +1,9 @@
 {
   "prediction": {
     "bias": "BEARISH",
-    "reasoning": "Intraday outlook based on live volume (0.0x) and order flow evaluation.",
-    "volume_ratio": 0.0,
-    "has_volume_spike": false,
+    "reasoning": "Intraday outlook based on live volume (3.64x) and order flow evaluation.",
+    "volume_ratio": 3.64,
+    "has_volume_spike": true,
     "news_feed": [
       {
         "title": "Muthoot Finance Ltd (BOM:533398) (Q1 2027) Earnings Call Highlights: AUM Surges 43% to ...",
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "MUTHOOTFIN",
     "date": "2026-10-01",
-    "generated_at": "12:45 PM IST",
+    "generated_at": "12:50 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
