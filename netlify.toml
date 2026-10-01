@@ -1,3 +1,7 @@
 [build]
   publish = "public"
-  command = "echo 'Static build step completed.'"
+  command = "echo 'Static deploy'"
+
+[build.ignore]
+  # Skips build (exit code 0) if index.html was NOT changed in the commit
+  command = "git diff --quiet HEAD^ HEAD -- public/index.html index.html"
