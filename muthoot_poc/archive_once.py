@@ -72,6 +72,10 @@ def run_archive_cycle():
     logger.info("Running Real Market Data & AI Prediction Cycle...")
     os.makedirs("public/data_store", exist_ok=True)
     
+    now = datetime.now()
+    today_str = now.strftime("%Y-%m-%d")
+    time_str = now.strftime("%I:%M %p IST")
+
     eod_summary = []
 
     for symbol in WATCHLIST:
@@ -105,6 +109,8 @@ def run_archive_cycle():
 
         curve_data = {
             "symbol": symbol,
+            "date": today_str,
+            "generated_at": time_str,
             "timeframes": TIMEFRAMES[:len(actual_prices)],
             "actual_curve": actual_prices,
             "predicted_curve": predicted_prices,

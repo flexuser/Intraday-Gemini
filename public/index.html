@@ -13,7 +13,7 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js');
+        navigator.serviceWorker.register('./sw.js').then(reg => reg.update());
       });
     }
   </script>
@@ -52,14 +52,31 @@
     <main id="view-container">
       <div id="view-intraday" class="space-y-6">
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 md:p-6 space-y-4">
-          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+          
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 pb-3">
             <div>
-              <h2 id="active-symbol" class="text-xl font-bold text-white tracking-wide">MUTHOOTFIN</h2>
-              <p class="text-xs text-slate-400">Comparing 09:30 AM Model Forecast Curve vs. Live Price Ticks</p>
+              <div class="flex items-center gap-3">
+                <h2 id="active-symbol" class="text-2xl font-bold text-white tracking-wide">MUTHOOTFIN</h2>
+                <div id="bias-badge" class="px-3 py-0.5 rounded-full text-xs font-bold bg-slate-800 text-slate-300">
+                  NEUTRAL
+                </div>
+              </div>
+              
+              <!-- DATE & TIMESTAMP METADATA BADGES -->
+              <div class="flex flex-wrap items-center gap-2 mt-2 text-xs">
+                <span class="bg-slate-950 text-slate-300 border border-slate-800 px-2.5 py-1 rounded-md font-mono flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Trade Date: <strong id="meta-date" class="text-white">--</strong>
+                </span>
+                <span class="bg-slate-950 text-slate-400 border border-slate-800 px-2.5 py-1 rounded-md font-mono">
+                  Last Synced: <span id="meta-time" class="text-slate-200">--</span>
+                </span>
+              </div>
             </div>
-            <div id="bias-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-300">
-              NEUTRAL
-            </div>
+            
+            <button onclick="loadStock(activeSymbol)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition">
+              🔄 Force Refresh
+            </button>
           </div>
 
           <div class="h-64 md:h-80 w-full relative">
@@ -86,7 +103,10 @@
 
       <div id="view-audit" class="hidden space-y-4">
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 md:p-6">
-          <h3 class="text-lg font-bold text-white mb-3">Portfolio Accuracy Audit Matrix</h3>
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-lg font-bold text-white">Portfolio Accuracy Audit Matrix</h3>
+            <span id="audit-sync-time" class="text-xs text-slate-400 font-mono">--</span>
+          </div>
           <div class="overflow-x-auto">
             <table class="w-full text-left text-xs text-slate-300">
               <thead class="bg-slate-950 text-slate-400 border-b border-slate-800 uppercase">
@@ -110,6 +130,7 @@
 
   <script>
     const WATCHLIST = ["MUTHOOTFIN", "RELIANCE", "TMPV", "INFY", "HDFCBANK", "ICICIBANK", "TCS", "SBIN", "BHARTIARTL", "LT", "SUNPHARMA"];
+    const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/flexuser/Intraday-Gemini/main/public/data_store";
     let activeSymbol = "MUTHOOTFIN";
     let chartInstance = null;
 
@@ -143,9 +164,15 @@
       document.getElementById("active-symbol").innerText = symbol;
 
       try {
-        const res = await fetch(`./data_store/${symbol}_prediction.json`);
+        const res = await fetch(`${GITHUB_RAW_BASE}/${symbol}_prediction.json?v=${Date.now()}`, { cache: 'no-store' });
         if (!res.ok) throw new Error("Not pre-indexed");
+        
         const data = await res.json();
+        
+        // Populate Trade Date and Last Synced Metadata
+        document.getElementById("meta-date").innerText = data.curves.date || new Date().toISOString().split('T')[0];
+        document.getElementById("meta-time").innerText = data.curves.generated_at || "Just Now";
+
         renderChartAndDetails(data.curves, data.prediction);
       } catch (e) {
         generateFallbackCurve(symbol);
@@ -160,6 +187,8 @@
     function generateFallbackCurve(symbol) {
       const timeframes = ['09:15', '09:45', '10:30', '11:15', '12:00', '12:45', '13:30', '14:15', '15:00', '15:30'];
       const base = 1000.0;
+      document.getElementById("meta-date").innerText = new Date().toISOString().split('T')[0];
+      document.getElementById("meta-time").innerText = "Live Preview";
       renderChartAndDetails({
         symbol: symbol,
         timeframes: timeframes,
@@ -180,11 +209,11 @@
       biasBadge.innerText = bias;
       
       if (bias === "BULLISH") {
-        biasBadge.className = "px-3 py-1 rounded-full text-xs font-bold bg-emerald-950 text-emerald-400 border border-emerald-800";
+        biasBadge.className = "px-3 py-0.5 rounded-full text-xs font-bold bg-emerald-950 text-emerald-400 border border-emerald-800";
       } else if (bias === "BEARISH") {
-        biasBadge.className = "px-3 py-1 rounded-full text-xs font-bold bg-rose-950 text-rose-400 border border-rose-800";
+        biasBadge.className = "px-3 py-0.5 rounded-full text-xs font-bold bg-rose-950 text-rose-400 border border-rose-800";
       } else {
-        biasBadge.className = "px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700";
+        biasBadge.className = "px-3 py-0.5 rounded-full text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700";
       }
 
       document.getElementById("ai-rationale").innerText = prediction?.reasoning || "Corporate news evaluation complete.";
@@ -236,8 +265,9 @@
       const tbody = document.getElementById("audit-table-body");
       tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-500">Loading evaluation matrix...</td></tr>`;
       try {
-        const res = await fetch('./data_store/eod_evaluation.json');
+        const res = await fetch(`${GITHUB_RAW_BASE}/eod_evaluation.json?v=${Date.now()}`, { cache: 'no-store' });
         const data = await res.json();
+        document.getElementById("audit-sync-time").innerText = `Last Refreshed: ${new Date().toLocaleTimeString('en-IN')}`;
         tbody.innerHTML = data.map(item => `
           <tr class="hover:bg-slate-900/50">
             <td class="p-2.5 font-bold text-white">${item.symbol}</td>
