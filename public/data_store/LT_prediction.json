@@ -1,8 +1,8 @@
 {
   "prediction": {
     "bias": "BEARISH",
-    "reasoning": "Intraday outlook based on live volume (0.48x) and order flow evaluation.",
-    "volume_ratio": 0.48,
+    "reasoning": "Intraday outlook based on live volume (0.2x) and order flow evaluation.",
+    "volume_ratio": 0.2,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "LT",
     "date": "2026-10-01",
-    "generated_at": "10:42 AM IST",
+    "generated_at": "11:19 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -70,7 +70,7 @@
       3708.2,
       3722.2,
       3723.2,
-      null,
+      3730.1,
       null,
       null,
       null,
@@ -82,7 +82,7 @@
       144650,
       78427,
       67969,
-      null,
+      62214,
       null,
       null,
       null,
@@ -91,7 +91,7 @@
       null
     ],
     "final_pred": 3604.37,
-    "final_actual": 3723.2,
-    "error_pct": 3.2
+    "final_actual": 3730.1,
+    "error_pct": 3.39
   }
 }
