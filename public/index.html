@@ -244,26 +244,41 @@
       if (chartInstance) chartInstance.destroy();
 
       chartInstance = new Chart(ctx, {
-        type: 'line',
         data: {
           labels: curves.timeframes,
           datasets: [
             {
+              type: 'bar',
+              label: '15m Volume',
+              data: curves.actual_volume || [],
+              backgroundColor: 'rgba(51, 65, 85, 0.45)',
+              borderColor: 'rgba(100, 116, 139, 0.6)',
+              borderWidth: 1,
+              yAxisID: 'y1',
+              order: 2
+            },
+            {
+              type: 'line',
               label: 'AI Predicted Trajectory',
               data: curves.predicted_curve,
               borderColor: '#3b82f6',
               borderDash: [5, 5],
               fill: false,
               tension: 0.2,
+              yAxisID: 'y',
+              order: 1,
               spanGaps: false
             },
             {
+              type: 'line',
               label: 'Actual Market Curve',
               data: curves.actual_curve,
               borderColor: '#10b981',
               borderWidth: 2,
               fill: false,
               tension: 0.2,
+              yAxisID: 'y',
+              order: 1,
               spanGaps: false
             }
           ]
@@ -274,7 +289,23 @@
           plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
           scales: {
             x: { ticks: { color: '#64748b' }, grid: { color: '#1e293b' } },
-            y: { ticks: { color: '#64748b' }, grid: { color: '#1e293b' } }
+            y: {
+              type: 'linear',
+              position: 'left',
+              ticks: { color: '#94a3b8' },
+              grid: { color: '#1e293b' },
+              title: { display: true, text: 'Price (₹)', color: '#64748b', font: { size: 10 } }
+            },
+            y1: {
+              type: 'linear',
+              position: 'right',
+              ticks: { 
+                color: '#475569',
+                callback: (val) => val >= 1e6 ? (val/1e6).toFixed(1) + 'M' : val >= 1e3 ? (val/1e3).toFixed(0) + 'k' : val
+              },
+              grid: { drawOnChartArea: false },
+              title: { display: true, text: 'Volume', color: '#475569', font: { size: 10 } }
+            }
           }
         }
       });

@@ -60,7 +60,6 @@ def fetch_live_news_and_volume(ticker_symbol: str):
     try:
         t = yf.Ticker(ticker_symbol)
         
-        # 1. News items
         raw_news = t.news or []
         for n in raw_news[:3]:
             title = n.get('title') or n.get('content', {}).get('title', '')
@@ -69,7 +68,6 @@ def fetch_live_news_and_volume(ticker_symbol: str):
             if title:
                 news_items.append({"title": title, "publisher": publisher, "link": link})
 
-        # 2. Volume Spike Check
         hist = t.history(period="5d", interval="1d")
         intraday = t.history(period="1d", interval="15m")
         if not hist.empty and not intraday.empty:
@@ -140,8 +138,9 @@ def query_gemini_curve(symbol: str, news_items: list, volume_ratio: float, has_s
         "shape_multipliers": get_fallback_shape(symbol_bias)
     }
 
-def fetch_actual_intraday_prices(ticker: str) -> list:
+def fetch_actual_intraday_prices_and_volumes(ticker: str):
     actuals = [None] * 10
+    volumes = [None] * 10
     ist_now = get_ist_now()
     current_minutes = ist_now.hour * 60 + ist_now.minute
 
@@ -149,6 +148,7 @@ def fetch_actual_intraday_prices(ticker: str) -> list:
         df = yf.download(ticker, period="1d", interval="15m", progress=False)
         if not df.empty:
             prices = df['Close'].iloc[:, 0].tolist() if hasattr(df['Close'], 'columns') else df['Close'].tolist()
+            vols = df['Volume'].iloc[:, 0].tolist() if hasattr(df['Volume'], 'columns') else df['Volume'].tolist()
             
             for idx, slot in enumerate(TIMEFRAMES):
                 slot_min = SLOT_MINUTES[slot]
@@ -157,13 +157,18 @@ def fetch_actual_intraday_prices(ticker: str) -> list:
                         val = float(prices[idx])
                         if not math.isnan(val):
                             actuals[idx] = round(val, 2)
+                    if idx < len(vols) and vols[idx] is not None:
+                        v_val = float(vols[idx])
+                        if not math.isnan(v_val):
+                            volumes[idx] = int(v_val)
                 else:
                     actuals[idx] = None
+                    volumes[idx] = None
 
     except Exception as e:
         print(f"yfinance fetch error for {ticker}: {e}")
         
-    return actuals
+    return actuals, volumes
 
 def run_archive():
     output_dir = os.path.join(os.getcwd(), "public", "data_store")
@@ -180,7 +185,7 @@ def run_archive():
         symbol = item["symbol"]
         ticker = item["ticker"]
         
-        actual_curve = fetch_actual_intraday_prices(ticker)
+        actual_curve, actual_volume = fetch_actual_intraday_prices_and_volumes(ticker)
         valid_actuals = [p for p in actual_curve if p is not None]
         base_price = valid_actuals[0] if valid_actuals else 1000.0
 
@@ -215,6 +220,7 @@ def run_archive():
                 "bias": str(ai_data.get("bias", "NEUTRAL")),
                 "predicted_curve": predicted_curve,
                 "actual_curve": actual_curve,
+                "actual_volume": actual_volume,
                 "final_pred": float(final_pred),
                 "final_actual": float(final_actual) if final_actual else None,
                 "error_pct": float(error_pct)
