@@ -1,90 +1,90 @@
 [
   {
+    "symbol": "HDFCBANK",
+    "bias": "NEUTRAL",
+    "final_pred": 717.5,
+    "final_actual": 719.85,
+    "error_pct": 0.33,
+    "verdict": "SUCCESS"
+  },
+  {
     "symbol": "MUTHOOTFIN",
-    "bias": "BEARISH",
-    "final_pred": 2653.27,
-    "final_actual": 2686.9,
-    "error_pct": 1.23,
+    "bias": "NEUTRAL",
+    "final_pred": 2729.7,
+    "final_actual": 2698.5,
+    "error_pct": 1.14,
     "verdict": "PARTIAL"
   },
   {
     "symbol": "RELIANCE",
-    "bias": "BULLISH",
-    "final_pred": 1203.8,
-    "final_actual": 1163.9,
-    "error_pct": 3.38,
-    "verdict": "FAILED"
+    "bias": "NEUTRAL",
+    "final_pred": 1180.2,
+    "final_actual": 1167.2,
+    "error_pct": 1.1,
+    "verdict": "PARTIAL"
   },
   {
     "symbol": "TMPV",
-    "bias": "BULLISH",
-    "final_pred": 286.06,
-    "final_actual": 274.35,
-    "error_pct": 4.18,
-    "verdict": "FAILED"
+    "bias": "NEUTRAL",
+    "final_pred": 280.45,
+    "final_actual": 276.8,
+    "error_pct": 1.3,
+    "verdict": "PARTIAL"
   },
   {
     "symbol": "INFY",
-    "bias": "BEARISH",
-    "final_pred": 986.09,
-    "final_actual": 1007.75,
-    "error_pct": 2.14,
-    "verdict": "FAILED"
-  },
-  {
-    "symbol": "HDFCBANK",
-    "bias": "BULLISH",
-    "final_pred": 731.85,
-    "final_actual": 714.1,
-    "error_pct": 2.47,
-    "verdict": "FAILED"
-  },
-  {
-    "symbol": "ICICIBANK",
-    "bias": "BEARISH",
-    "final_pred": 1284.6,
-    "final_actual": 1310.3,
-    "error_pct": 1.94,
-    "verdict": "FAILED"
+    "bias": "NEUTRAL",
+    "final_pred": 1014.5,
+    "final_actual": 1021.5,
+    "error_pct": 0.69,
+    "verdict": "SUCCESS"
   },
   {
     "symbol": "TCS",
-    "bias": "BULLISH",
-    "final_pred": 2119.97,
-    "final_actual": 2054.6,
-    "error_pct": 3.15,
-    "verdict": "FAILED"
+    "bias": "NEUTRAL",
+    "final_pred": 2078.4,
+    "final_actual": 2074.1,
+    "error_pct": 0.21,
+    "verdict": "SUCCESS"
+  },
+  {
+    "symbol": "ICICIBANK",
+    "bias": "NEUTRAL",
+    "final_pred": 1321.6,
+    "final_actual": 1313.4,
+    "error_pct": 0.62,
+    "verdict": "SUCCESS"
   },
   {
     "symbol": "SBIN",
-    "bias": "BULLISH",
-    "final_pred": 977.31,
-    "final_actual": 949.8,
-    "error_pct": 2.87,
-    "verdict": "FAILED"
+    "bias": "NEUTRAL",
+    "final_pred": 958.15,
+    "final_actual": 954.35,
+    "error_pct": 0.4,
+    "verdict": "SUCCESS"
   },
   {
     "symbol": "BHARTIARTL",
     "bias": "NEUTRAL",
     "final_pred": 1742.6,
-    "final_actual": 1735.5,
-    "error_pct": 0.41,
+    "final_actual": 1742.0,
+    "error_pct": 0.03,
     "verdict": "SUCCESS"
   },
   {
     "symbol": "LT",
-    "bias": "BEARISH",
-    "final_pred": 3613.02,
-    "final_actual": 3667.3,
-    "error_pct": 1.46,
-    "verdict": "PARTIAL"
+    "bias": "NEUTRAL",
+    "final_pred": 3717.1,
+    "final_actual": 3689.4,
+    "error_pct": 0.75,
+    "verdict": "SUCCESS"
   },
   {
     "symbol": "SUNPHARMA",
-    "bias": "BULLISH",
-    "final_pred": 1844.67,
-    "final_actual": 1796.5,
-    "error_pct": 2.66,
-    "verdict": "FAILED"
+    "bias": "NEUTRAL",
+    "final_pred": 1808.5,
+    "final_actual": 1803.3,
+    "error_pct": 0.29,
+    "verdict": "SUCCESS"
   }
 ]

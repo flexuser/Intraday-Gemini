@@ -35,12 +35,22 @@
           "lang": "en-US"
         }
       }
-    ]
+    ],
+    "quant_signals": {
+      "vwap": 283.36,
+      "rsi": 69.27,
+      "atr": 0.79,
+      "bb_upper": 279.31,
+      "bb_lower": 272.58,
+      "pcr": 1.0,
+      "implied_volatility": 18.5,
+      "past_verdict": "PARTIAL"
+    }
   },
   "curves": {
     "symbol": "TMPV",
     "date": "2026-10-01",
-    "generated_at": "03:15 PM IST",
+    "generated_at": "03:25 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
