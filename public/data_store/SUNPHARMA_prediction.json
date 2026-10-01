@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for SUNPHARMA.",
-    "volume_ratio": 9.97,
+    "volume_ratio": 5.49,
     "has_volume_spike": true,
     "news_feed": [
       {
@@ -37,11 +37,11 @@
       }
     ],
     "quant_signals": {
-      "vwap": 1835.35,
-      "rsi": 58.41,
-      "atr": 3.02,
-      "bb_upper": 1807.7,
-      "bb_lower": 1791.89,
+      "vwap": 1834.84,
+      "rsi": 48.08,
+      "atr": 3.06,
+      "bb_upper": 1807.81,
+      "bb_lower": 1792.14,
       "pcr": 1.0,
       "implied_volatility": 18.5,
       "past_verdict": "SUCCESS"
@@ -50,7 +50,7 @@
   "curves": {
     "symbol": "SUNPHARMA",
     "date": "2026-10-01",
-    "generated_at": "03:50 PM IST",
+    "generated_at": "03:55 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -86,7 +86,7 @@
       1799.7,
       1796.5,
       1803.3,
-      1805.0
+      1801.0
     ],
     "actual_volume": [
       0,
@@ -98,10 +98,10 @@
       20631,
       16539,
       46347,
-      250792
+      138010
     ],
     "final_pred": 1808.5,
-    "final_actual": 1805.0,
-    "error_pct": 0.19
+    "final_actual": 1801.0,
+    "error_pct": 0.41
   }
 }
