@@ -1,15 +1,12 @@
 {
   "prediction": {
-    "symbol": "ICICIBANK",
-    "predicted_bias": "BEARISH",
-    "confidence_pct": 81.1,
-    "learning_adjusted_weight": "Calibrated using 78.6% past accuracy score.",
-    "primary_driver": "Positive disclosure alignment & institutional VWAP support for ICICIBANK."
+    "bias": "BEARISH",
+    "reasoning": "Intraday sentiment for ICICIBANK derived from order flow & technical levels."
   },
   "curves": {
     "symbol": "ICICIBANK",
     "date": "2026-10-01",
-    "generated_at": "10:04 AM IST",
+    "generated_at": "09:30 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -22,34 +19,33 @@
       "15:00",
       "15:30"
     ],
+    "bias": "BEARISH",
+    "predicted_curve": [
+      1325.6,
+      1330.9,
+      1322.95,
+      1312.34,
+      1305.72,
+      1301.74,
+      1299.09,
+      1296.44,
+      1293.79,
+      1288.48
+    ],
     "actual_curve": [
       1325.6,
+      1323.4,
       1324.6,
-      1322.8,
-      null,
-      null,
+      1318.5,
+      1319.4,
       null,
       null,
       null,
       null,
       null
     ],
-    "predicted_curve": [
-      1325.6,
-      1326.06,
-      1326.4,
-      1326.7,
-      1326.99,
-      1327.26,
-      1327.52,
-      1327.77,
-      1328.01,
-      1328.25
-    ],
-    "bias": "NEUTRAL",
-    "final_actual": 1322.8,
-    "final_pred": 1328.25,
-    "error_pct": 0.41,
-    "verdict": "SUCCESS"
+    "final_pred": 1288.48,
+    "final_actual": 1319.4,
+    "error_pct": 2.33
   }
 }

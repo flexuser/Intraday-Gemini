@@ -1,15 +1,12 @@
 {
   "prediction": {
-    "symbol": "BHARTIARTL",
-    "predicted_bias": "BULLISH",
-    "confidence_pct": 81.1,
-    "learning_adjusted_weight": "Calibrated using 78.6% past accuracy score.",
-    "primary_driver": "Positive disclosure alignment & institutional VWAP support for BHARTIARTL."
+    "bias": "NEUTRAL",
+    "reasoning": "Intraday sentiment for BHARTIARTL derived from order flow & technical levels."
   },
   "curves": {
     "symbol": "BHARTIARTL",
     "date": "2026-10-01",
-    "generated_at": "10:04 AM IST",
+    "generated_at": "09:30 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -22,34 +19,33 @@
       "15:00",
       "15:30"
     ],
+    "bias": "NEUTRAL",
+    "predicted_curve": [
+      1750.2,
+      1753.7,
+      1746.7,
+      1751.95,
+      1744.95,
+      1753.7,
+      1746.7,
+      1751.95,
+      1748.45,
+      1750.2
+    ],
     "actual_curve": [
       1750.2,
+      1753.9,
       1757.0,
-      1760.9,
-      null,
-      null,
+      1763.0,
+      1763.9,
       null,
       null,
       null,
       null,
       null
     ],
-    "predicted_curve": [
-      1750.2,
-      1750.8,
-      1751.25,
-      1751.65,
-      1752.03,
-      1752.39,
-      1752.73,
-      1753.06,
-      1753.39,
-      1753.7
-    ],
-    "bias": "NEUTRAL",
-    "final_actual": 1760.9,
-    "final_pred": 1753.7,
-    "error_pct": 0.41,
-    "verdict": "SUCCESS"
+    "final_pred": 1750.2,
+    "final_actual": 1763.9,
+    "error_pct": 0.78
   }
 }

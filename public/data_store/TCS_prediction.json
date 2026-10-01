@@ -1,15 +1,12 @@
 {
   "prediction": {
-    "symbol": "TCS",
-    "predicted_bias": "BULLISH",
-    "confidence_pct": 81.1,
-    "learning_adjusted_weight": "Calibrated using 78.6% past accuracy score.",
-    "primary_driver": "Positive disclosure alignment & institutional VWAP support for TCS."
+    "bias": "BULLISH",
+    "reasoning": "Intraday sentiment for TCS derived from order flow & technical levels."
   },
   "curves": {
     "symbol": "TCS",
     "date": "2026-10-01",
-    "generated_at": "10:04 AM IST",
+    "generated_at": "09:30 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -22,34 +19,33 @@
       "15:00",
       "15:30"
     ],
+    "bias": "BULLISH",
+    "predicted_curve": [
+      2072.1,
+      2063.81,
+      2057.6,
+      2067.96,
+      2080.39,
+      2088.68,
+      2094.89,
+      2101.11,
+      2105.25,
+      2113.54
+    ],
     "actual_curve": [
       2072.1,
+      2067.8,
       2070.5,
-      2078.9,
-      null,
-      null,
+      2091.0,
+      2083.8,
       null,
       null,
       null,
       null,
       null
     ],
-    "predicted_curve": [
-      2072.1,
-      2072.81,
-      2073.34,
-      2073.82,
-      2074.27,
-      2074.69,
-      2075.1,
-      2075.49,
-      2075.87,
-      2076.24
-    ],
-    "bias": "NEUTRAL",
-    "final_actual": 2078.9,
-    "final_pred": 2076.24,
-    "error_pct": 0.13,
-    "verdict": "SUCCESS"
+    "final_pred": 2113.54,
+    "final_actual": 2083.8,
+    "error_pct": 1.44
   }
 }

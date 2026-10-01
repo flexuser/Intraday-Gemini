@@ -1,15 +1,12 @@
 {
   "prediction": {
-    "symbol": "SBIN",
-    "predicted_bias": "BEARISH",
-    "confidence_pct": 81.1,
-    "learning_adjusted_weight": "Calibrated using 78.6% past accuracy score.",
-    "primary_driver": "Positive disclosure alignment & institutional VWAP support for SBIN."
+    "bias": "BULLISH",
+    "reasoning": "Intraday sentiment for SBIN derived from order flow & technical levels."
   },
   "curves": {
     "symbol": "SBIN",
     "date": "2026-10-01",
-    "generated_at": "10:04 AM IST",
+    "generated_at": "09:30 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -22,34 +19,33 @@
       "15:00",
       "15:30"
     ],
+    "bias": "BULLISH",
+    "predicted_curve": [
+      959.95,
+      956.11,
+      953.23,
+      958.03,
+      963.79,
+      967.63,
+      970.51,
+      973.39,
+      975.31,
+      979.15
+    ],
     "actual_curve": [
       959.95,
+      963.5,
       963.9,
-      964.0,
-      null,
-      null,
+      961.9,
+      961.45,
       null,
       null,
       null,
       null,
       null
     ],
-    "predicted_curve": [
-      959.95,
-      960.28,
-      960.53,
-      960.75,
-      960.95,
-      961.15,
-      961.34,
-      961.52,
-      961.7,
-      961.87
-    ],
-    "bias": "NEUTRAL",
-    "final_actual": 964.0,
-    "final_pred": 961.87,
-    "error_pct": 0.22,
-    "verdict": "SUCCESS"
+    "final_pred": 979.15,
+    "final_actual": 961.45,
+    "error_pct": 1.84
   }
 }
