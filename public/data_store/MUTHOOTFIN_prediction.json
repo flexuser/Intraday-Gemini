@@ -1,7 +1,7 @@
 {
   "prediction": {
-    "bias": "BEARISH",
-    "reasoning": "Intraday outlook based on live volume (0.0x) and order flow evaluation.",
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for MUTHOOTFIN.",
     "volume_ratio": 0.0,
     "has_volume_spike": false,
     "news_feed": [
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "MUTHOOTFIN",
     "date": "2026-10-01",
-    "generated_at": "01:45 PM IST",
+    "generated_at": "01:50 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -53,18 +53,18 @@
       "15:00",
       "15:30"
     ],
-    "bias": "BEARISH",
+    "bias": "NEUTRAL",
     "predicted_curve": [
       2729.7,
-      2740.62,
+      2735.16,
       2724.24,
-      2702.4,
-      2688.75,
-      2680.57,
-      2675.11,
-      2669.65,
-      2664.19,
-      2653.27
+      2732.43,
+      2721.51,
+      2735.16,
+      2724.24,
+      2732.43,
+      2726.97,
+      2729.7
     ],
     "actual_curve": [
       2729.7,
@@ -90,8 +90,8 @@
       null,
       null
     ],
-    "final_pred": 2653.27,
+    "final_pred": 2729.7,
     "final_actual": 2703.3,
-    "error_pct": 1.83
+    "error_pct": 0.97
   }
 }

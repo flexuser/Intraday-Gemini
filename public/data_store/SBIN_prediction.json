@@ -1,7 +1,7 @@
 {
   "prediction": {
-    "bias": "BULLISH",
-    "reasoning": "Intraday outlook based on live volume (0.0x) and order flow evaluation.",
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for SBIN.",
     "volume_ratio": 0.0,
     "has_volume_spike": false,
     "news_feed": [
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "SBIN",
     "date": "2026-10-01",
-    "generated_at": "01:45 PM IST",
+    "generated_at": "01:50 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -53,18 +53,18 @@
       "15:00",
       "15:30"
     ],
-    "bias": "BULLISH",
+    "bias": "NEUTRAL",
     "predicted_curve": [
       958.15,
-      954.32,
-      951.44,
+      960.07,
       956.23,
-      961.98,
-      965.82,
-      968.69,
-      971.56,
-      973.48,
-      977.31
+      959.11,
+      955.28,
+      960.07,
+      956.23,
+      959.11,
+      957.19,
+      958.15
     ],
     "actual_curve": [
       958.15,
@@ -90,8 +90,8 @@
       null,
       null
     ],
-    "final_pred": 977.31,
+    "final_pred": 958.15,
     "final_actual": 952.45,
-    "error_pct": 2.59
+    "error_pct": 0.59
   }
 }
