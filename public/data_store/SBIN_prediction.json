@@ -9,7 +9,7 @@
   "curves": {
     "symbol": "SBIN",
     "date": "2026-10-01",
-    "generated_at": "09:46 AM IST",
+    "generated_at": "09:57 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -23,33 +23,33 @@
       "15:30"
     ],
     "actual_curve": [
-      968.5,
-      969.4,
-      970.7,
-      970.7,
-      968.6,
-      964.3,
-      962.7,
-      959.5,
       959.95,
-      963.4
+      963.0,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
     ],
     "predicted_curve": [
-      968.5,
-      968.5,
-      968.5,
-      968.5,
-      968.5,
-      968.5,
-      968.5,
-      968.5,
-      968.5,
-      968.5
+      959.95,
+      960.28,
+      960.53,
+      960.75,
+      960.95,
+      961.15,
+      961.34,
+      961.52,
+      961.7,
+      961.87
     ],
     "bias": "NEUTRAL",
-    "final_actual": 963.4,
-    "final_pred": 968.5,
-    "error_pct": 0.53,
+    "final_actual": 963.0,
+    "final_pred": 961.87,
+    "error_pct": 0.12,
     "verdict": "SUCCESS"
   }
 }

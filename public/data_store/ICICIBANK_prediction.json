@@ -9,7 +9,7 @@
   "curves": {
     "symbol": "ICICIBANK",
     "date": "2026-10-01",
-    "generated_at": "09:46 AM IST",
+    "generated_at": "09:57 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -23,33 +23,33 @@
       "15:30"
     ],
     "actual_curve": [
-      1329.0,
-      1329.8,
-      1334.4,
-      1330.9,
-      1329.3,
-      1324.0,
-      1323.8,
-      1321.7,
       1325.6,
-      1324.5
+      1324.6,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
     ],
     "predicted_curve": [
-      1329.0,
-      1329.0,
-      1329.0,
-      1329.0,
-      1329.0,
-      1329.0,
-      1329.0,
-      1329.0,
-      1329.0,
-      1329.0
+      1325.6,
+      1326.06,
+      1326.4,
+      1326.7,
+      1326.99,
+      1327.26,
+      1327.52,
+      1327.77,
+      1328.01,
+      1328.25
     ],
     "bias": "NEUTRAL",
-    "final_actual": 1324.5,
-    "final_pred": 1329.0,
-    "error_pct": 0.34,
+    "final_actual": 1324.6,
+    "final_pred": 1328.25,
+    "error_pct": 0.28,
     "verdict": "SUCCESS"
   }
 }

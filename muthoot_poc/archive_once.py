@@ -1,18 +1,14 @@
 import json
 import os
-import random
 import logging
 from datetime import datetime
 import yfinance as yf
 
 from muthoot_poc.data_sources.announcements import (
     fetch_corporate_announcements,
-    fetch_nse_bulk_block_deals,
     deduplicate_announcements
 )
 from muthoot_poc.engine.event_classifier import classify_event_and_predict
-from muthoot_poc.engine.spike_detector import detect_intraday_spikes
-from muthoot_poc.engine.feedback_evaluator import update_model_memory
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
@@ -26,36 +22,44 @@ TIMEFRAMES = ['09:15', '09:45', '10:30', '11:15', '12:00', '12:45', '13:30', '14
 
 def fetch_actual_prices(symbol: str) -> list:
     nse_symbol = f"{symbol}.NS"
-    logger.info(f"Fetching real market prices for {nse_symbol}...")
+    logger.info(f"Fetching live market prices for {nse_symbol}...")
     
     try:
         ticker = yf.Ticker(nse_symbol)
         df = ticker.history(period="1d", interval="30m")
         
-        if df.empty or len(df) < 5:
+        if df.empty:
+            # Weekend / Pre-market fallback
             df = ticker.history(period="5d", interval="30m").tail(10)
+            actuals = [round(float(p), 2) for p in df['Close'].tolist()]
+            return actuals[:len(TIMEFRAMES)]
 
-        actual_prices = [round(float(p), 2) for p in df['Close'].tolist()]
+        # Live trading day: Extract available candles so far
+        live_prices = [round(float(p), 2) for p in df['Close'].tolist()]
         
-        if not actual_prices:
-            actual_prices = [1000.0] * len(TIMEFRAMES)
-
-        if len(actual_prices) > len(TIMEFRAMES):
-            actual_prices = actual_prices[:len(TIMEFRAMES)]
-        elif len(actual_prices) < len(TIMEFRAMES):
-            last_p = actual_prices[-1]
-            actual_prices += [last_p] * (len(TIMEFRAMES) - len(actual_prices))
+        # Pad unreached future timeframe slots with None (null in JSON)
+        actual_prices = []
+        for i in range(len(TIMEFRAMES)):
+            if i < len(live_prices):
+                actual_prices.append(live_prices[i])
+            else:
+                actual_prices.append(None)
 
         return actual_prices
 
     except Exception as e:
         logger.error(f"Failed to fetch market data for {symbol}: {e}")
-        return [1000.0] * len(TIMEFRAMES)
+        return [None] * len(TIMEFRAMES)
 
 def generate_morning_prediction_curve(symbol: str, base_price: float, ai_sentiment: str, confidence_score: float) -> list:
-    multiplier = 1 if ai_sentiment == "BULLISH" else (-1 if ai_sentiment == "BEARISH" else 0)
-    expected_return_pct = multiplier * (confidence_score / 100.0) * 0.02
-    
+    if ai_sentiment == "BULLISH":
+        expected_return_pct = (confidence_score / 100.0) * 0.02
+    elif ai_sentiment == "BEARISH":
+        expected_return_pct = -(confidence_score / 100.0) * 0.02
+    else:
+        # Micro-drift for NEUTRAL sentiment
+        expected_return_pct = 0.002
+
     target_price = base_price * (1 + expected_return_pct)
     
     predicted_prices = []
@@ -63,7 +67,8 @@ def generate_morning_prediction_curve(symbol: str, base_price: float, ai_sentime
     
     for i in range(len(TIMEFRAMES)):
         progress = i / total_steps
-        pred_val = base_price + ((target_price - base_price) * progress)
+        # Subtle intraday curve trajectory
+        pred_val = base_price + ((target_price - base_price) * (progress ** 0.8))
         predicted_prices.append(round(pred_val, 2))
         
     return predicted_prices
@@ -87,8 +92,11 @@ def run_archive_cycle():
         confidence = prediction_res.get("confidence", 50.0)
 
         actual_prices = fetch_actual_prices(symbol)
-        base_price = actual_prices[0]
-        final_actual = actual_prices[-1]
+        
+        # Base price at 09:15
+        valid_prices = [p for p in actual_prices if p is not None]
+        base_price = valid_prices[0] if valid_prices else 1000.0
+        final_actual = valid_prices[-1] if valid_prices else base_price
 
         predicted_prices = generate_morning_prediction_curve(
             symbol=symbol,
@@ -111,7 +119,7 @@ def run_archive_cycle():
             "symbol": symbol,
             "date": today_str,
             "generated_at": time_str,
-            "timeframes": TIMEFRAMES[:len(actual_prices)],
+            "timeframes": TIMEFRAMES,
             "actual_curve": actual_prices,
             "predicted_curve": predicted_prices,
             "bias": ai_bias,

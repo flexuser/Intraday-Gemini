@@ -9,7 +9,7 @@
   "curves": {
     "symbol": "TMPV",
     "date": "2026-10-01",
-    "generated_at": "09:46 AM IST",
+    "generated_at": "09:57 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -23,33 +23,33 @@
       "15:30"
     ],
     "actual_curve": [
-      283.1,
-      283.15,
-      285.1,
-      286.4,
-      284.7,
-      283.1,
-      282.9,
-      283.5,
       279.15,
-      279.3
+      278.9,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
     ],
     "predicted_curve": [
-      283.1,
-      283.1,
-      283.1,
-      283.1,
-      283.1,
-      283.1,
-      283.1,
-      283.1,
-      283.1,
-      283.1
+      279.15,
+      279.25,
+      279.32,
+      279.38,
+      279.44,
+      279.5,
+      279.55,
+      279.61,
+      279.66,
+      279.71
     ],
     "bias": "NEUTRAL",
-    "final_actual": 279.3,
-    "final_pred": 283.1,
-    "error_pct": 1.36,
+    "final_actual": 278.9,
+    "final_pred": 279.71,
+    "error_pct": 0.29,
     "verdict": "SUCCESS"
   }
 }

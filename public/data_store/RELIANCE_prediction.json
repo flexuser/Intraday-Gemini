@@ -9,7 +9,7 @@
   "curves": {
     "symbol": "RELIANCE",
     "date": "2026-10-01",
-    "generated_at": "09:46 AM IST",
+    "generated_at": "09:57 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -23,33 +23,33 @@
       "15:30"
     ],
     "actual_curve": [
-      1192.5,
-      1191.9,
-      1192.6,
-      1193.0,
-      1190.7,
-      1186.8,
-      1188.3,
-      1187.0,
       1181.2,
-      1182.5
+      1181.8,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
     ],
     "predicted_curve": [
-      1192.5,
-      1192.5,
-      1192.5,
-      1192.5,
-      1192.5,
-      1192.5,
-      1192.5,
-      1192.5,
-      1192.5,
-      1192.5
+      1181.2,
+      1181.61,
+      1181.91,
+      1182.18,
+      1182.43,
+      1182.68,
+      1182.91,
+      1183.13,
+      1183.35,
+      1183.56
     ],
     "bias": "NEUTRAL",
-    "final_actual": 1182.5,
-    "final_pred": 1192.5,
-    "error_pct": 0.85,
+    "final_actual": 1181.8,
+    "final_pred": 1183.56,
+    "error_pct": 0.15,
     "verdict": "SUCCESS"
   }
 }

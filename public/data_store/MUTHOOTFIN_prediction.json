@@ -9,7 +9,7 @@
   "curves": {
     "symbol": "MUTHOOTFIN",
     "date": "2026-10-01",
-    "generated_at": "09:46 AM IST",
+    "generated_at": "09:57 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -23,33 +23,33 @@
       "15:30"
     ],
     "actual_curve": [
-      2748.1,
-      2765.0,
-      2767.9,
-      2778.3,
-      2781.0,
-      2761.2,
-      2761.6,
-      2737.1,
       2728.5,
-      2726.2
+      2728.0,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
     ],
     "predicted_curve": [
-      2748.1,
-      2748.1,
-      2748.1,
-      2748.1,
-      2748.1,
-      2748.1,
-      2748.1,
-      2748.1,
-      2748.1,
-      2748.1
+      2728.5,
+      2729.44,
+      2730.14,
+      2730.77,
+      2731.35,
+      2731.91,
+      2732.45,
+      2732.96,
+      2733.47,
+      2733.96
     ],
     "bias": "NEUTRAL",
-    "final_actual": 2726.2,
-    "final_pred": 2748.1,
-    "error_pct": 0.8,
+    "final_actual": 2728.0,
+    "final_pred": 2733.96,
+    "error_pct": 0.22,
     "verdict": "SUCCESS"
   }
 }

@@ -9,7 +9,7 @@
   "curves": {
     "symbol": "HDFCBANK",
     "date": "2026-10-01",
-    "generated_at": "09:46 AM IST",
+    "generated_at": "09:57 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -23,33 +23,33 @@
       "15:30"
     ],
     "actual_curve": [
-      717.0,
-      718.65,
-      717.9,
-      718.4,
-      717.45,
-      713.9,
-      714.05,
-      708.7,
       714.35,
-      714.9
+      715.75,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
     ],
     "predicted_curve": [
-      717.0,
-      717.0,
-      717.0,
-      717.0,
-      717.0,
-      717.0,
-      717.0,
-      717.0,
-      717.0,
-      717.0
+      714.35,
+      714.6,
+      714.78,
+      714.94,
+      715.1,
+      715.24,
+      715.38,
+      715.52,
+      715.65,
+      715.78
     ],
     "bias": "NEUTRAL",
-    "final_actual": 714.9,
-    "final_pred": 717.0,
-    "error_pct": 0.29,
+    "final_actual": 715.75,
+    "final_pred": 715.78,
+    "error_pct": 0.0,
     "verdict": "SUCCESS"
   }
 }

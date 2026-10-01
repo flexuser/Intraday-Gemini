@@ -9,7 +9,7 @@
   "curves": {
     "symbol": "BHARTIARTL",
     "date": "2026-10-01",
-    "generated_at": "09:46 AM IST",
+    "generated_at": "09:57 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -23,33 +23,33 @@
       "15:30"
     ],
     "actual_curve": [
-      1766.4,
-      1765.5,
-      1770.5,
-      1769.1,
-      1761.2,
-      1758.5,
-      1761.4,
-      1757.0,
       1750.2,
-      1752.0
+      1755.5,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
     ],
     "predicted_curve": [
-      1766.4,
-      1766.4,
-      1766.4,
-      1766.4,
-      1766.4,
-      1766.4,
-      1766.4,
-      1766.4,
-      1766.4,
-      1766.4
+      1750.2,
+      1750.8,
+      1751.25,
+      1751.65,
+      1752.03,
+      1752.39,
+      1752.73,
+      1753.06,
+      1753.39,
+      1753.7
     ],
     "bias": "NEUTRAL",
-    "final_actual": 1752.0,
-    "final_pred": 1766.4,
-    "error_pct": 0.82,
+    "final_actual": 1755.5,
+    "final_pred": 1753.7,
+    "error_pct": 0.1,
     "verdict": "SUCCESS"
   }
 }

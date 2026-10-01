@@ -9,7 +9,7 @@
   "curves": {
     "symbol": "SUNPHARMA",
     "date": "2026-10-01",
-    "generated_at": "09:46 AM IST",
+    "generated_at": "09:57 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -23,33 +23,33 @@
       "15:30"
     ],
     "actual_curve": [
-      1829.2,
-      1833.5,
-      1840.3,
-      1842.1,
-      1842.4,
-      1834.3,
-      1827.5,
-      1816.6,
       1810.1,
-      1813.4
+      1817.6,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
     ],
     "predicted_curve": [
-      1829.2,
-      1829.2,
-      1829.2,
-      1829.2,
-      1829.2,
-      1829.2,
-      1829.2,
-      1829.2,
-      1829.2,
-      1829.2
+      1810.1,
+      1810.72,
+      1811.19,
+      1811.6,
+      1811.99,
+      1812.36,
+      1812.72,
+      1813.06,
+      1813.39,
+      1813.72
     ],
     "bias": "NEUTRAL",
-    "final_actual": 1813.4,
-    "final_pred": 1829.2,
-    "error_pct": 0.87,
+    "final_actual": 1817.6,
+    "final_pred": 1813.72,
+    "error_pct": 0.21,
     "verdict": "SUCCESS"
   }
 }
