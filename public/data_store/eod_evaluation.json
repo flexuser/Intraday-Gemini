@@ -1,18 +1,18 @@
 [
   {
-    "symbol": "MUTHOOTFIN",
-    "bias": "NEUTRAL",
-    "final_pred": 2729.7,
-    "final_actual": 2697.1,
-    "error_pct": 1.19,
-    "verdict": "PARTIAL"
-  },
-  {
     "symbol": "RELIANCE",
     "bias": "NEUTRAL",
     "final_pred": 1180.2,
     "final_actual": 1167.7,
     "error_pct": 1.06,
+    "verdict": "PARTIAL"
+  },
+  {
+    "symbol": "MUTHOOTFIN",
+    "bias": "NEUTRAL",
+    "final_pred": 2729.7,
+    "final_actual": 2697.1,
+    "error_pct": 1.19,
     "verdict": "PARTIAL"
   },
   {
@@ -40,6 +40,22 @@
     "verdict": "SUCCESS"
   },
   {
+    "symbol": "BHARTIARTL",
+    "bias": "NEUTRAL",
+    "final_pred": 1742.6,
+    "final_actual": 1741.1,
+    "error_pct": 0.09,
+    "verdict": "SUCCESS"
+  },
+  {
+    "symbol": "SBIN",
+    "bias": "NEUTRAL",
+    "final_pred": 958.15,
+    "final_actual": 954.1,
+    "error_pct": 0.42,
+    "verdict": "SUCCESS"
+  },
+  {
     "symbol": "ICICIBANK",
     "bias": "NEUTRAL",
     "final_pred": 1321.6,
@@ -53,22 +69,6 @@
     "final_pred": 2078.4,
     "final_actual": 2075.0,
     "error_pct": 0.16,
-    "verdict": "SUCCESS"
-  },
-  {
-    "symbol": "SBIN",
-    "bias": "NEUTRAL",
-    "final_pred": 958.15,
-    "final_actual": 954.1,
-    "error_pct": 0.42,
-    "verdict": "SUCCESS"
-  },
-  {
-    "symbol": "BHARTIARTL",
-    "bias": "NEUTRAL",
-    "final_pred": 1742.6,
-    "final_actual": 1741.1,
-    "error_pct": 0.09,
     "verdict": "SUCCESS"
   },
   {

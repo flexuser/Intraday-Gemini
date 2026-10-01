@@ -35,12 +35,22 @@
           "lang": "en-US"
         }
       }
-    ]
+    ],
+    "quant_signals": {
+      "vwap": 3763.95,
+      "rsi": 58.34,
+      "atr": 8.16,
+      "bb_upper": 3698.18,
+      "bb_lower": 3654.34,
+      "pcr": 1.0,
+      "implied_volatility": 18.5,
+      "past_verdict": "SUCCESS"
+    }
   },
   "curves": {
     "symbol": "LT",
     "date": "2026-10-01",
-    "generated_at": "11:22 PM IST",
+    "generated_at": "11:28 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -79,7 +89,7 @@
       3693.4
     ],
     "actual_volume": [
-      66543,
+      0,
       43055,
       14210,
       14999,

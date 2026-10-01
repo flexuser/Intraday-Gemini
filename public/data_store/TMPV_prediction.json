@@ -35,12 +35,22 @@
           "lang": "en-US"
         }
       }
-    ]
+    ],
+    "quant_signals": {
+      "vwap": 283.35,
+      "rsi": 70.95,
+      "atr": 0.82,
+      "bb_upper": 279.41,
+      "bb_lower": 272.52,
+      "pcr": 1.0,
+      "implied_volatility": 18.5,
+      "past_verdict": "SUCCESS"
+    }
   },
   "curves": {
     "symbol": "TMPV",
     "date": "2026-10-01",
-    "generated_at": "11:22 PM IST",
+    "generated_at": "11:28 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -79,7 +89,7 @@
       279.4
     ],
     "actual_volume": [
-      213935,
+      0,
       103023,
       223673,
       218201,
