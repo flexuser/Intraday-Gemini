@@ -44,13 +44,13 @@
       "bb_lower": 945.37,
       "pcr": 1.0,
       "implied_volatility": 18.5,
-      "past_verdict": "FAILED"
+      "past_verdict": "SUCCESS"
     }
   },
   "curves": {
     "symbol": "SBIN",
     "date": "2026-10-01",
-    "generated_at": "03:20 PM IST",
+    "generated_at": "03:25 PM IST",
     "timeframes": [
       "09:15",
       "09:45",

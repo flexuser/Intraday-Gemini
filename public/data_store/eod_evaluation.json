@@ -1,10 +1,10 @@
 [
   {
-    "symbol": "INFY",
+    "symbol": "HDFCBANK",
     "bias": "NEUTRAL",
-    "final_pred": 1014.5,
-    "final_actual": 1021.5,
-    "error_pct": 0.69,
+    "final_pred": 717.5,
+    "final_actual": 719.85,
+    "error_pct": 0.33,
     "verdict": "SUCCESS"
   },
   {
@@ -16,12 +16,12 @@
     "verdict": "PARTIAL"
   },
   {
-    "symbol": "HDFCBANK",
+    "symbol": "RELIANCE",
     "bias": "NEUTRAL",
-    "final_pred": 717.5,
-    "final_actual": 719.85,
-    "error_pct": 0.33,
-    "verdict": "SUCCESS"
+    "final_pred": 1180.2,
+    "final_actual": 1167.2,
+    "error_pct": 1.1,
+    "verdict": "PARTIAL"
   },
   {
     "symbol": "TMPV",
@@ -32,19 +32,19 @@
     "verdict": "PARTIAL"
   },
   {
-    "symbol": "RELIANCE",
+    "symbol": "INFY",
     "bias": "NEUTRAL",
-    "final_pred": 1180.2,
-    "final_actual": 1167.2,
-    "error_pct": 1.1,
-    "verdict": "PARTIAL"
+    "final_pred": 1014.5,
+    "final_actual": 1021.5,
+    "error_pct": 0.69,
+    "verdict": "SUCCESS"
   },
   {
-    "symbol": "BHARTIARTL",
+    "symbol": "TCS",
     "bias": "NEUTRAL",
-    "final_pred": 1742.6,
-    "final_actual": 1742.0,
-    "error_pct": 0.03,
+    "final_pred": 2078.4,
+    "final_actual": 2074.1,
+    "error_pct": 0.21,
     "verdict": "SUCCESS"
   },
   {
@@ -64,11 +64,11 @@
     "verdict": "SUCCESS"
   },
   {
-    "symbol": "TCS",
+    "symbol": "BHARTIARTL",
     "bias": "NEUTRAL",
-    "final_pred": 2078.4,
-    "final_actual": 2074.1,
-    "error_pct": 0.21,
+    "final_pred": 1742.6,
+    "final_actual": 1742.0,
+    "error_pct": 0.03,
     "verdict": "SUCCESS"
   },
   {

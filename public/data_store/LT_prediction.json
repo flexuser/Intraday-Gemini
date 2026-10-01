@@ -44,13 +44,13 @@
       "bb_lower": 3652.6,
       "pcr": 1.0,
       "implied_volatility": 18.5,
-      "past_verdict": "PARTIAL"
+      "past_verdict": "SUCCESS"
     }
   },
   "curves": {
     "symbol": "LT",
     "date": "2026-10-01",
-    "generated_at": "03:20 PM IST",
+    "generated_at": "03:25 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
