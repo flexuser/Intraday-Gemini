@@ -35,12 +35,22 @@
           "lang": "en-SG"
         }
       }
-    ]
+    ],
+    "quant_signals": {
+      "vwap": 1770.64,
+      "rsi": 62.07,
+      "atr": 2.94,
+      "bb_upper": 1745.95,
+      "bb_lower": 1727.54,
+      "pcr": 1.0,
+      "implied_volatility": 18.5,
+      "past_verdict": "SUCCESS"
+    }
   },
   "curves": {
     "symbol": "BHARTIARTL",
     "date": "2026-10-01",
-    "generated_at": "03:15 PM IST",
+    "generated_at": "03:20 PM IST",
     "timeframes": [
       "09:15",
       "09:45",

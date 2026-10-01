@@ -35,12 +35,22 @@
           "lang": "en-US"
         }
       }
-    ]
+    ],
+    "quant_signals": {
+      "vwap": 1193.33,
+      "rsi": 55.52,
+      "atr": 2.01,
+      "bb_upper": 1171.47,
+      "bb_lower": 1161.86,
+      "pcr": 1.0,
+      "implied_volatility": 18.5,
+      "past_verdict": "FAILED"
+    }
   },
   "curves": {
     "symbol": "RELIANCE",
     "date": "2026-10-01",
-    "generated_at": "03:15 PM IST",
+    "generated_at": "03:20 PM IST",
     "timeframes": [
       "09:15",
       "09:45",

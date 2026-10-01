@@ -35,12 +35,22 @@
           "lang": "en-US"
         }
       }
-    ]
+    ],
+    "quant_signals": {
+      "vwap": 718.11,
+      "rsi": 68.87,
+      "atr": 1.42,
+      "bb_upper": 722.31,
+      "bb_lower": 710.65,
+      "pcr": 1.0,
+      "implied_volatility": 18.5,
+      "past_verdict": "FAILED"
+    }
   },
   "curves": {
     "symbol": "HDFCBANK",
     "date": "2026-10-01",
-    "generated_at": "03:15 PM IST",
+    "generated_at": "03:20 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
