@@ -1,8 +1,8 @@
 {
   "prediction": {
     "bias": "BULLISH",
-    "reasoning": "Intraday outlook based on live volume (0.2x) and order flow evaluation.",
-    "volume_ratio": 0.2,
+    "reasoning": "Intraday outlook based on live volume (0.0x) and order flow evaluation.",
+    "volume_ratio": 0.0,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "RELIANCE",
     "date": "2026-10-01",
-    "generated_at": "01:35 PM IST",
+    "generated_at": "01:45 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -55,43 +55,43 @@
     ],
     "bias": "BULLISH",
     "predicted_curve": [
-      1181.2,
-      1176.48,
-      1172.93,
-      1178.84,
-      1185.92,
-      1190.65,
-      1194.19,
-      1197.74,
-      1200.1,
-      1204.82
+      1180.2,
+      1175.48,
+      1171.94,
+      1177.84,
+      1184.92,
+      1189.64,
+      1193.18,
+      1196.72,
+      1199.08,
+      1203.8
     ],
     "actual_curve": [
-      1181.2,
-      1182.0,
-      1182.0,
-      1179.6,
-      1180.8,
-      1182.1,
-      1181.1,
+      1180.2,
+      1182.7,
+      1181.9,
+      1176.6,
+      1174.6,
+      1170.9,
+      1169.7,
       null,
       null,
       null
     ],
     "actual_volume": [
-      961583,
-      621885,
-      443268,
-      544098,
-      565116,
-      588797,
-      679466,
+      391610,
+      172379,
+      250528,
+      125164,
+      179558,
+      332112,
+      122802,
       null,
       null,
       null
     ],
-    "final_pred": 1204.82,
-    "final_actual": 1181.1,
-    "error_pct": 2.01
+    "final_pred": 1203.8,
+    "final_actual": 1169.7,
+    "error_pct": 2.89
   }
 }

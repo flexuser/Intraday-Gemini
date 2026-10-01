@@ -1,8 +1,8 @@
 {
   "prediction": {
     "bias": "BULLISH",
-    "reasoning": "Intraday outlook based on live volume (0.17x) and order flow evaluation.",
-    "volume_ratio": 0.17,
+    "reasoning": "Intraday outlook based on live volume (0.0x) and order flow evaluation.",
+    "volume_ratio": 0.0,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "SBIN",
     "date": "2026-10-01",
-    "generated_at": "01:35 PM IST",
+    "generated_at": "01:45 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -55,43 +55,43 @@
     ],
     "bias": "BULLISH",
     "predicted_curve": [
-      959.95,
-      956.11,
-      953.23,
-      958.03,
-      963.79,
-      967.63,
-      970.51,
-      973.39,
-      975.31,
-      979.15
+      958.15,
+      954.32,
+      951.44,
+      956.23,
+      961.98,
+      965.82,
+      968.69,
+      971.56,
+      973.48,
+      977.31
     ],
     "actual_curve": [
-      959.95,
-      963.5,
-      963.9,
-      961.9,
-      962.15,
-      962.15,
-      963.15,
+      958.15,
+      963.0,
+      963.55,
+      962.3,
+      961.8,
+      953.5,
+      952.45,
       null,
       null,
       null
     ],
     "actual_volume": [
-      434656,
-      278211,
-      179636,
-      186502,
-      230647,
-      147185,
-      226681,
+      192796,
+      64772,
+      54238,
+      33855,
+      84045,
+      141166,
+      69555,
       null,
       null,
       null
     ],
-    "final_pred": 979.15,
-    "final_actual": 963.15,
-    "error_pct": 1.67
+    "final_pred": 977.31,
+    "final_actual": 952.45,
+    "error_pct": 2.59
   }
 }
