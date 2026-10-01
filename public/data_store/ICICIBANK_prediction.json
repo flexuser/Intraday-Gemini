@@ -30,7 +30,11 @@
       1324.0,
       1323.8,
       1321.7,
+<<<<<<< HEAD
       1325.6
+=======
+      1322.3
+>>>>>>> 01891123e4b2b12bff90143fe71f578e589be386
     ],
     "predicted_curve": [
       1325.9,
@@ -45,9 +49,15 @@
       1325.9
     ],
     "bias": "NEUTRAL",
+<<<<<<< HEAD
     "final_actual": 1325.6,
     "final_pred": 1325.9,
     "error_pct": 0.02,
+=======
+    "final_actual": 1322.3,
+    "final_pred": 1325.9,
+    "error_pct": 0.27,
+>>>>>>> 01891123e4b2b12bff90143fe71f578e589be386
     "verdict": "SUCCESS"
   }
 }

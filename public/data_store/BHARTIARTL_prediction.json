@@ -30,7 +30,11 @@
       1758.5,
       1761.4,
       1757.0,
+<<<<<<< HEAD
       1749.8
+=======
+      1742.6
+>>>>>>> 01891123e4b2b12bff90143fe71f578e589be386
     ],
     "predicted_curve": [
       1761.6,
@@ -45,9 +49,15 @@
       1761.6
     ],
     "bias": "NEUTRAL",
+<<<<<<< HEAD
     "final_actual": 1749.8,
     "final_pred": 1761.6,
     "error_pct": 0.67,
+=======
+    "final_actual": 1742.6,
+    "final_pred": 1761.6,
+    "error_pct": 1.09,
+>>>>>>> 01891123e4b2b12bff90143fe71f578e589be386
     "verdict": "SUCCESS"
   }
 }

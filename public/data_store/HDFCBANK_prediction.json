@@ -30,7 +30,11 @@
       713.9,
       714.05,
       708.7,
+<<<<<<< HEAD
       714.45
+=======
+      717.75
+>>>>>>> 01891123e4b2b12bff90143fe71f578e589be386
     ],
     "predicted_curve": [
       716.25,
@@ -45,9 +49,15 @@
       716.25
     ],
     "bias": "NEUTRAL",
+<<<<<<< HEAD
     "final_actual": 714.45,
     "final_pred": 716.25,
     "error_pct": 0.25,
+=======
+    "final_actual": 717.75,
+    "final_pred": 716.25,
+    "error_pct": 0.21,
+>>>>>>> 01891123e4b2b12bff90143fe71f578e589be386
     "verdict": "SUCCESS"
   }
 }
