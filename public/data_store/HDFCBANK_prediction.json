@@ -1,0 +1,97 @@
+{
+  "prediction": {
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for HDFCBANK.",
+    "volume_ratio": 3.46,
+    "has_volume_spike": true,
+    "news_feed": [
+      {
+        "title": "Apple Pay launches in India with Axis Bank partnership",
+        "publisher": "Quartz",
+        "link": {
+          "url": "https://qz.com/apple-pay-launches-india-axis-bank-093026",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "WF vs. HDB: Which Stock Should Value Investors Buy Now?",
+        "publisher": "Zacks",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/wf-vs-hdb-stock-value-144002894.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Microsoft Drops as Three-Zone Hyderabad Region Goes Live",
+        "publisher": "GuruFocus.com",
+        "link": {
+          "url": "https://finance.yahoo.com/technology/ai/articles/microsoft-drops-three-zone-hyderabad-155029074.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      }
+    ]
+  },
+  "curves": {
+    "symbol": "HDFCBANK",
+    "date": "2026-10-01",
+    "generated_at": "10:30 PM IST",
+    "timeframes": [
+      "09:15",
+      "09:45",
+      "10:30",
+      "11:15",
+      "12:00",
+      "12:45",
+      "13:30",
+      "14:15",
+      "15:00",
+      "15:30"
+    ],
+    "bias": "NEUTRAL",
+    "predicted_curve": [
+      717.5,
+      718.93,
+      716.07,
+      718.22,
+      715.35,
+      718.93,
+      716.07,
+      718.22,
+      716.78,
+      717.5
+    ],
+    "actual_curve": [
+      717.5,
+      715.8,
+      714.25,
+      716.8,
+      719.25,
+      716.15,
+      717.9,
+      714.1,
+      719.85,
+      721.2
+    ],
+    "actual_volume": [
+      1026096,
+      425939,
+      290425,
+      227297,
+      260990,
+      633505,
+      579657,
+      466504,
+      952229,
+      1482466
+    ],
+    "final_pred": 717.5,
+    "final_actual": 721.2,
+    "error_pct": 0.52
+  }
+}

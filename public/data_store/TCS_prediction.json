@@ -1,0 +1,97 @@
+{
+  "prediction": {
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for TCS.",
+    "volume_ratio": 2.51,
+    "has_volume_spike": true,
+    "news_feed": [
+      {
+        "title": "Becoming \u2018AI native\u2019 might not be as profitable as you think. Unless your company does it right",
+        "publisher": "FastCompany",
+        "link": {
+          "url": "https://www.fastcompany.com/91589386/being-ai-native-is-only-profitable-when-done-right",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Trump administration proposes axing grace period for H-1B visa holders after job loss",
+        "publisher": "Reuters",
+        "link": {
+          "url": "https://finance.yahoo.com/news/trump-administration-proposes-waiving-grace-152322715.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Rezolve\u2019s (RZLV) Revenue Surge Is Turning Heads, but at What Cost?",
+        "publisher": "Insider Monkey",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/rezolve-rzlv-revenue-surge-turning-084132796.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      }
+    ]
+  },
+  "curves": {
+    "symbol": "TCS",
+    "date": "2026-10-01",
+    "generated_at": "10:30 PM IST",
+    "timeframes": [
+      "09:15",
+      "09:45",
+      "10:30",
+      "11:15",
+      "12:00",
+      "12:45",
+      "13:30",
+      "14:15",
+      "15:00",
+      "15:30"
+    ],
+    "bias": "NEUTRAL",
+    "predicted_curve": [
+      2078.4,
+      2082.56,
+      2074.24,
+      2080.48,
+      2072.16,
+      2082.56,
+      2074.24,
+      2080.48,
+      2076.32,
+      2078.4
+    ],
+    "actual_curve": [
+      2078.4,
+      2069.0,
+      2085.9,
+      2077.1,
+      2067.2,
+      2054.1,
+      2053.9,
+      2054.6,
+      2074.1,
+      2075.0
+    ],
+    "actual_volume": [
+      114502,
+      35304,
+      32367,
+      104893,
+      23986,
+      36333,
+      26101,
+      34720,
+      68564,
+      115816
+    ],
+    "final_pred": 2078.4,
+    "final_actual": 2075.0,
+    "error_pct": 0.16
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "prediction": {
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for BHARTIARTL.",
+    "volume_ratio": 6.59,
+    "has_volume_spike": true,
+    "news_feed": [
+      {
+        "title": "India's Airtel Payments Bank names Shabnam Sinha chairperson",
+        "publisher": "Reuters",
+        "link": {
+          "url": "https://sg.finance.yahoo.com/news/indias-airtel-payments-bank-names-124642016.html",
+          "site": "finance",
+          "region": "SG",
+          "lang": "en-SG"
+        }
+      },
+      {
+        "title": "Singtel's quarterly profit tops estimates on Optus, digital services strength",
+        "publisher": "Reuters",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/singtel-posts-21-rise-first-234459872.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "India's Vodafone Idea narrows quarterly loss on bigger per-user revenue",
+        "publisher": "Reuters",
+        "link": {
+          "url": "https://sg.finance.yahoo.com/news/indias-vodafone-idea-narrows-quarterly-134758108.html",
+          "site": "finance",
+          "region": "SG",
+          "lang": "en-SG"
+        }
+      }
+    ]
+  },
+  "curves": {
+    "symbol": "BHARTIARTL",
+    "date": "2026-10-01",
+    "generated_at": "10:30 PM IST",
+    "timeframes": [
+      "09:15",
+      "09:45",
+      "10:30",
+      "11:15",
+      "12:00",
+      "12:45",
+      "13:30",
+      "14:15",
+      "15:00",
+      "15:30"
+    ],
+    "bias": "NEUTRAL",
+    "predicted_curve": [
+      1742.6,
+      1746.09,
+      1739.11,
+      1744.34,
+      1737.37,
+      1746.09,
+      1739.11,
+      1744.34,
+      1740.86,
+      1742.6
+    ],
+    "actual_curve": [
+      1742.6,
+      1750.5,
+      1760.4,
+      1760.7,
+      1762.6,
+      1745.0,
+      1736.5,
+      1735.5,
+      1742.0,
+      1741.1
+    ],
+    "actual_volume": [
+      163804,
+      39915,
+      30468,
+      33834,
+      29892,
+      89533,
+      129288,
+      41298,
+      81044,
+      577950
+    ],
+    "final_pred": 1742.6,
+    "final_actual": 1741.1,
+    "error_pct": 0.09
+  }
+}

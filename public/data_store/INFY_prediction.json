@@ -1,0 +1,97 @@
+{
+  "prediction": {
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for INFY.",
+    "volume_ratio": 10.59,
+    "has_volume_spike": true,
+    "news_feed": [
+      {
+        "title": "Accenture Soars 23% as Record Bookings Dispel AI Demand Fears; Infosys Jumps 8%, IBM Climbs 5%",
+        "publisher": "24/7 Wall St.",
+        "link": {
+          "url": "https://247wallst.com/investing/2026/10/01/accenture-soars-23-as-record-bookings-dispel-ai-demand-fears-infosys-jumps-8-ibm-climbs-5/",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Accenture (ACN): A 50% Rally Into Earnings, and a Street That Cannot Agree on What It Means",
+        "publisher": "Insider Monkey",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/accenture-acn-50-rally-earnings-005828466.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Standard Chartered Predicts Chainlink at $200 and XRP at $28 by 2030. Which Will Get There First?",
+        "publisher": "24/7 Wall St.",
+        "link": {
+          "url": "https://247wallst.com/investing/cryptocurrency/2026/09/27/standard-chartered-predicts-chainlink-at-200-and-xrp-at-28-by-2030-which-will-get-there-first/",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      }
+    ]
+  },
+  "curves": {
+    "symbol": "INFY",
+    "date": "2026-10-01",
+    "generated_at": "10:30 PM IST",
+    "timeframes": [
+      "09:15",
+      "09:45",
+      "10:30",
+      "11:15",
+      "12:00",
+      "12:45",
+      "13:30",
+      "14:15",
+      "15:00",
+      "15:30"
+    ],
+    "bias": "NEUTRAL",
+    "predicted_curve": [
+      1014.5,
+      1016.53,
+      1012.47,
+      1015.51,
+      1011.46,
+      1016.53,
+      1012.47,
+      1015.51,
+      1013.49,
+      1014.5
+    ],
+    "actual_curve": [
+      1014.5,
+      1009.4,
+      1016.7,
+      1016.95,
+      1011.3,
+      1003.5,
+      1003.8,
+      1007.75,
+      1021.5,
+      1035.0
+    ],
+    "actual_volume": [
+      504956,
+      74176,
+      46965,
+      266853,
+      104725,
+      137378,
+      95220,
+      201352,
+      377786,
+      1704773
+    ],
+    "final_pred": 1014.5,
+    "final_actual": 1035.0,
+    "error_pct": 2.02
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "prediction": {
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for SUNPHARMA.",
+    "volume_ratio": 5.49,
+    "has_volume_spike": true,
+    "news_feed": [
+      {
+        "title": "Here's How Trump's Drug Deals Are Likely to Impact Healthcare ETFs",
+        "publisher": "Zacks",
+        "link": {
+          "url": "https://finance.yahoo.com/healthcare/articles/heres-trumps-drug-deals-likely-151500696.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Trump Expands Drug Pricing Deals With 9 Pharma Companies, Bringing Total to 26 \u2014 RFK Jr. Details 'Very, Very Emotional' Conversations With President",
+        "publisher": "Benzinga",
+        "link": {
+          "url": "https://finance.yahoo.com/healthcare/articles/trump-expands-drug-pricing-deals-220007792.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Trump's MFN Push Goes Beyond Big Pharma, Adds 9 Mid-Sized Drugmakers",
+        "publisher": "Zacks",
+        "link": {
+          "url": "https://finance.yahoo.com/healthcare/articles/trumps-mfn-push-goes-beyond-163500680.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      }
+    ]
+  },
+  "curves": {
+    "symbol": "SUNPHARMA",
+    "date": "2026-10-01",
+    "generated_at": "10:30 PM IST",
+    "timeframes": [
+      "09:15",
+      "09:45",
+      "10:30",
+      "11:15",
+      "12:00",
+      "12:45",
+      "13:30",
+      "14:15",
+      "15:00",
+      "15:30"
+    ],
+    "bias": "NEUTRAL",
+    "predicted_curve": [
+      1808.5,
+      1812.12,
+      1804.88,
+      1810.31,
+      1803.07,
+      1812.12,
+      1804.88,
+      1810.31,
+      1806.69,
+      1808.5
+    ],
+    "actual_curve": [
+      1808.5,
+      1815.9,
+      1825.8,
+      1823.1,
+      1807.6,
+      1800.4,
+      1799.7,
+      1796.5,
+      1803.3,
+      1801.0
+    ],
+    "actual_volume": [
+      34627,
+      13477,
+      6387,
+      13099,
+      166205,
+      21216,
+      20631,
+      16539,
+      46347,
+      138010
+    ],
+    "final_pred": 1808.5,
+    "final_actual": 1801.0,
+    "error_pct": 0.41
+  }
+}

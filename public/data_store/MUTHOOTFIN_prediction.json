@@ -1,0 +1,97 @@
+{
+  "prediction": {
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for MUTHOOTFIN.",
+    "volume_ratio": 1.97,
+    "has_volume_spike": true,
+    "news_feed": [
+      {
+        "title": "Muthoot Finance Ltd (BOM:533398) (Q1 2027) Earnings Call Highlights: AUM Surges 43% to ...",
+        "publisher": "GuruFocus.com",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/muthoot-finance-ltd-bom-533398-010148679.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Muthoot Finance Ltd (BOM:533398) Q4 2026 Earnings Call Highlights: Record Growth and Strategic ...",
+        "publisher": "GuruFocus.com",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/muthoot-finance-ltd-bom-533398-230353356.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Indian gold-loan financier Muthoot Finance's profit doubles on strong loan growth",
+        "publisher": "Reuters",
+        "link": {
+          "url": "https://sg.finance.yahoo.com/news/indian-gold-loan-financier-muthoot-123529478.html",
+          "site": "finance",
+          "region": "SG",
+          "lang": "en-SG"
+        }
+      }
+    ]
+  },
+  "curves": {
+    "symbol": "MUTHOOTFIN",
+    "date": "2026-10-01",
+    "generated_at": "10:30 PM IST",
+    "timeframes": [
+      "09:15",
+      "09:45",
+      "10:30",
+      "11:15",
+      "12:00",
+      "12:45",
+      "13:30",
+      "14:15",
+      "15:00",
+      "15:30"
+    ],
+    "bias": "NEUTRAL",
+    "predicted_curve": [
+      2729.7,
+      2735.16,
+      2724.24,
+      2732.43,
+      2721.51,
+      2735.16,
+      2724.24,
+      2732.43,
+      2726.97,
+      2729.7
+    ],
+    "actual_curve": [
+      2729.7,
+      2724.7,
+      2751.0,
+      2744.6,
+      2745.5,
+      2706.9,
+      2703.3,
+      2686.9,
+      2698.5,
+      2697.1
+    ],
+    "actual_volume": [
+      8690,
+      3955,
+      10523,
+      2408,
+      2599,
+      89677,
+      6337,
+      6636,
+      12159,
+      17440
+    ],
+    "final_pred": 2729.7,
+    "final_actual": 2697.1,
+    "error_pct": 1.19
+  }
+}

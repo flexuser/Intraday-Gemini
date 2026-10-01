@@ -1,0 +1,97 @@
+{
+  "prediction": {
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for ICICIBANK.",
+    "volume_ratio": 2.81,
+    "has_volume_spike": true,
+    "news_feed": [
+      {
+        "title": "Apple Pay launches in India with Axis Bank partnership",
+        "publisher": "Quartz",
+        "link": {
+          "url": "https://qz.com/apple-pay-launches-india-axis-bank-093026",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Apple Pay to launch in India next month with Axis Bank- report",
+        "publisher": "Electronic Payments",
+        "link": {
+          "url": "https://www.electronicpaymentsinternational.com/news/apple-pay-to-launch-in-india-next-month-with-axis-bank-report/",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "India and Russia Are Finding Another Way Around the Dollar",
+        "publisher": "Moby",
+        "link": {
+          "url": "https://app.moby.co/home/news/news-india-and-russia-are-finding-another-way-around-the-dollar?utm_source=yahoo_finance&utm_medium=rss",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      }
+    ]
+  },
+  "curves": {
+    "symbol": "ICICIBANK",
+    "date": "2026-10-01",
+    "generated_at": "10:30 PM IST",
+    "timeframes": [
+      "09:15",
+      "09:45",
+      "10:30",
+      "11:15",
+      "12:00",
+      "12:45",
+      "13:30",
+      "14:15",
+      "15:00",
+      "15:30"
+    ],
+    "bias": "NEUTRAL",
+    "predicted_curve": [
+      1321.6,
+      1324.24,
+      1318.96,
+      1322.92,
+      1317.64,
+      1324.24,
+      1318.96,
+      1322.92,
+      1320.28,
+      1321.6
+    ],
+    "actual_curve": [
+      1321.6,
+      1324.0,
+      1321.3,
+      1322.0,
+      1326.0,
+      1317.6,
+      1314.0,
+      1310.3,
+      1313.4,
+      1310.6
+    ],
+    "actual_volume": [
+      332875,
+      265151,
+      88817,
+      60342,
+      62715,
+      253127,
+      136922,
+      104758,
+      224561,
+      442910
+    ],
+    "final_pred": 1321.6,
+    "final_actual": 1310.6,
+    "error_pct": 0.83
+  }
+}

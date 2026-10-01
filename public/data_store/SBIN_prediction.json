@@ -1,0 +1,97 @@
+{
+  "prediction": {
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for SBIN.",
+    "volume_ratio": 2.76,
+    "has_volume_spike": true,
+    "news_feed": [
+      {
+        "title": "SBI and Kyobo Test Japan-Korea Stablecoin Settlement Model",
+        "publisher": "Coinspeaker",
+        "link": {
+          "url": "https://www.coinspeaker.com/ripple-news-japan-korea-stablecoin-test/",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Ripple XRP News: Circle Arc Launch Puts SBI\u2019s Dual-Rail Strategy in Focus",
+        "publisher": "99bitcoins",
+        "link": {
+          "url": "https://99bitcoins.com/news/altcoins/circle-arc-sbi-settlement-ripple-xrp/",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "India\u2019s National Stock Exchange Seeks $46 Billion Valuation in IPO",
+        "publisher": "The Wall Street Journal",
+        "link": {
+          "url": "https://www.wsj.com/business/national-stock-exchange-of-india-seeks-2-36-billion-in-pared-back-ipo-19cf72eb?siteid=yhoof2&yptr=yahoo",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      }
+    ]
+  },
+  "curves": {
+    "symbol": "SBIN",
+    "date": "2026-10-01",
+    "generated_at": "10:30 PM IST",
+    "timeframes": [
+      "09:15",
+      "09:45",
+      "10:30",
+      "11:15",
+      "12:00",
+      "12:45",
+      "13:30",
+      "14:15",
+      "15:00",
+      "15:30"
+    ],
+    "bias": "NEUTRAL",
+    "predicted_curve": [
+      958.15,
+      960.07,
+      956.23,
+      959.11,
+      955.28,
+      960.07,
+      956.23,
+      959.11,
+      957.19,
+      958.15
+    ],
+    "actual_curve": [
+      958.15,
+      963.0,
+      963.55,
+      962.3,
+      961.8,
+      953.5,
+      952.45,
+      949.8,
+      954.35,
+      954.1
+    ],
+    "actual_volume": [
+      192796,
+      64772,
+      54238,
+      33855,
+      84045,
+      141166,
+      69555,
+      81760,
+      179474,
+      410749
+    ],
+    "final_pred": 958.15,
+    "final_actual": 954.1,
+    "error_pct": 0.42
+  }
+}
