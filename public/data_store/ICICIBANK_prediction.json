@@ -1,8 +1,8 @@
 {
   "prediction": {
     "bias": "BEARISH",
-    "reasoning": "Intraday outlook based on live volume (0.32x) and order flow evaluation.",
-    "volume_ratio": 0.32,
+    "reasoning": "Intraday outlook based on live volume (0.0x) and order flow evaluation.",
+    "volume_ratio": 0.0,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "ICICIBANK",
     "date": "2026-10-01",
-    "generated_at": "01:35 PM IST",
+    "generated_at": "01:40 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -55,43 +55,43 @@
     ],
     "bias": "BEARISH",
     "predicted_curve": [
-      1325.6,
-      1330.9,
-      1322.95,
-      1312.34,
-      1305.72,
-      1301.74,
-      1299.09,
-      1296.44,
-      1293.79,
-      1288.48
+      1321.6,
+      1326.89,
+      1318.96,
+      1308.38,
+      1301.78,
+      1297.81,
+      1295.17,
+      1292.52,
+      1289.88,
+      1284.6
     ],
     "actual_curve": [
-      1325.6,
-      1323.4,
-      1324.6,
-      1318.5,
-      1322.0,
+      1321.6,
+      1324.0,
       1321.3,
-      1320.9,
+      1322.0,
+      1326.0,
+      1317.6,
+      1314.0,
       null,
       null,
       null
     ],
     "actual_volume": [
-      1185762,
-      312932,
-      817832,
-      253196,
-      218006,
-      188834,
-      238957,
+      332875,
+      265151,
+      88817,
+      60342,
+      62715,
+      253127,
+      136922,
       null,
       null,
       null
     ],
-    "final_pred": 1288.48,
-    "final_actual": 1320.9,
-    "error_pct": 2.45
+    "final_pred": 1284.6,
+    "final_actual": 1314.0,
+    "error_pct": 2.22
   }
 }

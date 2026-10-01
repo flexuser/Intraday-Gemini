@@ -1,8 +1,8 @@
 {
   "prediction": {
     "bias": "BEARISH",
-    "reasoning": "Intraday outlook based on live volume (0.25x) and order flow evaluation.",
-    "volume_ratio": 0.25,
+    "reasoning": "Intraday outlook based on live volume (0.0x) and order flow evaluation.",
+    "volume_ratio": 0.0,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "MUTHOOTFIN",
     "date": "2026-10-01",
-    "generated_at": "01:35 PM IST",
+    "generated_at": "01:40 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -55,43 +55,43 @@
     ],
     "bias": "BEARISH",
     "predicted_curve": [
-      2728.5,
-      2739.41,
-      2723.04,
-      2701.22,
-      2687.57,
-      2679.39,
-      2673.93,
-      2668.47,
-      2663.02,
-      2652.1
+      2729.7,
+      2740.62,
+      2724.24,
+      2702.4,
+      2688.75,
+      2680.57,
+      2675.11,
+      2669.65,
+      2664.19,
+      2653.27
     ],
     "actual_curve": [
-      2728.5,
-      2728.9,
-      2730.2,
-      2737.4,
-      2740.5,
-      2756.7,
-      2758.0,
+      2729.7,
+      2724.7,
+      2751.0,
+      2744.6,
+      2745.5,
+      2706.9,
+      2703.3,
       null,
       null,
       null
     ],
     "actual_volume": [
-      27101,
-      11538,
-      10889,
-      17514,
-      8774,
-      34287,
-      13195,
+      8690,
+      3955,
+      10523,
+      2408,
+      2599,
+      89677,
+      6337,
       null,
       null,
       null
     ],
-    "final_pred": 2652.1,
-    "final_actual": 2758.0,
-    "error_pct": 3.88
+    "final_pred": 2653.27,
+    "final_actual": 2703.3,
+    "error_pct": 1.83
   }
 }

@@ -1,8 +1,8 @@
 {
   "prediction": {
     "bias": "BULLISH",
-    "reasoning": "Intraday outlook based on live volume (0.21x) and order flow evaluation.",
-    "volume_ratio": 0.21,
+    "reasoning": "Intraday outlook based on live volume (0.0x) and order flow evaluation.",
+    "volume_ratio": 0.0,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "TCS",
     "date": "2026-10-01",
-    "generated_at": "01:35 PM IST",
+    "generated_at": "01:40 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -55,43 +55,43 @@
     ],
     "bias": "BULLISH",
     "predicted_curve": [
-      2072.1,
-      2063.81,
-      2057.6,
-      2067.96,
-      2080.39,
-      2088.68,
-      2094.89,
-      2101.11,
-      2105.25,
-      2113.54
+      2078.4,
+      2070.09,
+      2063.85,
+      2074.24,
+      2086.71,
+      2095.03,
+      2101.26,
+      2107.5,
+      2111.65,
+      2119.97
     ],
     "actual_curve": [
-      2072.1,
-      2067.8,
-      2070.5,
-      2091.0,
-      2083.5,
-      2083.6,
-      2084.4,
+      2078.4,
+      2069.0,
+      2085.9,
+      2077.1,
+      2067.2,
+      2054.1,
+      2053.9,
       null,
       null,
       null
     ],
     "actual_volume": [
-      256735,
-      108840,
-      106929,
-      206520,
-      91905,
-      79912,
-      69996,
+      114502,
+      35304,
+      32367,
+      104893,
+      23986,
+      36333,
+      26101,
       null,
       null,
       null
     ],
-    "final_pred": 2113.54,
-    "final_actual": 2084.4,
-    "error_pct": 1.41
+    "final_pred": 2119.97,
+    "final_actual": 2053.9,
+    "error_pct": 3.18
   }
 }
