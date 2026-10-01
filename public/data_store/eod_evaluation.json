@@ -1,5 +1,29 @@
 [
   {
+    "symbol": "HDFCBANK",
+    "bias": "NEUTRAL",
+    "final_pred": 717.5,
+    "final_actual": 721.3,
+    "error_pct": 0.53,
+    "verdict": "SUCCESS"
+  },
+  {
+    "symbol": "TMPV",
+    "bias": "NEUTRAL",
+    "final_pred": 280.45,
+    "final_actual": 279.0,
+    "error_pct": 0.52,
+    "verdict": "SUCCESS"
+  },
+  {
+    "symbol": "INFY",
+    "bias": "NEUTRAL",
+    "final_pred": 1014.5,
+    "final_actual": 1025.3,
+    "error_pct": 1.06,
+    "verdict": "PARTIAL"
+  },
+  {
     "symbol": "MUTHOOTFIN",
     "bias": "NEUTRAL",
     "final_pred": 2729.7,
@@ -16,34 +40,10 @@
     "verdict": "PARTIAL"
   },
   {
-    "symbol": "INFY",
+    "symbol": "SBIN",
     "bias": "NEUTRAL",
-    "final_pred": 1014.5,
-    "final_actual": 1025.3,
-    "error_pct": 1.06,
-    "verdict": "PARTIAL"
-  },
-  {
-    "symbol": "TMPV",
-    "bias": "NEUTRAL",
-    "final_pred": 280.45,
-    "final_actual": 279.0,
-    "error_pct": 0.52,
-    "verdict": "SUCCESS"
-  },
-  {
-    "symbol": "HDFCBANK",
-    "bias": "NEUTRAL",
-    "final_pred": 717.5,
-    "final_actual": 721.3,
-    "error_pct": 0.53,
-    "verdict": "SUCCESS"
-  },
-  {
-    "symbol": "BHARTIARTL",
-    "bias": "NEUTRAL",
-    "final_pred": 1742.6,
-    "final_actual": 1745.7,
+    "final_pred": 958.15,
+    "final_actual": 956.4,
     "error_pct": 0.18,
     "verdict": "SUCCESS"
   },
@@ -56,14 +56,6 @@
     "verdict": "SUCCESS"
   },
   {
-    "symbol": "LT",
-    "bias": "NEUTRAL",
-    "final_pred": 3717.1,
-    "final_actual": 3694.1,
-    "error_pct": 0.62,
-    "verdict": "SUCCESS"
-  },
-  {
     "symbol": "ICICIBANK",
     "bias": "NEUTRAL",
     "final_pred": 1321.6,
@@ -72,10 +64,18 @@
     "verdict": "SUCCESS"
   },
   {
-    "symbol": "SBIN",
+    "symbol": "LT",
     "bias": "NEUTRAL",
-    "final_pred": 958.15,
-    "final_actual": 956.4,
+    "final_pred": 3717.1,
+    "final_actual": 3694.1,
+    "error_pct": 0.62,
+    "verdict": "SUCCESS"
+  },
+  {
+    "symbol": "BHARTIARTL",
+    "bias": "NEUTRAL",
+    "final_pred": 1742.6,
+    "final_actual": 1745.7,
     "error_pct": 0.18,
     "verdict": "SUCCESS"
   },

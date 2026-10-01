@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for LT.",
-    "volume_ratio": 3.57,
+    "volume_ratio": 3.54,
     "has_volume_spike": true,
     "news_feed": [
       {
@@ -50,7 +50,7 @@
   "curves": {
     "symbol": "LT",
     "date": "2026-10-01",
-    "generated_at": "03:30 PM IST",
+    "generated_at": "03:39 PM IST",
     "timeframes": [
       "09:15",
       "09:45",

@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for SUNPHARMA.",
-    "volume_ratio": 10.12,
+    "volume_ratio": 9.97,
     "has_volume_spike": true,
     "news_feed": [
       {
@@ -50,7 +50,7 @@
   "curves": {
     "symbol": "SUNPHARMA",
     "date": "2026-10-01",
-    "generated_at": "03:30 PM IST",
+    "generated_at": "03:39 PM IST",
     "timeframes": [
       "09:15",
       "09:45",

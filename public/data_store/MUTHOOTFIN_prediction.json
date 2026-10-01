@@ -37,7 +37,7 @@
       }
     ],
     "quant_signals": {
-      "vwap": 2757.17,
+      "vwap": 2757.24,
       "rsi": 46.22,
       "atr": 7.34,
       "bb_upper": 2709.28,
@@ -50,7 +50,7 @@
   "curves": {
     "symbol": "MUTHOOTFIN",
     "date": "2026-10-01",
-    "generated_at": "03:30 PM IST",
+    "generated_at": "03:39 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -89,7 +89,7 @@
       2698.0
     ],
     "actual_volume": [
-      8690,
+      0,
       3955,
       10523,
       2408,

@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for TMPV.",
-    "volume_ratio": 7.68,
+    "volume_ratio": 7.65,
     "has_volume_spike": true,
     "news_feed": [
       {
@@ -37,20 +37,20 @@
       }
     ],
     "quant_signals": {
-      "vwap": 283.36,
+      "vwap": 283.37,
       "rsi": 69.27,
       "atr": 0.87,
       "bb_upper": 278.81,
       "bb_lower": 272.7,
       "pcr": 1.0,
       "implied_volatility": 18.5,
-      "past_verdict": "PARTIAL"
+      "past_verdict": "SUCCESS"
     }
   },
   "curves": {
     "symbol": "TMPV",
     "date": "2026-10-01",
-    "generated_at": "03:30 PM IST",
+    "generated_at": "03:39 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -89,7 +89,7 @@
       279.0
     ],
     "actual_volume": [
-      213935,
+      0,
       103023,
       223673,
       218201,

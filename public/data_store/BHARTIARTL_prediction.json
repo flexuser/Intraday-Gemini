@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for BHARTIARTL.",
-    "volume_ratio": 2.51,
+    "volume_ratio": 2.49,
     "has_volume_spike": true,
     "news_feed": [
       {
@@ -37,7 +37,7 @@
       }
     ],
     "quant_signals": {
-      "vwap": 1770.64,
+      "vwap": 1770.8,
       "rsi": 61.25,
       "atr": 2.94,
       "bb_upper": 1745.82,
@@ -50,7 +50,7 @@
   "curves": {
     "symbol": "BHARTIARTL",
     "date": "2026-10-01",
-    "generated_at": "03:30 PM IST",
+    "generated_at": "03:39 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -89,7 +89,7 @@
       1745.7
     ],
     "actual_volume": [
-      163804,
+      0,
       39915,
       30468,
       33834,
