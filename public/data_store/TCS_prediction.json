@@ -9,7 +9,7 @@
   "curves": {
     "symbol": "TCS",
     "date": "2026-10-01",
-    "generated_at": "09:57 AM IST",
+    "generated_at": "10:04 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -24,8 +24,8 @@
     ],
     "actual_curve": [
       2072.1,
-      2067.4,
-      null,
+      2070.5,
+      2078.9,
       null,
       null,
       null,
@@ -47,9 +47,9 @@
       2076.24
     ],
     "bias": "NEUTRAL",
-    "final_actual": 2067.4,
+    "final_actual": 2078.9,
     "final_pred": 2076.24,
-    "error_pct": 0.43,
+    "error_pct": 0.13,
     "verdict": "SUCCESS"
   }
 }

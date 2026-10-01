@@ -9,7 +9,7 @@
   "curves": {
     "symbol": "LT",
     "date": "2026-10-01",
-    "generated_at": "09:57 AM IST",
+    "generated_at": "10:04 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -24,8 +24,8 @@
     ],
     "actual_curve": [
       3708.2,
-      3718.7,
-      null,
+      3723.2,
+      3731.0,
       null,
       null,
       null,
@@ -47,9 +47,9 @@
       3715.62
     ],
     "bias": "NEUTRAL",
-    "final_actual": 3718.7,
+    "final_actual": 3731.0,
     "final_pred": 3715.62,
-    "error_pct": 0.08,
+    "error_pct": 0.41,
     "verdict": "SUCCESS"
   }
 }

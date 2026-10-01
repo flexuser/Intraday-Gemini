@@ -129,6 +129,7 @@
 
   <script>
     const WATCHLIST = ["MUTHOOTFIN", "RELIANCE", "TMPV", "INFY", "HDFCBANK", "ICICIBANK", "TCS", "SBIN", "BHARTIARTL", "LT", "SUNPHARMA"];
+    const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/flexuser/Intraday-Gemini/main/public/data_store";
     let activeSymbol = "MUTHOOTFIN";
     let chartInstance = null;
 
@@ -161,8 +162,8 @@
       renderWatchlistPills();
       document.getElementById("active-symbol").innerText = symbol;
 
-      // Resilient fetch strategy: Try local deployment directory first
       const urlsToTry = [
+        `${GITHUB_RAW_BASE}/${symbol}_prediction.json?v=${Date.now()}`,
         `./data_store/${symbol}_prediction.json?v=${Date.now()}`
       ];
 
@@ -227,9 +228,10 @@
 
       document.getElementById("ai-rationale").innerText = prediction?.reasoning || "Corporate news evaluation complete.";
       
-      document.getElementById("val-base").innerText = curves.actual_curve ? curves.actual_curve[0] : "--";
+      const validActuals = curves.actual_curve ? curves.actual_curve.filter(v => v !== null) : [];
+      document.getElementById("val-base").innerText = validActuals.length > 0 ? validActuals[0] : "--";
       document.getElementById("val-target").innerText = curves.final_pred ?? "--";
-      document.getElementById("val-actual").innerText = curves.final_actual ?? "--";
+      document.getElementById("val-actual").innerText = validActuals.length > 0 ? validActuals[validActuals.length - 1] : "--";
       document.getElementById("val-error").innerText = curves.error_pct !== undefined ? `${curves.error_pct}%` : "--";
 
       const ctx = document.getElementById('predictionChart').getContext('2d');
@@ -246,7 +248,8 @@
               borderColor: '#3b82f6',
               borderDash: [5, 5],
               fill: false,
-              tension: 0.2
+              tension: 0.2,
+              spanGaps: false
             },
             {
               label: 'Actual Market Curve',
@@ -254,7 +257,8 @@
               borderColor: '#10b981',
               borderWidth: 2,
               fill: false,
-              tension: 0.2
+              tension: 0.2,
+              spanGaps: false
             }
           ]
         },
@@ -274,7 +278,7 @@
       const tbody = document.getElementById("audit-table-body");
       tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-500">Loading evaluation matrix...</td></tr>`;
       try {
-        const res = await fetch(`./data_store/eod_evaluation.json?v=${Date.now()}`, { cache: 'no-store' });
+        const res = await fetch(`${GITHUB_RAW_BASE}/eod_evaluation.json?v=${Date.now()}`, { cache: 'no-store' });
         const data = await res.json();
         document.getElementById("audit-sync-time").innerText = `Last Refreshed: ${new Date().toLocaleTimeString('en-IN')}`;
         tbody.innerHTML = data.map(item => `

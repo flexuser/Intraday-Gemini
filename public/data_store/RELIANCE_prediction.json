@@ -9,7 +9,7 @@
   "curves": {
     "symbol": "RELIANCE",
     "date": "2026-10-01",
-    "generated_at": "09:57 AM IST",
+    "generated_at": "10:04 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -24,8 +24,8 @@
     ],
     "actual_curve": [
       1181.2,
-      1181.8,
-      null,
+      1182.0,
+      1182.5,
       null,
       null,
       null,
@@ -47,9 +47,9 @@
       1183.56
     ],
     "bias": "NEUTRAL",
-    "final_actual": 1181.8,
+    "final_actual": 1182.5,
     "final_pred": 1183.56,
-    "error_pct": 0.15,
+    "error_pct": 0.09,
     "verdict": "SUCCESS"
   }
 }

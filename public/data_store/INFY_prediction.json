@@ -9,7 +9,7 @@
   "curves": {
     "symbol": "INFY",
     "date": "2026-10-01",
-    "generated_at": "09:57 AM IST",
+    "generated_at": "10:04 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -24,8 +24,8 @@
     ],
     "actual_curve": [
       1009.7,
-      1010.5,
-      null,
+      1010.45,
+      1013.8,
       null,
       null,
       null,
@@ -47,9 +47,9 @@
       1011.72
     ],
     "bias": "NEUTRAL",
-    "final_actual": 1010.5,
+    "final_actual": 1013.8,
     "final_pred": 1011.72,
-    "error_pct": 0.12,
+    "error_pct": 0.21,
     "verdict": "SUCCESS"
   }
 }

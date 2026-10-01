@@ -2,7 +2,7 @@
   {
     "symbol": "MUTHOOTFIN",
     "date": "2026-10-01",
-    "generated_at": "09:57 AM IST",
+    "generated_at": "10:04 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -17,8 +17,8 @@
     ],
     "actual_curve": [
       2728.5,
-      2728.0,
-      null,
+      2730.2,
+      2742.0,
       null,
       null,
       null,
@@ -40,15 +40,15 @@
       2733.96
     ],
     "bias": "NEUTRAL",
-    "final_actual": 2728.0,
+    "final_actual": 2742.0,
     "final_pred": 2733.96,
-    "error_pct": 0.22,
+    "error_pct": 0.29,
     "verdict": "SUCCESS"
   },
   {
     "symbol": "RELIANCE",
     "date": "2026-10-01",
-    "generated_at": "09:57 AM IST",
+    "generated_at": "10:04 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -63,8 +63,8 @@
     ],
     "actual_curve": [
       1181.2,
-      1181.8,
-      null,
+      1182.0,
+      1182.5,
       null,
       null,
       null,
@@ -86,15 +86,15 @@
       1183.56
     ],
     "bias": "NEUTRAL",
-    "final_actual": 1181.8,
+    "final_actual": 1182.5,
     "final_pred": 1183.56,
-    "error_pct": 0.15,
+    "error_pct": 0.09,
     "verdict": "SUCCESS"
   },
   {
     "symbol": "TMPV",
     "date": "2026-10-01",
-    "generated_at": "09:57 AM IST",
+    "generated_at": "10:04 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -109,8 +109,8 @@
     ],
     "actual_curve": [
       279.15,
-      278.9,
-      null,
+      279.7,
+      279.8,
       null,
       null,
       null,
@@ -132,15 +132,15 @@
       279.71
     ],
     "bias": "NEUTRAL",
-    "final_actual": 278.9,
+    "final_actual": 279.8,
     "final_pred": 279.71,
-    "error_pct": 0.29,
+    "error_pct": 0.03,
     "verdict": "SUCCESS"
   },
   {
     "symbol": "INFY",
     "date": "2026-10-01",
-    "generated_at": "09:57 AM IST",
+    "generated_at": "10:04 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -155,8 +155,8 @@
     ],
     "actual_curve": [
       1009.7,
-      1010.5,
-      null,
+      1010.45,
+      1013.8,
       null,
       null,
       null,
@@ -178,15 +178,15 @@
       1011.72
     ],
     "bias": "NEUTRAL",
-    "final_actual": 1010.5,
+    "final_actual": 1013.8,
     "final_pred": 1011.72,
-    "error_pct": 0.12,
+    "error_pct": 0.21,
     "verdict": "SUCCESS"
   },
   {
     "symbol": "HDFCBANK",
     "date": "2026-10-01",
-    "generated_at": "09:57 AM IST",
+    "generated_at": "10:04 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -201,8 +201,8 @@
     ],
     "actual_curve": [
       714.35,
-      715.75,
-      null,
+      715.5,
+      716.4,
       null,
       null,
       null,
@@ -224,15 +224,15 @@
       715.78
     ],
     "bias": "NEUTRAL",
-    "final_actual": 715.75,
+    "final_actual": 716.4,
     "final_pred": 715.78,
-    "error_pct": 0.0,
+    "error_pct": 0.09,
     "verdict": "SUCCESS"
   },
   {
     "symbol": "ICICIBANK",
     "date": "2026-10-01",
-    "generated_at": "09:57 AM IST",
+    "generated_at": "10:04 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -248,7 +248,7 @@
     "actual_curve": [
       1325.6,
       1324.6,
-      null,
+      1322.8,
       null,
       null,
       null,
@@ -270,15 +270,15 @@
       1328.25
     ],
     "bias": "NEUTRAL",
-    "final_actual": 1324.6,
+    "final_actual": 1322.8,
     "final_pred": 1328.25,
-    "error_pct": 0.28,
+    "error_pct": 0.41,
     "verdict": "SUCCESS"
   },
   {
     "symbol": "TCS",
     "date": "2026-10-01",
-    "generated_at": "09:57 AM IST",
+    "generated_at": "10:04 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -293,8 +293,8 @@
     ],
     "actual_curve": [
       2072.1,
-      2067.4,
-      null,
+      2070.5,
+      2078.9,
       null,
       null,
       null,
@@ -316,15 +316,15 @@
       2076.24
     ],
     "bias": "NEUTRAL",
-    "final_actual": 2067.4,
+    "final_actual": 2078.9,
     "final_pred": 2076.24,
-    "error_pct": 0.43,
+    "error_pct": 0.13,
     "verdict": "SUCCESS"
   },
   {
     "symbol": "SBIN",
     "date": "2026-10-01",
-    "generated_at": "09:57 AM IST",
+    "generated_at": "10:04 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -339,8 +339,8 @@
     ],
     "actual_curve": [
       959.95,
-      963.0,
-      null,
+      963.9,
+      964.0,
       null,
       null,
       null,
@@ -362,15 +362,15 @@
       961.87
     ],
     "bias": "NEUTRAL",
-    "final_actual": 963.0,
+    "final_actual": 964.0,
     "final_pred": 961.87,
-    "error_pct": 0.12,
+    "error_pct": 0.22,
     "verdict": "SUCCESS"
   },
   {
     "symbol": "BHARTIARTL",
     "date": "2026-10-01",
-    "generated_at": "09:57 AM IST",
+    "generated_at": "10:04 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -385,8 +385,8 @@
     ],
     "actual_curve": [
       1750.2,
-      1755.5,
-      null,
+      1757.0,
+      1760.9,
       null,
       null,
       null,
@@ -408,15 +408,15 @@
       1753.7
     ],
     "bias": "NEUTRAL",
-    "final_actual": 1755.5,
+    "final_actual": 1760.9,
     "final_pred": 1753.7,
-    "error_pct": 0.1,
+    "error_pct": 0.41,
     "verdict": "SUCCESS"
   },
   {
     "symbol": "LT",
     "date": "2026-10-01",
-    "generated_at": "09:57 AM IST",
+    "generated_at": "10:04 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -431,8 +431,8 @@
     ],
     "actual_curve": [
       3708.2,
-      3718.7,
-      null,
+      3723.2,
+      3731.0,
       null,
       null,
       null,
@@ -454,15 +454,15 @@
       3715.62
     ],
     "bias": "NEUTRAL",
-    "final_actual": 3718.7,
+    "final_actual": 3731.0,
     "final_pred": 3715.62,
-    "error_pct": 0.08,
+    "error_pct": 0.41,
     "verdict": "SUCCESS"
   },
   {
     "symbol": "SUNPHARMA",
     "date": "2026-10-01",
-    "generated_at": "09:57 AM IST",
+    "generated_at": "10:04 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -477,8 +477,8 @@
     ],
     "actual_curve": [
       1810.1,
-      1817.6,
-      null,
+      1817.4,
+      1820.0,
       null,
       null,
       null,
@@ -500,9 +500,9 @@
       1813.72
     ],
     "bias": "NEUTRAL",
-    "final_actual": 1817.6,
+    "final_actual": 1820.0,
     "final_pred": 1813.72,
-    "error_pct": 0.21,
+    "error_pct": 0.35,
     "verdict": "SUCCESS"
   }
 ]

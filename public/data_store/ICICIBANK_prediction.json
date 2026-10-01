@@ -9,7 +9,7 @@
   "curves": {
     "symbol": "ICICIBANK",
     "date": "2026-10-01",
-    "generated_at": "09:57 AM IST",
+    "generated_at": "10:04 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -25,7 +25,7 @@
     "actual_curve": [
       1325.6,
       1324.6,
-      null,
+      1322.8,
       null,
       null,
       null,
@@ -47,9 +47,9 @@
       1328.25
     ],
     "bias": "NEUTRAL",
-    "final_actual": 1324.6,
+    "final_actual": 1322.8,
     "final_pred": 1328.25,
-    "error_pct": 0.28,
+    "error_pct": 0.41,
     "verdict": "SUCCESS"
   }
 }
