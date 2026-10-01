@@ -9,7 +9,7 @@
   "curves": {
     "symbol": "HDFCBANK",
     "date": "2026-10-01",
-    "generated_at": "09:39 AM IST",
+    "generated_at": "09:46 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -32,7 +32,7 @@
       714.05,
       708.7,
       714.35,
-      714.3
+      714.9
     ],
     "predicted_curve": [
       717.0,
@@ -47,9 +47,9 @@
       717.0
     ],
     "bias": "NEUTRAL",
-    "final_actual": 714.3,
+    "final_actual": 714.9,
     "final_pred": 717.0,
-    "error_pct": 0.38,
+    "error_pct": 0.29,
     "verdict": "SUCCESS"
   }
 }

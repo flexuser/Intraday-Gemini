@@ -9,7 +9,7 @@
   "curves": {
     "symbol": "SBIN",
     "date": "2026-10-01",
-    "generated_at": "09:39 AM IST",
+    "generated_at": "09:46 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -32,7 +32,7 @@
       962.7,
       959.5,
       959.95,
-      963.7
+      963.4
     ],
     "predicted_curve": [
       968.5,
@@ -47,9 +47,9 @@
       968.5
     ],
     "bias": "NEUTRAL",
-    "final_actual": 963.7,
+    "final_actual": 963.4,
     "final_pred": 968.5,
-    "error_pct": 0.5,
+    "error_pct": 0.53,
     "verdict": "SUCCESS"
   }
 }

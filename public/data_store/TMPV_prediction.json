@@ -9,7 +9,7 @@
   "curves": {
     "symbol": "TMPV",
     "date": "2026-10-01",
-    "generated_at": "09:39 AM IST",
+    "generated_at": "09:46 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -32,7 +32,7 @@
       282.9,
       283.5,
       279.15,
-      280.0
+      279.3
     ],
     "predicted_curve": [
       283.1,
@@ -47,9 +47,9 @@
       283.1
     ],
     "bias": "NEUTRAL",
-    "final_actual": 280.0,
+    "final_actual": 279.3,
     "final_pred": 283.1,
-    "error_pct": 1.11,
+    "error_pct": 1.36,
     "verdict": "SUCCESS"
   }
 }

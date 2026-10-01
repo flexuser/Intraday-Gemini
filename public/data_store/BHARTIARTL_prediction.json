@@ -9,7 +9,7 @@
   "curves": {
     "symbol": "BHARTIARTL",
     "date": "2026-10-01",
-    "generated_at": "09:39 AM IST",
+    "generated_at": "09:46 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -32,7 +32,7 @@
       1761.4,
       1757.0,
       1750.2,
-      1752.8
+      1752.0
     ],
     "predicted_curve": [
       1766.4,
@@ -47,9 +47,9 @@
       1766.4
     ],
     "bias": "NEUTRAL",
-    "final_actual": 1752.8,
+    "final_actual": 1752.0,
     "final_pred": 1766.4,
-    "error_pct": 0.78,
+    "error_pct": 0.82,
     "verdict": "SUCCESS"
   }
 }
