@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for HDFCBANK.",
-    "volume_ratio": 0.0,
+    "volume_ratio": 0.26,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -10,6 +10,16 @@
         "publisher": "Quartz",
         "link": {
           "url": "https://qz.com/apple-pay-launches-india-axis-bank-093026",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Asian Equities Traded in the US as American Depositary Receipts Rise in Friday Trading; Down for Week",
+        "publisher": "MT Newswires",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/world-indices/articles/asian-equities-traded-us-american-144123090.html",
           "site": "finance",
           "region": "US",
           "lang": "en-US"
@@ -24,23 +34,13 @@
           "region": "US",
           "lang": "en-US"
         }
-      },
-      {
-        "title": "Microsoft Drops as Three-Zone Hyderabad Region Goes Live",
-        "publisher": "GuruFocus.com",
-        "link": {
-          "url": "https://finance.yahoo.com/technology/ai/articles/microsoft-drops-three-zone-hyderabad-155029074.html",
-          "site": "finance",
-          "region": "US",
-          "lang": "en-US"
-        }
       }
     ]
   },
   "curves": {
     "symbol": "HDFCBANK",
     "date": "2026-10-01",
-    "generated_at": "02:10 PM IST",
+    "generated_at": "02:15 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -74,7 +74,7 @@
       719.25,
       716.15,
       717.9,
-      null,
+      713.7,
       null,
       null
     ],
@@ -86,12 +86,12 @@
       260990,
       633505,
       579657,
-      null,
+      104733,
       null,
       null
     ],
     "final_pred": 717.5,
-    "final_actual": 717.9,
-    "error_pct": 0.06
+    "final_actual": 713.7,
+    "error_pct": 0.53
   }
 }
