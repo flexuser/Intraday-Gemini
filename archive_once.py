@@ -8,6 +8,7 @@ import requests
 import numpy as np
 import pandas as pd
 import yfinance as yf
+from scipy.interpolate import PchipInterpolator
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 try:
@@ -50,7 +51,7 @@ def get_ist_now():
     return datetime.datetime.now(ist)
 
 def extract_series(df, col_name):
-    """Safely extracts a 1D Pandas Series from yfinance single/multi-index DataFrames."""
+    """Safely extracts a 1D Pandas Series from yfinance DataFrames."""
     if df is None or df.empty or col_name not in df:
         return None
     data = df[col_name]
@@ -59,14 +60,10 @@ def extract_series(df, col_name):
     return data
 
 def calculate_technical_indicators(df_5m: pd.DataFrame) -> dict:
-    """Calculates VWAP, 14-period RSI, ATR (14), and Bollinger Bands from intraday DataFrame."""
+    """Calculates VWAP, RSI (14), ATR (14), and Bollinger Bands."""
     default_res = {
-        "vwap": None,
-        "rsi": 50.0,
-        "atr": None,
-        "bb_upper": None,
-        "bb_lower": None,
-        "vwap_signal": "NEUTRAL"
+        "vwap": None, "rsi": 50.0, "atr": None,
+        "bb_upper": None, "bb_lower": None, "vwap_signal": "NEUTRAL"
     }
     if df_5m is None or df_5m.empty or len(df_5m) < 3:
         return default_res
@@ -80,7 +77,6 @@ def calculate_technical_indicators(df_5m: pd.DataFrame) -> dict:
         return default_res
 
     try:
-        # 1. VWAP Calculation
         typical_price = (high + low + close) / 3.0
         valid_vol = volume.replace(0, np.nan).fillna(1.0)
         cum_tp_vol = (typical_price * valid_vol).cumsum()
@@ -89,9 +85,8 @@ def calculate_technical_indicators(df_5m: pd.DataFrame) -> dict:
         latest_vwap = round(float(vwap_series.iloc[-1]), 2)
         latest_close = float(close.iloc[-1])
 
-        vwap_signal = "ABOVE_VWAP (BULLISH)" if latest_close >= latest_vwap else "BELOW_VWAP (BEARISH)"
+        vwap_signal = "ABOVE_VWAP" if latest_close >= latest_vwap else "BELOW_VWAP"
 
-        # 2. RSI (14) Calculation
         if len(close) >= 14:
             delta = close.diff()
             gain = delta.clip(lower=0)
@@ -104,14 +99,12 @@ def calculate_technical_indicators(df_5m: pd.DataFrame) -> dict:
         else:
             latest_rsi = 50.0
 
-        # 3. ATR (14) Calculation
         tr1 = high - low
         tr2 = (high - close.shift(1)).abs()
         tr3 = (low - close.shift(1)).abs()
         tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
         latest_atr = round(float(tr.rolling(window=min(14, len(tr)), min_periods=1).mean().iloc[-1]), 2)
 
-        # 4. Bollinger Bands (20, 2)
         window = min(20, len(close))
         sma = close.rolling(window=window, min_periods=1).mean()
         std = close.rolling(window=window, min_periods=1).std().fillna(0)
@@ -131,11 +124,10 @@ def calculate_technical_indicators(df_5m: pd.DataFrame) -> dict:
         return default_res
 
 def fetch_nse_option_chain_signals(symbol: str) -> dict:
-    """Fetches real-time Put-Call Ratio (PCR) and ATM Implied Volatility directly from NSE API."""
+    """Fetches real-time PCR and ATM Implied Volatility directly from NSE API."""
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
         "Accept-Language": "en-US,en;q=0.9",
-        "Accept-Encoding": "gzip, deflate, br",
         "Referer": "https://www.nseindia.com/option-chain"
     }
     url = f"https://www.nseindia.com/api/option-chain-equities?symbol={symbol}"
@@ -163,7 +155,7 @@ def fetch_nse_option_chain_signals(symbol: str) -> dict:
     return {"pcr": 1.0, "implied_volatility": 18.5}
 
 def load_historical_feedback(symbol: str, output_dir: str) -> dict:
-    """Reads eod_evaluation.json to calculate recent model error rate and apply feedback scaling."""
+    """Reads eod_evaluation.json to calculate recent model performance and feedback scaling."""
     audit_path = os.path.join(output_dir, "eod_evaluation.json")
     if not os.path.exists(audit_path):
         return {"avg_error_pct": 0.0, "past_verdict": "NO_HISTORY", "volatility_scaling": 1.0}
@@ -177,7 +169,6 @@ def load_historical_feedback(symbol: str, output_dir: str) -> dict:
             last_row = ticker_hist[0]
             err = last_row.get("error_pct", 0.0)
             verdict = last_row.get("verdict", "IN_PROGRESS")
-            # Dampen future forecast bounds if past prediction failed
             scaling = 0.75 if verdict == "FAILED" else (0.9 if verdict == "PARTIAL" else 1.0)
             return {
                 "avg_error_pct": err,
@@ -189,36 +180,50 @@ def load_historical_feedback(symbol: str, output_dir: str) -> dict:
 
     return {"avg_error_pct": 0.0, "past_verdict": "NO_HISTORY", "volatility_scaling": 1.0}
 
-def generate_smooth_momentum_multipliers(bias: str, recent_return: float, scaling: float = 1.0) -> list:
-    """Generates realistic intraday directional drift dampening based on historical feedback."""
-    multipliers = [1.0]
-    base_step = (0.0003 if bias == "BULLISH" else (-0.0003 if bias == "BEARISH" else 0.0)) * scaling
-    velocity = max(min(recent_return * 0.05, 0.0004), -0.0004) * scaling
-    step = base_step + velocity
+def build_intraday_pchip_curve(base_price: float, target_pct: float, archetype: str, scaling: float = 1.0) -> list:
+    """
+    Constructs a continuous intraday price curve using Monotone Cubic Hermite Spline (PCHIP).
+    Keyframe time pivots:
+      t = 0.00  (09:15 Open)
+      t = 0.22  (10:30 Morning Peak/Trough)
+      t = 0.67  (13:30 Midday VWAP Anchor)
+      t = 1.00  (15:30 EOD Close Target)
+    """
+    # Scale target percent based on historical feedback scaling
+    effective_target_pct = max(min(target_pct * scaling, 3.5), -3.5) / 100.0
+    end_price = base_price * (1.0 + effective_target_pct)
 
-    curr = 1.0
-    max_bound = 1.0 + (0.035 * scaling)
-    min_bound = 1.0 - (0.035 * scaling)
+    # Time values normalized between 0.0 and 1.0 for 10 slots
+    t_timeframes = np.linspace(0.0, 1.0, len(TIMEFRAMES))
 
-    for i in range(1, 10):
-        dampening = 1.0 - (i * 0.06)
-        curr += step * dampening
-        curr = max(min(curr, max_bound), min_bound)
-        multipliers.append(round(curr, 4))
-    return multipliers
+    # Define keyframe pivot times and prices based on archetypes
+    t_pivots = [0.0, 0.22, 0.67, 1.0]
 
-def clamp_multipliers(multipliers: list, scaling: float = 1.0) -> list:
-    """Clamps LLM multipliers to realistic intraday bounds with feedback scaling."""
-    if not multipliers or len(multipliers) != 10:
-        return None
-    clamped = [1.0]
-    max_bound = 1.0 + (0.035 * scaling)
-    min_bound = 1.0 - (0.035 * scaling)
+    if archetype == "MORNING_SPIKE_FADE":
+        p1 = base_price * (1.0 + max(effective_target_pct * 1.5, 0.008))
+        p2 = base_price * (1.0 + effective_target_pct * 0.4)
+        price_pivots = [base_price, p1, p2, end_price]
 
-    for m in multipliers[1:]:
-        val = max(min(float(m), max_bound), min_bound)
-        clamped.append(round(val, 4))
-    return clamped
+    elif archetype == "DIP_AND_RECOVERY":
+        p1 = base_price * (1.0 + min(effective_target_pct * 1.5, -0.008))
+        p2 = base_price * (1.0 + effective_target_pct * 0.5)
+        price_pivots = [base_price, p1, p2, end_price]
+
+    elif archetype == "RANGE_BOUND":
+        p1 = base_price * 1.002
+        p2 = base_price * 0.998
+        price_pivots = [base_price, p1, p2, end_price]
+
+    else:  # STEADY_DRIFT (Default)
+        p1 = base_price + (end_price - base_price) * 0.35
+        p2 = base_price + (end_price - base_price) * 0.70
+        price_pivots = [base_price, p1, p2, end_price]
+
+    # Perform Piecewise Cubic Hermite Interpolating Polynomial fit
+    pchip = PchipInterpolator(t_pivots, price_pivots)
+    curve_prices = pchip(t_timeframes)
+
+    return [round(float(p), 2) for p in curve_prices]
 
 def fetch_market_signals(ticker_symbol: str):
     news_items = []
@@ -274,17 +279,22 @@ def fetch_market_signals(ticker_symbol: str):
 
     return news_items, volume_ratio, has_volume_spike, recent_return, prev_close, df_intraday
 
-def query_gemini_curve(symbol: str, news_items: list, volume_ratio: float, has_spike: bool,
-                       base_price: float, recent_return: float, techs: dict, options: dict, feedback: dict) -> dict:
+def query_gemini_regime(symbol: str, news_items: list, volume_ratio: float, has_spike: bool,
+                         base_price: float, recent_return: float, techs: dict, options: dict, feedback: dict) -> dict:
     api_key = os.environ.get("GEMINI_API_KEY")
     scaling = feedback.get("volatility_scaling", 1.0)
 
+    # Defaults if Gemini API is unavailable
+    default_bias = "BULLISH" if recent_return > 0.0015 else ("BEARISH" if recent_return < -0.0015 else "NEUTRAL")
+    default_target_pct = round(recent_return * 100 * 1.2, 2) if abs(recent_return) > 0.001 else (0.6 if default_bias == "BULLISH" else -0.6)
+    default_archetype = "STEADY_DRIFT"
+
     if not GEMINI_AVAILABLE or not api_key:
-        bias = "BULLISH" if recent_return > 0.0015 else ("BEARISH" if recent_return < -0.0015 else "NEUTRAL")
         return {
-            "bias": bias,
-            "reasoning": f"Quant momentum active (VWAP: {techs.get('vwap')}, RSI: {techs.get('rsi')}, ATR: {techs.get('atr')}, PCR: {options.get('pcr')}).",
-            "shape_multipliers": generate_smooth_momentum_multipliers(bias, recent_return, scaling)
+            "bias": default_bias,
+            "target_pct": default_target_pct,
+            "archetype": default_archetype,
+            "reasoning": f"Quantitative fallback applied based on technical drift (VWAP: {techs.get('vwap')}, RSI: {techs.get('rsi')})."
         }
 
     try:
@@ -296,33 +306,37 @@ def query_gemini_curve(symbol: str, news_items: list, volume_ratio: float, has_s
         Act as a Quantitative Analyst for NSE Stock: {symbol}
         Current Price: ₹{base_price} | Intraday Shift: {recent_return*100:.2f}%
 
-        === QUANTITATIVE & TECHNICAL SIGNALS ===
+        === TECHNICAL & QUANT SIGNALS ===
         - VWAP Benchmark: ₹{techs.get('vwap') or 'N/A'} (Signal: {techs.get('vwap_signal')})
-        - RSI (14-Period): {techs.get('rsi')} (Overbought > 70, Oversold < 30)
-        - ATR (14-Period): {techs.get('atr')} | Bollinger Upper: ₹{techs.get('bb_upper')} | Bollinger Lower: ₹{techs.get('bb_lower')}
-        - Put-Call Ratio (PCR): {options.get('pcr')} (PCR > 1.2 Bullish Wall, PCR < 0.7 Bearish Wall)
-        - ATM Implied Volatility (IV): {options.get('implied_volatility')}%
+        - RSI (14-Period): {techs.get('rsi')}
+        - ATR (14-Period): {techs.get('atr')} | Bollinger Upper: ₹{techs.get('bb_upper')} | Lower: ₹{techs.get('bb_lower')}
+        - Put-Call Ratio (PCR): {options.get('pcr')} | Implied Volatility: {options.get('implied_volatility')}%
         - Volume Ratio: {volume_ratio}x (Spike Active: {has_spike})
 
-        === SELF-LEARNING FEEDBACK CONTEXT ===
-        - Previous Session Error Rate: {feedback.get('avg_error_pct')}%
-        - Recent Model Verdict: {feedback.get('past_verdict')}
-        * INSTRUCTION: If recent verdict was FAILED or PARTIAL, synthesize tighter intraday targets.
+        === SELF-LEARNING AUDIT HISTORY ===
+        - Past Session Error: {feedback.get('avg_error_pct')}%
+        - Last Session Verdict: {feedback.get('past_verdict')}
 
         === NEWS FEED ===
         {news_summary}
 
-        Rules for prediction shape_multipliers:
-        1. Must return EXACTLY 10 floats in a list starting with 1.0 at index 0.
-        2. Multipliers correspond to timeframes: 09:15, 09:45, 10:30, 11:15, 12:00, 12:45, 13:30, 14:15, 15:00, 15:30.
-        3. If RSI > 70, factor in mean-reversion pullbacks. If Price < VWAP, maintain bearish dampening.
-        4. Keep values strictly realistic for large caps (between 0.970 and 1.030).
+        TASK:
+        Evaluate macro direction and determine:
+        1. "bias": "BULLISH", "BEARISH", or "NEUTRAL"
+        2. "target_pct": Expected percentage price change by 3:30 PM Close (Float between -3.0 and +3.0). Grounded by ATR & Bollinger Bands.
+        3. "archetype": Choose exactly ONE structural profile:
+           - "STEADY_DRIFT": Consistent trend momentum toward target close.
+           - "MORNING_SPIKE_FADE": Early aggressive move followed by mean-reversion/pullback.
+           - "DIP_AND_RECOVERY": Initial morning drop finding support and recovering toward EOD.
+           - "RANGE_BOUND": Tight oscillation around VWAP within ATR limits.
+        4. "reasoning": Concise 2-sentence rationale synthesizing VWAP, PCR, and RSI.
 
         Return strictly JSON:
         {{
-          "bias": "BULLISH" | "BEARISH" | "NEUTRAL",
-          "reasoning": "2 sentences synthesizing VWAP, RSI, PCR wall, and feedback context.",
-          "shape_multipliers": [1.0, ...]
+          "bias": "BULLISH",
+          "target_pct": 1.25,
+          "archetype": "STEADY_DRIFT",
+          "reasoning": "Price remains above VWAP with a bullish PCR wall at 1.25, supporting a steady afternoon trend expansion."
         }}
         """
 
@@ -330,18 +344,20 @@ def query_gemini_curve(symbol: str, news_items: list, volume_ratio: float, has_s
         match = re.search(r'\{.*\}', res.text, re.DOTALL)
         if match:
             data = json.loads(match.group(0))
-            clamped = clamp_multipliers(data.get("shape_multipliers"), scaling)
-            if clamped:
-                data["shape_multipliers"] = clamped
-                return data
+            return {
+                "bias": str(data.get("bias", default_bias)),
+                "target_pct": float(data.get("target_pct", default_target_pct)),
+                "archetype": str(data.get("archetype", default_archetype)),
+                "reasoning": str(data.get("reasoning", "Analysis grounded in technical indicators."))
+            }
     except Exception as e:
         print(f"Gemini API parse notice for {symbol}: {e}")
 
-    bias = "BULLISH" if recent_return > 0.001 else ("BEARISH" if recent_return < -0.001 else "NEUTRAL")
     return {
-        "bias": bias,
-        "reasoning": f"Quant fallback trajectory applied for {symbol} (Feedback scaling: {scaling}).",
-        "shape_multipliers": generate_smooth_momentum_multipliers(bias, recent_return, scaling)
+        "bias": default_bias,
+        "target_pct": default_target_pct,
+        "archetype": default_archetype,
+        "reasoning": f"Quant fallback trajectory applied (Feedback scaling: {scaling})."
     }
 
 def fetch_actual_intraday_prices_and_volumes(ticker: str):
@@ -359,7 +375,6 @@ def fetch_actual_intraday_prices_and_volumes(ticker: str):
             else:
                 df.index = df.index.tz_convert('Asia/Kolkata')
 
-            # Extract latest available trading session's DataFrame
             latest_date = df.index.date[-1]
             df_latest = df[df.index.date == latest_date]
 
@@ -421,18 +436,23 @@ def process_single_ticker(item: dict, output_dir: str, today_str: str, now_str: 
     if existing_predicted_curve and len(existing_predicted_curve) == 10:
         predicted_curve = existing_predicted_curve
         bias = existing_bias or "NEUTRAL"
-        reasoning = existing_reasoning or "Forecast locked for current trading session."
-        ai_data = {"bias": bias, "reasoning": reasoning}
+        reasoning = existing_reasoning or "Forecast locked for current session."
+        regime_data = {"bias": bias, "reasoning": reasoning}
     else:
-        ai_data = query_gemini_curve(symbol, news_items, volume_ratio, has_spike, base_price, recent_return, techs, options, feedback)
+        regime_data = query_gemini_regime(symbol, news_items, volume_ratio, has_spike, base_price, recent_return, techs, options, feedback)
         scaling = feedback.get("volatility_scaling", 1.0)
-        multipliers = ai_data.get("shape_multipliers", generate_smooth_momentum_multipliers(ai_data.get("bias", "NEUTRAL"), recent_return, scaling))
-        predicted_curve = [round(float(base_price * m), 2) for m in multipliers]
+        
+        # Build mathematical PCHIP continuous curve
+        predicted_curve = build_intraday_pchip_curve(
+            base_price=base_price,
+            target_pct=regime_data.get("target_pct", 0.0),
+            archetype=regime_data.get("archetype", "STEADY_DRIFT"),
+            scaling=scaling
+        )
 
     final_pred = predicted_curve[-1]
     final_actual = valid_actuals[-1] if valid_actuals else None
 
-    # Calculate session error percentage and verdict
     error_pct = 0.0
     if final_actual and base_price:
         error_pct = round(float(abs(final_actual - final_pred) / base_price * 100), 2)
@@ -440,7 +460,6 @@ def process_single_ticker(item: dict, output_dir: str, today_str: str, now_str: 
     else:
         verdict = "IN_PROGRESS"
 
-    # Edge Case Fix: Preserve past session verdict in matrix when running mid-day before session closes
     audit_verdict = verdict
     audit_error_pct = error_pct
     if verdict == "IN_PROGRESS" and feedback.get("past_verdict") in ["SUCCESS", "PARTIAL", "FAILED"]:
@@ -449,8 +468,8 @@ def process_single_ticker(item: dict, output_dir: str, today_str: str, now_str: 
 
     payload = {
         "prediction": {
-            "bias": str(ai_data.get("bias", "NEUTRAL")),
-            "reasoning": str(ai_data.get("reasoning", "Analysis active.")),
+            "bias": str(regime_data.get("bias", "NEUTRAL")),
+            "reasoning": str(regime_data.get("reasoning", "Analysis active.")),
             "volume_ratio": float(volume_ratio),
             "has_volume_spike": bool(has_spike),
             "news_feed": news_items,
@@ -470,7 +489,7 @@ def process_single_ticker(item: dict, output_dir: str, today_str: str, now_str: 
             "date": today_str,
             "generated_at": now_str,
             "timeframes": TIMEFRAMES,
-            "bias": str(ai_data.get("bias", "NEUTRAL")),
+            "bias": str(regime_data.get("bias", "NEUTRAL")),
             "predicted_curve": predicted_curve,
             "actual_curve": actual_curve,
             "actual_volume": actual_volume,
@@ -485,14 +504,14 @@ def process_single_ticker(item: dict, output_dir: str, today_str: str, now_str: 
 
     eod_row = {
         "symbol": symbol,
-        "bias": str(ai_data.get("bias", "NEUTRAL")),
+        "bias": str(regime_data.get("bias", "NEUTRAL")),
         "final_pred": float(final_pred),
         "final_actual": float(final_actual) if final_actual else "--",
         "error_pct": float(audit_error_pct),
         "verdict": audit_verdict
     }
 
-    print(f" Synced {symbol:12} | Bias: {ai_data.get('bias'):7} | VWAP: {str(techs.get('vwap')):7} | RSI: {str(techs.get('rsi')):5} | PCR: {options.get('pcr')}")
+    print(f" Synced {symbol:12} | Bias: {regime_data.get('bias'):7} | Archetype: {regime_data.get('archetype', 'STEADY_DRIFT'):20} | PCR: {options.get('pcr')}")
     return eod_row
 
 def run_archive():
@@ -506,7 +525,6 @@ def run_archive():
     print(f"=== Quantitative Intraday AI Pipeline Execution [{today_str} {now_str}] ===")
 
     eod_matrix = []
-    # Concurrently execute API downloads and quant signal calculations across watchlist
     with ThreadPoolExecutor(max_workers=5) as executor:
         futures = [
             executor.submit(process_single_ticker, item, output_dir, today_str, now_str)
