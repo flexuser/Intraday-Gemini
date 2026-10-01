@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for INFY.",
-    "volume_ratio": 0.3,
+    "volume_ratio": 0.0,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "INFY",
     "date": "2026-10-01",
-    "generated_at": "02:15 PM IST",
+    "generated_at": "02:20 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -74,7 +74,7 @@
       1011.3,
       1003.5,
       1003.8,
-      1009.45,
+      1007.75,
       null,
       null
     ],
@@ -86,12 +86,12 @@
       104725,
       137378,
       95220,
-      0,
+      201352,
       null,
       null
     ],
     "final_pred": 1014.5,
-    "final_actual": 1009.45,
-    "error_pct": 0.5
+    "final_actual": 1007.75,
+    "error_pct": 0.67
   }
 }

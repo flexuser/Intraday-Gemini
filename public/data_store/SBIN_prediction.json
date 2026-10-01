@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for SBIN.",
-    "volume_ratio": 0.08,
+    "volume_ratio": 0.0,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "SBIN",
     "date": "2026-10-01",
-    "generated_at": "02:15 PM IST",
+    "generated_at": "02:20 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -74,7 +74,7 @@
       961.8,
       953.5,
       952.45,
-      948.9,
+      949.8,
       null,
       null
     ],
@@ -86,12 +86,12 @@
       84045,
       141166,
       69555,
-      11474,
+      81760,
       null,
       null
     ],
     "final_pred": 958.15,
-    "final_actual": 948.9,
-    "error_pct": 0.97
+    "final_actual": 949.8,
+    "error_pct": 0.87
   }
 }

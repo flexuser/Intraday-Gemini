@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for HDFCBANK.",
-    "volume_ratio": 0.26,
+    "volume_ratio": 0.0,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "HDFCBANK",
     "date": "2026-10-01",
-    "generated_at": "02:15 PM IST",
+    "generated_at": "02:20 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -74,7 +74,7 @@
       719.25,
       716.15,
       717.9,
-      713.7,
+      714.1,
       null,
       null
     ],
@@ -86,12 +86,12 @@
       260990,
       633505,
       579657,
-      104733,
+      466504,
       null,
       null
     ],
     "final_pred": 717.5,
-    "final_actual": 713.7,
-    "error_pct": 0.53
+    "final_actual": 714.1,
+    "error_pct": 0.47
   }
 }
