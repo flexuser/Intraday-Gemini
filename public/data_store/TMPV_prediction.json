@@ -1,8 +1,8 @@
 {
   "prediction": {
-    "bias": "BULLISH",
-    "reasoning": "Intraday outlook based on live volume (0.13x) and order flow evaluation.",
-    "volume_ratio": 0.13,
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for TMPV.",
+    "volume_ratio": 0.34,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "TMPV",
     "date": "2026-10-01",
-    "generated_at": "11:05 AM IST",
+    "generated_at": "11:10 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -53,18 +53,18 @@
       "15:00",
       "15:30"
     ],
-    "bias": "BULLISH",
+    "bias": "NEUTRAL",
     "predicted_curve": [
       279.15,
-      278.03,
-      277.2,
+      279.71,
       278.59,
-      280.27,
-      281.38,
-      282.22,
-      283.06,
-      283.62,
-      284.73
+      279.43,
+      278.31,
+      279.71,
+      278.59,
+      279.43,
+      278.87,
+      279.15
     ],
     "actual_curve": [
       279.15,
@@ -90,8 +90,8 @@
       null,
       null
     ],
-    "final_pred": 284.73,
+    "final_pred": 279.15,
     "final_actual": 279.7,
-    "error_pct": 1.8
+    "error_pct": 0.2
   }
 }

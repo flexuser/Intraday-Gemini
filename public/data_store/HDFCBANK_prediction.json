@@ -1,8 +1,8 @@
 {
   "prediction": {
-    "bias": "BULLISH",
-    "reasoning": "Intraday outlook based on live volume (0.22x) and order flow evaluation.",
-    "volume_ratio": 0.22,
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for HDFCBANK.",
+    "volume_ratio": 0.52,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "HDFCBANK",
     "date": "2026-10-01",
-    "generated_at": "11:05 AM IST",
+    "generated_at": "11:10 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -53,18 +53,18 @@
       "15:00",
       "15:30"
     ],
-    "bias": "BULLISH",
+    "bias": "NEUTRAL",
     "predicted_curve": [
       714.35,
-      711.49,
-      709.35,
+      715.78,
       712.92,
-      717.21,
-      720.06,
-      722.21,
-      724.35,
-      725.78,
-      728.64
+      715.06,
+      712.21,
+      715.78,
+      712.92,
+      715.06,
+      713.64,
+      714.35
     ],
     "actual_curve": [
       714.35,
@@ -90,8 +90,8 @@
       null,
       null
     ],
-    "final_pred": 728.64,
+    "final_pred": 714.35,
     "final_actual": 715.5,
-    "error_pct": 1.84
+    "error_pct": 0.16
   }
 }

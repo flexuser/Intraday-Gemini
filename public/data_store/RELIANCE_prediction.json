@@ -1,8 +1,8 @@
 {
   "prediction": {
-    "bias": "BULLISH",
-    "reasoning": "Intraday outlook based on live volume (0.27x) and order flow evaluation.",
-    "volume_ratio": 0.27,
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for RELIANCE.",
+    "volume_ratio": 0.73,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "RELIANCE",
     "date": "2026-10-01",
-    "generated_at": "11:05 AM IST",
+    "generated_at": "11:10 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -53,18 +53,18 @@
       "15:00",
       "15:30"
     ],
-    "bias": "BULLISH",
+    "bias": "NEUTRAL",
     "predicted_curve": [
       1181.2,
-      1176.48,
-      1172.93,
+      1183.56,
       1178.84,
-      1185.92,
-      1190.65,
-      1194.19,
-      1197.74,
-      1200.1,
-      1204.82
+      1182.38,
+      1177.66,
+      1183.56,
+      1178.84,
+      1182.38,
+      1180.02,
+      1181.2
     ],
     "actual_curve": [
       1181.2,
@@ -90,8 +90,8 @@
       null,
       null
     ],
-    "final_pred": 1204.82,
+    "final_pred": 1181.2,
     "final_actual": 1182.0,
-    "error_pct": 1.93
+    "error_pct": 0.07
   }
 }
