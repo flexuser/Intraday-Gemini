@@ -1,8 +1,8 @@
 {
   "prediction": {
-    "bias": "NEUTRAL",
-    "reasoning": "Market dynamics evaluation active for ICICIBANK.",
-    "volume_ratio": 0.26,
+    "bias": "BEARISH",
+    "reasoning": "Intraday outlook based on live volume (0.12x) and order flow evaluation.",
+    "volume_ratio": 0.12,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "ICICIBANK",
     "date": "2026-10-01",
-    "generated_at": "11:10 AM IST",
+    "generated_at": "11:19 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -53,24 +53,24 @@
       "15:00",
       "15:30"
     ],
-    "bias": "NEUTRAL",
+    "bias": "BEARISH",
     "predicted_curve": [
       1325.6,
-      1328.25,
+      1330.9,
       1322.95,
-      1326.93,
-      1321.62,
-      1328.25,
-      1322.95,
-      1326.93,
-      1324.27,
-      1325.6
+      1312.34,
+      1305.72,
+      1301.74,
+      1299.09,
+      1296.44,
+      1293.79,
+      1288.48
     ],
     "actual_curve": [
       1325.6,
       1323.4,
       1324.6,
-      null,
+      1318.5,
       null,
       null,
       null,
@@ -82,7 +82,7 @@
       1185762,
       312932,
       817832,
-      null,
+      253196,
       null,
       null,
       null,
@@ -90,8 +90,8 @@
       null,
       null
     ],
-    "final_pred": 1325.6,
-    "final_actual": 1324.6,
-    "error_pct": 0.08
+    "final_pred": 1288.48,
+    "final_actual": 1318.5,
+    "error_pct": 2.26
   }
 }

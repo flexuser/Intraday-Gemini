@@ -1,8 +1,8 @@
 {
   "prediction": {
-    "bias": "NEUTRAL",
-    "reasoning": "Market dynamics evaluation active for INFY.",
-    "volume_ratio": 0.56,
+    "bias": "BEARISH",
+    "reasoning": "Intraday outlook based on live volume (0.6x) and order flow evaluation.",
+    "volume_ratio": 0.6,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "INFY",
     "date": "2026-10-01",
-    "generated_at": "11:10 AM IST",
+    "generated_at": "11:19 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -53,24 +53,24 @@
       "15:00",
       "15:30"
     ],
-    "bias": "NEUTRAL",
+    "bias": "BEARISH",
     "predicted_curve": [
       1009.7,
-      1011.72,
+      1013.74,
       1007.68,
-      1010.71,
-      1006.67,
-      1011.72,
-      1007.68,
-      1010.71,
-      1008.69,
-      1009.7
+      999.6,
+      994.55,
+      991.53,
+      989.51,
+      987.49,
+      985.47,
+      981.43
     ],
     "actual_curve": [
       1009.7,
       1008.95,
       1010.45,
-      null,
+      1019.2,
       null,
       null,
       null,
@@ -82,7 +82,7 @@
       1227016,
       489699,
       289519,
-      null,
+      553578,
       null,
       null,
       null,
@@ -90,8 +90,8 @@
       null,
       null
     ],
-    "final_pred": 1009.7,
-    "final_actual": 1010.45,
-    "error_pct": 0.07
+    "final_pred": 981.43,
+    "final_actual": 1019.2,
+    "error_pct": 3.74
   }
 }

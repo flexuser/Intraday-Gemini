@@ -1,8 +1,8 @@
 {
   "prediction": {
-    "bias": "NEUTRAL",
-    "reasoning": "Market dynamics evaluation active for LT.",
-    "volume_ratio": 0.37,
+    "bias": "BEARISH",
+    "reasoning": "Intraday outlook based on live volume (0.2x) and order flow evaluation.",
+    "volume_ratio": 0.2,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "LT",
     "date": "2026-10-01",
-    "generated_at": "11:10 AM IST",
+    "generated_at": "11:19 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -53,24 +53,24 @@
       "15:00",
       "15:30"
     ],
-    "bias": "NEUTRAL",
+    "bias": "BEARISH",
     "predicted_curve": [
       3708.2,
-      3715.62,
+      3723.03,
       3700.78,
-      3711.91,
-      3697.08,
-      3715.62,
-      3700.78,
-      3711.91,
-      3704.49,
-      3708.2
+      3671.12,
+      3652.58,
+      3641.45,
+      3634.04,
+      3626.62,
+      3619.2,
+      3604.37
     ],
     "actual_curve": [
       3708.2,
       3722.2,
       3723.2,
-      null,
+      3730.1,
       null,
       null,
       null,
@@ -82,7 +82,7 @@
       144650,
       78427,
       67969,
-      null,
+      62214,
       null,
       null,
       null,
@@ -90,8 +90,8 @@
       null,
       null
     ],
-    "final_pred": 3708.2,
-    "final_actual": 3723.2,
-    "error_pct": 0.4
+    "final_pred": 3604.37,
+    "final_actual": 3730.1,
+    "error_pct": 3.39
   }
 }

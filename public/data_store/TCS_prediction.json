@@ -1,8 +1,8 @@
 {
   "prediction": {
-    "bias": "NEUTRAL",
-    "reasoning": "Market dynamics evaluation active for TCS.",
-    "volume_ratio": 0.59,
+    "bias": "BULLISH",
+    "reasoning": "Intraday outlook based on live volume (0.51x) and order flow evaluation.",
+    "volume_ratio": 0.51,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "TCS",
     "date": "2026-10-01",
-    "generated_at": "11:10 AM IST",
+    "generated_at": "11:19 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -53,24 +53,24 @@
       "15:00",
       "15:30"
     ],
-    "bias": "NEUTRAL",
+    "bias": "BULLISH",
     "predicted_curve": [
       2072.1,
-      2076.24,
+      2063.81,
+      2057.6,
       2067.96,
-      2074.17,
-      2065.88,
-      2076.24,
-      2067.96,
-      2074.17,
-      2070.03,
-      2072.1
+      2080.39,
+      2088.68,
+      2094.89,
+      2101.11,
+      2105.25,
+      2113.54
     ],
     "actual_curve": [
       2072.1,
       2067.8,
       2070.5,
-      null,
+      2091.0,
       null,
       null,
       null,
@@ -82,7 +82,7 @@
       256735,
       108840,
       106929,
-      null,
+      206520,
       null,
       null,
       null,
@@ -90,8 +90,8 @@
       null,
       null
     ],
-    "final_pred": 2072.1,
-    "final_actual": 2070.5,
-    "error_pct": 0.08
+    "final_pred": 2113.54,
+    "final_actual": 2091.0,
+    "error_pct": 1.09
   }
 }

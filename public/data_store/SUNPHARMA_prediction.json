@@ -1,8 +1,8 @@
 {
   "prediction": {
-    "bias": "NEUTRAL",
-    "reasoning": "Market dynamics evaluation active for SUNPHARMA.",
-    "volume_ratio": 0.4,
+    "bias": "BULLISH",
+    "reasoning": "Intraday outlook based on live volume (0.16x) and order flow evaluation.",
+    "volume_ratio": 0.16,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "SUNPHARMA",
     "date": "2026-10-01",
-    "generated_at": "11:10 AM IST",
+    "generated_at": "11:19 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -53,24 +53,24 @@
       "15:00",
       "15:30"
     ],
-    "bias": "NEUTRAL",
+    "bias": "BULLISH",
     "predicted_curve": [
       1810.1,
-      1813.72,
+      1802.86,
+      1797.43,
       1806.48,
-      1811.91,
-      1804.67,
-      1813.72,
-      1806.48,
-      1811.91,
-      1808.29,
-      1810.1
+      1817.34,
+      1824.58,
+      1830.01,
+      1835.44,
+      1839.06,
+      1846.3
     ],
     "actual_curve": [
       1810.1,
       1817.1,
       1817.4,
-      null,
+      1824.7,
       null,
       null,
       null,
@@ -82,7 +82,7 @@
       66022,
       53937,
       51700,
-      null,
+      93083,
       null,
       null,
       null,
@@ -90,8 +90,8 @@
       null,
       null
     ],
-    "final_pred": 1810.1,
-    "final_actual": 1817.4,
-    "error_pct": 0.4
+    "final_pred": 1846.3,
+    "final_actual": 1824.7,
+    "error_pct": 1.19
   }
 }
