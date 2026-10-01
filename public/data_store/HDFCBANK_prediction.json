@@ -16,20 +16,20 @@
         }
       },
       {
-        "title": "WF vs. HDB: Which Stock Should Value Investors Buy Now?",
-        "publisher": "Zacks",
+        "title": "Asian Equities Traded in the US as American Depositary Receipts Rise in Friday Trading; Down for Week",
+        "publisher": "MT Newswires",
         "link": {
-          "url": "https://finance.yahoo.com/markets/stocks/articles/wf-vs-hdb-stock-value-144002894.html",
+          "url": "https://finance.yahoo.com/markets/world-indices/articles/asian-equities-traded-us-american-144123090.html",
           "site": "finance",
           "region": "US",
           "lang": "en-US"
         }
       },
       {
-        "title": "Microsoft Drops as Three-Zone Hyderabad Region Goes Live",
-        "publisher": "GuruFocus.com",
+        "title": "WF vs. HDB: Which Stock Should Value Investors Buy Now?",
+        "publisher": "Zacks",
         "link": {
-          "url": "https://finance.yahoo.com/technology/ai/articles/microsoft-drops-three-zone-hyderabad-155029074.html",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/wf-vs-hdb-stock-value-144002894.html",
           "site": "finance",
           "region": "US",
           "lang": "en-US"
@@ -50,7 +50,7 @@
   "curves": {
     "symbol": "HDFCBANK",
     "date": "2026-10-01",
-    "generated_at": "03:39 PM IST",
+    "generated_at": "03:40 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
