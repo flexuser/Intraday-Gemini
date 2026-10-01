@@ -35,22 +35,12 @@
           "lang": "en-US"
         }
       }
-    ],
-    "quant_signals": {
-      "vwap": 1314.76,
-      "rsi": 43.33,
-      "atr": 3.14,
-      "bb_upper": 1316.93,
-      "bb_lower": 1308.25,
-      "pcr": 1.0,
-      "implied_volatility": 18.5,
-      "past_verdict": "PARTIAL"
-    }
+    ]
   },
   "curves": {
     "symbol": "ICICIBANK",
     "date": "2026-10-01",
-    "generated_at": "03:55 PM IST",
+    "generated_at": "04:19 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -89,7 +79,7 @@
       1310.6
     ],
     "actual_volume": [
-      0,
+      332875,
       265151,
       88817,
       60342,

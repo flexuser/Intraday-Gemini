@@ -35,22 +35,12 @@
           "lang": "en-SG"
         }
       }
-    ],
-    "quant_signals": {
-      "vwap": 2757.13,
-      "rsi": 45.47,
-      "atr": 7.53,
-      "bb_upper": 2709.2,
-      "bb_lower": 2679.13,
-      "pcr": 1.0,
-      "implied_volatility": 18.5,
-      "past_verdict": "PARTIAL"
-    }
+    ]
   },
   "curves": {
     "symbol": "MUTHOOTFIN",
     "date": "2026-10-01",
-    "generated_at": "03:55 PM IST",
+    "generated_at": "04:19 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -89,7 +79,7 @@
       2697.1
     ],
     "actual_volume": [
-      0,
+      8690,
       3955,
       10523,
       2408,

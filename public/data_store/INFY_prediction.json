@@ -35,22 +35,12 @@
           "lang": "en-US"
         }
       }
-    ],
-    "quant_signals": {
-      "vwap": 1002.52,
-      "rsi": 81.13,
-      "atr": 4.9,
-      "bb_upper": 1032.52,
-      "bb_lower": 995.78,
-      "pcr": 1.0,
-      "implied_volatility": 18.5,
-      "past_verdict": "FAILED"
-    }
+    ]
   },
   "curves": {
     "symbol": "INFY",
     "date": "2026-10-01",
-    "generated_at": "03:55 PM IST",
+    "generated_at": "04:19 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -89,7 +79,7 @@
       1035.0
     ],
     "actual_volume": [
-      0,
+      504956,
       74176,
       46965,
       266853,

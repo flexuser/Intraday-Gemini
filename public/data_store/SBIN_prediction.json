@@ -35,22 +35,12 @@
           "lang": "en-US"
         }
       }
-    ],
-    "quant_signals": {
-      "vwap": 962.22,
-      "rsi": 53.45,
-      "atr": 2.0,
-      "bb_upper": 956.59,
-      "bb_lower": 945.66,
-      "pcr": 1.0,
-      "implied_volatility": 18.5,
-      "past_verdict": "SUCCESS"
-    }
+    ]
   },
   "curves": {
     "symbol": "SBIN",
     "date": "2026-10-01",
-    "generated_at": "03:55 PM IST",
+    "generated_at": "04:19 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -89,7 +79,7 @@
       954.1
     ],
     "actual_volume": [
-      0,
+      192796,
       64772,
       54238,
       33855,

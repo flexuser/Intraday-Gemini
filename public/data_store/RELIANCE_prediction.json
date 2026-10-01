@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for RELIANCE.",
-    "volume_ratio": 2.6,
+    "volume_ratio": 4.92,
     "has_volume_spike": true,
     "news_feed": [
       {
@@ -35,22 +35,12 @@
           "lang": "en-US"
         }
       }
-    ],
-    "quant_signals": {
-      "vwap": 1193.39,
-      "rsi": 54.76,
-      "atr": 2.26,
-      "bb_upper": 1171.24,
-      "bb_lower": 1161.97,
-      "pcr": 1.0,
-      "implied_volatility": 18.5,
-      "past_verdict": "PARTIAL"
-    }
+    ]
   },
   "curves": {
     "symbol": "RELIANCE",
     "date": "2026-10-01",
-    "generated_at": "03:55 PM IST",
+    "generated_at": "04:19 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -86,10 +76,10 @@
       1169.7,
       1163.9,
       1167.2,
-      1170.1
+      1167.7
     ],
     "actual_volume": [
-      0,
+      391610,
       172379,
       250528,
       125164,
@@ -98,10 +88,10 @@
       122802,
       185796,
       443825,
-      582139
+      1101198
     ],
     "final_pred": 1180.2,
-    "final_actual": 1170.1,
-    "error_pct": 0.86
+    "final_actual": 1167.7,
+    "error_pct": 1.06
   }
 }
