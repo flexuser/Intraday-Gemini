@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "SUNPHARMA",
     "date": "2026-10-01",
-    "generated_at": "02:55 PM IST",
+    "generated_at": "03:00 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -75,7 +75,7 @@
       1800.4,
       1799.7,
       1796.5,
-      null,
+      1802.5,
       null
     ],
     "actual_volume": [
@@ -87,11 +87,11 @@
       21216,
       20631,
       16539,
-      null,
+      0,
       null
     ],
     "final_pred": 1808.5,
-    "final_actual": 1796.5,
-    "error_pct": 0.66
+    "final_actual": 1802.5,
+    "error_pct": 0.33
   }
 }
