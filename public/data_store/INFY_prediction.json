@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "NEUTRAL",
     "reasoning": "Market dynamics evaluation active for INFY.",
-    "volume_ratio": 4.89,
+    "volume_ratio": 10.59,
     "has_volume_spike": true,
     "news_feed": [
       {
@@ -37,11 +37,11 @@
       }
     ],
     "quant_signals": {
-      "vwap": 1001.96,
-      "rsi": 73.75,
-      "atr": 4.28,
-      "bb_upper": 1030.13,
-      "bb_lower": 997.2,
+      "vwap": 1002.52,
+      "rsi": 81.13,
+      "atr": 4.9,
+      "bb_upper": 1032.52,
+      "bb_lower": 995.78,
       "pcr": 1.0,
       "implied_volatility": 18.5,
       "past_verdict": "PARTIAL"
@@ -50,7 +50,7 @@
   "curves": {
     "symbol": "INFY",
     "date": "2026-10-01",
-    "generated_at": "03:40 PM IST",
+    "generated_at": "03:45 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -86,7 +86,7 @@
       1003.8,
       1007.75,
       1021.5,
-      1025.3
+      1035.0
     ],
     "actual_volume": [
       0,
@@ -98,10 +98,10 @@
       95220,
       201352,
       377786,
-      787831
+      1704773
     ],
     "final_pred": 1014.5,
-    "final_actual": 1025.3,
-    "error_pct": 1.06
+    "final_actual": 1035.0,
+    "error_pct": 2.02
   }
 }

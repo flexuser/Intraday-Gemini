@@ -1,19 +1,19 @@
 [
   {
-    "symbol": "MUTHOOTFIN",
+    "symbol": "RELIANCE",
     "bias": "NEUTRAL",
-    "final_pred": 2729.7,
-    "final_actual": 2698.0,
-    "error_pct": 1.16,
+    "final_pred": 1180.2,
+    "final_actual": 1170.1,
+    "error_pct": 0.86,
     "verdict": "PARTIAL"
   },
   {
     "symbol": "INFY",
     "bias": "NEUTRAL",
     "final_pred": 1014.5,
-    "final_actual": 1025.3,
-    "error_pct": 1.06,
-    "verdict": "PARTIAL"
+    "final_actual": 1035.0,
+    "error_pct": 2.02,
+    "verdict": "FAILED"
   },
   {
     "symbol": "TMPV",
@@ -24,27 +24,19 @@
     "verdict": "SUCCESS"
   },
   {
+    "symbol": "MUTHOOTFIN",
+    "bias": "NEUTRAL",
+    "final_pred": 2729.7,
+    "final_actual": 2698.0,
+    "error_pct": 1.16,
+    "verdict": "PARTIAL"
+  },
+  {
     "symbol": "HDFCBANK",
     "bias": "NEUTRAL",
     "final_pred": 717.5,
     "final_actual": 721.3,
     "error_pct": 0.53,
-    "verdict": "SUCCESS"
-  },
-  {
-    "symbol": "RELIANCE",
-    "bias": "NEUTRAL",
-    "final_pred": 1180.2,
-    "final_actual": 1170.1,
-    "error_pct": 0.86,
-    "verdict": "PARTIAL"
-  },
-  {
-    "symbol": "ICICIBANK",
-    "bias": "NEUTRAL",
-    "final_pred": 1321.6,
-    "final_actual": 1318.0,
-    "error_pct": 0.27,
     "verdict": "SUCCESS"
   },
   {
@@ -59,8 +51,16 @@
     "symbol": "BHARTIARTL",
     "bias": "NEUTRAL",
     "final_pred": 1742.6,
-    "final_actual": 1745.7,
-    "error_pct": 0.18,
+    "final_actual": 1741.1,
+    "error_pct": 0.09,
+    "verdict": "SUCCESS"
+  },
+  {
+    "symbol": "LT",
+    "bias": "NEUTRAL",
+    "final_pred": 3717.1,
+    "final_actual": 3694.1,
+    "error_pct": 0.62,
     "verdict": "SUCCESS"
   },
   {
@@ -72,12 +72,12 @@
     "verdict": "SUCCESS"
   },
   {
-    "symbol": "LT",
+    "symbol": "ICICIBANK",
     "bias": "NEUTRAL",
-    "final_pred": 3717.1,
-    "final_actual": 3694.1,
-    "error_pct": 0.62,
-    "verdict": "SUCCESS"
+    "final_pred": 1321.6,
+    "final_actual": 1310.6,
+    "error_pct": 0.83,
+    "verdict": "PARTIAL"
   },
   {
     "symbol": "SUNPHARMA",
