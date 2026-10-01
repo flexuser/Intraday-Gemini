@@ -1,21 +1,46 @@
 {
   "prediction": {
     "bias": "BULLISH",
-    "reasoning": "Intraday outlook based on live volume (0.51x) and order flow evaluation.",
-    "volume_ratio": 0.51,
+    "reasoning": "Intraday outlook based on live volume (0.65x) and order flow evaluation.",
+    "volume_ratio": 0.65,
     "has_volume_spike": false,
     "news_feed": [
       {
-        "title": "No major structural announcements recorded for TMPV.NS.",
-        "publisher": "NSE Surveillance",
-        "link": "#"
+        "title": "Tata Motors Q1 profit falls 80.2% despite revenue rise",
+        "publisher": "Just Auto",
+        "link": {
+          "url": "https://www.just-auto.com/news/tata-motors-q1-profit-falls-80-2/",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "India's Tata Motors Passenger Vehicles falls on persistent margin, demand concerns at JLR",
+        "publisher": "Reuters",
+        "link": {
+          "url": "https://sg.finance.yahoo.com/news/indias-tata-motors-passenger-vehicles-035612911.html",
+          "site": "finance",
+          "region": "SG",
+          "lang": "en-SG"
+        }
+      },
+      {
+        "title": "Tata Motors Passenger Vehicles Ltd (BOM:500570) (Q1 2027) Earnings Call Highlights: Record EV ...",
+        "publisher": "GuruFocus.com",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/tata-motors-passenger-vehicles-ltd-230555605.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
       }
     ]
   },
   "curves": {
     "symbol": "TMPV",
     "date": "2026-10-01",
-    "generated_at": "01:05 PM IST",
+    "generated_at": "01:10 PM IST",
     "timeframes": [
       "09:15",
       "09:45",

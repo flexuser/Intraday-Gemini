@@ -1,21 +1,46 @@
 {
   "prediction": {
     "bias": "BULLISH",
-    "reasoning": "Intraday outlook based on live volume (0.6x) and order flow evaluation.",
-    "volume_ratio": 0.6,
+    "reasoning": "Intraday outlook based on live volume (0.78x) and order flow evaluation.",
+    "volume_ratio": 0.78,
     "has_volume_spike": false,
     "news_feed": [
       {
-        "title": "No major structural announcements recorded for RELIANCE.NS.",
-        "publisher": "NSE Surveillance",
-        "link": "#"
+        "title": "Oil Refiners In Focus After Saudi Exports Rise and Brent Nears $110",
+        "publisher": "Simply Wall St.",
+        "link": {
+          "url": "https://finance.yahoo.com/energy/articles/oil-refiners-focus-saudi-exports-201455221.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Reliance (NYSE:RS) Gets A Lift From Tax Relief As Valuation Looks Nearly Fair",
+        "publisher": "Simply Wall St.",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/reliance-nyse-rs-gets-lift-101251758.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Kering Expands Generation Award to India",
+        "publisher": "WWD",
+        "link": {
+          "url": "https://wwd.com/sustainability/innovation/kering-generation-award-india-reliance-brands-limited-1239199796/",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
       }
     ]
   },
   "curves": {
     "symbol": "RELIANCE",
     "date": "2026-10-01",
-    "generated_at": "01:05 PM IST",
+    "generated_at": "01:10 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
