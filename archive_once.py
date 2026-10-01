@@ -1,4 +1,4 @@
-﻿import datetime
+import datetime
 import json
 import math
 import os
@@ -12,7 +12,7 @@ from scipy.interpolate import PchipInterpolator
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 try:
-    import google.generativeai as genai
+    from google import genai
     GEMINI_AVAILABLE = True
 except ImportError:
     GEMINI_AVAILABLE = False
@@ -181,22 +181,11 @@ def load_historical_feedback(symbol: str, output_dir: str) -> dict:
     return {"avg_error_pct": 0.0, "past_verdict": "NO_HISTORY", "volatility_scaling": 1.0}
 
 def build_intraday_pchip_curve(base_price: float, target_pct: float, archetype: str, scaling: float = 1.0) -> list:
-    """
-    Constructs a continuous intraday price curve using Monotone Cubic Hermite Spline (PCHIP).
-    Keyframe time pivots:
-      t = 0.00  (09:15 Open)
-      t = 0.22  (10:30 Morning Peak/Trough)
-      t = 0.67  (13:30 Midday VWAP Anchor)
-      t = 1.00  (15:30 EOD Close Target)
-    """
-    # Scale target percent based on historical feedback scaling
+    """Constructs a continuous intraday price curve using Monotone Cubic Hermite Spline (PCHIP)."""
     effective_target_pct = max(min(target_pct * scaling, 3.5), -3.5) / 100.0
     end_price = base_price * (1.0 + effective_target_pct)
 
-    # Time values normalized between 0.0 and 1.0 for 10 slots
     t_timeframes = np.linspace(0.0, 1.0, len(TIMEFRAMES))
-
-    # Define keyframe pivot times and prices based on archetypes
     t_pivots = [0.0, 0.22, 0.67, 1.0]
 
     if archetype == "MORNING_SPIKE_FADE":
@@ -219,7 +208,6 @@ def build_intraday_pchip_curve(base_price: float, target_pct: float, archetype: 
         p2 = base_price + (end_price - base_price) * 0.70
         price_pivots = [base_price, p1, p2, end_price]
 
-    # Perform Piecewise Cubic Hermite Interpolating Polynomial fit
     pchip = PchipInterpolator(t_pivots, price_pivots)
     curve_prices = pchip(t_timeframes)
 
@@ -280,11 +268,10 @@ def fetch_market_signals(ticker_symbol: str):
     return news_items, volume_ratio, has_volume_spike, recent_return, prev_close, df_intraday
 
 def query_gemini_regime(symbol: str, news_items: list, volume_ratio: float, has_spike: bool,
-                         base_price: float, recent_return: float, techs: dict, options: dict, feedback: dict) -> dict:
+                        base_price: float, recent_return: float, techs: dict, options: dict, feedback: dict) -> dict:
     api_key = os.environ.get("GEMINI_API_KEY")
     scaling = feedback.get("volatility_scaling", 1.0)
 
-    # Defaults if Gemini API is unavailable
     default_bias = "BULLISH" if recent_return > 0.0015 else ("BEARISH" if recent_return < -0.0015 else "NEUTRAL")
     default_target_pct = round(recent_return * 100 * 1.2, 2) if abs(recent_return) > 0.001 else (0.6 if default_bias == "BULLISH" else -0.6)
     default_archetype = "STEADY_DRIFT"
@@ -298,8 +285,7 @@ def query_gemini_regime(symbol: str, news_items: list, volume_ratio: float, has_
         }
 
     try:
-        genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-3.8-flash')
+        client = genai.Client(api_key=api_key)
         news_summary = "\n".join([f"- {n['title']} ({n['publisher']})" for n in news_items])
 
         prompt = f"""
@@ -340,7 +326,10 @@ def query_gemini_regime(symbol: str, news_items: list, volume_ratio: float, has_
         }}
         """
 
-        res = model.generate_content(prompt)
+        res = client.models.generate_content(
+            model='gemini-3.8-flash',
+            contents=prompt
+        )
         match = re.search(r'\{.*\}', res.text, re.DOTALL)
         if match:
             data = json.loads(match.group(0))
@@ -442,7 +431,6 @@ def process_single_ticker(item: dict, output_dir: str, today_str: str, now_str: 
         regime_data = query_gemini_regime(symbol, news_items, volume_ratio, has_spike, base_price, recent_return, techs, options, feedback)
         scaling = feedback.get("volatility_scaling", 1.0)
         
-        # Build mathematical PCHIP continuous curve
         predicted_curve = build_intraday_pchip_curve(
             base_price=base_price,
             target_pct=regime_data.get("target_pct", 0.0),
