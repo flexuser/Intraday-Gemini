@@ -1,8 +1,8 @@
 {
   "prediction": {
     "bias": "BULLISH",
-    "reasoning": "Intraday outlook based on live volume (0.07x) and order flow evaluation.",
-    "volume_ratio": 0.07,
+    "reasoning": "Intraday outlook based on live volume (0.08x) and order flow evaluation.",
+    "volume_ratio": 0.08,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "SBIN",
     "date": "2026-10-01",
-    "generated_at": "11:49 AM IST",
+    "generated_at": "12:33 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -71,7 +71,7 @@
       963.5,
       963.9,
       961.9,
-      null,
+      962.15,
       null,
       null,
       null,
@@ -83,7 +83,7 @@
       278211,
       179636,
       186502,
-      null,
+      230647,
       null,
       null,
       null,
@@ -91,7 +91,7 @@
       null
     ],
     "final_pred": 979.15,
-    "final_actual": 961.9,
-    "error_pct": 1.8
+    "final_actual": 962.15,
+    "error_pct": 1.77
   }
 }

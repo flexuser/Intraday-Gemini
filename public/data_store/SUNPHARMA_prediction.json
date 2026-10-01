@@ -1,8 +1,8 @@
 {
   "prediction": {
     "bias": "BULLISH",
-    "reasoning": "Intraday outlook based on live volume (0.29x) and order flow evaluation.",
-    "volume_ratio": 0.29,
+    "reasoning": "Intraday outlook based on live volume (0.16x) and order flow evaluation.",
+    "volume_ratio": 0.16,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "SUNPHARMA",
     "date": "2026-10-01",
-    "generated_at": "11:49 AM IST",
+    "generated_at": "12:33 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -71,7 +71,7 @@
       1817.1,
       1817.4,
       1824.7,
-      null,
+      1827.0,
       null,
       null,
       null,
@@ -83,7 +83,7 @@
       53937,
       51700,
       93083,
-      null,
+      45612,
       null,
       null,
       null,
@@ -91,7 +91,7 @@
       null
     ],
     "final_pred": 1846.3,
-    "final_actual": 1824.7,
-    "error_pct": 1.19
+    "final_actual": 1827.0,
+    "error_pct": 1.07
   }
 }

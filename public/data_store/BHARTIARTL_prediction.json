@@ -1,8 +1,8 @@
 {
   "prediction": {
     "bias": "NEUTRAL",
-    "reasoning": "Intraday outlook based on live volume (0.1x) and order flow evaluation.",
-    "volume_ratio": 0.1,
+    "reasoning": "Intraday outlook based on live volume (0.24x) and order flow evaluation.",
+    "volume_ratio": 0.24,
     "has_volume_spike": false,
     "news_feed": [
       {
@@ -40,7 +40,7 @@
   "curves": {
     "symbol": "BHARTIARTL",
     "date": "2026-10-01",
-    "generated_at": "11:49 AM IST",
+    "generated_at": "12:33 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -71,7 +71,7 @@
       1753.9,
       1757.0,
       1763.0,
-      null,
+      1760.5,
       null,
       null,
       null,
@@ -83,7 +83,7 @@
       144606,
       150356,
       332772,
-      null,
+      176834,
       null,
       null,
       null,
@@ -91,7 +91,7 @@
       null
     ],
     "final_pred": 1750.2,
-    "final_actual": 1763.0,
-    "error_pct": 0.73
+    "final_actual": 1760.5,
+    "error_pct": 0.59
   }
 }
