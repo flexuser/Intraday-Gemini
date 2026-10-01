@@ -2,8 +2,8 @@
   "prediction": {
     "bias": "BEARISH",
     "reasoning": "Intraday outlook based on live volume (0.0x) and order flow evaluation.",
-    "volume_ratio": 0.0,
-    "has_volume_spike": false,
+    "volume_ratio": 1.94,
+    "has_volume_spike": true,
     "news_feed": [
       {
         "title": "India Begins Tokenizing Its $620 Billion Corporate Bond Market",
@@ -35,12 +35,19 @@
           "lang": "en-US"
         }
       }
-    ]
+    ],
+    "quant_signals": {
+      "vwap": 3695.05,
+      "rsi": 58.79,
+      "pcr": 1.0,
+      "implied_volatility": 18.5,
+      "past_verdict": "PARTIAL"
+    }
   },
   "curves": {
     "symbol": "LT",
     "date": "2026-10-01",
-    "generated_at": "01:45 PM IST",
+    "generated_at": "02:58 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -74,7 +81,7 @@
       3715.2,
       3683.6,
       3680.0,
-      null,
+      3667.3,
       null,
       null
     ],
@@ -86,12 +93,12 @@
       12169,
       88174,
       18667,
-      null,
+      29179,
       null,
       null
     ],
     "final_pred": 3613.02,
-    "final_actual": 3680.0,
-    "error_pct": 1.8
+    "final_actual": 3667.3,
+    "error_pct": 1.46
   }
 }

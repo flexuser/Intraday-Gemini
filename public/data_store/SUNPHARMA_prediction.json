@@ -2,8 +2,8 @@
   "prediction": {
     "bias": "BULLISH",
     "reasoning": "Intraday outlook based on live volume (0.0x) and order flow evaluation.",
-    "volume_ratio": 0.0,
-    "has_volume_spike": false,
+    "volume_ratio": 3.07,
+    "has_volume_spike": true,
     "news_feed": [
       {
         "title": "Here's How Trump's Drug Deals Are Likely to Impact Healthcare ETFs",
@@ -35,12 +35,19 @@
           "lang": "en-US"
         }
       }
-    ]
+    ],
+    "quant_signals": {
+      "vwap": 1808.02,
+      "rsi": 56.17,
+      "pcr": 1.0,
+      "implied_volatility": 18.5,
+      "past_verdict": "FAILED"
+    }
   },
   "curves": {
     "symbol": "SUNPHARMA",
     "date": "2026-10-01",
-    "generated_at": "01:45 PM IST",
+    "generated_at": "02:58 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -74,7 +81,7 @@
       1807.6,
       1800.4,
       1799.7,
-      null,
+      1796.5,
       null,
       null
     ],
@@ -86,12 +93,12 @@
       166205,
       21216,
       20631,
-      null,
+      16539,
       null,
       null
     ],
     "final_pred": 1844.67,
-    "final_actual": 1799.7,
-    "error_pct": 2.49
+    "final_actual": 1796.5,
+    "error_pct": 2.66
   }
 }

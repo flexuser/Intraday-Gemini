@@ -3,88 +3,88 @@
     "symbol": "MUTHOOTFIN",
     "bias": "BEARISH",
     "final_pred": 2653.27,
-    "final_actual": 2703.3,
-    "error_pct": 1.83,
-    "verdict": "FAILED"
+    "final_actual": 2686.9,
+    "error_pct": 1.23,
+    "verdict": "PARTIAL"
   },
   {
     "symbol": "RELIANCE",
     "bias": "BULLISH",
     "final_pred": 1203.8,
-    "final_actual": 1169.7,
-    "error_pct": 2.89,
+    "final_actual": 1163.9,
+    "error_pct": 3.38,
     "verdict": "FAILED"
   },
   {
     "symbol": "TMPV",
     "bias": "BULLISH",
     "final_pred": 286.06,
-    "final_actual": 275.55,
-    "error_pct": 3.75,
+    "final_actual": 274.35,
+    "error_pct": 4.18,
     "verdict": "FAILED"
   },
   {
     "symbol": "INFY",
     "bias": "BEARISH",
     "final_pred": 986.09,
-    "final_actual": 1003.8,
-    "error_pct": 1.75,
-    "verdict": "PARTIAL"
+    "final_actual": 1007.75,
+    "error_pct": 2.14,
+    "verdict": "FAILED"
   },
   {
     "symbol": "HDFCBANK",
     "bias": "BULLISH",
     "final_pred": 731.85,
-    "final_actual": 717.9,
-    "error_pct": 1.94,
+    "final_actual": 714.1,
+    "error_pct": 2.47,
     "verdict": "FAILED"
   },
   {
     "symbol": "ICICIBANK",
     "bias": "BEARISH",
     "final_pred": 1284.6,
-    "final_actual": 1314.0,
-    "error_pct": 2.22,
+    "final_actual": 1310.3,
+    "error_pct": 1.94,
     "verdict": "FAILED"
   },
   {
     "symbol": "TCS",
     "bias": "BULLISH",
     "final_pred": 2119.97,
-    "final_actual": 2053.9,
-    "error_pct": 3.18,
+    "final_actual": 2054.6,
+    "error_pct": 3.15,
     "verdict": "FAILED"
   },
   {
     "symbol": "SBIN",
     "bias": "BULLISH",
     "final_pred": 977.31,
-    "final_actual": 952.45,
-    "error_pct": 2.59,
+    "final_actual": 949.8,
+    "error_pct": 2.87,
     "verdict": "FAILED"
   },
   {
     "symbol": "BHARTIARTL",
     "bias": "NEUTRAL",
     "final_pred": 1742.6,
-    "final_actual": 1736.5,
-    "error_pct": 0.35,
+    "final_actual": 1735.5,
+    "error_pct": 0.41,
     "verdict": "SUCCESS"
   },
   {
     "symbol": "LT",
     "bias": "BEARISH",
     "final_pred": 3613.02,
-    "final_actual": 3680.0,
-    "error_pct": 1.8,
+    "final_actual": 3667.3,
+    "error_pct": 1.46,
     "verdict": "PARTIAL"
   },
   {
     "symbol": "SUNPHARMA",
     "bias": "BULLISH",
     "final_pred": 1844.67,
-    "final_actual": 1799.7,
-    "error_pct": 2.49,
+    "final_actual": 1796.5,
+    "error_pct": 2.66,
     "verdict": "FAILED"
   }
 ]

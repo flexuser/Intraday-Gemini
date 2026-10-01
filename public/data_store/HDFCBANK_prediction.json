@@ -2,14 +2,24 @@
   "prediction": {
     "bias": "BULLISH",
     "reasoning": "Intraday outlook based on live volume (0.0x) and order flow evaluation.",
-    "volume_ratio": 0.0,
-    "has_volume_spike": false,
+    "volume_ratio": 1.86,
+    "has_volume_spike": true,
     "news_feed": [
       {
         "title": "Apple Pay launches in India with Axis Bank partnership",
         "publisher": "Quartz",
         "link": {
           "url": "https://qz.com/apple-pay-launches-india-axis-bank-093026",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Asian Equities Traded in the US as American Depositary Receipts Rise in Friday Trading; Down for Week",
+        "publisher": "MT Newswires",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/world-indices/articles/asian-equities-traded-us-american-144123090.html",
           "site": "finance",
           "region": "US",
           "lang": "en-US"
@@ -24,23 +34,20 @@
           "region": "US",
           "lang": "en-US"
         }
-      },
-      {
-        "title": "Microsoft Drops as Three-Zone Hyderabad Region Goes Live",
-        "publisher": "GuruFocus.com",
-        "link": {
-          "url": "https://finance.yahoo.com/technology/ai/articles/microsoft-drops-three-zone-hyderabad-155029074.html",
-          "site": "finance",
-          "region": "US",
-          "lang": "en-US"
-        }
       }
-    ]
+    ],
+    "quant_signals": {
+      "vwap": 715.91,
+      "rsi": 63.79,
+      "pcr": 1.0,
+      "implied_volatility": 18.5,
+      "past_verdict": "FAILED"
+    }
   },
   "curves": {
     "symbol": "HDFCBANK",
     "date": "2026-10-01",
-    "generated_at": "01:45 PM IST",
+    "generated_at": "02:58 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -74,7 +81,7 @@
       719.25,
       716.15,
       717.9,
-      null,
+      714.1,
       null,
       null
     ],
@@ -86,12 +93,12 @@
       260990,
       633505,
       579657,
-      null,
+      466504,
       null,
       null
     ],
     "final_pred": 731.85,
-    "final_actual": 717.9,
-    "error_pct": 1.94
+    "final_actual": 714.1,
+    "error_pct": 2.47
   }
 }
