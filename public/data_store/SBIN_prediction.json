@@ -1,39 +1,14 @@
 {
   "prediction": {
-    "bias": "NEUTRAL",
-    "reasoning": "Market dynamics evaluation active for SBIN.",
+    "bias": "BULLISH",
+    "reasoning": "Despite trading below VWAP at \u20b9962.22 following an initial steep sell-off, RSI remains resilient at 53.45 with a neutral PCR anchor at 1.0. The 2.76x volume spike indicates institutional absorption, favoring an afternoon mean-reversion move back toward VWAP.",
     "volume_ratio": 2.76,
     "has_volume_spike": true,
     "news_feed": [
       {
-        "title": "SBI and Kyobo Test Japan-Korea Stablecoin Settlement Model",
-        "publisher": "Coinspeaker",
-        "link": {
-          "url": "https://www.coinspeaker.com/ripple-news-japan-korea-stablecoin-test/",
-          "site": "finance",
-          "region": "US",
-          "lang": "en-US"
-        }
-      },
-      {
-        "title": "Ripple XRP News: Circle Arc Launch Puts SBI\u2019s Dual-Rail Strategy in Focus",
-        "publisher": "99bitcoins",
-        "link": {
-          "url": "https://99bitcoins.com/news/altcoins/circle-arc-sbi-settlement-ripple-xrp/",
-          "site": "finance",
-          "region": "US",
-          "lang": "en-US"
-        }
-      },
-      {
-        "title": "India\u2019s National Stock Exchange Seeks $46 Billion Valuation in IPO",
-        "publisher": "The Wall Street Journal",
-        "link": {
-          "url": "https://www.wsj.com/business/national-stock-exchange-of-india-seeks-2-36-billion-in-pared-back-ipo-19cf72eb?siteid=yhoof2&yptr=yahoo",
-          "site": "finance",
-          "region": "US",
-          "lang": "en-US"
-        }
+        "title": "No major structural announcements recorded for SBIN.NS.",
+        "publisher": "NSE Surveillance",
+        "link": "#"
       }
     ],
     "quant_signals": {
@@ -49,8 +24,8 @@
   },
   "curves": {
     "symbol": "SBIN",
-    "date": "2026-10-01",
-    "generated_at": "11:28 PM IST",
+    "date": "2026-10-02",
+    "generated_at": "09:10 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -63,18 +38,18 @@
       "15:00",
       "15:30"
     ],
-    "bias": "NEUTRAL",
+    "bias": "BULLISH",
     "predicted_curve": [
       958.15,
-      960.07,
-      956.23,
-      959.11,
-      955.28,
-      960.07,
-      956.23,
-      959.11,
-      957.19,
-      958.15
+      952.81,
+      950.49,
+      951.82,
+      954.79,
+      958.01,
+      960.13,
+      961.12,
+      961.87,
+      962.17
     ],
     "actual_curve": [
       958.15,
@@ -100,8 +75,8 @@
       179474,
       410749
     ],
-    "final_pred": 958.15,
+    "final_pred": 962.17,
     "final_actual": 954.1,
-    "error_pct": 0.42
+    "error_pct": 0.84
   }
 }

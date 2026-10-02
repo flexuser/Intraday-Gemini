@@ -1,39 +1,14 @@
 {
   "prediction": {
-    "bias": "NEUTRAL",
-    "reasoning": "Market dynamics evaluation active for TCS.",
+    "bias": "BULLISH",
+    "reasoning": "Quant fallback trajectory applied (Feedback scaling: 1.0).",
     "volume_ratio": 2.51,
     "has_volume_spike": true,
     "news_feed": [
       {
-        "title": "Becoming \u2018AI native\u2019 might not be as profitable as you think. Unless your company does it right",
-        "publisher": "FastCompany",
-        "link": {
-          "url": "https://www.fastcompany.com/91589386/being-ai-native-is-only-profitable-when-done-right",
-          "site": "finance",
-          "region": "US",
-          "lang": "en-US"
-        }
-      },
-      {
-        "title": "Trump administration proposes axing grace period for H-1B visa holders after job loss",
-        "publisher": "Reuters",
-        "link": {
-          "url": "https://finance.yahoo.com/news/trump-administration-proposes-waiving-grace-152322715.html",
-          "site": "finance",
-          "region": "US",
-          "lang": "en-US"
-        }
-      },
-      {
-        "title": "Rezolve\u2019s (RZLV) Revenue Surge Is Turning Heads, but at What Cost?",
-        "publisher": "Insider Monkey",
-        "link": {
-          "url": "https://finance.yahoo.com/markets/stocks/articles/rezolve-rzlv-revenue-surge-turning-084132796.html",
-          "site": "finance",
-          "region": "US",
-          "lang": "en-US"
-        }
+        "title": "No major structural announcements recorded for TCS.NS.",
+        "publisher": "NSE Surveillance",
+        "link": "#"
       }
     ],
     "quant_signals": {
@@ -49,8 +24,8 @@
   },
   "curves": {
     "symbol": "TCS",
-    "date": "2026-10-01",
-    "generated_at": "11:28 PM IST",
+    "date": "2026-10-02",
+    "generated_at": "09:10 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -63,18 +38,18 @@
       "15:00",
       "15:30"
     ],
-    "bias": "NEUTRAL",
+    "bias": "BULLISH",
     "predicted_curve": [
       2078.4,
-      2082.56,
-      2074.24,
-      2080.48,
-      2072.16,
-      2082.56,
-      2074.24,
-      2080.48,
-      2076.32,
-      2078.4
+      2085.27,
+      2090.63,
+      2094.24,
+      2097.09,
+      2099.7,
+      2102.6,
+      2105.94,
+      2109.45,
+      2113.11
     ],
     "actual_curve": [
       2078.4,
@@ -100,8 +75,8 @@
       68564,
       115816
     ],
-    "final_pred": 2078.4,
+    "final_pred": 2113.11,
     "final_actual": 2075.0,
-    "error_pct": 0.16
+    "error_pct": 1.83
   }
 }
