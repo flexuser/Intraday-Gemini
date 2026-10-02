@@ -25,7 +25,7 @@ jobs:
       - name: Execute Intraday AI Sync
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python archive_once.py
+        run: python -m muthoot_poc.archive_once
 
       - name: Commit & Push Updated Data Store
         run: |
