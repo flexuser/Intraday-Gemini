@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-02T18:02:45+05:30",
+  "as_of": "2026-10-02T18:08:54+05:30",
   "status": "FAILED",
   "symbols_total": 11,
   "symbols_updated": 0,
@@ -9,6 +9,10 @@
   "sample_llm_error": null,
   "errors": [
     {
+      "symbol": "MUTHOOTFIN",
+      "error": "no bars for today - files left untouched"
+    },
+    {
       "symbol": "RELIANCE",
       "error": "no bars for today - files left untouched"
     },
@@ -17,11 +21,7 @@
       "error": "no bars for today - files left untouched"
     },
     {
-      "symbol": "MUTHOOTFIN",
-      "error": "no bars for today - files left untouched"
-    },
-    {
-      "symbol": "INFY",
+      "symbol": "ICICIBANK",
       "error": "no bars for today - files left untouched"
     },
     {
@@ -29,15 +29,15 @@
       "error": "no bars for today - files left untouched"
     },
     {
-      "symbol": "ICICIBANK",
-      "error": "no bars for today - files left untouched"
-    },
-    {
-      "symbol": "TCS",
+      "symbol": "INFY",
       "error": "no bars for today - files left untouched"
     },
     {
       "symbol": "SBIN",
+      "error": "no bars for today - files left untouched"
+    },
+    {
+      "symbol": "TCS",
       "error": "no bars for today - files left untouched"
     },
     {
