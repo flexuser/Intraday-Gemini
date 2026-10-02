@@ -1,14 +1,39 @@
 {
   "prediction": {
-    "bias": "BEARISH",
-    "reasoning": "Quant fallback trajectory applied (Feedback scaling: 1.0).",
-    "volume_ratio": 6.58,
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for BHARTIARTL.",
+    "volume_ratio": 6.59,
     "has_volume_spike": true,
     "news_feed": [
       {
-        "title": "No major structural announcements recorded for BHARTIARTL.NS.",
-        "publisher": "NSE Surveillance",
-        "link": "#"
+        "title": "India's Airtel Payments Bank names Shabnam Sinha chairperson",
+        "publisher": "Reuters",
+        "link": {
+          "url": "https://sg.finance.yahoo.com/news/indias-airtel-payments-bank-names-124642016.html",
+          "site": "finance",
+          "region": "SG",
+          "lang": "en-SG"
+        }
+      },
+      {
+        "title": "Singtel's quarterly profit tops estimates on Optus, digital services strength",
+        "publisher": "Reuters",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/singtel-posts-21-rise-first-234459872.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "India's Vodafone Idea narrows quarterly loss on bigger per-user revenue",
+        "publisher": "Reuters",
+        "link": {
+          "url": "https://sg.finance.yahoo.com/news/indias-vodafone-idea-narrows-quarterly-134758108.html",
+          "site": "finance",
+          "region": "SG",
+          "lang": "en-SG"
+        }
       }
     ],
     "quant_signals": {
@@ -24,8 +49,8 @@
   },
   "curves": {
     "symbol": "BHARTIARTL",
-    "date": "2026-10-02",
-    "generated_at": "09:10 AM IST",
+    "date": "2026-10-01",
+    "generated_at": "11:28 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -38,18 +63,18 @@
       "15:00",
       "15:30"
     ],
-    "bias": "BEARISH",
+    "bias": "NEUTRAL",
     "predicted_curve": [
       1742.6,
-      1730.52,
-      1721.11,
-      1714.76,
-      1709.76,
-      1705.17,
-      1700.08,
-      1694.21,
-      1688.04,
-      1681.61
+      1746.09,
+      1739.11,
+      1744.34,
+      1737.37,
+      1746.09,
+      1739.11,
+      1744.34,
+      1740.86,
+      1742.6
     ],
     "actual_curve": [
       1742.6,
@@ -75,8 +100,8 @@
       81044,
       577950
     ],
-    "final_pred": 1681.61,
+    "final_pred": 1742.6,
     "final_actual": 1741.1,
-    "error_pct": 3.41
+    "error_pct": 0.09
   }
 }

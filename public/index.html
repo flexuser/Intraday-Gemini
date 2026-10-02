@@ -56,7 +56,7 @@
           <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 pb-3">
             <div>
               <div class="flex items-center gap-3">
-                <h2 id="active-symbol" class="text-2xl font-bold text-white tracking-wide">SBIN</h2>
+                <h2 id="active-symbol" class="text-2xl font-bold text-white tracking-wide">MUTHOOTFIN</h2>
                 <div id="bias-badge" class="px-3 py-0.5 rounded-full text-xs font-bold bg-slate-800 text-slate-300">
                   NEUTRAL
                 </div>
@@ -145,9 +145,7 @@
     function renderWatchlistPills() {
       const container = document.getElementById("watchlist-pills");
       container.innerHTML = WATCHLIST.map(sym => 
-        <button onclick="loadStock('')" class="px-3 py-1 rounded-md text-xs font-semibold transition ">
-          
-        </button>
+        `<button onclick="loadStock('${sym}')" class="px-3 py-1 rounded-md text-xs font-semibold transition ${sym === activeSymbol ? 'bg-blue-600 text-white' : 'bg-slate-900 text-slate-400 hover:text-white'}">${sym}</button>`
       ).join("");
     }
 
@@ -173,8 +171,8 @@
 
       const cb = Date.now();
       const urlsToTry = [
-        ${GITHUB_RAW_BASE}/_prediction.json?cb=,
-        ./data_store/_prediction.json?cb=
+        `${GITHUB_RAW_BASE}/${symbol}_prediction.json?cb=${cb}`,
+        `./data_store/${symbol}_prediction.json?cb=${cb}`
       ];
 
       let data = null;
@@ -218,7 +216,7 @@
 
       const volRatio = prediction?.volume_ratio || 1.0;
       const hasSpike = prediction?.has_volume_spike || false;
-      volumeBadge.innerText = Vol Ratio: x;
+      volumeBadge.innerText = `Vol Ratio: ${volRatio}x`;
       volumeBadge.className = hasSpike 
         ? "px-2.5 py-0.5 rounded text-xs font-bold bg-amber-950 text-amber-400 border border-amber-800 animate-pulse" 
         : "px-2.5 py-0.5 rounded text-xs font-semibold bg-slate-800 text-slate-400";
@@ -228,20 +226,20 @@
       const newsList = document.getElementById("news-list");
       if (prediction?.news_feed && prediction.news_feed.length > 0) {
         newsList.innerHTML = prediction.news_feed.map(item => 
-          <li class="bg-slate-900 p-2 rounded border border-slate-800/80">
-            <a href="" target="_blank" class="text-blue-400 hover:underline font-medium block leading-snug"></a>
-            <span class="text-[10px] text-slate-500 block mt-0.5">Source: </span>
-          </li>
+          `<li class="bg-slate-900 p-2 rounded border border-slate-800/80">
+            <a href="${item.link}" target="_blank" class="text-blue-400 hover:underline font-medium block leading-snug">${item.title}</a>
+            <span class="text-[10px] text-slate-500 block mt-0.5">Source: ${item.publisher}</span>
+          </li>`
         ).join('');
       } else {
-        newsList.innerHTML = <li class="text-slate-500 italic">No direct catalysts reported.</li>;
+        newsList.innerHTML = `<li class="text-slate-500 italic">No direct catalysts reported.</li>`;
       }
 
       const validActuals = curves.actual_curve ? curves.actual_curve.filter(v => v !== null) : [];
-      document.getElementById("val-base").innerText = validActuals.length > 0 ? validActuals[0] : "--";
-      document.getElementById("val-target").innerText = curves.final_pred ?? "--";
-      document.getElementById("val-actual").innerText = validActuals.length > 0 ? validActuals[validActuals.length - 1] : "--";
-      document.getElementById("val-error").innerText = curves.error_pct !== undefined ? ${curves.error_pct}% : "--";
+      document.getElementById("val-base").innerText = validActuals.length > 0 ? `₹${validActuals[0]}` : "--";
+      document.getElementById("val-target").innerText = curves.final_pred ? `₹${curves.final_pred}` : "--";
+      document.getElementById("val-actual").innerText = validActuals.length > 0 ? `₹${validActuals[validActuals.length - 1]}` : "--";
+      document.getElementById("val-error").innerText = curves.error_pct !== undefined ? `${curves.error_pct}%` : "--";
 
       const ctx = document.getElementById('predictionChart').getContext('2d');
       if (chartInstance) chartInstance.destroy();
@@ -316,23 +314,23 @@
 
     async function loadAuditData() {
       const tbody = document.getElementById("audit-table-body");
-      tbody.innerHTML = <tr><td colspan="6" class="p-4 text-center text-slate-500">Loading evaluation matrix...</td></tr>;
+      tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-500">Loading evaluation matrix...</td></tr>`;
       try {
-        const res = await fetch(./data_store/eod_evaluation.json?cb=, { cache: 'no-store' });
+        const res = await fetch(`./data_store/eod_evaluation.json?cb=${Date.now()}`, { cache: 'no-store' });
         const data = await res.json();
-        document.getElementById("audit-sync-time").innerText = Last Refreshed: ;
+        document.getElementById("audit-sync-time").innerText = `Last Refreshed: ${new Date().toLocaleTimeString()}`;
         tbody.innerHTML = data.map(item => 
-          <tr class="hover:bg-slate-900/50">
-            <td class="p-2.5 font-bold text-white"></td>
-            <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] rounded font-semibold "></span></td>
-            <td class="p-2.5 font-mono"></td>
-            <td class="p-2.5 font-mono"></td>
-            <td class="p-2.5 font-mono">%</td>
-            <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] rounded font-semibold "></span></td>
-          </tr>
+          `<tr class="hover:bg-slate-900/50">
+            <td class="p-2.5 font-bold text-white">${item.symbol}</td>
+            <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] rounded font-semibold ${item.bias === 'BULLISH' ? 'bg-emerald-950 text-emerald-400' : item.bias === 'BEARISH' ? 'bg-rose-950 text-rose-400' : 'bg-slate-800 text-slate-300'}">${item.bias}</span></td>
+            <td class="p-2.5 font-mono">₹${item.final_pred}</td>
+            <td class="p-2.5 font-mono">₹${item.final_actual}</td>
+            <td class="p-2.5 font-mono">${item.error_pct}%</td>
+            <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] rounded font-semibold ${item.verdict === 'SUCCESS' ? 'bg-emerald-900/50 text-emerald-300' : item.verdict === 'PARTIAL' ? 'bg-amber-900/50 text-amber-300' : 'bg-rose-900/50 text-rose-300'}">${item.verdict}</span></td>
+          </tr>`
         ).join('');
       } catch (e) {
-        tbody.innerHTML = <tr><td colspan="6" class="p-4 text-center text-rose-400">Failed to load audit data. Ensure archive_once.py has run.</td></tr>;
+        tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-rose-400">Failed to load audit data. Ensure archive_once.py has run.</td></tr>`;
       }
     }
 

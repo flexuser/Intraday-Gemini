@@ -1,14 +1,39 @@
 {
   "prediction": {
-    "bias": "BEARISH",
-    "reasoning": "Quant fallback trajectory applied (Feedback scaling: 1.0).",
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for LT.",
     "volume_ratio": 6.87,
     "has_volume_spike": true,
     "news_feed": [
       {
-        "title": "No major structural announcements recorded for LT.NS.",
-        "publisher": "NSE Surveillance",
-        "link": "#"
+        "title": "India Begins Tokenizing Its $620 Billion Corporate Bond Market",
+        "publisher": "decrypt",
+        "link": {
+          "url": "https://decrypt.co/378120/india-begins-tokenizing-its-620-billion-corporate-bond-market",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "L&T and MHI to build 50km people mover system at Al Maktoum Airport",
+        "publisher": "World Construction Network",
+        "link": {
+          "url": "https://www.worldconstructionnetwork.com/news/lt-mhi-al-maktoum-airport-contract/",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "What Does Nvidia (NVDA) Gain From Its New AI Factory Push In India?",
+        "publisher": "Simply Wall St.",
+        "link": {
+          "url": "https://finance.yahoo.com/technology/ai/articles/does-nvidia-nvda-gain-ai-101028140.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
       }
     ],
     "quant_signals": {
@@ -24,8 +49,8 @@
   },
   "curves": {
     "symbol": "LT",
-    "date": "2026-10-02",
-    "generated_at": "09:10 AM IST",
+    "date": "2026-10-01",
+    "generated_at": "11:28 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -38,18 +63,18 @@
       "15:00",
       "15:30"
     ],
-    "bias": "BEARISH",
+    "bias": "NEUTRAL",
     "predicted_curve": [
       3717.1,
-      3691.34,
-      3671.25,
-      3657.72,
-      3647.05,
-      3637.27,
-      3626.39,
-      3613.88,
-      3600.71,
-      3587.0
+      3724.53,
+      3709.67,
+      3720.82,
+      3705.95,
+      3724.53,
+      3709.67,
+      3720.82,
+      3713.38,
+      3717.1
     ],
     "actual_curve": [
       3717.1,
@@ -75,8 +100,8 @@
       70636,
       178623
     ],
-    "final_pred": 3587.0,
+    "final_pred": 3717.1,
     "final_actual": 3693.4,
-    "error_pct": 2.86
+    "error_pct": 0.64
   }
 }

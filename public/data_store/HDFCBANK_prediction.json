@@ -1,14 +1,39 @@
 {
   "prediction": {
-    "bias": "BULLISH",
-    "reasoning": "Despite the negative morning session, heavy volume absorption and a resilient RSI at 68.87 suggest institutional accumulation near the \u20b9718 VWAP pivot. Neutral PCR positioning at 1.0 further provides balanced overhead room for an intraday recovery back toward the upper Bollinger boundary.",
-    "volume_ratio": 3.45,
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for HDFCBANK.",
+    "volume_ratio": 3.46,
     "has_volume_spike": true,
     "news_feed": [
       {
-        "title": "No major structural announcements recorded for HDFCBANK.NS.",
-        "publisher": "NSE Surveillance",
-        "link": "#"
+        "title": "Apple Pay launches in India with Axis Bank partnership",
+        "publisher": "Quartz",
+        "link": {
+          "url": "https://qz.com/apple-pay-launches-india-axis-bank-093026",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "WF vs. HDB: Which Stock Should Value Investors Buy Now?",
+        "publisher": "Zacks",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/wf-vs-hdb-stock-value-144002894.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Microsoft Drops as Three-Zone Hyderabad Region Goes Live",
+        "publisher": "GuruFocus.com",
+        "link": {
+          "url": "https://finance.yahoo.com/technology/ai/articles/microsoft-drops-three-zone-hyderabad-155029074.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
       }
     ],
     "quant_signals": {
@@ -24,8 +49,8 @@
   },
   "curves": {
     "symbol": "HDFCBANK",
-    "date": "2026-10-02",
-    "generated_at": "09:10 AM IST",
+    "date": "2026-10-01",
+    "generated_at": "11:28 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -38,18 +63,18 @@
       "15:00",
       "15:30"
     ],
-    "bias": "BULLISH",
+    "bias": "NEUTRAL",
     "predicted_curve": [
       717.5,
-      713.5,
-      711.76,
-      712.77,
-      715.01,
-      717.46,
-      719.09,
-      719.88,
-      720.48,
-      720.73
+      718.93,
+      716.07,
+      718.22,
+      715.35,
+      718.93,
+      716.07,
+      718.22,
+      716.78,
+      717.5
     ],
     "actual_curve": [
       717.5,
@@ -75,8 +100,8 @@
       952229,
       1482466
     ],
-    "final_pred": 720.73,
+    "final_pred": 717.5,
     "final_actual": 721.2,
-    "error_pct": 0.07
+    "error_pct": 0.52
   }
 }

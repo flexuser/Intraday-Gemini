@@ -1,14 +1,39 @@
 {
   "prediction": {
-    "bias": "BEARISH",
-    "reasoning": "With RSI subdued at 43.33 and price stretched above the Bollinger upper band and VWAP benchmark, mean-reversion pressure favors a pullback toward \u20b91314.76. A neutral PCR of 1.0 fails to provide directional option support, leaving the elevated volume vulnerable to profit-taking.",
-    "volume_ratio": 2.8,
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for ICICIBANK.",
+    "volume_ratio": 2.81,
     "has_volume_spike": true,
     "news_feed": [
       {
-        "title": "No major structural announcements recorded for ICICIBANK.NS.",
-        "publisher": "NSE Surveillance",
-        "link": "#"
+        "title": "Apple Pay launches in India with Axis Bank partnership",
+        "publisher": "Quartz",
+        "link": {
+          "url": "https://qz.com/apple-pay-launches-india-axis-bank-093026",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Apple Pay to launch in India next month with Axis Bank- report",
+        "publisher": "Electronic Payments",
+        "link": {
+          "url": "https://www.electronicpaymentsinternational.com/news/apple-pay-to-launch-in-india-next-month-with-axis-bank-report/",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "India and Russia Are Finding Another Way Around the Dollar",
+        "publisher": "Moby",
+        "link": {
+          "url": "https://app.moby.co/home/news/news-india-and-russia-are-finding-another-way-around-the-dollar?utm_source=yahoo_finance&utm_medium=rss",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
       }
     ],
     "quant_signals": {
@@ -24,8 +49,8 @@
   },
   "curves": {
     "symbol": "ICICIBANK",
-    "date": "2026-10-02",
-    "generated_at": "09:10 AM IST",
+    "date": "2026-10-01",
+    "generated_at": "11:28 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -38,18 +63,18 @@
       "15:00",
       "15:30"
     ],
-    "bias": "BEARISH",
+    "bias": "NEUTRAL",
     "predicted_curve": [
       1321.6,
-      1328.96,
-      1332.17,
-      1330.45,
-      1326.56,
-      1322.24,
-      1319.18,
-      1317.51,
-      1316.18,
-      1315.41
+      1324.24,
+      1318.96,
+      1322.92,
+      1317.64,
+      1324.24,
+      1318.96,
+      1322.92,
+      1320.28,
+      1321.6
     ],
     "actual_curve": [
       1321.6,
@@ -75,8 +100,8 @@
       224561,
       442910
     ],
-    "final_pred": 1315.41,
+    "final_pred": 1321.6,
     "final_actual": 1310.6,
-    "error_pct": 0.36
+    "error_pct": 0.83
   }
 }

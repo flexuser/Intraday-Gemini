@@ -1,14 +1,39 @@
 {
   "prediction": {
-    "bias": "BEARISH",
-    "reasoning": "Trading significantly below the \u20b92757.13 VWAP on an active 1.97x volume spike confirms persistent institutional distribution. With RSI at 45.47 reflecting soft momentum and PCR balanced at 1.0 offering no strong floor, downward drift is expected into the close.",
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for MUTHOOTFIN.",
     "volume_ratio": 1.97,
     "has_volume_spike": true,
     "news_feed": [
       {
-        "title": "No major structural announcements recorded for MUTHOOTFIN.NS.",
-        "publisher": "NSE Surveillance",
-        "link": "#"
+        "title": "Muthoot Finance Ltd (BOM:533398) (Q1 2027) Earnings Call Highlights: AUM Surges 43% to ...",
+        "publisher": "GuruFocus.com",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/muthoot-finance-ltd-bom-533398-010148679.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Muthoot Finance Ltd (BOM:533398) Q4 2026 Earnings Call Highlights: Record Growth and Strategic ...",
+        "publisher": "GuruFocus.com",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/muthoot-finance-ltd-bom-533398-230353356.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "Indian gold-loan financier Muthoot Finance's profit doubles on strong loan growth",
+        "publisher": "Reuters",
+        "link": {
+          "url": "https://sg.finance.yahoo.com/news/indian-gold-loan-financier-muthoot-123529478.html",
+          "site": "finance",
+          "region": "SG",
+          "lang": "en-SG"
+        }
       }
     ],
     "quant_signals": {
@@ -24,8 +49,8 @@
   },
   "curves": {
     "symbol": "MUTHOOTFIN",
-    "date": "2026-10-02",
-    "generated_at": "09:10 AM IST",
+    "date": "2026-10-01",
+    "generated_at": "11:28 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -38,18 +63,18 @@
       "15:00",
       "15:30"
     ],
-    "bias": "BEARISH",
+    "bias": "NEUTRAL",
     "predicted_curve": [
       2729.7,
-      2727.02,
-      2724.94,
-      2723.53,
-      2722.42,
-      2721.41,
-      2720.28,
-      2718.98,
-      2717.61,
-      2716.19
+      2735.16,
+      2724.24,
+      2732.43,
+      2721.51,
+      2735.16,
+      2724.24,
+      2732.43,
+      2726.97,
+      2729.7
     ],
     "actual_curve": [
       2729.7,
@@ -75,8 +100,8 @@
       12159,
       17440
     ],
-    "final_pred": 2716.19,
+    "final_pred": 2729.7,
     "final_actual": 2697.1,
-    "error_pct": 0.7
+    "error_pct": 1.19
   }
 }

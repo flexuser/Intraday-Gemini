@@ -1,14 +1,39 @@
 {
   "prediction": {
-    "bias": "BEARISH",
-    "reasoning": "Trading below the \u20b9283.35 VWAP with RSI at an overextended 70.95 signals strong intraday exhaustion above the upper Bollinger Band. With a neutral 1.0 PCR providing no decisive gamma support, elevated volume favors downward mean reversion into the close.",
+    "bias": "NEUTRAL",
+    "reasoning": "Market dynamics evaluation active for TMPV.",
     "volume_ratio": 1.52,
     "has_volume_spike": true,
     "news_feed": [
       {
-        "title": "No major structural announcements recorded for TMPV.NS.",
-        "publisher": "NSE Surveillance",
-        "link": "#"
+        "title": "Tata Motors Q1 profit falls 80.2% despite revenue rise",
+        "publisher": "Just Auto",
+        "link": {
+          "url": "https://www.just-auto.com/news/tata-motors-q1-profit-falls-80-2/",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
+      },
+      {
+        "title": "India's Tata Motors Passenger Vehicles falls on persistent margin, demand concerns at JLR",
+        "publisher": "Reuters",
+        "link": {
+          "url": "https://sg.finance.yahoo.com/news/indias-tata-motors-passenger-vehicles-035612911.html",
+          "site": "finance",
+          "region": "SG",
+          "lang": "en-SG"
+        }
+      },
+      {
+        "title": "Tata Motors Passenger Vehicles Ltd (BOM:500570) (Q1 2027) Earnings Call Highlights: Record EV ...",
+        "publisher": "GuruFocus.com",
+        "link": {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/tata-motors-passenger-vehicles-ltd-230555605.html",
+          "site": "finance",
+          "region": "US",
+          "lang": "en-US"
+        }
       }
     ],
     "quant_signals": {
@@ -24,8 +49,8 @@
   },
   "curves": {
     "symbol": "TMPV",
-    "date": "2026-10-02",
-    "generated_at": "09:10 AM IST",
+    "date": "2026-10-01",
+    "generated_at": "11:28 PM IST",
     "timeframes": [
       "09:15",
       "09:45",
@@ -38,18 +63,18 @@
       "15:00",
       "15:30"
     ],
-    "bias": "BEARISH",
+    "bias": "NEUTRAL",
     "predicted_curve": [
       280.45,
-      282.02,
-      282.69,
-      282.3,
-      281.4,
-      280.35,
-      279.51,
-      278.95,
-      278.47,
-      278.07
+      281.01,
+      279.89,
+      280.73,
+      279.61,
+      281.01,
+      279.89,
+      280.73,
+      280.17,
+      280.45
     ],
     "actual_curve": [
       280.45,
@@ -75,8 +100,8 @@
       331208,
       334733
     ],
-    "final_pred": 278.07,
+    "final_pred": 280.45,
     "final_actual": 279.4,
-    "error_pct": 0.47
+    "error_pct": 0.37
   }
 }
