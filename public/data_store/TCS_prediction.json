@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "BULLISH",
     "reasoning": "Quant fallback trajectory applied (Feedback scaling: 1.0).",
-    "volume_ratio": 2.51,
+    "volume_ratio": 2.49,
     "has_volume_spike": true,
     "news_feed": [
       {
@@ -12,20 +12,20 @@
       }
     ],
     "quant_signals": {
-      "vwap": 2065.69,
+      "vwap": 2063.54,
       "rsi": 67.77,
       "atr": 4.88,
       "bb_upper": 2086.14,
       "bb_lower": 2038.51,
       "pcr": 1.0,
       "implied_volatility": 18.5,
-      "past_verdict": "SUCCESS"
+      "past_verdict": "FAILED"
     }
   },
   "curves": {
     "symbol": "TCS",
     "date": "2026-10-02",
-    "generated_at": "09:10 AM IST",
+    "generated_at": "09:20 AM IST",
     "timeframes": [
       "09:15",
       "09:45",

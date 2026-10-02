@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "BEARISH",
     "reasoning": "Trading significantly below the \u20b92757.13 VWAP on an active 1.97x volume spike confirms persistent institutional distribution. With RSI at 45.47 reflecting soft momentum and PCR balanced at 1.0 offering no strong floor, downward drift is expected into the close.",
-    "volume_ratio": 1.97,
+    "volume_ratio": 1.74,
     "has_volume_spike": true,
     "news_feed": [
       {
@@ -12,20 +12,20 @@
       }
     ],
     "quant_signals": {
-      "vwap": 2757.13,
+      "vwap": 2749.97,
       "rsi": 45.47,
       "atr": 7.53,
       "bb_upper": 2709.2,
       "bb_lower": 2679.13,
       "pcr": 1.0,
       "implied_volatility": 18.5,
-      "past_verdict": "PARTIAL"
+      "past_verdict": "SUCCESS"
     }
   },
   "curves": {
     "symbol": "MUTHOOTFIN",
     "date": "2026-10-02",
-    "generated_at": "09:10 AM IST",
+    "generated_at": "09:20 AM IST",
     "timeframes": [
       "09:15",
       "09:45",

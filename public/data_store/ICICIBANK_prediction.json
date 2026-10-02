@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "BEARISH",
     "reasoning": "With RSI subdued at 43.33 and price stretched above the Bollinger upper band and VWAP benchmark, mean-reversion pressure favors a pullback toward \u20b91314.76. A neutral PCR of 1.0 fails to provide directional option support, leaving the elevated volume vulnerable to profit-taking.",
-    "volume_ratio": 2.8,
+    "volume_ratio": 2.75,
     "has_volume_spike": true,
     "news_feed": [
       {
@@ -12,20 +12,20 @@
       }
     ],
     "quant_signals": {
-      "vwap": 1314.76,
+      "vwap": 1312.05,
       "rsi": 43.33,
       "atr": 3.14,
       "bb_upper": 1316.93,
       "bb_lower": 1308.25,
       "pcr": 1.0,
       "implied_volatility": 18.5,
-      "past_verdict": "PARTIAL"
+      "past_verdict": "SUCCESS"
     }
   },
   "curves": {
     "symbol": "ICICIBANK",
     "date": "2026-10-02",
-    "generated_at": "09:10 AM IST",
+    "generated_at": "09:20 AM IST",
     "timeframes": [
       "09:15",
       "09:45",

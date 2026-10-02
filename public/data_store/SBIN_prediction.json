@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "BULLISH",
     "reasoning": "Despite trading below VWAP at \u20b9962.22 following an initial steep sell-off, RSI remains resilient at 53.45 with a neutral PCR anchor at 1.0. The 2.76x volume spike indicates institutional absorption, favoring an afternoon mean-reversion move back toward VWAP.",
-    "volume_ratio": 2.76,
+    "volume_ratio": 2.37,
     "has_volume_spike": true,
     "news_feed": [
       {
@@ -12,20 +12,20 @@
       }
     ],
     "quant_signals": {
-      "vwap": 962.22,
+      "vwap": 960.9,
       "rsi": 53.45,
       "atr": 2.0,
       "bb_upper": 956.59,
       "bb_lower": 945.66,
       "pcr": 1.0,
       "implied_volatility": 18.5,
-      "past_verdict": "SUCCESS"
+      "past_verdict": "PARTIAL"
     }
   },
   "curves": {
     "symbol": "SBIN",
     "date": "2026-10-02",
-    "generated_at": "09:10 AM IST",
+    "generated_at": "09:20 AM IST",
     "timeframes": [
       "09:15",
       "09:45",

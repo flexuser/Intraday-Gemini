@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "BULLISH",
     "reasoning": "Despite the negative morning session, heavy volume absorption and a resilient RSI at 68.87 suggest institutional accumulation near the \u20b9718 VWAP pivot. Neutral PCR positioning at 1.0 further provides balanced overhead room for an intraday recovery back toward the upper Bollinger boundary.",
-    "volume_ratio": 3.45,
+    "volume_ratio": 3.15,
     "has_volume_spike": true,
     "news_feed": [
       {
@@ -12,7 +12,7 @@
       }
     ],
     "quant_signals": {
-      "vwap": 718.17,
+      "vwap": 715.9,
       "rsi": 68.87,
       "atr": 1.42,
       "bb_upper": 722.31,
@@ -25,7 +25,7 @@
   "curves": {
     "symbol": "HDFCBANK",
     "date": "2026-10-02",
-    "generated_at": "09:10 AM IST",
+    "generated_at": "09:20 AM IST",
     "timeframes": [
       "09:15",
       "09:45",

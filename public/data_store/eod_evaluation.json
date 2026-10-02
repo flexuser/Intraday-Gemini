@@ -1,11 +1,27 @@
 [
   {
+    "symbol": "TMPV",
+    "bias": "BEARISH",
+    "final_pred": 278.07,
+    "final_actual": 279.4,
+    "error_pct": 0.47,
+    "verdict": "SUCCESS"
+  },
+  {
     "symbol": "INFY",
     "bias": "BULLISH",
     "final_pred": 1050.01,
     "final_actual": 1035.0,
     "error_pct": 1.48,
     "verdict": "PARTIAL"
+  },
+  {
+    "symbol": "MUTHOOTFIN",
+    "bias": "BEARISH",
+    "final_pred": 2716.19,
+    "final_actual": 2697.1,
+    "error_pct": 0.7,
+    "verdict": "SUCCESS"
   },
   {
     "symbol": "RELIANCE",
@@ -24,28 +40,12 @@
     "verdict": "SUCCESS"
   },
   {
-    "symbol": "TMPV",
-    "bias": "BEARISH",
-    "final_pred": 278.07,
-    "final_actual": 279.4,
-    "error_pct": 0.47,
-    "verdict": "SUCCESS"
-  },
-  {
     "symbol": "ICICIBANK",
     "bias": "BEARISH",
     "final_pred": 1315.41,
     "final_actual": 1310.6,
     "error_pct": 0.36,
     "verdict": "SUCCESS"
-  },
-  {
-    "symbol": "LT",
-    "bias": "BEARISH",
-    "final_pred": 3587.0,
-    "final_actual": 3693.4,
-    "error_pct": 2.86,
-    "verdict": "FAILED"
   },
   {
     "symbol": "TCS",
@@ -56,11 +56,19 @@
     "verdict": "FAILED"
   },
   {
-    "symbol": "SUNPHARMA",
+    "symbol": "SBIN",
+    "bias": "BULLISH",
+    "final_pred": 962.17,
+    "final_actual": 954.1,
+    "error_pct": 0.84,
+    "verdict": "PARTIAL"
+  },
+  {
+    "symbol": "LT",
     "bias": "BEARISH",
-    "final_pred": 1757.14,
-    "final_actual": 1801.0,
-    "error_pct": 2.43,
+    "final_pred": 3587.0,
+    "final_actual": 3693.4,
+    "error_pct": 2.86,
     "verdict": "FAILED"
   },
   {
@@ -72,19 +80,11 @@
     "verdict": "FAILED"
   },
   {
-    "symbol": "MUTHOOTFIN",
+    "symbol": "SUNPHARMA",
     "bias": "BEARISH",
-    "final_pred": 2716.19,
-    "final_actual": 2697.1,
-    "error_pct": 0.7,
-    "verdict": "SUCCESS"
-  },
-  {
-    "symbol": "SBIN",
-    "bias": "BULLISH",
-    "final_pred": 962.17,
-    "final_actual": 954.1,
-    "error_pct": 0.84,
-    "verdict": "PARTIAL"
+    "final_pred": 1757.14,
+    "final_actual": 1801.0,
+    "error_pct": 2.43,
+    "verdict": "FAILED"
   }
 ]

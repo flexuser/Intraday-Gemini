@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "BEARISH",
     "reasoning": "Quant fallback trajectory applied (Feedback scaling: 1.0).",
-    "volume_ratio": 6.87,
+    "volume_ratio": 6.29,
     "has_volume_spike": true,
     "news_feed": [
       {
@@ -12,20 +12,20 @@
       }
     ],
     "quant_signals": {
-      "vwap": 3763.95,
+      "vwap": 3749.56,
       "rsi": 58.34,
       "atr": 8.16,
       "bb_upper": 3698.18,
       "bb_lower": 3654.34,
       "pcr": 1.0,
       "implied_volatility": 18.5,
-      "past_verdict": "SUCCESS"
+      "past_verdict": "FAILED"
     }
   },
   "curves": {
     "symbol": "LT",
     "date": "2026-10-02",
-    "generated_at": "09:10 AM IST",
+    "generated_at": "09:20 AM IST",
     "timeframes": [
       "09:15",
       "09:45",

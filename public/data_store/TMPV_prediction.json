@@ -2,7 +2,7 @@
   "prediction": {
     "bias": "BEARISH",
     "reasoning": "Trading below the \u20b9283.35 VWAP with RSI at an overextended 70.95 signals strong intraday exhaustion above the upper Bollinger Band. With a neutral 1.0 PCR providing no decisive gamma support, elevated volume favors downward mean reversion into the close.",
-    "volume_ratio": 1.52,
+    "volume_ratio": 1.68,
     "has_volume_spike": true,
     "news_feed": [
       {
@@ -12,7 +12,7 @@
       }
     ],
     "quant_signals": {
-      "vwap": 283.35,
+      "vwap": 280.02,
       "rsi": 70.95,
       "atr": 0.82,
       "bb_upper": 279.41,
@@ -25,7 +25,7 @@
   "curves": {
     "symbol": "TMPV",
     "date": "2026-10-02",
-    "generated_at": "09:10 AM IST",
+    "generated_at": "09:20 AM IST",
     "timeframes": [
       "09:15",
       "09:45",
