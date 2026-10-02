@@ -34,6 +34,9 @@ def env(monkeypatch, tmp_path):
     monkeypatch.delenv("FORCE_RUN", raising=False)
     monkeypatch.setattr(ao, "fetch_news", lambda t: [{"title": "t", "link": "#", "publisher": "p"}])
     llm = LLM(); monkeypatch.setattr(ao, "llm_generate", llm)
+    monkeypatch.setattr(ao, "fetch_daily_context",
+                        lambda t, today: {"prev_close": 99.0, "prev_return_pct": 0.5, "avg_daily_range_pct": 1.4})
+    del ao.RUN_ERRORS[:]
     state = {"df": bars(4)}
     monkeypatch.setattr(ao, "fetch_5m", lambda t, today: state["df"])
     return llm, state, tmp_path
@@ -114,7 +117,9 @@ def test_refresh_window_and_opening_forecast_is_immutable(env):
     llm, state, tmp = env
     ao.process_symbol("INFY", at(9, 30)); assert llm.calls == 1
     first = saved(tmp)["opening_forecast"]
+    state["df"] = bars(7)
     ao.process_symbol("INFY", at(9, 45)); assert llm.calls == 1            # < 30 min: no API call
+    state["df"] = bars(11)
     llm.out = json.dumps({"bias": "BEARISH", "target_pct": -2.0, "archetype": "BREAKDOWN", "reasoning": "x"})
     ao.process_symbol("INFY", at(10, 5)); assert llm.calls == 2           # refreshed
     d = saved(tmp)
@@ -123,7 +128,7 @@ def test_refresh_window_and_opening_forecast_is_immutable(env):
 def test_failed_refresh_keeps_last_real_forecast(env):
     llm, state, tmp = env
     ao.process_symbol("INFY", at(9, 30))
-    llm.out = HttpErr(503)
+    llm.out = HttpErr(503); state["df"] = bars(11)
     ao.process_symbol("INFY", at(10, 5))
     d = saved(tmp)
     assert d["prediction"]["source"] == "llm" and d["prediction"]["target_pct"] == 1.0 and d["prediction"]["llm_error"]
@@ -139,6 +144,7 @@ def test_error_is_not_always_zero_and_beats_baseline(env):
 
 def test_mid_session_is_not_scored(env):
     llm, state, tmp = env
+    state["df"] = bars(22)
     ao.process_symbol("INFY", at(11, 0))
     d = saved(tmp)
     assert d["session"]["verdict"] == "IN_PROGRESS" and d["curves"]["error_pct"] is None
@@ -166,3 +172,60 @@ def test_finalize_idempotent_and_midsession_shows_last_completed(env):
     ao.finalize([inprog], at(9, 30, (2026, 10, 6)))
     eod = {r["symbol"]: r for r in json.load(open(tmp / "eod_evaluation.json"))}
     assert eod["INFY"]["verdict"] == "SUCCESS" and eod["INFY"]["session_date"] == "2026-10-05"
+
+
+# ---- v3: context, baselines, statistics, health ----
+def test_prompt_includes_context_and_no_none():
+    m = ao.compute_session_metrics(bars(4), at(9, 30))
+    p = ao.build_prompt("INFY", m, [], at(9, 30), {"prev_close": 99.0, "prev_return_pct": 0.5, "avg_daily_range_pct": 1.4})
+    assert "opening gap: +1.01%" in p and "Previous session's move: +0.50%" in p and "1.40%" in p and "None" not in p
+    assert "None" not in ao.build_prompt("INFY", m, [], at(9, 30), {})
+
+def test_daily_context_excludes_today(monkeypatch):
+    days = pd.date_range("2026-09-28", periods=7, freq="B", tz="Asia/Kolkata")          # last row = Oct 6 (today)
+    d = pd.DataFrame({"Open": 100.0, "High": 102.0, "Low": 98.0, "Close": np.linspace(100, 106, 7), "Volume": 1}, index=days)
+    class T:
+        def __init__(self, t): pass
+        def history(self, period, interval): return d
+    monkeypatch.setattr(ao.yf, "Ticker", T)
+    c = ao.fetch_daily_context("INFY.NS", datetime.date(2026, 10, 6))
+    assert c["prev_close"] == 105.0 and c["prev_return_pct"] == round((105 / 104 - 1) * 100, 2) and c["avg_daily_range_pct"] > 0
+
+def test_baselines_are_frozen_and_scored(env):
+    llm, state, tmp = env
+    ao.process_symbol("INFY", at(9, 30))                                    # open 100, prev close 99 -> gap +1.01%
+    assert saved(tmp)["opening_forecast"]["baselines"] == {"flat": 0.0, "momentum": 0.5, "gap_fade": -1.01}
+    state["df"] = bars(75, drift=0.8)
+    row = ao.process_symbol("INFY", at(15, 35))
+    b = row["baselines"]
+    assert b["momentum"]["error_pct"] == 0.3 and b["momentum"]["direction_hit"] is True
+    assert b["gap_fade"]["direction_hit"] is False and b["flat"]["error_pct"] == 0.8
+
+def test_summary_wilson_interval_and_enough_data():
+    rows = [{"symbol": "INFY", "date": f"2026-10-{d:02d}", "source": "llm", "error_pct": 0.5, "baseline_error_pct": 0.8,
+             "direction_hit": d <= 6, "baselines": {"flat": {"error_pct": 0.8, "direction_hit": None}}} for d in range(1, 11)]
+    o = ao.summarize(rows)["overall"]
+    assert o["direction_hit_rate"] == 0.6 and o["directional_calls"] == 10
+    lo, hi = o["direction_hit_ci95"]; assert 0.25 < lo < 0.35 and 0.8 < hi < 0.9      # 6/10 is NOT distinguishable from luck
+    assert o["days"] == 10 and o["enough_data"] is False and o["baselines"]["flat"]["mean_error_pct"] == 0.8
+
+def test_stale_data_is_skipped_and_reported(env):
+    llm, state, tmp = env
+    state["df"] = bars(4)                                                   # newest bar 09:30 but "now" is 11:00
+    assert ao.process_symbol("INFY", at(11, 0)) is None
+    assert not (tmp / "INFY_prediction.json").exists() and ao.RUN_ERRORS[0][0] == "INFY" and llm.calls == 0
+
+def test_health_status_and_alert_cooldown(env, monkeypatch):
+    llm, state, tmp = env
+    sent = []
+    monkeypatch.setenv("ALERT_WEBHOOK_URL", "http://example.invalid/hook")
+    monkeypatch.setattr(ao.requests, "post", lambda url, json, timeout: sent.append(json["text"]))
+    bad = [{"symbol": s, "forecast_source": "fallback", "llm_error": "404", "complete": False, "date": "2026-10-05",
+            "verdict": "IN_PROGRESS", "bias": "NEUTRAL", "final_pred": 1, "final_actual": 1, "error_pct": None,
+            "baseline_error_pct": None, "direction_hit": None, "baselines": {}, "source": "fallback", "target_pct": None}
+           for s in ao.SYMBOLS]
+    good = [dict(r, forecast_source="llm", llm_error=None) for r in bad]
+    assert ao.finalize(bad, at(10, 0))["status"] == "DEGRADED" and len(sent) == 1
+    ao.finalize(bad, at(10, 5)); assert len(sent) == 1                      # inside cooldown: no spam
+    assert ao.finalize(good, at(10, 10))["status"] == "OK" and "recovered" in sent[-1]
+    assert ao.finalize([], at(10, 15))["status"] == "FAILED"

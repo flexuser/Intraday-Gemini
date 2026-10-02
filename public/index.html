@@ -365,5 +365,47 @@
       }
     }, 5 * 60 * 1000);
   </script>
+<script>
+/* Status strip + honest track record + disclaimer. Reads health.json and performance_summary.json. */
+(function () {
+  const RAW_X = "https://raw.githubusercontent.com/flexuser/Intraday-Gemini/main/public/data_store";
+  const NEED_DAYS = 20;
+  async function getJsonX(name) {
+    for (const base of [RAW_X, "./data_store"]) {
+      try {
+        const r = await fetch(`${base}/${name}?cb=${Date.now()}`, { cache: "no-store" });
+        if (r.ok) return await r.json();
+      } catch (_) { /* try next source */ }
+    }
+    return null;
+  }
+  const pctX = v => (v == null ? "--" : `${Math.round(v * 100)}%`);
+  async function renderStatus() {
+    const [health, perf] = await Promise.all([getJsonX("health.json"), getJsonX("performance_summary.json")]);
+    const lines = [];
+    if (health && health.status && health.status !== "OK") {
+      const ageMin = (Date.now() - new Date(health.as_of).getTime()) / 60000;
+      if (ageMin < 30) {
+        lines.push(`<span class="text-amber-400 font-semibold">Pipeline ${escapeHtml(health.status.toLowerCase())}: ` +
+          `${Number(health.llm_fallback_count)} of ${Number(health.symbols_total)} forecasts are flat placeholders (no AI forecast).</span>`);
+      }
+    }
+    const o = perf && perf.overall;
+    if (!o || !o.enough_data) {
+      lines.push(`Track record: still collecting data (${o ? Number(o.days) : 0} of ${NEED_DAYS} trading days). Treat every forecast as experimental.`);
+    } else {
+      const ci = o.direction_hit_ci95 ? ` (95% range ${pctX(o.direction_hit_ci95[0])}-${pctX(o.direction_hit_ci95[1])})` : "";
+      lines.push(`Last ${Number(o.days)} trading days: direction hit-rate ${pctX(o.direction_hit_rate)}${ci} on ` +
+        `${Number(o.directional_calls)} calls; mean error ${o.mean_error_pct}% vs ${o.mean_flat_baseline_error_pct}% for a flat "no change" guess.`);
+    }
+    document.body.insertAdjacentHTML("afterbegin",
+      `<div id="status-strip" class="text-xs text-slate-400 bg-slate-900 border-b border-slate-800 px-4 py-2 space-y-0.5">${lines.map(l => `<div>${l}</div>`).join("")}</div>`);
+  }
+  document.body.insertAdjacentHTML("beforeend",
+    `<footer id="disclaimer" class="text-[11px] text-slate-500 px-4 py-4 border-t border-slate-800">` +
+    `For research and education only. Not investment advice. Forecasts are experimental model output and can be wrong.</footer>`);
+  renderStatus().catch(() => {});
+})();
+</script>
 </body>
 </html>
