@@ -21,7 +21,7 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install yfinance requests pandas numpy pytz google-generativeai scipy
+          python -m pip install install yfinance requests pandas numpy pytz google-genai scipy
 
       - name: Execute Multi-Stock Archiving Pass
         env:
