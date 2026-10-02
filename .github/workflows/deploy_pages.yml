@@ -1,12 +1,15 @@
 name: Deploy Public Directory to GitHub Pages
 
+# The dashboard reads live data from raw.githubusercontent.com, so Pages only needs to be
+# redeployed when the front-end itself changes (bot data commits are [skip ci] anyway).
 on:
   push:
     branches: ["main"]
-  # Optional: allow running after intraday/daily archive workflows
-  workflow_run:
-    workflows: ["Daily Archive", "Intraday Tracker"]
-    types: [completed]
+    paths:
+      - "public/index.html"
+      - "public/manifest.json"
+      - "public/sw.js"
+      - ".github/workflows/deploy_pages.yml"
   workflow_dispatch:
 
 permissions:
@@ -34,7 +37,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'public'  # Tells Pages to publish the public directory as root
+          path: 'public'
 
       - name: Deploy to GitHub Pages
         id: deployment

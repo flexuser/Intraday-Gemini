@@ -254,7 +254,7 @@
       document.getElementById("val-base").innerText = validActuals.length > 0 ? `₹${validActuals[0]}` : "--";
       document.getElementById("val-target").innerText = curves.final_pred ? `₹${curves.final_pred}` : "--";
       document.getElementById("val-actual").innerText = validActuals.length > 0 ? `₹${validActuals[validActuals.length - 1]}` : "--";
-      document.getElementById("val-error").innerText = curves.error_pct !== undefined ? `${curves.error_pct}%` : "--";
+      document.getElementById("val-error").innerText = curves.error_pct != null ? `${curves.error_pct}%` : "--";
 
       const ctx = document.getElementById('predictionChart').getContext('2d');
       if (chartInstance) chartInstance.destroy();
@@ -331,8 +331,14 @@
       const tbody = document.getElementById("audit-table-body");
       tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-500">Loading evaluation matrix...</td></tr>`;
       try {
-        const res = await fetch(`./data_store/eod_evaluation.json?cb=${Date.now()}`, { cache: 'no-store' });
-        const data = await res.json();
+        let data = null;
+        for (const url of [`${GITHUB_RAW_BASE}/eod_evaluation.json?cb=${Date.now()}`, `./data_store/eod_evaluation.json?cb=${Date.now()}`]) {
+          try {
+            const res = await fetch(url, { cache: 'no-store' });
+            if (res.ok) { data = await res.json(); break; }
+          } catch (_) { /* try next source */ }
+        }
+        if (!data) throw new Error("audit data unavailable");
         document.getElementById("audit-sync-time").innerText = `Last Refreshed: ${new Date().toLocaleTimeString()}`;
         tbody.innerHTML = data.map(item => 
           `<tr class="hover:bg-slate-900/50">
@@ -340,8 +346,8 @@
             <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] rounded font-semibold ${item.bias === 'BULLISH' ? 'bg-emerald-950 text-emerald-400' : item.bias === 'BEARISH' ? 'bg-rose-950 text-rose-400' : 'bg-slate-800 text-slate-300'}">${escapeHtml(item.bias)}</span></td>
             <td class="p-2.5 font-mono">₹${item.final_pred}</td>
             <td class="p-2.5 font-mono">₹${item.final_actual}</td>
-            <td class="p-2.5 font-mono">${item.error_pct}%</td>
-            <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] rounded font-semibold ${item.verdict === 'SUCCESS' ? 'bg-emerald-900/50 text-emerald-300' : item.verdict === 'PARTIAL' ? 'bg-amber-900/50 text-amber-300' : 'bg-rose-900/50 text-rose-300'}">${escapeHtml(item.verdict)}</span></td>
+            <td class="p-2.5 font-mono">${item.error_pct != null ? item.error_pct + '%' : '--'}</td>
+            <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] rounded font-semibold ${item.verdict === 'SUCCESS' ? 'bg-emerald-900/50 text-emerald-300' : item.verdict === 'PARTIAL' ? 'bg-amber-900/50 text-amber-300' : item.verdict === 'FAILED' ? 'bg-rose-900/50 text-rose-300' : 'bg-slate-800 text-slate-300'}">${escapeHtml(item.verdict)}</span></td>
           </tr>`
         ).join('');
       } catch (e) {
