@@ -1,27 +1,11 @@
 [
   {
-    "symbol": "MUTHOOTFIN",
-    "bias": "BEARISH",
-    "final_pred": 2716.19,
-    "final_actual": 2697.1,
-    "error_pct": 0.7,
-    "verdict": "SUCCESS"
-  },
-  {
     "symbol": "RELIANCE",
     "bias": "BEARISH",
     "final_pred": 1138.89,
     "final_actual": 1167.7,
     "error_pct": 2.44,
     "verdict": "FAILED"
-  },
-  {
-    "symbol": "TMPV",
-    "bias": "BEARISH",
-    "final_pred": 278.07,
-    "final_actual": 279.4,
-    "error_pct": 0.47,
-    "verdict": "SUCCESS"
   },
   {
     "symbol": "INFY",
@@ -32,11 +16,27 @@
     "verdict": "PARTIAL"
   },
   {
+    "symbol": "TMPV",
+    "bias": "BEARISH",
+    "final_pred": 278.07,
+    "final_actual": 279.4,
+    "error_pct": 0.47,
+    "verdict": "SUCCESS"
+  },
+  {
     "symbol": "HDFCBANK",
     "bias": "BULLISH",
     "final_pred": 720.73,
     "final_actual": 721.2,
     "error_pct": 0.07,
+    "verdict": "SUCCESS"
+  },
+  {
+    "symbol": "MUTHOOTFIN",
+    "bias": "BEARISH",
+    "final_pred": 2716.19,
+    "final_actual": 2697.1,
+    "error_pct": 0.7,
     "verdict": "SUCCESS"
   },
   {
@@ -48,12 +48,12 @@
     "verdict": "FAILED"
   },
   {
-    "symbol": "BHARTIARTL",
+    "symbol": "ICICIBANK",
     "bias": "BEARISH",
-    "final_pred": 1681.61,
-    "final_actual": 1741.1,
-    "error_pct": 3.41,
-    "verdict": "FAILED"
+    "final_pred": 1315.41,
+    "final_actual": 1310.6,
+    "error_pct": 0.36,
+    "verdict": "SUCCESS"
   },
   {
     "symbol": "SBIN",
@@ -64,12 +64,12 @@
     "verdict": "PARTIAL"
   },
   {
-    "symbol": "ICICIBANK",
+    "symbol": "BHARTIARTL",
     "bias": "BEARISH",
-    "final_pred": 1315.41,
-    "final_actual": 1310.6,
-    "error_pct": 0.36,
-    "verdict": "SUCCESS"
+    "final_pred": 1681.61,
+    "final_actual": 1741.1,
+    "error_pct": 3.41,
+    "verdict": "FAILED"
   },
   {
     "symbol": "LT",
