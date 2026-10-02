@@ -1,6 +1,6 @@
-"""Intraday AI sync: fetch 5-min bars, ask Gemini for a close forecast, score it honestly.
+﻿"""Intraday AI sync: fetch 5-min bars, ask Gemini for a close forecast, score it honestly.
 
-Output (public/data_store/):
+Output (public/data_store/ + Supabase):
   <SYMBOL>_prediction.json   per-symbol forecast + 75-slot curves
   eod_evaluation.json        audit table rows (UI)
   history.json               one scored record per (date, symbol)
@@ -13,6 +13,7 @@ import math
 import time
 import re
 import datetime
+import db
 from concurrent.futures import ThreadPoolExecutor
 
 import numpy as np
@@ -30,25 +31,25 @@ SYMBOLS = ["MUTHOOTFIN", "RELIANCE", "TMPV", "INFY", "HDFCBANK", "ICICIBANK",
            "TCS", "SBIN", "BHARTIARTL", "LT", "SUNPHARMA"]
 
 DATA_DIR = os.getenv("DATA_DIR", "public/data_store")
-MODEL = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")        # configurable, no code change needed
+MODEL = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
 REFRESH_MINUTES = int(os.getenv("FORECAST_REFRESH_MINUTES", "30"))
 RETRIES = 3
 MAX_WORKERS = 3
-PROMPT_VERSION = "v3-context"           # stored with every forecast so versions can be compared later
-MAX_DATA_LAG_MIN = 20                   # skip a symbol if its newest bar is older than this
-MIN_DAYS_FOR_CLAIMS = 20                # the UI makes no performance claims before this many trading days
+PROMPT_VERSION = "v3-context"
+MAX_DATA_LAG_MIN = 20
+MIN_DAYS_FOR_CLAIMS = 20
 ALERT_COOLDOWN_MIN = 60
-RUN_ERRORS = []                         # (symbol, message) collected during one run
+RUN_ERRORS = []
 PROBE_SYMBOL = "RELIANCE.NS"
 
 MARKET_OPEN = datetime.time(9, 15)
 LAST_RUN = datetime.time(15, 50)
 SESSION_CLOSE = datetime.time(15, 30)
-NUM_SLOTS = 75                                               # 09:15 .. 15:30, every 5 min
+NUM_SLOTS = 75
 BIASES = ("BULLISH", "BEARISH", "NEUTRAL")
 ARCHETYPES = ("MOMENTUM_BREAKOUT", "MEAN_REVERSION", "RANGE_BOUND", "BREAKDOWN")
 MAX_TARGET_PCT = 3.0
-PERMANENT_HTTP_CODES = (400, 401, 403, 404)                  # retrying these is pointless
+PERMANENT_HTTP_CODES = (400, 401, 403, 404)
 
 RESPONSE_SCHEMA = {
     "type": "OBJECT",
@@ -66,9 +67,7 @@ RESPONSE_SCHEMA = {
 }
 
 
-# --------------------------------------------------------------------------- data access
 def normalize_frame(df):
-    """Flat columns + IST index. yf.download() returns MultiIndex columns in current yfinance."""
     if df is None or len(df) == 0:
         return pd.DataFrame()
     df = df.copy()
@@ -80,8 +79,7 @@ def normalize_frame(df):
 
 
 def fetch_5m(ticker, today):
-    """Today's 5-minute bars only (empty on holidays / before Yahoo has published today's bars)."""
-    raw = yf.Ticker(ticker).history(period="1d", interval="5m")   # Ticker.history: thread-safe, flat columns
+    raw = yf.Ticker(ticker).history(period="1d", interval="5m")
     df = normalize_frame(raw)
     if df.empty:
         return df
@@ -89,7 +87,6 @@ def fetch_5m(ticker, today):
 
 
 def fetch_daily_context(ticker, today):
-    """Prior-session facts only: previous close, previous day's return, typical full-day range."""
     empty = {"prev_close": None, "prev_return_pct": None, "avg_daily_range_pct": None}
     try:
         df = normalize_frame(yf.Ticker(ticker).history(period="10d", interval="1d"))
@@ -113,17 +110,14 @@ def gap_pct(open_price, ctx):
 
 
 def baseline_targets(open_price, ctx):
-    """Naive benchmarks the LLM must beat. Frozen at forecast time, so they cannot look ahead."""
     clip = lambda x: None if x is None else round(max(min(x, MAX_TARGET_PCT), -MAX_TARGET_PCT), 2)
     gap = gap_pct(open_price, ctx)
-    return {"flat": 0.0,                                           # no change from the open
-            "momentum": clip((ctx or {}).get("prev_return_pct")),  # previous day's move repeats
-            "gap_fade": clip(None if gap is None else -gap)}       # the opening gap reverses
+    return {"flat": 0.0,
+            "momentum": clip((ctx or {}).get("prev_return_pct")),
+            "gap_fade": clip(None if gap is None else -gap)}
 
 
 def is_live_session(now=None):
-    """True only on a trading day, inside 09:15-15:50 IST, once Yahoo has a bar dated today.
-    The bar-date check also catches exchange holidays without needing a holiday calendar."""
     if os.getenv("FORCE_RUN", "").strip().lower() in ("1", "true", "yes"):
         print("[SessionGuard] FORCE_RUN set - skipping guard.")
         return True
@@ -174,9 +168,7 @@ def fetch_news(ticker):
         return []
 
 
-# --------------------------------------------------------------------------- metrics
 def compute_session_metrics(df, now):
-    """Session VWAP (today's bars only) and a volume spike check on the last COMPLETED 5-min bar."""
     tp = (df["High"] + df["Low"] + df["Close"]) / 3.0
     cum_vol = float(df["Volume"].sum())
     vwap = float((tp * df["Volume"]).sum() / cum_vol) if cum_vol > 0 else float(df["Close"].iloc[-1])
@@ -194,14 +186,13 @@ def compute_session_metrics(df, now):
     }
 
 
-# --------------------------------------------------------------------------- LLM
 def llm_generate(prompt):
     client = genai.Client(api_key=os.environ["GEMINI_API_KEY"],
                           http_options=types.HttpOptions(timeout=30_000))
     config = types.GenerateContentConfig(
         response_mime_type="application/json",
         response_schema=RESPONSE_SCHEMA,
-        thinking_config=types.ThinkingConfig(thinking_level="low"),   # temperature left at the Gemini 3 default
+        thinking_config=types.ThinkingConfig(thinking_level="low"),
     )
     return client.models.generate_content(model=MODEL, contents=prompt, config=config).text
 
@@ -278,13 +269,12 @@ def query_gemini_regime(symbol, m, news, now, ctx=None):
             last_error = f"{type(e).__name__}: {e}"
             print(f"[Gemini {attempt}/{RETRIES}] {symbol}: {last_error}")
             if getattr(e, "code", None) in PERMANENT_HTTP_CODES:
-                break                                    # bad key / unknown model: retrying cannot help
+                break
             if attempt < RETRIES:
                 time.sleep(2 ** attempt)
     return fallback_regime(last_error)
 
 
-# --------------------------------------------------------------------------- curves
 def build_curves(df, target_price):
     start = datetime.datetime.combine(df.index[0].date(), MARKET_OPEN)
     timeframes = [(start + datetime.timedelta(minutes=5 * i)).strftime("%H:%M") for i in range(NUM_SLOTS)]
@@ -296,7 +286,7 @@ def build_curves(df, target_price):
     valid = [i for i, p in enumerate(actual) if p is not None]
     if not valid:
         return timeframes, actual, [], volume
-    first_i, last_i = valid[0], valid[-1]                # real slot positions, robust to missing bars
+    first_i, last_i = valid[0], valid[-1]
     if last_i == first_i:
         xs, ys = [first_i, NUM_SLOTS - 1], [actual[first_i], target_price]
     elif last_i >= NUM_SLOTS - 1:
@@ -307,7 +297,6 @@ def build_curves(df, target_price):
     return timeframes, actual, [round(float(p), 2) for p in curve], volume
 
 
-# --------------------------------------------------------------------------- scoring
 def session_complete(df, now):
     return now.time() >= SESSION_CLOSE and df.index[-1].time() >= datetime.time(15, 25)
 
@@ -319,7 +308,6 @@ def _hit(target_pct, move):
 
 
 def score_session(opening, close_price):
-    """Score the FIRST LLM forecast of the day (and each frozen baseline) against the real close."""
     if not opening:
         return {"verdict": "NO_FORECAST", "error_pct": None, "baseline_error_pct": None,
                 "direction_hit": None, "baselines": {}}
@@ -335,8 +323,6 @@ def score_session(opening, close_price):
             "direction_hit": hit, "baselines": baselines}
 
 
-
-# --------------------------------------------------------------------------- io
 def _finite(o):
     if isinstance(o, float) and not math.isfinite(o):
         return None
@@ -370,7 +356,6 @@ def _age_minutes(made_at, now):
         return float("inf")
 
 
-# --------------------------------------------------------------------------- per symbol
 def _fail(symbol, msg):
     print(f"[{symbol}] {msg}")
     RUN_ERRORS.append((symbol, msg))
@@ -396,19 +381,19 @@ def process_symbol(symbol, now):
             existing = {}
         ctx = existing.get("context")
         if not ctx or ctx.get("prev_close") is None:
-            ctx = fetch_daily_context(ticker, now.date())     # prior-session facts do not change intraday
+            ctx = fetch_daily_context(ticker, now.date())
         forecast, opening = existing.get("forecast"), existing.get("opening_forecast")
 
         fresh_llm = forecast and forecast.get("source") == "llm" and \
             _age_minutes(forecast.get("made_at"), now) < REFRESH_MINUTES
         if fresh_llm:
-            pred = forecast                                  # no API call: forecast is recent enough
+            pred = forecast
         else:
             pred = query_gemini_regime(symbol, m, news, now, ctx)
             pred["made_at"] = now.isoformat(timespec="seconds")
             pred["prompt_version"] = PROMPT_VERSION
             if pred["source"] == "fallback" and forecast and forecast.get("source") == "llm":
-                pred = dict(forecast, llm_error=pred["llm_error"])   # keep the last real forecast on a failed refresh
+                pred = dict(forecast, llm_error=pred["llm_error"])
         if opening is None and pred["source"] == "llm":
             opening = {"bias": pred["bias"], "target_pct": pred["target_pct"], "archetype": pred["archetype"],
                        "base_price": round(m["open_price"], 2), "made_at": pred["made_at"], "model": pred["model"],
@@ -424,6 +409,7 @@ def process_symbol(symbol, now):
             {"verdict": "IN_PROGRESS", "error_pct": None, "baseline_error_pct": None,
              "direction_hit": None, "baselines": {}}
 
+        # Write to local JSON store
         write_json(path, {
             "symbol": symbol,
             "prediction": {
@@ -445,6 +431,22 @@ def process_symbol(symbol, now):
             },
             "session": {"complete": complete, **score},
         })
+
+        # Sync forecast record directly to Supabase DB
+        try:
+            if opening:
+                db.upsert_forecast_record(
+                    session_date=today,
+                    symbol=symbol,
+                    prompt_version=pred.get("prompt_version", PROMPT_VERSION),
+                    opening_forecast=opening,
+                    baseline_targets=baseline_targets(m["open_price"], ctx),
+                    closing_actuals={"final_actual": m["last_close"]} if complete else None,
+                    score=score if complete else None,
+                )
+        except Exception as db_err:
+            print(f"[{symbol}] Supabase sync warning: {db_err}")
+
         return {"symbol": symbol, "date": today, "bias": opening["bias"] if opening else pred["bias"],
                 "target_pct": opening["target_pct"] if opening else None,
                 "source": "llm" if opening else "fallback",
@@ -456,14 +458,11 @@ def process_symbol(symbol, now):
         return _fail(symbol, f"pipeline error: {type(e).__name__}: {e}")
 
 
-
-# --------------------------------------------------------------------------- history / audit
 def _rate(values):
     return round(sum(values) / len(values), 3) if values else None
 
 
 def _wilson(k, n, z=1.96):
-    """95% interval for a hit-rate: shows how much of a small-sample result could just be luck."""
     if n == 0:
         return None
     p, d = k / n, 1 + z * z / n
@@ -519,7 +518,7 @@ def _notify(text):
     if not url:
         return
     try:
-        requests.post(url, json={"text": text, "content": text}, timeout=10)   # Slack + Discord compatible
+        requests.post(url, json={"text": text, "content": text}, timeout=10)
     except Exception as e:
         print(f"[alert] webhook failed: {e}")
 
@@ -540,7 +539,6 @@ def maybe_alert(health, previous, now):
 
 
 def heartbeat(health):
-    """Optional dead-man's switch (e.g. healthchecks.io): alerts you when these pings STOP arriving."""
     url = os.getenv("HEARTBEAT_URL")
     if url and health["status"] != "FAILED":
         try:
@@ -572,7 +570,7 @@ def finalize(results, now, errors=None):
         r = today_rows.get(s)
         if r and r["complete"]:
             row = dict(r, session_date=r["date"])
-        else:                                                # mid-session: show the last completed session
+        else:
             prev = [h for h in trimmed if h["symbol"] == s]
             row = dict(prev[-1], session_date=prev[-1]["date"]) if prev else (dict(r, session_date=r["date"]) if r else None)
         if row:
@@ -587,6 +585,13 @@ def finalize(results, now, errors=None):
     health = build_health(results, now, errors, previous)
     maybe_alert(health, previous, now)
     write_json(health_path, health)
+
+    # Sync health status to Supabase
+    try:
+        db.save_health_status(health["status"], health)
+    except Exception as db_err:
+        print(f"[finalize] Supabase health save warning: {db_err}")
+
     heartbeat(health)
     return health
 

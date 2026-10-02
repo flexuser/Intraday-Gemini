@@ -5,3 +5,4 @@ pandas
 numpy
 pytz
 scipy
+supabase>=2.0.0
