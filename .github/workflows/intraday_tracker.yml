@@ -45,6 +45,8 @@ jobs:
           FORCE_RUN: ${{ inputs.force_run }}
           ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL }}   # optional: Slack/Discord webhook
           HEARTBEAT_URL: ${{ secrets.HEARTBEAT_URL }}           # optional: healthchecks.io ping
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: python -m muthoot_poc.archive_once
 
       - name: Commit & Push Updated Data Store
