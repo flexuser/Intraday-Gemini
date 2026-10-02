@@ -1,19 +1,11 @@
 [
   {
-    "symbol": "INFY",
-    "bias": "BULLISH",
-    "final_pred": 1050.01,
-    "final_actual": 1035.0,
-    "error_pct": 1.48,
-    "verdict": "PARTIAL"
-  },
-  {
-    "symbol": "RELIANCE",
+    "symbol": "TMPV",
     "bias": "BEARISH",
-    "final_pred": 1138.89,
-    "final_actual": 1167.7,
-    "error_pct": 2.44,
-    "verdict": "FAILED"
+    "final_pred": 278.07,
+    "final_actual": 279.4,
+    "error_pct": 0.47,
+    "verdict": "SUCCESS"
   },
   {
     "symbol": "MUTHOOTFIN",
@@ -24,12 +16,20 @@
     "verdict": "SUCCESS"
   },
   {
-    "symbol": "TMPV",
+    "symbol": "RELIANCE",
     "bias": "BEARISH",
-    "final_pred": 278.07,
-    "final_actual": 279.4,
-    "error_pct": 0.47,
-    "verdict": "SUCCESS"
+    "final_pred": 1138.89,
+    "final_actual": 1167.7,
+    "error_pct": 2.44,
+    "verdict": "FAILED"
+  },
+  {
+    "symbol": "INFY",
+    "bias": "BULLISH",
+    "final_pred": 1050.01,
+    "final_actual": 1035.0,
+    "error_pct": 1.48,
+    "verdict": "PARTIAL"
   },
   {
     "symbol": "HDFCBANK",
