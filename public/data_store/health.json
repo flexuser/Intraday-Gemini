@@ -1,0 +1,53 @@
+{
+  "as_of": "2026-10-02T18:02:45+05:30",
+  "status": "FAILED",
+  "symbols_total": 11,
+  "symbols_updated": 0,
+  "llm_fallback_count": 0,
+  "model": "gemini-3.8-flash",
+  "prompt_version": "v3-context",
+  "sample_llm_error": null,
+  "errors": [
+    {
+      "symbol": "RELIANCE",
+      "error": "no bars for today - files left untouched"
+    },
+    {
+      "symbol": "TMPV",
+      "error": "no bars for today - files left untouched"
+    },
+    {
+      "symbol": "MUTHOOTFIN",
+      "error": "no bars for today - files left untouched"
+    },
+    {
+      "symbol": "INFY",
+      "error": "no bars for today - files left untouched"
+    },
+    {
+      "symbol": "HDFCBANK",
+      "error": "no bars for today - files left untouched"
+    },
+    {
+      "symbol": "ICICIBANK",
+      "error": "no bars for today - files left untouched"
+    },
+    {
+      "symbol": "TCS",
+      "error": "no bars for today - files left untouched"
+    },
+    {
+      "symbol": "SBIN",
+      "error": "no bars for today - files left untouched"
+    },
+    {
+      "symbol": "BHARTIARTL",
+      "error": "no bars for today - files left untouched"
+    },
+    {
+      "symbol": "LT",
+      "error": "no bars for today - files left untouched"
+    }
+  ],
+  "last_alert_at": "2026-10-02T18:02:45+05:30"
+}
