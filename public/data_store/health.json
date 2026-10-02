@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-02T18:08:54+05:30",
+  "as_of": "2026-10-02T18:12:19+05:30",
   "status": "FAILED",
   "symbols_total": 11,
   "symbols_updated": 0,
@@ -13,19 +13,11 @@
       "error": "no bars for today - files left untouched"
     },
     {
-      "symbol": "RELIANCE",
-      "error": "no bars for today - files left untouched"
-    },
-    {
       "symbol": "TMPV",
       "error": "no bars for today - files left untouched"
     },
     {
-      "symbol": "ICICIBANK",
-      "error": "no bars for today - files left untouched"
-    },
-    {
-      "symbol": "HDFCBANK",
+      "symbol": "RELIANCE",
       "error": "no bars for today - files left untouched"
     },
     {
@@ -33,7 +25,11 @@
       "error": "no bars for today - files left untouched"
     },
     {
-      "symbol": "SBIN",
+      "symbol": "HDFCBANK",
+      "error": "no bars for today - files left untouched"
+    },
+    {
+      "symbol": "ICICIBANK",
       "error": "no bars for today - files left untouched"
     },
     {
@@ -42,6 +38,10 @@
     },
     {
       "symbol": "BHARTIARTL",
+      "error": "no bars for today - files left untouched"
+    },
+    {
+      "symbol": "SBIN",
       "error": "no bars for today - files left untouched"
     },
     {
