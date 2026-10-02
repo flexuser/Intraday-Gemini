@@ -1,10 +1,10 @@
 [
   {
-    "symbol": "TMPV",
+    "symbol": "MUTHOOTFIN",
     "bias": "BEARISH",
-    "final_pred": 278.07,
-    "final_actual": 279.4,
-    "error_pct": 0.47,
+    "final_pred": 2716.19,
+    "final_actual": 2697.1,
+    "error_pct": 0.7,
     "verdict": "SUCCESS"
   },
   {
@@ -24,11 +24,11 @@
     "verdict": "FAILED"
   },
   {
-    "symbol": "MUTHOOTFIN",
+    "symbol": "TMPV",
     "bias": "BEARISH",
-    "final_pred": 2716.19,
-    "final_actual": 2697.1,
-    "error_pct": 0.7,
+    "final_pred": 278.07,
+    "final_actual": 279.4,
+    "error_pct": 0.47,
     "verdict": "SUCCESS"
   },
   {
@@ -38,22 +38,6 @@
     "final_actual": 721.2,
     "error_pct": 0.07,
     "verdict": "SUCCESS"
-  },
-  {
-    "symbol": "SBIN",
-    "bias": "BULLISH",
-    "final_pred": 962.17,
-    "final_actual": 954.1,
-    "error_pct": 0.84,
-    "verdict": "PARTIAL"
-  },
-  {
-    "symbol": "TCS",
-    "bias": "BULLISH",
-    "final_pred": 2113.11,
-    "final_actual": 2075.0,
-    "error_pct": 1.83,
-    "verdict": "FAILED"
   },
   {
     "symbol": "ICICIBANK",
@@ -70,6 +54,22 @@
     "final_actual": 1741.1,
     "error_pct": 3.41,
     "verdict": "FAILED"
+  },
+  {
+    "symbol": "TCS",
+    "bias": "BULLISH",
+    "final_pred": 2113.11,
+    "final_actual": 2075.0,
+    "error_pct": 1.83,
+    "verdict": "FAILED"
+  },
+  {
+    "symbol": "SBIN",
+    "bias": "BULLISH",
+    "final_pred": 962.17,
+    "final_actual": 954.1,
+    "error_pct": 0.84,
+    "verdict": "PARTIAL"
   },
   {
     "symbol": "LT",
