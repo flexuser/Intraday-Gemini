@@ -1,7 +1,7 @@
 ﻿"""Intraday AI sync: fetch 5-min bars, ask Gemini for a close forecast, score it honestly.
 
 Output (public/data_store/ + Supabase):
-  <SYMBOL>_prediction.json   per-symbol forecast + 75-slot curves
+  <SYMBOL>_prediction.json   per-symbol forecast + 75-slot curves + confidence bands
   eod_evaluation.json        audit table rows (UI)
   history.json               one scored record per (date, symbol)
   performance_summary.json   direction hit-rate / error vs a flat "no change" baseline
@@ -24,6 +24,12 @@ import yfinance as yf
 from scipy.interpolate import PchipInterpolator
 from google import genai
 from google.genai import types
+
+try:
+    import holidays
+    HAS_HOLIDAYS = True
+except ImportError:
+    HAS_HOLIDAYS = False
 
 IST = pytz.timezone("Asia/Kolkata")
 
@@ -79,29 +85,40 @@ def normalize_frame(df):
 
 
 def fetch_5m(ticker, today):
-    raw = yf.Ticker(ticker).history(period="1d", interval="5m")
-    df = normalize_frame(raw)
-    if df.empty:
-        return df
-    return df[df.index.date == today]
+    for attempt in range(1, RETRIES + 1):
+        try:
+            raw = yf.Ticker(ticker).history(period="1d", interval="5m")
+            df = normalize_frame(raw)
+            if not df.empty:
+                filtered = df[df.index.date == today]
+                if not filtered.empty:
+                    return filtered
+        except Exception as e:
+            if attempt == RETRIES:
+                print(f"[fetch_5m] {ticker} failed after {RETRIES} attempts: {e}")
+        time.sleep(1 * attempt)
+    return pd.DataFrame()
 
 
 def fetch_daily_context(ticker, today):
     empty = {"prev_close": None, "prev_return_pct": None, "avg_daily_range_pct": None}
-    try:
-        df = normalize_frame(yf.Ticker(ticker).history(period="10d", interval="1d"))
-        df = df[df.index.date < today] if not df.empty else df
-        if df.empty:
-            return empty
-        closes = df["Close"]
-        prev_ret = (closes.iloc[-1] / closes.iloc[-2] - 1) * 100 if len(closes) >= 2 else None
-        rng = ((df["High"] - df["Low"]) / df["Close"] * 100).tail(5).mean()
-        return {"prev_close": round(float(closes.iloc[-1]), 2),
-                "prev_return_pct": None if prev_ret is None else round(float(prev_ret), 2),
-                "avg_daily_range_pct": round(float(rng), 2)}
-    except Exception as e:
-        print(f"[context] {ticker}: {type(e).__name__}: {e}")
-        return empty
+    for attempt in range(1, RETRIES + 1):
+        try:
+            df = normalize_frame(yf.Ticker(ticker).history(period="10d", interval="1d"))
+            df = df[df.index.date < today] if not df.empty else df
+            if df.empty:
+                return empty
+            closes = df["Close"]
+            prev_ret = (closes.iloc[-1] / closes.iloc[-2] - 1) * 100 if len(closes) >= 2 else None
+            rng = ((df["High"] - df["Low"]) / df["Close"] * 100).tail(5).mean()
+            return {"prev_close": round(float(closes.iloc[-1]), 2),
+                    "prev_return_pct": None if prev_ret is None else round(float(prev_ret), 2),
+                    "avg_daily_range_pct": round(float(rng), 2)}
+        except Exception as e:
+            if attempt == RETRIES:
+                print(f"[context] {ticker}: {type(e).__name__}: {e}")
+            time.sleep(1 * attempt)
+    return empty
 
 
 def gap_pct(open_price, ctx):
@@ -122,9 +139,20 @@ def is_live_session(now=None):
         print("[SessionGuard] FORCE_RUN set - skipping guard.")
         return True
     now = now or datetime.datetime.now(IST)
+    
+    # Phase 2: Check Weekends
     if now.weekday() >= 5:
         print(f"[SessionGuard] {now.strftime('%A')} - weekend, market closed.")
         return False
+
+    # Phase 2: Check official NSE trading holidays
+    if HAS_HOLIDAYS:
+        in_holidays = holidays.India()
+        if now.date() in in_holidays:
+            holiday_name = in_holidays.get(now.date())
+            print(f"[SessionGuard] Market closed today ({holiday_name} - official NSE Holiday).")
+            return False
+
     if not (MARKET_OPEN <= now.time() <= LAST_RUN):
         print(f"[SessionGuard] {now.strftime('%H:%M')} IST is outside 09:15-15:50.")
         return False
@@ -275,7 +303,7 @@ def query_gemini_regime(symbol, m, news, now, ctx=None):
     return fallback_regime(last_error)
 
 
-def build_curves(df, target_price):
+def build_curves(df, target_price, ctx=None):
     start = datetime.datetime.combine(df.index[0].date(), MARKET_OPEN)
     timeframes = [(start + datetime.timedelta(minutes=5 * i)).strftime("%H:%M") for i in range(NUM_SLOTS)]
     price_by_slot = {t.strftime("%H:%M"): round(float(p), 2) for t, p in zip(df.index, df["Close"])}
@@ -285,7 +313,7 @@ def build_curves(df, target_price):
 
     valid = [i for i, p in enumerate(actual) if p is not None]
     if not valid:
-        return timeframes, actual, [], volume
+        return timeframes, actual, [], [], [], volume
     first_i, last_i = valid[0], valid[-1]
     if last_i == first_i:
         xs, ys = [first_i, NUM_SLOTS - 1], [actual[first_i], target_price]
@@ -293,8 +321,17 @@ def build_curves(df, target_price):
         xs, ys = [first_i, NUM_SLOTS - 1], [actual[first_i], actual[last_i]]
     else:
         xs, ys = [first_i, last_i, NUM_SLOTS - 1], [actual[first_i], actual[last_i], target_price]
-    curve = PchipInterpolator(xs, ys)(np.clip(np.arange(NUM_SLOTS), first_i, NUM_SLOTS - 1))
-    return timeframes, actual, [round(float(p), 2) for p in curve], volume
+    
+    curve_interp = PchipInterpolator(xs, ys)(np.clip(np.arange(NUM_SLOTS), first_i, NUM_SLOTS - 1))
+    predicted = [round(float(p), 2) for p in curve_interp]
+
+    # Phase 5: Confidence Bands (Upper & Lower bounds based on daily volatility)
+    range_pct = (ctx or {}).get("avg_daily_range_pct") or 1.5
+    band_offset = (target_price * (range_pct / 100.0) * 0.25)
+    upper_curve = [round(p + band_offset * (i / (NUM_SLOTS - 1)), 2) for i, p in enumerate(predicted)]
+    lower_curve = [round(p - band_offset * (i / (NUM_SLOTS - 1)), 2) for i, p in enumerate(predicted)]
+
+    return timeframes, actual, predicted, upper_curve, lower_curve, volume
 
 
 def session_complete(df, now):
@@ -373,6 +410,11 @@ def process_symbol(symbol, now):
             return _fail(symbol, f"stale data: newest bar is {lag:.0f} min old - files left untouched")
         news = fetch_news(ticker)
         m = compute_session_metrics(df, now)
+
+        # Phase 4: Catalyst & Volume Spike Webhook Notification
+        if m["vol_ratio"] >= 2.5:
+            _notify(f"⚡ Volume Spike Alert: {symbol} trading at {m['vol_ratio']}x average bar volume (Last: Rs {m['last_close']:.2f})")
+
         path = os.path.join(DATA_DIR, f"{symbol}_prediction.json")
         today = str(now.date())
 
@@ -402,7 +444,7 @@ def process_symbol(symbol, now):
                        "baselines": baseline_targets(m["open_price"], ctx)}
 
         target_price = round(m["open_price"] * (1 + pred["target_pct"] / 100.0), 2)
-        timeframes, actual, predicted, volume = build_curves(df, target_price)
+        timeframes, actual, predicted, upper_curve, lower_curve, volume = build_curves(df, target_price, ctx)
 
         complete = session_complete(df, now)
         score = score_session(opening, m["last_close"]) if complete else \
@@ -425,14 +467,14 @@ def process_symbol(symbol, now):
             "curves": {
                 "date": today, "generated_at": now.strftime("%I:%M %p IST"), "symbol": symbol,
                 "bias": pred["bias"], "timeframes": timeframes, "actual_curve": actual,
-                "predicted_curve": predicted, "actual_volume": volume,
-                "final_pred": target_price, "final_actual": m["last_close"],
+                "predicted_curve": predicted, "upper_confidence": upper_curve, "lower_confidence": lower_curve,
+                "actual_volume": volume, "final_pred": target_price, "final_actual": m["last_close"],
                 "error_pct": score["error_pct"],
             },
             "session": {"complete": complete, **score},
         })
 
-        # Sync forecast record directly to Supabase DB
+        # Phase 3: Sync forecast record directly to Supabase DB
         try:
             if opening:
                 db.upsert_forecast_record(
