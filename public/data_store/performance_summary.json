@@ -1,0 +1,149 @@
+{
+  "overall": {
+    "sessions": 0,
+    "days": 0,
+    "enough_data": false,
+    "direction_hit_rate": null,
+    "directional_calls": 0,
+    "direction_hit_ci95": null,
+    "mean_error_pct": null,
+    "mean_flat_baseline_error_pct": null,
+    "beat_flat_baseline_rate": null,
+    "baselines": {}
+  },
+  "by_symbol": {
+    "MUTHOOTFIN": {
+      "sessions": 0,
+      "days": 0,
+      "enough_data": false,
+      "direction_hit_rate": null,
+      "directional_calls": 0,
+      "direction_hit_ci95": null,
+      "mean_error_pct": null,
+      "mean_flat_baseline_error_pct": null,
+      "beat_flat_baseline_rate": null,
+      "baselines": {}
+    },
+    "RELIANCE": {
+      "sessions": 0,
+      "days": 0,
+      "enough_data": false,
+      "direction_hit_rate": null,
+      "directional_calls": 0,
+      "direction_hit_ci95": null,
+      "mean_error_pct": null,
+      "mean_flat_baseline_error_pct": null,
+      "beat_flat_baseline_rate": null,
+      "baselines": {}
+    },
+    "TMPV": {
+      "sessions": 0,
+      "days": 0,
+      "enough_data": false,
+      "direction_hit_rate": null,
+      "directional_calls": 0,
+      "direction_hit_ci95": null,
+      "mean_error_pct": null,
+      "mean_flat_baseline_error_pct": null,
+      "beat_flat_baseline_rate": null,
+      "baselines": {}
+    },
+    "INFY": {
+      "sessions": 0,
+      "days": 0,
+      "enough_data": false,
+      "direction_hit_rate": null,
+      "directional_calls": 0,
+      "direction_hit_ci95": null,
+      "mean_error_pct": null,
+      "mean_flat_baseline_error_pct": null,
+      "beat_flat_baseline_rate": null,
+      "baselines": {}
+    },
+    "HDFCBANK": {
+      "sessions": 0,
+      "days": 0,
+      "enough_data": false,
+      "direction_hit_rate": null,
+      "directional_calls": 0,
+      "direction_hit_ci95": null,
+      "mean_error_pct": null,
+      "mean_flat_baseline_error_pct": null,
+      "beat_flat_baseline_rate": null,
+      "baselines": {}
+    },
+    "ICICIBANK": {
+      "sessions": 0,
+      "days": 0,
+      "enough_data": false,
+      "direction_hit_rate": null,
+      "directional_calls": 0,
+      "direction_hit_ci95": null,
+      "mean_error_pct": null,
+      "mean_flat_baseline_error_pct": null,
+      "beat_flat_baseline_rate": null,
+      "baselines": {}
+    },
+    "TCS": {
+      "sessions": 0,
+      "days": 0,
+      "enough_data": false,
+      "direction_hit_rate": null,
+      "directional_calls": 0,
+      "direction_hit_ci95": null,
+      "mean_error_pct": null,
+      "mean_flat_baseline_error_pct": null,
+      "beat_flat_baseline_rate": null,
+      "baselines": {}
+    },
+    "SBIN": {
+      "sessions": 0,
+      "days": 0,
+      "enough_data": false,
+      "direction_hit_rate": null,
+      "directional_calls": 0,
+      "direction_hit_ci95": null,
+      "mean_error_pct": null,
+      "mean_flat_baseline_error_pct": null,
+      "beat_flat_baseline_rate": null,
+      "baselines": {}
+    },
+    "BHARTIARTL": {
+      "sessions": 0,
+      "days": 0,
+      "enough_data": false,
+      "direction_hit_rate": null,
+      "directional_calls": 0,
+      "direction_hit_ci95": null,
+      "mean_error_pct": null,
+      "mean_flat_baseline_error_pct": null,
+      "beat_flat_baseline_rate": null,
+      "baselines": {}
+    },
+    "LT": {
+      "sessions": 0,
+      "days": 0,
+      "enough_data": false,
+      "direction_hit_rate": null,
+      "directional_calls": 0,
+      "direction_hit_ci95": null,
+      "mean_error_pct": null,
+      "mean_flat_baseline_error_pct": null,
+      "beat_flat_baseline_rate": null,
+      "baselines": {}
+    },
+    "SUNPHARMA": {
+      "sessions": 0,
+      "days": 0,
+      "enough_data": false,
+      "direction_hit_rate": null,
+      "directional_calls": 0,
+      "direction_hit_ci95": null,
+      "mean_error_pct": null,
+      "mean_flat_baseline_error_pct": null,
+      "beat_flat_baseline_rate": null,
+      "baselines": {}
+    }
+  },
+  "as_of": "2026-10-02T18:02:45+05:30"
+}
