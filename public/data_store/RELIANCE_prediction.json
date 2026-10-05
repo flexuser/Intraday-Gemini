@@ -9,7 +9,7 @@
     "model": "gemini-3.8-flash",
     "llm_error": "skipped: Gemini quota cooldown until 20:05 IST",
     "made_at": "2026-10-05T12:30:49+05:30",
-    "volume_ratio": 1.42,
+    "volume_ratio": 0.0,
     "has_volume_spike": false,
     "news_feed": []
   },
@@ -48,7 +48,7 @@
   },
   "curves": {
     "date": "2026-10-05",
-    "generated_at": "03:15 PM IST",
+    "generated_at": "03:20 PM IST",
     "symbol": "RELIANCE",
     "bias": "NEUTRAL",
     "timeframes": [
