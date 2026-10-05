@@ -1,53 +1,12 @@
 {
-  "as_of": "2026-10-02T18:12:19+05:30",
-  "status": "FAILED",
+  "as_of": "2026-10-05T09:15:36+05:30",
+  "status": "DEGRADED",
   "symbols_total": 11,
-  "symbols_updated": 0,
-  "llm_fallback_count": 0,
+  "symbols_updated": 11,
+  "llm_fallback_count": 10,
   "model": "gemini-3.8-flash",
   "prompt_version": "v3-context",
-  "sample_llm_error": null,
-  "errors": [
-    {
-      "symbol": "MUTHOOTFIN",
-      "error": "no bars for today - files left untouched"
-    },
-    {
-      "symbol": "TMPV",
-      "error": "no bars for today - files left untouched"
-    },
-    {
-      "symbol": "RELIANCE",
-      "error": "no bars for today - files left untouched"
-    },
-    {
-      "symbol": "INFY",
-      "error": "no bars for today - files left untouched"
-    },
-    {
-      "symbol": "HDFCBANK",
-      "error": "no bars for today - files left untouched"
-    },
-    {
-      "symbol": "ICICIBANK",
-      "error": "no bars for today - files left untouched"
-    },
-    {
-      "symbol": "TCS",
-      "error": "no bars for today - files left untouched"
-    },
-    {
-      "symbol": "BHARTIARTL",
-      "error": "no bars for today - files left untouched"
-    },
-    {
-      "symbol": "SBIN",
-      "error": "no bars for today - files left untouched"
-    },
-    {
-      "symbol": "LT",
-      "error": "no bars for today - files left untouched"
-    }
-  ],
-  "last_alert_at": "2026-10-02T18:02:45+05:30"
+  "sample_llm_error": "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev",
+  "errors": [],
+  "last_alert_at": "2026-10-05T09:15:36+05:30"
 }

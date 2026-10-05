@@ -1,1 +1,123 @@
-[]
+[
+  {
+    "symbol": "MUTHOOTFIN",
+    "bias": "NEUTRAL",
+    "final_pred": 2724.5,
+    "final_actual": 2724.5,
+    "error_pct": null,
+    "verdict": "IN_PROGRESS",
+    "baseline_error_pct": null,
+    "direction_hit": null,
+    "session_date": "2026-10-05"
+  },
+  {
+    "symbol": "RELIANCE",
+    "bias": "NEUTRAL",
+    "final_pred": 1175.9,
+    "final_actual": 1175.9000244140625,
+    "error_pct": null,
+    "verdict": "IN_PROGRESS",
+    "baseline_error_pct": null,
+    "direction_hit": null,
+    "session_date": "2026-10-05"
+  },
+  {
+    "symbol": "TMPV",
+    "bias": "NEUTRAL",
+    "final_pred": 281.0,
+    "final_actual": 281.0,
+    "error_pct": null,
+    "verdict": "IN_PROGRESS",
+    "baseline_error_pct": null,
+    "direction_hit": null,
+    "session_date": "2026-10-05"
+  },
+  {
+    "symbol": "INFY",
+    "bias": "NEUTRAL",
+    "final_pred": 1036.0,
+    "final_actual": 1036.0,
+    "error_pct": null,
+    "verdict": "IN_PROGRESS",
+    "baseline_error_pct": null,
+    "direction_hit": null,
+    "session_date": "2026-10-05"
+  },
+  {
+    "symbol": "HDFCBANK",
+    "bias": "NEUTRAL",
+    "final_pred": 730.8,
+    "final_actual": 730.7999877929688,
+    "error_pct": null,
+    "verdict": "IN_PROGRESS",
+    "baseline_error_pct": null,
+    "direction_hit": null,
+    "session_date": "2026-10-05"
+  },
+  {
+    "symbol": "ICICIBANK",
+    "bias": "NEUTRAL",
+    "final_pred": 1305.8,
+    "final_actual": 1305.800048828125,
+    "error_pct": null,
+    "verdict": "IN_PROGRESS",
+    "baseline_error_pct": null,
+    "direction_hit": null,
+    "session_date": "2026-10-05"
+  },
+  {
+    "symbol": "TCS",
+    "bias": "NEUTRAL",
+    "final_pred": 2075.0,
+    "final_actual": 2075.0,
+    "error_pct": null,
+    "verdict": "IN_PROGRESS",
+    "baseline_error_pct": null,
+    "direction_hit": null,
+    "session_date": "2026-10-05"
+  },
+  {
+    "symbol": "SBIN",
+    "bias": "NEUTRAL",
+    "final_pred": 961.0,
+    "final_actual": 961.0,
+    "error_pct": null,
+    "verdict": "IN_PROGRESS",
+    "baseline_error_pct": null,
+    "direction_hit": null,
+    "session_date": "2026-10-05"
+  },
+  {
+    "symbol": "BHARTIARTL",
+    "bias": "NEUTRAL",
+    "final_pred": 1748.0,
+    "final_actual": 1748.0,
+    "error_pct": null,
+    "verdict": "IN_PROGRESS",
+    "baseline_error_pct": null,
+    "direction_hit": null,
+    "session_date": "2026-10-05"
+  },
+  {
+    "symbol": "LT",
+    "bias": "NEUTRAL",
+    "final_pred": 3717.0,
+    "final_actual": 3729.0,
+    "error_pct": null,
+    "verdict": "IN_PROGRESS",
+    "baseline_error_pct": null,
+    "direction_hit": null,
+    "session_date": "2026-10-05"
+  },
+  {
+    "symbol": "SUNPHARMA",
+    "bias": "NEUTRAL",
+    "final_pred": 1795.7,
+    "final_actual": 1799.199951171875,
+    "error_pct": null,
+    "verdict": "IN_PROGRESS",
+    "baseline_error_pct": null,
+    "direction_hit": null,
+    "session_date": "2026-10-05"
+  }
+]
