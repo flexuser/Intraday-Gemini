@@ -4,6 +4,7 @@ import numpy as np, pandas as pd, pytest
 import muthoot_poc.archive_once as ao
 
 IST = ao.IST
+ORIG_NOTIFY = ao._notify
 def at(h, m, day=(2026, 10, 5)):
     return IST.localize(datetime.datetime(*day, h, m))
 
@@ -37,6 +38,9 @@ def env(monkeypatch, tmp_path):
     monkeypatch.setattr(ao, "fetch_daily_context",
                         lambda t, today: {"prev_close": 99.0, "prev_return_pct": 0.5, "avg_daily_range_pct": 1.4})
     del ao.RUN_ERRORS[:]
+    monkeypatch.setattr(ao, "LLM_BLOCKED_UNTIL", None)
+    monkeypatch.setattr(ao, "REFRESH_MINUTES", 30)
+    monkeypatch.setattr(ao, "_notify", lambda text: None)
     state = {"df": bars(4)}
     monkeypatch.setattr(ao, "fetch_5m", lambda t, today: state["df"])
     return llm, state, tmp_path
@@ -54,7 +58,7 @@ def test_multiindex_columns_are_flattened():
 
 def test_gaps_anchor_at_real_slot():
     df = bars(14, gaps=(2, 3), drift=1.0)
-    tf, actual, pred, _ = ao.build_curves(df, 101.5)
+    tf, actual, pred, *_ = ao.build_curves(df, 101.5)
     last = max(i for i, v in enumerate(actual) if v is not None)
     assert last == 13 and pred[last] == actual[last]
 
@@ -218,6 +222,7 @@ def test_stale_data_is_skipped_and_reported(env):
 def test_health_status_and_alert_cooldown(env, monkeypatch):
     llm, state, tmp = env
     sent = []
+    monkeypatch.setattr(ao, "_notify", ORIG_NOTIFY)
     monkeypatch.setenv("ALERT_WEBHOOK_URL", "http://example.invalid/hook")
     monkeypatch.setattr(ao.requests, "post", lambda url, json, timeout: sent.append(json["text"]))
     bad = [{"symbol": s, "forecast_source": "fallback", "llm_error": "404", "complete": False, "date": "2026-10-05",
@@ -229,3 +234,93 @@ def test_health_status_and_alert_cooldown(env, monkeypatch):
     ao.finalize(bad, at(10, 5)); assert len(sent) == 1                      # inside cooldown: no spam
     assert ao.finalize(good, at(10, 10))["status"] == "OK" and "recovered" in sent[-1]
     assert ao.finalize([], at(10, 15))["status"] == "FAILED"
+
+
+# ---- v4: frozen chart line, quota handling, checkpoints, alerts ----
+def test_chart_line_is_frozen_while_the_latest_forecast_line_moves(env):
+    llm, state, tmp = env
+    state["df"] = bars(4);  ao.process_symbol("INFY", at(9, 30))
+    early = saved(tmp)["curves"]
+    state["df"] = bars(55, drift=-1.5);  ao.process_symbol("INFY", at(13, 45))     # price fell 1.5% since the morning
+    late = saved(tmp)["curves"]
+    assert early["predicted_curve"] == late["predicted_curve"]                      # the plotted forecast never changes
+    assert early["predicted_curve"][0] == 100.0 and early["predicted_curve"][-1] == 101.0
+    assert early["latest_forecast_curve"] != late["latest_forecast_curve"]          # the re-anchored one does
+    assert late["opening_made_at"] == "09:30"
+
+def test_no_opening_forecast_means_no_blue_line(env):
+    llm, state, tmp = env
+    llm.out = HttpErr(404)
+    ao.process_symbol("INFY", at(9, 30))
+    assert saved(tmp)["curves"]["predicted_curve"] == [None] * ao.NUM_SLOTS
+
+def test_quota_error_is_not_retried_and_sets_cooldown(env):
+    llm, state, _ = env
+    llm.out = HttpErr(429)
+    m = ao.compute_session_metrics(state["df"], at(9, 30))
+    r = ao.query_gemini_regime("INFY", m, [], at(9, 30))
+    assert llm.calls == 1 and r["source"] == "fallback" and ao.LLM_BLOCKED_UNTIL is not None
+    r2 = ao.query_gemini_regime("TCS", m, [], at(9, 40))                            # inside the cooldown
+    assert llm.calls == 1 and "cooldown" in r2["llm_error"]
+    r3 = ao.query_gemini_regime("TCS", m, [], at(10, 5)); assert llm.calls == 2     # cooldown over: tries again
+
+def test_cooldown_survives_across_runs(env):
+    llm, state, tmp = env
+    ao.write_json(str(tmp / "health.json"), {"llm_cooldown_until": at(10, 30).isoformat()})
+    ao.load_cooldown(at(10, 0));  assert ao.LLM_BLOCKED_UNTIL == at(10, 30)
+    ao.load_cooldown(at(11, 0));  assert ao.LLM_BLOCKED_UNTIL is None
+
+def test_health_is_degraded_when_llm_errors_even_if_old_forecasts_are_kept(env):
+    llm, state, tmp = env
+    rows = [{"symbol": s, "forecast_source": "llm", "llm_error": "429", "complete": False, "date": "2026-10-05",
+             "verdict": "IN_PROGRESS", "bias": "NEUTRAL", "final_pred": 1, "final_actual": 1, "error_pct": None,
+             "baseline_error_pct": None, "direction_hit": None, "baselines": {}, "checkpoints": [], "source": "llm",
+             "target_pct": 0.0} for s in ao.SYMBOLS]
+    h = ao.build_health(rows, at(13, 45), [], {})
+    assert h["status"] == "DEGRADED" and h["llm_error_count"] == 11
+
+def test_checkpoint_forecasts_are_scored_from_their_own_start_price(env):
+    llm, state, tmp = env
+    state["df"] = bars(4);  ao.process_symbol("INFY", at(9, 30))                    # opening: +1.0%
+    llm.out = json.dumps({"bias": "BULLISH", "target_pct": 2.0, "archetype": "MOMENTUM_BREAKOUT", "reasoning": "x"})
+    state["df"] = bars(55, drift=2.0);  ao.process_symbol("INFY", at(13, 35))       # price already +2% -> "forecast" +2%
+    assert [e["target_price"] for e in saved(tmp)["forecast_log"]] == [101.0, 102.0]
+    state["df"] = bars(75, drift=2.0);  row = ao.process_symbol("INFY", at(15, 35))
+    cps = row["checkpoints"]
+    assert len(cps) == 2 and cps[1]["made_at"] == "13:35"
+    assert cps[1]["direction_hit"] is None or cps[1]["flat_error_pct"] < cps[0]["flat_error_pct"]   # late call had almost nothing left to predict
+    ao.finalize([row], at(15, 35))
+    late = json.load(open(tmp / "performance_summary.json"))["overall"]["late_forecasts"]
+    assert late["calls"] in (0, 1)
+
+def test_volume_spike_alert_has_a_cooldown(env, monkeypatch):
+    llm, state, tmp = env
+    sent = []; monkeypatch.setattr(ao, "_notify", lambda text: sent.append(text))
+    def spiky(n):
+        d = bars(n); d.iloc[-1, d.columns.get_loc("Volume")] = 30000; return d
+    state["df"] = spiky(10);  ao.process_symbol("INFY", at(10, 0, ) .replace(minute=5)); assert len(sent) == 1
+    state["df"] = spiky(11);  ao.process_symbol("INFY", at(10, 10));                      assert len(sent) == 1   # 5 min later: silent
+    state["df"] = spiky(23);  ao.process_symbol("INFY", at(11, 10));                      assert len(sent) == 2   # > 60 min: alerts again
+
+def test_public_holiday_list_is_advisory_not_a_blocker(monkeypatch):
+    import types
+    monkeypatch.delenv("FORCE_RUN", raising=False)
+    monkeypatch.setattr(ao, "HAS_HOLIDAYS", True, raising=False)
+    monkeypatch.setattr(ao, "holidays", types.SimpleNamespace(India=lambda: {datetime.date(2026, 10, 5): "Some public holiday"}), raising=False)
+    monkeypatch.setattr(ao, "fetch_5m", lambda t, today: bars(10))
+    assert ao.is_live_session(at(10, 0)) is True                                          # market data says it is open
+    monkeypatch.setattr(ao, "fetch_5m", lambda t, today: pd.DataFrame())
+    assert ao.is_live_session(at(10, 0)) is False                                         # ...and no bars means closed
+
+def test_supabase_is_optional(monkeypatch):
+    assert ao.db is None or hasattr(ao.db, "upsert_forecast_record")
+
+
+def test_no_new_llm_forecast_after_1500_and_none_logged(env):
+    llm, state, tmp = env
+    state["df"] = bars(75)
+    ao.process_symbol("INFY", at(15, 5))                                               # no forecast yet, too late to start
+    assert llm.calls == 0 and saved(tmp)["opening_forecast"] is None
+    state["df"] = bars(4); ao.process_symbol("TCS", at(9, 30)); n = llm.calls          # normal opening forecast
+    state["df"] = bars(75); ao.process_symbol("TCS", at(15, 35))
+    assert llm.calls == n and len(saved(tmp, "TCS")["forecast_log"]) == 1             # final run reuses it, logs nothing new

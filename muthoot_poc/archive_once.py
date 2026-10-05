@@ -1,4 +1,4 @@
-﻿"""Intraday AI sync: fetch 5-min bars, ask Gemini for a close forecast, score it honestly.
+"""Intraday AI sync: fetch 5-min bars, ask Gemini for a close forecast, score it honestly.
 
 Output (public/data_store/ + Supabase):
   <SYMBOL>_prediction.json   per-symbol forecast + 75-slot curves + confidence bands
@@ -13,7 +13,11 @@ import math
 import time
 import re
 import datetime
-import db
+try:
+    import db
+except Exception as _db_err:                 # Supabase is optional
+    db = None
+    print(f"[db] Supabase disabled: {_db_err}")
 from concurrent.futures import ThreadPoolExecutor
 
 import numpy as np
@@ -38,7 +42,10 @@ SYMBOLS = ["MUTHOOTFIN", "RELIANCE", "TMPV", "INFY", "HDFCBANK", "ICICIBANK",
 
 DATA_DIR = os.getenv("DATA_DIR", "public/data_store")
 MODEL = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
-REFRESH_MINUTES = int(os.getenv("FORECAST_REFRESH_MINUTES", "30"))
+REFRESH_MINUTES = int(os.getenv("FORECAST_REFRESH_MINUTES", "120"))   # was 30: ~4x fewer Gemini calls
+LLM_COOLDOWN_MIN = int(os.getenv("LLM_COOLDOWN_MIN", "30"))
+SPIKE_ALERT_COOLDOWN_MIN = 60
+LLM_BLOCKED_UNTIL = None                # set after a 429 so the next runs stop hammering the API
 RETRIES = 3
 MAX_WORKERS = 3
 PROMPT_VERSION = "v3-context"
@@ -149,9 +156,8 @@ def is_live_session(now=None):
     if HAS_HOLIDAYS:
         in_holidays = holidays.India()
         if now.date() in in_holidays:
-            holiday_name = in_holidays.get(now.date())
-            print(f"[SessionGuard] Market closed today ({holiday_name} - official NSE Holiday).")
-            return False
+            print(f"[SessionGuard] Note: {in_holidays.get(now.date())} is an Indian public holiday "
+                  f"(not necessarily an NSE one) - confirming with market data.")
 
     if not (MARKET_OPEN <= now.time() <= LAST_RUN):
         print(f"[SessionGuard] {now.strftime('%H:%M')} IST is outside 09:15-15:50.")
@@ -283,9 +289,32 @@ Task: forecast the 15:30 IST close.
 """
 
 
+def _is_quota_error(e):
+    return getattr(e, "code", None) == 429 or "RESOURCE_EXHAUSTED" in str(e)
+
+
+def _quota_cooldown_minutes(e):
+    txt = str(e).lower().replace(" ", "")
+    return 360 if ("perday" in txt or "daily" in txt) else LLM_COOLDOWN_MIN
+
+
+def load_cooldown(now):
+    """Restore a quota cooldown set by an earlier run (each GitHub Actions run is a fresh process)."""
+    global LLM_BLOCKED_UNTIL
+    until = read_json(os.path.join(DATA_DIR, "health.json"), {}).get("llm_cooldown_until")
+    try:
+        t = datetime.datetime.fromisoformat(until) if until else None
+    except Exception:
+        t = None
+    LLM_BLOCKED_UNTIL = t if t and t > now else None
+
+
 def query_gemini_regime(symbol, m, news, now, ctx=None):
+    global LLM_BLOCKED_UNTIL
     if not os.getenv("GEMINI_API_KEY"):
         return fallback_regime("GEMINI_API_KEY is not set")
+    if LLM_BLOCKED_UNTIL and now < LLM_BLOCKED_UNTIL:
+        return fallback_regime(f"skipped: Gemini quota cooldown until {LLM_BLOCKED_UNTIL.strftime('%H:%M')} IST")
     prompt = build_prompt(symbol, m, news, now, ctx or {})
     last_error = None
     for attempt in range(1, RETRIES + 1):
@@ -295,12 +324,21 @@ def query_gemini_regime(symbol, m, news, now, ctx=None):
             return regime
         except Exception as e:
             last_error = f"{type(e).__name__}: {e}"
-            print(f"[Gemini {attempt}/{RETRIES}] {symbol}: {last_error}")
+            print(f"[Gemini {attempt}/{RETRIES}] {symbol}: {last_error[:200]}")
+            if _is_quota_error(e):                       # retrying a 429 only burns more quota
+                LLM_BLOCKED_UNTIL = now + datetime.timedelta(minutes=_quota_cooldown_minutes(e))
+                break
             if getattr(e, "code", None) in PERMANENT_HTTP_CODES:
                 break
             if attempt < RETRIES:
                 time.sleep(2 ** attempt)
     return fallback_regime(last_error)
+
+
+def frozen_curve(base_price, target_pct):
+    """Straight line from the open to the opening forecast's 15:30 target. Never changes during the day."""
+    target = base_price * (1 + target_pct / 100.0)
+    return [round(float(base_price + (target - base_price) * i / (NUM_SLOTS - 1)), 2) for i in range(NUM_SLOTS)]
 
 
 def build_curves(df, target_price, ctx=None):
@@ -344,10 +382,11 @@ def _hit(target_pct, move):
     return bool(move != 0 and (move > 0) == (target_pct > 0))
 
 
-def score_session(opening, close_price):
+def score_session(opening, close_price, log=None):
+    """Score the FIRST LLM forecast of the day, each frozen baseline, and every later checkpoint forecast."""
     if not opening:
         return {"verdict": "NO_FORECAST", "error_pct": None, "baseline_error_pct": None,
-                "direction_hit": None, "baselines": {}}
+                "direction_hit": None, "baselines": {}, "checkpoints": []}
     base = opening["base_price"]
     move = close_price - base
     err = lambda t: round(abs(close_price - base * (1 + t / 100.0)) / base * 100, 2)
@@ -355,9 +394,16 @@ def score_session(opening, close_price):
     hit = None if opening["bias"] == "NEUTRAL" else _hit(opening["target_pct"], move)
     baselines = {n: {"target_pct": t, "error_pct": err(t), "direction_hit": _hit(t, move)}
                  for n, t in (opening.get("baselines") or {}).items() if t is not None}
+    checkpoints = []
+    for e in (log or []):                                # direction is judged from the price AT forecast time
+        p0 = e["price_at_forecast"]
+        checkpoints.append({"made_at": e["made_at"][11:16], "target_price": e["target_price"], "price_at_forecast": p0,
+                            "direction_hit": _hit(e["target_price"] - p0, close_price - p0),
+                            "error_pct": round(abs(close_price - e["target_price"]) / p0 * 100, 2),
+                            "flat_error_pct": round(abs(close_price - p0) / p0 * 100, 2)})
     verdict = "SUCCESS" if error <= 1.0 else ("PARTIAL" if error <= 2.5 else "FAILED")
     return {"verdict": verdict, "error_pct": error, "baseline_error_pct": round(abs(move) / base * 100, 2),
-            "direction_hit": hit, "baselines": baselines}
+            "direction_hit": hit, "baselines": baselines, "checkpoints": checkpoints}
 
 
 def _finite(o):
@@ -411,10 +457,6 @@ def process_symbol(symbol, now):
         news = fetch_news(ticker)
         m = compute_session_metrics(df, now)
 
-        # Phase 4: Catalyst & Volume Spike Webhook Notification
-        if m["vol_ratio"] >= 2.5:
-            _notify(f"⚡ Volume Spike Alert: {symbol} trading at {m['vol_ratio']}x average bar volume (Last: Rs {m['last_close']:.2f})")
-
         path = os.path.join(DATA_DIR, f"{symbol}_prediction.json")
         today = str(now.date())
 
@@ -426,28 +468,48 @@ def process_symbol(symbol, now):
             ctx = fetch_daily_context(ticker, now.date())
         forecast, opening = existing.get("forecast"), existing.get("opening_forecast")
 
+        last_spike = existing.get("last_spike_alert_at")     # alert once per hour per symbol, not every 5 minutes
+        if m["vol_ratio"] >= 2.5 and now.time() >= datetime.time(9, 45) and \
+                (not last_spike or _age_minutes(last_spike, now) >= SPIKE_ALERT_COOLDOWN_MIN):
+            _notify(f"Volume spike: {symbol} at {m['vol_ratio']}x its average 5-min volume (last Rs {m['last_close']:.2f})")
+            last_spike = now.isoformat(timespec="seconds")
+
+        too_late = now.time() >= datetime.time(15, 0)       # a forecast this close to the 15:30 close is meaningless
         fresh_llm = forecast and forecast.get("source") == "llm" and \
-            _age_minutes(forecast.get("made_at"), now) < REFRESH_MINUTES
+            (too_late or _age_minutes(forecast.get("made_at"), now) < REFRESH_MINUTES)
         if fresh_llm:
             pred = forecast
+        elif too_late:
+            pred = dict(fallback_regime("no new forecasts after 15:00 IST"),
+                        made_at=now.isoformat(timespec="seconds"), prompt_version=PROMPT_VERSION)
         else:
             pred = query_gemini_regime(symbol, m, news, now, ctx)
             pred["made_at"] = now.isoformat(timespec="seconds")
             pred["prompt_version"] = PROMPT_VERSION
             if pred["source"] == "fallback" and forecast and forecast.get("source") == "llm":
                 pred = dict(forecast, llm_error=pred["llm_error"])
-        if opening is None and pred["source"] == "llm":
+        log = list(existing.get("forecast_log") or [])
+        if pred["source"] == "llm" and pred.get("made_at") == now.isoformat(timespec="seconds"):
+            log.append({"made_at": pred["made_at"], "bias": pred["bias"], "target_pct": pred["target_pct"],
+                        "target_price": round(m["open_price"] * (1 + pred["target_pct"] / 100.0), 2),
+                        "price_at_forecast": round(m["last_close"], 2)})
+            log = log[-20:]
+        new_opening = opening is None and pred["source"] == "llm"
+        if new_opening:
             opening = {"bias": pred["bias"], "target_pct": pred["target_pct"], "archetype": pred["archetype"],
                        "base_price": round(m["open_price"], 2), "made_at": pred["made_at"], "model": pred["model"],
                        "prompt_version": pred.get("prompt_version", PROMPT_VERSION),
                        "gap_pct": gap_pct(m["open_price"], ctx),
                        "baselines": baseline_targets(m["open_price"], ctx)}
+            opening["curve"] = frozen_curve(opening["base_price"], opening["target_pct"])
 
         target_price = round(m["open_price"] * (1 + pred["target_pct"] / 100.0), 2)
         timeframes, actual, predicted, upper_curve, lower_curve, volume = build_curves(df, target_price, ctx)
+        opening_curve = (opening.get("curve") or frozen_curve(opening["base_price"], opening["target_pct"])) \
+            if opening else [None] * NUM_SLOTS
 
         complete = session_complete(df, now)
-        score = score_session(opening, m["last_close"]) if complete else \
+        score = score_session(opening, m["last_close"], log) if complete else \
             {"verdict": "IN_PROGRESS", "error_pct": None, "baseline_error_pct": None,
              "direction_hit": None, "baselines": {}}
 
@@ -463,11 +525,15 @@ def process_symbol(symbol, now):
             "forecast": {k: pred.get(k) for k in ("bias", "target_pct", "archetype", "reasoning", "source",
                                                   "model", "made_at", "llm_error", "prompt_version")},
             "opening_forecast": opening,
+            "forecast_log": log,
+            "last_spike_alert_at": last_spike,
             "context": ctx,
             "curves": {
                 "date": today, "generated_at": now.strftime("%I:%M %p IST"), "symbol": symbol,
                 "bias": pred["bias"], "timeframes": timeframes, "actual_curve": actual,
-                "predicted_curve": predicted, "upper_confidence": upper_curve, "lower_confidence": lower_curve,
+                "predicted_curve": opening_curve, "latest_forecast_curve": predicted,
+                "opening_made_at": opening["made_at"][11:16] if opening else None,
+                "upper_confidence": upper_curve, "lower_confidence": lower_curve,
                 "actual_volume": volume, "final_pred": target_price, "final_actual": m["last_close"],
                 "error_pct": score["error_pct"],
             },
@@ -476,7 +542,7 @@ def process_symbol(symbol, now):
 
         # Phase 3: Sync forecast record directly to Supabase DB
         try:
-            if opening:
+            if opening and db is not None and (new_opening or complete):   # not on every 5-min run
                 db.upsert_forecast_record(
                     session_date=today,
                     symbol=symbol,
@@ -524,6 +590,9 @@ def summarize(history):
             dirs = [b["direction_hit"] for b in rs if b.get("direction_hit") is not None]
             base[n] = {"sessions": len(rs), "mean_error_pct": _rate([b["error_pct"] for b in rs]),
                        "direction_hit_rate": _rate([1 if d else 0 for d in dirs])}
+        late = [c for r in scored for c in (r.get("checkpoints") or [])
+                if c["made_at"] >= "11:00" and c.get("direction_hit") is not None]
+        late_hits = sum(1 for c in late if c["direction_hit"])
         days = len({r["date"] for r in scored})
         return {"sessions": len(scored), "days": days, "enough_data": days >= MIN_DAYS_FOR_CLAIMS,
                 "direction_hit_rate": _rate([1 if d else 0 for d in directional]),
@@ -531,7 +600,11 @@ def summarize(history):
                 "mean_error_pct": _rate([r["error_pct"] for r in scored]),
                 "mean_flat_baseline_error_pct": _rate([r["baseline_error_pct"] for r in scored]),
                 "beat_flat_baseline_rate": _rate([1 if r["error_pct"] < r["baseline_error_pct"] else 0 for r in scored]),
-                "baselines": base}
+                "baselines": base,
+                "late_forecasts": {"calls": len(late), "direction_hit_ci95": _wilson(late_hits, len(late)),
+                                   "direction_hit_rate": _rate([1 if c["direction_hit"] else 0 for c in late]),
+                                   "mean_error_pct": _rate([c["error_pct"] for c in late]),
+                                   "mean_flat_error_pct": _rate([c["flat_error_pct"] for c in late])}}
     llm_rows = [r for r in history if r.get("source") == "llm"]
     return {"overall": block(llm_rows),
             "by_symbol": {s: block([r for r in llm_rows if r["symbol"] == s]) for s in SYMBOLS}}
@@ -540,17 +613,19 @@ def summarize(history):
 def build_health(results, now, errors, previous):
     ok = [r for r in results if r]
     fallbacks = [r for r in ok if r.get("forecast_source") != "llm"]
+    llm_errors = [r for r in ok if r.get("llm_error")]
     total = len(SYMBOLS)
     if not ok:
         status = "FAILED"
-    elif len(ok) < total * 0.7 or len(fallbacks) >= total * 0.5:
+    elif len(ok) < total * 0.7 or len(fallbacks) >= total * 0.5 or len(llm_errors) >= total * 0.5:
         status = "DEGRADED"
     else:
         status = "OK"
     return {"as_of": now.isoformat(timespec="seconds"), "status": status, "symbols_total": total,
-            "symbols_updated": len(ok), "llm_fallback_count": len(fallbacks), "model": MODEL,
+            "symbols_updated": len(ok), "llm_fallback_count": len(fallbacks), "llm_error_count": len(llm_errors),
+            "llm_cooldown_until": LLM_BLOCKED_UNTIL.isoformat(timespec="seconds") if LLM_BLOCKED_UNTIL else None, "model": MODEL,
             "prompt_version": PROMPT_VERSION,
-            "sample_llm_error": next((r["llm_error"] for r in fallbacks if r.get("llm_error")), None),
+            "sample_llm_error": next((r["llm_error"] for r in llm_errors), None),
             "errors": [{"symbol": s, "error": e} for s, e in (errors or [])][:10],
             "last_alert_at": (previous or {}).get("last_alert_at")}
 
@@ -569,12 +644,12 @@ def maybe_alert(health, previous, now):
     status, prev_status = health["status"], (previous or {}).get("status")
     if status != "OK":
         print(f"::warning::Pipeline {status}: {health['symbols_updated']}/{health['symbols_total']} updated, "
-              f"{health['llm_fallback_count']} without an AI forecast. {health.get('sample_llm_error') or ''}")
+              f"{health['llm_fallback_count']} without an AI forecast, {health['llm_error_count']} with LLM errors. {health.get('sample_llm_error') or ''}")
     last = (previous or {}).get("last_alert_at")
     cooled = last is None or _age_minutes(last, now) >= ALERT_COOLDOWN_MIN
     if status != "OK" and (prev_status in (None, "OK") or cooled):
         _notify(f"Intraday pipeline {status}: {health['symbols_updated']}/{health['symbols_total']} symbols updated, "
-                f"{health['llm_fallback_count']} without an AI forecast. {health.get('sample_llm_error') or ''}")
+                f"{health['llm_fallback_count']} without an AI forecast, {health['llm_error_count']} with LLM errors. {health.get('sample_llm_error') or ''}")
         health["last_alert_at"] = now.isoformat(timespec="seconds")
     elif status == "OK" and prev_status in ("DEGRADED", "FAILED"):
         _notify("Intraday pipeline recovered: all checks OK.")
@@ -599,7 +674,7 @@ def finalize(results, now, errors=None):
             history = [h for h in history if not (h["date"] == r["date"] and h["symbol"] == r["symbol"])]
             history.append({k: r.get(k) for k in ("date", "symbol", "bias", "target_pct", "source", "final_pred",
                                                   "final_actual", "verdict", "error_pct", "baseline_error_pct",
-                                                  "direction_hit", "baselines", "prompt_version")})
+                                                  "direction_hit", "baselines", "prompt_version", "checkpoints")})
     history.sort(key=lambda h: (h["symbol"], h["date"]))
     trimmed = []
     for s in SYMBOLS:
@@ -630,7 +705,8 @@ def finalize(results, now, errors=None):
 
     # Sync health status to Supabase
     try:
-        db.save_health_status(health["status"], health)
+        if db is not None:
+            db.save_health_status(health["status"], health)
     except Exception as db_err:
         print(f"[finalize] Supabase health save warning: {db_err}")
 
@@ -645,6 +721,7 @@ def main():
         return
     print("Live session confirmed.")
     del RUN_ERRORS[:]
+    load_cooldown(now)
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
         results = list(pool.map(lambda s: process_symbol(s, now), SYMBOLS))
     health = finalize(results, now, list(RUN_ERRORS))

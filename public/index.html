@@ -276,7 +276,7 @@
             },
             {
               type: 'line',
-              label: 'AI Predicted Trajectory',
+              label: `Opening forecast (frozen ${curves.opening_made_at || 'n/a'})`,
               data: curves.predicted_curve,
               borderColor: '#3b82f6',
               borderDash: [5, 5],
@@ -390,6 +390,10 @@
         lines.push(`<span class="text-amber-400 font-semibold">Pipeline ${escapeHtml(health.status.toLowerCase())}: ` +
           `${Number(health.llm_fallback_count)} of ${Number(health.symbols_total)} forecasts are flat placeholders (no AI forecast).</span>`);
       }
+    }
+    if (health && Number(health.llm_error_count) > 0) {
+      const ageMin2 = (Date.now() - new Date(health.as_of).getTime()) / 60000;
+      if (ageMin2 < 30) lines.push(`<span class="text-amber-400">AI refresh errors on ${Number(health.llm_error_count)} of ${Number(health.symbols_total)} symbols (quota?). Latest forecasts may be stale.</span>`);
     }
     const o = perf && perf.overall;
     if (!o || !o.enough_data) {
