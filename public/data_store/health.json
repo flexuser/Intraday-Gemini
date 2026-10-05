@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-05T09:15:36+05:30",
+  "as_of": "2026-10-05T09:20:38+05:30",
   "status": "DEGRADED",
   "symbols_total": 11,
   "symbols_updated": 11,
-  "llm_fallback_count": 10,
+  "llm_fallback_count": 8,
   "model": "gemini-3.8-flash",
   "prompt_version": "v3-context",
   "sample_llm_error": "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev",
