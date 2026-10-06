@@ -47,7 +47,7 @@ LLM_COOLDOWN_MIN = int(os.getenv("LLM_COOLDOWN_MIN", "30"))
 SPIKE_ALERT_COOLDOWN_MIN = 60
 LLM_BLOCKED_UNTIL = None                # set after a 429 so the next runs stop hammering the API
 RETRIES = 3
-MAX_WORKERS = 3
+MAX_WORKERS = 1
 PROMPT_VERSION = "v3-context"
 MAX_DATA_LAG_MIN = 20
 MIN_DAYS_FOR_CLAIMS = 20
@@ -226,7 +226,6 @@ def llm_generate(prompt):
     config = types.GenerateContentConfig(
         response_mime_type="application/json",
         response_schema=RESPONSE_SCHEMA,
-        thinking_config=types.ThinkingConfig(thinking_level="low"),
     )
     return client.models.generate_content(model=MODEL, contents=prompt, config=config).text
 
@@ -315,23 +314,40 @@ def query_gemini_regime(symbol, m, news, now, ctx=None):
         return fallback_regime("GEMINI_API_KEY is not set")
     if LLM_BLOCKED_UNTIL and now < LLM_BLOCKED_UNTIL:
         return fallback_regime(f"skipped: Gemini quota cooldown until {LLM_BLOCKED_UNTIL.strftime('%H:%M')} IST")
+    
     prompt = build_prompt(symbol, m, news, now, ctx or {})
     last_error = None
+    
     for attempt in range(1, RETRIES + 1):
         try:
+            # Small inter-request pause to stay under Requests-Per-Minute (RPM) limits
+            time.sleep(1.2)
             regime = validate_regime(json.loads((llm_generate(prompt) or "").strip()))
             regime.update({"source": "llm", "model": MODEL, "llm_error": None})
             return regime
         except Exception as e:
             last_error = f"{type(e).__name__}: {e}"
             print(f"[Gemini {attempt}/{RETRIES}] {symbol}: {last_error[:200]}")
-            if _is_quota_error(e):                       # retrying a 429 only burns more quota
-                LLM_BLOCKED_UNTIL = now + datetime.timedelta(minutes=_quota_cooldown_minutes(e))
+            
+            txt = str(e).lower()
+            if _is_quota_error(e):
+                # Distinguish daily limit vs temporary per-minute burst
+                if "perday" in txt or "daily" in txt:
+                    LLM_BLOCKED_UNTIL = now + datetime.timedelta(minutes=360)
+                    break
+                else:
+                    # Temporary per-minute burst: sleep exponential backoff and retry
+                    wait_sec = 6 * attempt
+                    print(f"[{symbol}] Soft rate limit hit. Pausing {wait_sec}s before retry...")
+                    time.sleep(wait_sec)
+                    if attempt == RETRIES:
+                        # Only set a short 5-minute cooldown if all retries fail
+                        LLM_BLOCKED_UNTIL = now + datetime.timedelta(minutes=LLM_COOLDOWN_MIN)
+            elif getattr(e, "code", None) in PERMANENT_HTTP_CODES:
                 break
-            if getattr(e, "code", None) in PERMANENT_HTTP_CODES:
-                break
-            if attempt < RETRIES:
+            else:
                 time.sleep(2 ** attempt)
+                
     return fallback_regime(last_error)
 
 

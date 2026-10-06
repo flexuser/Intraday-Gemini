@@ -5,7 +5,7 @@
   "symbols_updated": 11,
   "llm_fallback_count": 10,
   "llm_error_count": 10,
-  "llm_cooldown_until": "2026-10-06T15:15:43+05:30",
+  "llm_cooldown_until": null,
   "model": "gemini-3.8-flash",
   "prompt_version": "v3-context",
   "sample_llm_error": "skipped: Gemini quota cooldown until 15:15 IST",
