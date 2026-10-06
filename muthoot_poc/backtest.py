@@ -34,10 +34,10 @@ MIN_TRAIN_ROWS = 500
 
 # --------------------------------------------------------------------------- serialization helper
 def sanitize_for_json(obj):
-    """Recursively replaces float NaN/Inf values with None for standard JSON encoding."""
+    """Recursively converts NumPy scalars and replaces float NaN/Inf values with None for standard JSON encoding."""
     if isinstance(obj, dict):
         return {k: sanitize_for_json(v) for k, v in obj.items()}
-    elif isinstance(obj, list):
+    elif isinstance(obj, (list, tuple)):
         return [sanitize_for_json(v) for v in obj]
     elif isinstance(obj, float):
         if math.isnan(obj) or math.isinf(obj):
@@ -48,6 +48,10 @@ def sanitize_for_json(obj):
         if isinstance(val, float) and (math.isnan(val) or math.isinf(val)):
             return None
         return val
+    elif isinstance(obj, np.ndarray):
+        return [sanitize_for_json(v) for v in obj.tolist()]
+    elif isinstance(obj, (np.bool_, bool)):
+        return bool(obj)
     return obj
 
 
@@ -169,9 +173,20 @@ def evaluate(oos, cost_bps=6.0, n_boot=500, seed=0):
     by_symbol = {}
     for sym, g in oos.groupby("symbol"):
         gr, gm = g["r_oc"].values, g["mu_z"].values * g["sig"].values
-        by_symbol[sym] = {"n": int(len(g)), "hit_rate": round(float(np.mean(np.sign(gm) == np.sign(gr))), 3),
-                          "ic": round(float(np.corrcoef(g["mu_z"], g["z_oc"].clip(-4, 4))[0, 1]), 3),
-                          "coverage_80": round(float(np.mean((gr >= g["lo"].values) & (gr <= g["hi"].values))), 3)}
+        
+        # Safe correlation calculation for individual symbol groups
+        if len(g) > 1 and np.std(g["mu_z"]) > 0 and np.std(g["z_oc"]) > 0:
+            sym_ic = float(np.corrcoef(g["mu_z"], g["z_oc"].clip(-4, 4))[0, 1])
+            sym_ic = round(sym_ic, 3) if not (math.isnan(sym_ic) or math.isinf(sym_ic)) else None
+        else:
+            sym_ic = None
+
+        by_symbol[sym] = {
+            "n": int(len(g)),
+            "hit_rate": round(float(np.mean(np.sign(gm) == np.sign(gr))), 3),
+            "ic": sym_ic,
+            "coverage_80": round(float(np.mean((gr >= g["lo"].values) & (gr <= g["hi"].values))), 3)
+        }
 
     direction = {"ic": round(ic, 4), "ic_ci95": ic_ci, "hit_rate": round(float(hit_rate), 4), "hit_ci95": hit_ci,
                  "mae_model_bps": round(mae_model, 2), "mae_flat_bps": round(mae_flat, 2),
@@ -214,20 +229,34 @@ def run(daily, idx, cost_bps=6.0, n_boot=500, init_days=504, step=21):
     return report, model
 
 
+def _fmt(val, fmt_spec):
+    """Safely formats numerical values, defaulting to N/A for None or NaN."""
+    if val is None or (isinstance(val, float) and (math.isnan(val) or math.isinf(val))):
+        return "N/A"
+    return f"{val:{fmt_spec}}"
+
+
 def summary_text(report):
     d, r = report["direction"], report["range"]
+    hit_ci0 = _fmt(d['hit_ci95'][0], '.1%') if isinstance(d['hit_ci95'], list) and len(d['hit_ci95']) > 0 else 'N/A'
+    hit_ci1 = _fmt(d['hit_ci95'][1], '.1%') if isinstance(d['hit_ci95'], list) and len(d['hit_ci95']) > 1 else 'N/A'
+    ic_ci0 = _fmt(d['ic_ci95'][0], '+.3f') if isinstance(d['ic_ci95'], list) and len(d['ic_ci95']) > 0 else 'N/A'
+    ic_ci1 = _fmt(d['ic_ci95'][1], '+.3f') if isinstance(d['ic_ci95'], list) and len(d['ic_ci95']) > 1 else 'N/A'
+    net_ci0 = _fmt(d['net_ci95'][0], '+.1f') if isinstance(d['net_ci95'], list) and len(d['net_ci95']) > 0 else 'N/A'
+    net_ci1 = _fmt(d['net_ci95'][1], '+.1f') if isinstance(d['net_ci95'], list) and len(d['net_ci95']) > 1 else 'N/A'
+
     lines = [f"Out-of-sample: {report['n_obs']:,} stock-days over {report['n_days']} trading days "
              f"({report['oos_start']} to {report['oos_end']}), {report['n_symbols']} symbols",
              "", "DIRECTION (open -> close)",
-             f"  hit-rate {d['hit_rate']:.1%}  (95% range {d['hit_ci95'][0]:.1%} - {d['hit_ci95'][1]:.1%})   coin flip = 50%",
-             f"  IC       {d['ic']:+.3f}  (95% range {d['ic_ci95'][0]:+.3f} to {d['ic_ci95'][1]:+.3f})",
-             f"  baselines: momentum {d['baseline_hit_rates']['momentum']:.1%}, gap-fade {d['baseline_hit_rates']['gap_fade']:.1%}",
-             f"  net per trade after {report['cost_bps_assumed']:.0f} bps cost: {d['mean_net_bps_per_trade']:+.1f} bps "
-             f"(95% range {d['net_ci95'][0]:+.1f} to {d['net_ci95'][1]:+.1f})",
+             f"  hit-rate {_fmt(d['hit_rate'], '.1%')}  (95% range {hit_ci0} - {hit_ci1})   coin flip = 50%",
+             f"  IC       {_fmt(d['ic'], '+.3f')}  (95% range {ic_ci0} to {ic_ci1})",
+             f"  baselines: momentum {_fmt(d['baseline_hit_rates']['momentum'], '.1%')}, gap-fade {_fmt(d['baseline_hit_rates']['gap_fade'], '.1%')}",
+             f"  net per trade after {_fmt(report['cost_bps_assumed'], '.0f')} bps cost: {_fmt(d['mean_net_bps_per_trade'], '+.1f')} bps "
+             f"(95% range {net_ci0} to {net_ci1})",
              f"  GATE: {'PASSED - directional forecasts will be published' if d['passes_gate'] else 'NOT PASSED - no directional forecast will be shown'}"
              f"{'' if not d['passes_gate'] else ('; tradeable after costs: ' + ('yes' if d['tradeable_after_costs'] else 'NO'))}",
              "", "RANGE (how far will it move today)",
-             f"  80% band coverage {r['coverage_80']:.1%} (target 80%)   log-range error {r['mae_logrange_model']:.3f} vs naive {r['mae_logrange_naive_5d_mean']:.3f}",
+             f"  80% band coverage {_fmt(r['coverage_80'], '.1%')} (target 80%)   log-range error {_fmt(r['mae_logrange_model'], '.3f')} vs naive {_fmt(r['mae_logrange_naive_5d_mean'], '.3f')}",
              f"  GATE: {'PASSED - calibrated band will be shown' if r['passes_gate'] else 'NOT PASSED - no band will be shown'}"]
     return "\n".join(lines)
 
@@ -255,13 +284,18 @@ def main(argv=None):
     report, model = run(daily, idx, cost_bps=a.cost_bps, n_boot=a.boot)
     os.makedirs(a.out, exist_ok=True)
 
+    summary = summary_text(report)
+
     report = sanitize_for_json(report)
     model = sanitize_for_json(model)
 
     with open(os.path.join(a.out, "backtest_report.json"), "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2, allow_nan=False)
-    qm.save_model(os.path.join(a.out, "quant_model.json"), model)
-    print(summary_text(report))
+
+    with open(os.path.join(a.out, "quant_model.json"), "w", encoding="utf-8") as f:
+        json.dump(model, f, indent=2, allow_nan=False)
+
+    print(summary)
     print(f"\nWrote backtest_report.json and quant_model.json to {a.out}")
 
 
