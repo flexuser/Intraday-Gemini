@@ -1,0 +1,315 @@
+{
+  "n_obs": 70126,
+  "n_days": 1950,
+  "n_symbols": 36,
+  "oos_start": "2018-11-14",
+  "oos_end": "2026-10-06",
+  "cost_bps_assumed": 6.0,
+  "direction": {
+    "ic": 0.063,
+    "ic_ci95": [
+      0.0388,
+      0.089
+    ],
+    "hit_rate": 0.5399,
+    "hit_ci95": [
+      0.5323,
+      0.547
+    ],
+    "mae_model_bps": 116.61,
+    "mae_flat_bps": 117.35,
+    "mean_net_bps_per_trade": 3.7,
+    "net_ci95": [
+      0.6421,
+      6.4667
+    ],
+    "top_quintile": {
+      "hit_rate": 0.5709,
+      "mean_net_bps": 13.41
+    },
+    "baseline_hit_rates": {
+      "momentum": 0.482,
+      "gap_fade": 0.5293
+    },
+    "passes_gate": true,
+    "tradeable_after_costs": true
+  },
+  "range": {
+    "coverage_80": 0.8083,
+    "coverage_ci95": [
+      0.803,
+      0.8139
+    ],
+    "mae_logrange_model": null,
+    "mae_logrange_naive_5d_mean": null,
+    "passes_gate": false
+  },
+  "by_symbol": {
+    "ASIANPAINT.NS": {
+      "n": 1948,
+      "hit_rate": 0.557,
+      "ic": 0.096,
+      "coverage_80": 0.818
+    },
+    "AXISBANK.NS": {
+      "n": 1948,
+      "hit_rate": 0.505,
+      "ic": -0.019,
+      "coverage_80": 0.818
+    },
+    "BAJAJFINSV.NS": {
+      "n": 1948,
+      "hit_rate": 0.554,
+      "ic": 0.051,
+      "coverage_80": 0.776
+    },
+    "BAJFINANCE.NS": {
+      "n": 1948,
+      "hit_rate": 0.538,
+      "ic": 0.019,
+      "coverage_80": 0.789
+    },
+    "BHARTIARTL.NS": {
+      "n": 1948,
+      "hit_rate": 0.559,
+      "ic": 0.177,
+      "coverage_80": 0.805
+    },
+    "CIPLA.NS": {
+      "n": 1948,
+      "hit_rate": 0.581,
+      "ic": 0.158,
+      "coverage_80": 0.81
+    },
+    "COALINDIA.NS": {
+      "n": 1948,
+      "hit_rate": 0.564,
+      "ic": 0.074,
+      "coverage_80": 0.786
+    },
+    "DRREDDY.NS": {
+      "n": 1948,
+      "hit_rate": 0.544,
+      "ic": 0.092,
+      "coverage_80": 0.831
+    },
+    "EICHERMOT.NS": {
+      "n": 1948,
+      "hit_rate": 0.54,
+      "ic": 0.087,
+      "coverage_80": 0.8
+    },
+    "GRASIM.NS": {
+      "n": 1948,
+      "hit_rate": 0.556,
+      "ic": 0.136,
+      "coverage_80": 0.806
+    },
+    "HCLTECH.NS": {
+      "n": 1948,
+      "hit_rate": 0.541,
+      "ic": 0.064,
+      "coverage_80": 0.823
+    },
+    "HDFCBANK.NS": {
+      "n": 1948,
+      "hit_rate": 0.542,
+      "ic": 0.128,
+      "coverage_80": 0.833
+    },
+    "HINDALCO.NS": {
+      "n": 1948,
+      "hit_rate": 0.495,
+      "ic": -0.057,
+      "coverage_80": 0.794
+    },
+    "HINDUNILVR.NS": {
+      "n": 1948,
+      "hit_rate": 0.548,
+      "ic": 0.058,
+      "coverage_80": 0.828
+    },
+    "ICICIBANK.NS": {
+      "n": 1948,
+      "hit_rate": 0.521,
+      "ic": 0.044,
+      "coverage_80": 0.831
+    },
+    "INFY.NS": {
+      "n": 1948,
+      "hit_rate": 0.499,
+      "ic": -0.038,
+      "coverage_80": 0.825
+    },
+    "ITC.NS": {
+      "n": 1949,
+      "hit_rate": 0.555,
+      "ic": 0.063,
+      "coverage_80": 0.823
+    },
+    "JSWSTEEL.NS": {
+      "n": 1945,
+      "hit_rate": 0.527,
+      "ic": 0.086,
+      "coverage_80": 0.802
+    },
+    "KOTAKBANK.NS": {
+      "n": 1948,
+      "hit_rate": 0.535,
+      "ic": 0.029,
+      "coverage_80": 0.822
+    },
+    "LT.NS": {
+      "n": 1948,
+      "hit_rate": 0.535,
+      "ic": -0.05,
+      "coverage_80": 0.821
+    },
+    "MARUTI.NS": {
+      "n": 1948,
+      "hit_rate": 0.545,
+      "ic": 0.055,
+      "coverage_80": 0.813
+    },
+    "MUTHOOTFIN.NS": {
+      "n": 1948,
+      "hit_rate": 0.561,
+      "ic": 0.04,
+      "coverage_80": 0.799
+    },
+    "NESTLEIND.NS": {
+      "n": 1948,
+      "hit_rate": 0.549,
+      "ic": 0.107,
+      "coverage_80": 0.836
+    },
+    "NTPC.NS": {
+      "n": 1948,
+      "hit_rate": 0.548,
+      "ic": 0.116,
+      "coverage_80": 0.8
+    },
+    "ONGC.NS": {
+      "n": 1948,
+      "hit_rate": 0.533,
+      "ic": 0.069,
+      "coverage_80": 0.806
+    },
+    "POWERGRID.NS": {
+      "n": 1948,
+      "hit_rate": 0.555,
+      "ic": 0.162,
+      "coverage_80": 0.797
+    },
+    "RELIANCE.NS": {
+      "n": 1948,
+      "hit_rate": 0.516,
+      "ic": -0.012,
+      "coverage_80": 0.798
+    },
+    "SBIN.NS": {
+      "n": 1948,
+      "hit_rate": 0.525,
+      "ic": 0.04,
+      "coverage_80": 0.787
+    },
+    "SUNPHARMA.NS": {
+      "n": 1948,
+      "hit_rate": 0.563,
+      "ic": 0.158,
+      "coverage_80": 0.827
+    },
+    "TATASTEEL.NS": {
+      "n": 1948,
+      "hit_rate": 0.515,
+      "ic": 0.004,
+      "coverage_80": 0.77
+    },
+    "TCS.NS": {
+      "n": 1948,
+      "hit_rate": 0.537,
+      "ic": 0.049,
+      "coverage_80": 0.813
+    },
+    "TECHM.NS": {
+      "n": 1948,
+      "hit_rate": 0.505,
+      "ic": 0.015,
+      "coverage_80": 0.807
+    },
+    "TITAN.NS": {
+      "n": 1948,
+      "hit_rate": 0.545,
+      "ic": 0.079,
+      "coverage_80": 0.816
+    },
+    "TMPV.NS": {
+      "n": 1948,
+      "hit_rate": 0.551,
+      "ic": -0.077,
+      "coverage_80": 0.781
+    },
+    "ULTRACEMCO.NS": {
+      "n": 1948,
+      "hit_rate": 0.55,
+      "ic": 0.112,
+      "coverage_80": 0.793
+    },
+    "WIPRO.NS": {
+      "n": 1948,
+      "hit_rate": 0.542,
+      "ic": 0.014,
+      "coverage_80": 0.814
+    }
+  },
+  "generated_at": "2026-10-06T11:25:52+00:00",
+  "universe": [
+    "ASIANPAINT.NS",
+    "AXISBANK.NS",
+    "BAJAJFINSV.NS",
+    "BAJFINANCE.NS",
+    "BHARTIARTL.NS",
+    "CIPLA.NS",
+    "COALINDIA.NS",
+    "DRREDDY.NS",
+    "EICHERMOT.NS",
+    "GRASIM.NS",
+    "HCLTECH.NS",
+    "HDFCBANK.NS",
+    "HINDALCO.NS",
+    "HINDUNILVR.NS",
+    "ICICIBANK.NS",
+    "INFY.NS",
+    "ITC.NS",
+    "JSWSTEEL.NS",
+    "KOTAKBANK.NS",
+    "LT.NS",
+    "MARUTI.NS",
+    "MUTHOOTFIN.NS",
+    "NESTLEIND.NS",
+    "NTPC.NS",
+    "ONGC.NS",
+    "POWERGRID.NS",
+    "RELIANCE.NS",
+    "SBIN.NS",
+    "SUNPHARMA.NS",
+    "TATASTEEL.NS",
+    "TCS.NS",
+    "TECHM.NS",
+    "TITAN.NS",
+    "TMPV.NS",
+    "ULTRACEMCO.NS",
+    "WIPRO.NS"
+  ],
+  "gates": {
+    "direction": true,
+    "range": false,
+    "tradeable": true
+  },
+  "caveats": [
+    "Out-of-sample means each day was predicted by a model trained only on earlier days.",
+    "Results are for open->close moves on liquid large caps; they say nothing about other horizons.",
+    "Costs are a flat per-trade assumption; real slippage can be higher.",
+    "A passed gate is evidence, not a guarantee: re-check every month."
+  ]
+}
