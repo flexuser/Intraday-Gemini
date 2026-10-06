@@ -25,7 +25,13 @@ CLIP = 4.0
 # --------------------------------------------------------------------------- features
 def clean_daily(df):
     """Date-only index, positive OHLC only."""
-    df = df[["Open", "High", "Low", "Close"]].astype(float).copy()
+    if df is None or df.empty:
+        return pd.DataFrame(columns=["Open", "High", "Low", "Close"])
+    cols = ["Open", "High", "Low", "Close"]
+    if not all(col in df.columns for col in cols):
+        return pd.DataFrame(columns=cols)
+
+    df = df[cols].astype(float).copy()
     idx = pd.DatetimeIndex(df.index)
     if idx.tz is not None:
         idx = idx.tz_localize(None)
@@ -41,7 +47,11 @@ def _vol20(d):
 def _build_features(d, idx):
     """Row t uses days < t and day t's Open only. (Day t's High/Low/Close are never read, except for the targets.)"""
     d = clean_daily(d)
-    idx = clean_daily(idx).reindex(d.index).ffill()
+    idx = clean_daily(idx)
+    if d.empty or idx.empty:
+        return pd.DataFrame()
+
+    idx = idx.reindex(d.index).ffill()
     sig, isig = _vol20(d), _vol20(idx)
     gap = np.log(d["Open"] / d["Close"].shift(1))
     igap = np.log(idx["Open"] / idx["Close"].shift(1))
@@ -149,20 +159,45 @@ def load_model(path):
 
 def predict_today(model, feature_row, min_prob_edge=0.03):
     """Live forecast from one feature row. Returns None if any feature is missing (never guess)."""
-    row = feature_row
-    if row[DIR_FEATURES + RNG_FEATURES + ["sig"]].isna().any():
+    if not model or not isinstance(model, dict) or not model.get("dir") or not model.get("rng"):
         return None
+    if feature_row is None or feature_row.empty:
+        return None
+
+    row = feature_row
+    req_cols = DIR_FEATURES + RNG_FEATURES + ["sig"]
+    if not all(col in row.index for col in req_cols) or row[req_cols].isna().any():
+        return None
+
     models = {"dir": model["dir"], "rng": model["rng"]}
     p = predict_rows(models, row.to_frame().T.astype(float))
-    mu_z, F, lo, hi = (float(p["mu_z"].iloc[0]), float(p["range_f"].iloc[0]), float(p["lo"].iloc[0]), float(p["hi"].iloc[0]))
+    if p.empty or p["mu_z"].isna().any() or p["range_f"].isna().any():
+        return None
+
+    mu_z = float(p["mu_z"].iloc[0])
+    F = float(p["range_f"].iloc[0])
+    lo = float(p["lo"].iloc[0])
+    hi = float(p["hi"].iloc[0])
     sig = float(row["sig"])
-    p_up = _phi(mu_z / max(model["dir"]["resid_sd"], 1e-9))
+
+    resid_sd = float(model["dir"].get("resid_sd", 1.0))
+    resid_sd = resid_sd if (resid_sd and not math.isnan(resid_sd) and resid_sd > 1e-9) else 1e-9
+
+    p_up = _phi(mu_z / resid_sd)
     gates = model.get("gates", {})
     dir_ok, rng_ok = bool(gates.get("direction")), bool(gates.get("range"))
     bias = "NEUTRAL"
     if dir_ok and abs(p_up - 0.5) >= min_prob_edge:
         bias = "BULLISH" if p_up > 0.5 else "BEARISH"
-    return {"mu_pct": round((math.exp(mu_z * sig) - 1) * 100, 3), "p_up": round(p_up, 3), "bias": bias,
-            "expected_range_pct": round((math.exp(F) - 1) * 100, 2),
-            "band_lo_pct": round((math.exp(lo) - 1) * 100, 2), "band_hi_pct": round((math.exp(hi) - 1) * 100, 2),
-            "direction_validated": dir_ok, "range_validated": rng_ok, "model_version": model.get("version")}
+
+    return {
+        "mu_pct": round((math.exp(mu_z * sig) - 1) * 100, 3),
+        "p_up": round(p_up, 3),
+        "bias": bias,
+        "expected_range_pct": round((math.exp(F) - 1) * 100, 2),
+        "band_lo_pct": round((math.exp(lo) - 1) * 100, 2),
+        "band_hi_pct": round((math.exp(hi) - 1) * 100, 2),
+        "direction_validated": dir_ok,
+        "range_validated": rng_ok,
+        "model_version": model.get("version"),
+    }

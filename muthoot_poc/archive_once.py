@@ -1,7 +1,7 @@
 """Intraday AI sync: fetch 5-min bars, ask Gemini for a close forecast, score it honestly.
 
 Output (public/data_store/ + Supabase):
-  <SYMBOL>_prediction.json   per-symbol forecast + 75-slot curves + confidence bands
+  <SYMBOL>_prediction.json   per-symbol forecast + 75-slot curves + confidence bands + risk plan
   eod_evaluation.json        audit table rows (UI)
   history.json               one scored record per (date, symbol)
   performance_summary.json   direction hit-rate / error vs a flat "no change" baseline
@@ -31,6 +31,26 @@ from scipy.interpolate import PchipInterpolator
 from google import genai
 from google.genai import types
 from google.genai.errors import APIError
+from muthoot_poc.gemini_engine import QuotaSafeGeminiEngine
+
+# Integrations for technical indicators, hard risk rules, and audit telemetry
+try:
+    from muthoot_poc.indicators import calculate_technical_snapshot
+    from muthoot_poc.risk_engine import HardRiskGuardrail
+    from muthoot_poc.telemetry import AuditLogger
+except ImportError:
+    try:
+        from indicators import calculate_technical_snapshot
+        from risk_engine import HardRiskGuardrail
+        from telemetry import AuditLogger
+    except ImportError:
+        calculate_technical_snapshot = None
+        HardRiskGuardrail = None
+        AuditLogger = None
+
+GEMINI_ENGINE = None  # Lazy initialized when needed
+RISK_MANAGER = HardRiskGuardrail(account_capital=1_000_000.0, max_risk_per_trade_pct=1.0, min_risk_reward_ratio=1.5) if HardRiskGuardrail else None
+AUDIT_LOGGER = AuditLogger() if AuditLogger else None
 
 try:
     import holidays
@@ -54,7 +74,7 @@ _INDEX_LOCK = threading.Lock()
 _INDEX_CACHE = {}
 RETRIES = 3
 MAX_WORKERS = 1
-PROMPT_VERSION = "v3-context"
+PROMPT_VERSION = "v3-context-risk"
 MAX_DATA_LAG_MIN = 20
 MIN_DAYS_FOR_CLAIMS = 20
 ALERT_COOLDOWN_MIN = 60
@@ -306,23 +326,17 @@ def compute_session_metrics(df, now):
     }
 
 
+def get_gemini_engine():
+    global GEMINI_ENGINE
+    if GEMINI_ENGINE is None:
+        GEMINI_ENGINE = QuotaSafeGeminiEngine(model_name=MODEL, min_delay_seconds=4.0)
+    return GEMINI_ENGINE
+
+
 def llm_generate(prompt):
-    """
-    Executes Gemini request via Chat.send_message with AFC explicitly disabled
-    to resolve SDK warnings and enforce valid schema outputs.
-    """
-    client = genai.Client(
-        api_key=os.environ["GEMINI_API_KEY"],
-        http_options=types.HttpOptions(timeout=30_000)
-    )
-    afc_config = types.AutomaticFunctionCallingConfig(disable=True)
-    config = types.GenerateContentConfig(
-        response_mime_type="application/json",
-        response_schema=RESPONSE_SCHEMA,
-        automatic_function_calling=afc_config,
-    )
-    chat = client.chats.create(model=MODEL, config=config)
-    return chat.send_message(prompt).text
+    """Delegates LLM generation to the persistent engine."""
+    engine = get_gemini_engine()
+    return engine.generate(prompt, RESPONSE_SCHEMA)
 
 
 def validate_regime(data):
@@ -349,7 +363,7 @@ def fallback_regime(error):
             "source": "fallback", "model": MODEL, "llm_error": str(error)[:300]}
 
 
-def build_prompt(symbol, m, news, now, ctx):
+def build_prompt(symbol, m, news, now, ctx, tech_snapshot=None):
     shift = (m["last_close"] - m["open_price"]) / m["open_price"] * 100
     side = "above" if m["last_close"] >= m["vwap"] else "below"
     headlines = "\n".join(f"- {n['title']} ({n['publisher'] or 'News'})" for n in news) or "- none"
@@ -357,6 +371,14 @@ def build_prompt(symbol, m, news, now, ctx):
              f"- Latest price: Rs {m['last_close']:.2f} ({shift:+.2f}% since open)",
              f"- Session VWAP: Rs {m['vwap']:.2f} (price is {side} VWAP)",
              f"- Volume of the last completed 5-minute bar vs today's average bar: {m['vol_ratio']}x"]
+    
+    if tech_snapshot:
+        rsi = tech_snapshot.get("rsi_14")
+        macd = tech_snapshot.get("macd")
+        atr = tech_snapshot.get("atr_14")
+        tbias = tech_snapshot.get("technical_bias")
+        lines.append(f"- Technical Indicators: RSI(14)={rsi}, MACD={macd}, ATR(14)=Rs {atr}, Technical Bias={tbias}")
+
     gap = gap_pct(m["open_price"], ctx)
     if gap is not None:
         lines.append(f"- Previous close: Rs {ctx['prev_close']:.2f}; today's opening gap: {gap:+.2f}%")
@@ -398,27 +420,38 @@ def load_cooldown(now):
     LLM_BLOCKED_UNTIL = t if t and t > now else None
 
 
-def query_gemini_regime(symbol, m, news, now, ctx=None):
+def query_gemini_regime(symbol, m, news, now, ctx=None, tech_snapshot=None):
     global LLM_BLOCKED_UNTIL
     if not os.getenv("GEMINI_API_KEY"):
-        return fallback_regime("GEMINI_API_KEY is not set")
+        return fallback_regime("GEMINI_API_KEY is not set"), None, None
     if LLM_BLOCKED_UNTIL and now < LLM_BLOCKED_UNTIL:
-        return fallback_regime(f"skipped: Gemini quota cooldown until {LLM_BLOCKED_UNTIL.strftime('%H:%M')} IST")
+        return fallback_regime(f"skipped: Gemini quota cooldown until {LLM_BLOCKED_UNTIL.strftime('%H:%M')} IST"), None, None
     
-    prompt = build_prompt(symbol, m, news, now, ctx or {})
+    # NOISE FILTER: Skip calling Gemini if price change is negligible and volume is low
+    price_change_pct = abs((m["last_close"] - m["open_price"]) / m["open_price"] * 100)
+    if price_change_pct < 0.1 and m["vol_ratio"] < 1.2:
+        return {
+            "bias": "NEUTRAL",
+            "target_pct": 0.0,
+            "archetype": "RANGE_BOUND",
+            "reasoning": "Price and volume are neutral. Saved LLM quota for active setups.",
+            "source": "fallback",
+            "model": MODEL,
+            "llm_error": None
+        }, None, None
+
+    prompt = build_prompt(symbol, m, news, now, ctx or {}, tech_snapshot or {})
     last_error = None
     
     for attempt in range(1, RETRIES + 1):
         try:
-            # 4.0 second delay guarantees pacing stays below 15 RPM
-            time.sleep(4.0)
             raw_text = llm_generate(prompt)
             if not raw_text or not raw_text.strip():
                 raise ValueError("Received empty response from Gemini API")
                 
             regime = validate_regime(json.loads(raw_text.strip()))
             regime.update({"source": "llm", "model": MODEL, "llm_error": None})
-            return regime
+            return regime, prompt, raw_text
 
         except Exception as e:
             last_error = f"{type(e).__name__}: {e}"
@@ -441,7 +474,7 @@ def query_gemini_regime(symbol, m, news, now, ctx=None):
             else:
                 time.sleep(2 ** attempt)
                 
-    return fallback_regime(last_error)
+    return fallback_regime(last_error), prompt, None
 
 
 def frozen_curve(base_price, target_pct):
@@ -562,6 +595,10 @@ def process_symbol(symbol, now):
         lag = (now - (df.index[-1] + datetime.timedelta(minutes=5))).total_seconds() / 60.0
         if lag > MAX_DATA_LAG_MIN and now.time() < datetime.time(15, 45):
             return _fail(symbol, f"stale data: newest bar is {lag:.0f} min old - files left untouched")
+        
+        # Calculate technical snapshot (VWAP, RSI, MACD, ATR, technical bias)
+        tech_snapshot = calculate_technical_snapshot(df) if calculate_technical_snapshot else {}
+
         news = fetch_news(ticker)
         m = compute_session_metrics(df, now)
 
@@ -588,17 +625,22 @@ def process_symbol(symbol, now):
         too_late = now.time() >= datetime.time(15, 0)
         fresh_llm = forecast and forecast.get("source") == "llm" and \
             (too_late or _age_minutes(forecast.get("made_at"), now) < REFRESH_MINUTES)
+        
+        last_prompt = None
+        last_response = None
+
         if fresh_llm:
             pred = forecast
         elif too_late:
             pred = dict(fallback_regime("no new forecasts after 15:00 IST"),
                         made_at=now.isoformat(timespec="seconds"), prompt_version=PROMPT_VERSION)
         else:
-            pred = query_gemini_regime(symbol, m, news, now, ctx)
+            pred, last_prompt, last_response = query_gemini_regime(symbol, m, news, now, ctx, tech_snapshot)
             pred["made_at"] = now.isoformat(timespec="seconds")
             pred["prompt_version"] = PROMPT_VERSION
             if pred["source"] == "fallback" and forecast and forecast.get("source") == "llm":
                 pred = dict(forecast, llm_error=pred["llm_error"])
+        
         log = list(existing.get("forecast_log") or [])
         if pred["source"] == "llm" and pred.get("made_at") == now.isoformat(timespec="seconds"):
             log.append({"made_at": pred["made_at"], "bias": pred["bias"], "target_pct": pred["target_pct"],
@@ -615,6 +657,50 @@ def process_symbol(symbol, now):
             opening["curve"] = frozen_curve(opening["base_price"], opening["target_pct"])
 
         target_price = round(m["open_price"] * (1 + pred["target_pct"] / 100.0), 2)
+        
+        # Evaluate Hard Risk Rules & Guardrail Plan
+        atr_val = tech_snapshot.get("atr_14", 0.0) if tech_snapshot else 0.0
+        if atr_val <= 0:
+            atr_val = m["last_close"] * 0.01
+
+        eval_bias = quant.get("bias", pred["bias"]) if quant else pred["bias"]
+        p_up_val = quant.get("p_up", 0.5) if quant else 0.5
+        dir_val = quant.get("direction_validated", True) if quant else True
+        rng_val = quant.get("range_validated", True) if quant else True
+
+        if RISK_MANAGER:
+            risk_plan = RISK_MANAGER.evaluate_execution_plan(
+                symbol=symbol,
+                current_price=m["last_close"],
+                bias=eval_bias,
+                p_up=p_up_val,
+                target_price=target_price,
+                atr_14=atr_val,
+                direction_validated=dir_val,
+                range_validated=rng_val,
+            )
+        else:
+            risk_plan = {
+                "approved": True,
+                "action": "BUY" if eval_bias == "BULLISH" else ("SELL" if eval_bias == "BEARISH" else "NO_TRADE"),
+                "stop_loss": round(m["last_close"] - 1.5 * atr_val, 2),
+                "take_profit": target_price,
+                "position_size_shares": 100,
+                "rejection_reason": None,
+            }
+
+        # Record Telemetry Event
+        if AUDIT_LOGGER:
+            AUDIT_LOGGER.log_prediction_event(
+                symbol=symbol,
+                session_date=today,
+                technical_snapshot=tech_snapshot,
+                quant_prediction=quant,
+                llm_raw_prompt=last_prompt,
+                llm_raw_response=last_response,
+                risk_plan=risk_plan,
+            )
+
         timeframes, actual, predicted, upper_curve, lower_curve, volume = build_curves(df, target_price, ctx)
         opening_curve = (opening.get("curve") or frozen_curve(opening["base_price"], opening["target_pct"])) \
             if opening else [None] * NUM_SLOTS
@@ -649,6 +735,8 @@ def process_symbol(symbol, now):
             "opening_forecast": opening,
             "forecast_log": log,
             "quant": quant,
+            "technical_indicators": tech_snapshot,
+            "risk_execution_plan": risk_plan,
             "last_spike_alert_at": last_spike,
             "context": ctx,
             "curves": {
