@@ -32,6 +32,25 @@ UNIVERSE_EXTRA = ["ITC", "KOTAKBANK", "AXISBANK", "HINDUNILVR", "BAJFINANCE", "M
 MIN_TRAIN_ROWS = 500
 
 
+# --------------------------------------------------------------------------- serialization helper
+def sanitize_for_json(obj):
+    """Recursively replaces float NaN/Inf values with None for standard JSON encoding."""
+    if isinstance(obj, dict):
+        return {k: sanitize_for_json(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [sanitize_for_json(v) for v in obj]
+    elif isinstance(obj, float):
+        if math.isnan(obj) or math.isinf(obj):
+            return None
+        return obj
+    elif isinstance(obj, (np.floating, np.integer)):
+        val = obj.item()
+        if isinstance(val, float) and (math.isnan(val) or math.isinf(val)):
+            return None
+        return val
+    return obj
+
+
 # --------------------------------------------------------------------------- data
 def download_daily(tickers, period="10y"):
     import yfinance as yf
@@ -235,6 +254,10 @@ def main(argv=None):
             sys.exit(f"Only {len(daily)} symbols downloaded - refusing to train on so little data.")
     report, model = run(daily, idx, cost_bps=a.cost_bps, n_boot=a.boot)
     os.makedirs(a.out, exist_ok=True)
+
+    report = sanitize_for_json(report)
+    model = sanitize_for_json(model)
+
     with open(os.path.join(a.out, "backtest_report.json"), "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2, allow_nan=False)
     qm.save_model(os.path.join(a.out, "quant_model.json"), model)
