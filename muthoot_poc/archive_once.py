@@ -28,6 +28,7 @@ import yfinance as yf
 from scipy.interpolate import PchipInterpolator
 from google import genai
 from google.genai import types
+from google.genai.errors import APIError
 
 try:
     import holidays
@@ -42,10 +43,10 @@ SYMBOLS = ["MUTHOOTFIN", "RELIANCE", "TMPV", "INFY", "HDFCBANK", "ICICIBANK",
 
 DATA_DIR = os.getenv("DATA_DIR", "public/data_store")
 MODEL = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
-REFRESH_MINUTES = int(os.getenv("FORECAST_REFRESH_MINUTES", "120"))   # was 30: ~4x fewer Gemini calls
-LLM_COOLDOWN_MIN = int(os.getenv("LLM_COOLDOWN_MIN", "30"))
+REFRESH_MINUTES = int(os.getenv("FORECAST_REFRESH_MINUTES", "120"))
+LLM_COOLDOWN_MIN = int(os.getenv("LLM_COOLDOWN_MIN", "5"))
 SPIKE_ALERT_COOLDOWN_MIN = 60
-LLM_BLOCKED_UNTIL = None                # set after a 429 so the next runs stop hammering the API
+LLM_BLOCKED_UNTIL = None                # set after a hard 429 quota block
 RETRIES = 3
 MAX_WORKERS = 1
 PROMPT_VERSION = "v3-context"
@@ -147,12 +148,10 @@ def is_live_session(now=None):
         return True
     now = now or datetime.datetime.now(IST)
     
-    # Phase 2: Check Weekends
     if now.weekday() >= 5:
         print(f"[SessionGuard] {now.strftime('%A')} - weekend, market closed.")
         return False
 
-    # Phase 2: Check official NSE trading holidays
     if HAS_HOLIDAYS:
         in_holidays = holidays.India()
         if now.date() in in_holidays:
@@ -221,13 +220,22 @@ def compute_session_metrics(df, now):
 
 
 def llm_generate(prompt):
-    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"],
-                          http_options=types.HttpOptions(timeout=30_000))
+    """
+    Executes Gemini request via Chat.send_message with AFC explicitly disabled
+    to resolve SDK warnings and enforce valid schema outputs.
+    """
+    client = genai.Client(
+        api_key=os.environ["GEMINI_API_KEY"],
+        http_options=types.HttpOptions(timeout=30_000)
+    )
+    afc_config = types.AutomaticFunctionCallingConfig(disable=True)
     config = types.GenerateContentConfig(
         response_mime_type="application/json",
         response_schema=RESPONSE_SCHEMA,
+        automatic_function_calling=afc_config,
     )
-    return client.models.generate_content(model=MODEL, contents=prompt, config=config).text
+    chat = client.chats.create(model=MODEL, config=config)
+    return chat.send_message(prompt).text
 
 
 def validate_regime(data):
@@ -292,13 +300,8 @@ def _is_quota_error(e):
     return getattr(e, "code", None) == 429 or "RESOURCE_EXHAUSTED" in str(e)
 
 
-def _quota_cooldown_minutes(e):
-    txt = str(e).lower().replace(" ", "")
-    return 360 if ("perday" in txt or "daily" in txt) else LLM_COOLDOWN_MIN
-
-
 def load_cooldown(now):
-    """Restore a quota cooldown set by an earlier run (each GitHub Actions run is a fresh process)."""
+    """Restore a quota cooldown set by an earlier run."""
     global LLM_BLOCKED_UNTIL
     until = read_json(os.path.join(DATA_DIR, "health.json"), {}).get("llm_cooldown_until")
     try:
@@ -320,28 +323,30 @@ def query_gemini_regime(symbol, m, news, now, ctx=None):
     
     for attempt in range(1, RETRIES + 1):
         try:
-            # Small inter-request pause to stay under Requests-Per-Minute (RPM) limits
-            time.sleep(1.2)
-            regime = validate_regime(json.loads((llm_generate(prompt) or "").strip()))
+            # 4.0 second delay guarantees pacing stays below 15 RPM
+            time.sleep(4.0)
+            raw_text = llm_generate(prompt)
+            if not raw_text or not raw_text.strip():
+                raise ValueError("Received empty response from Gemini API")
+                
+            regime = validate_regime(json.loads(raw_text.strip()))
             regime.update({"source": "llm", "model": MODEL, "llm_error": None})
             return regime
+
         except Exception as e:
             last_error = f"{type(e).__name__}: {e}"
             print(f"[Gemini {attempt}/{RETRIES}] {symbol}: {last_error[:200]}")
             
             txt = str(e).lower()
             if _is_quota_error(e):
-                # Distinguish daily limit vs temporary per-minute burst
                 if "perday" in txt or "daily" in txt:
                     LLM_BLOCKED_UNTIL = now + datetime.timedelta(minutes=360)
                     break
                 else:
-                    # Temporary per-minute burst: sleep exponential backoff and retry
-                    wait_sec = 6 * attempt
-                    print(f"[{symbol}] Soft rate limit hit. Pausing {wait_sec}s before retry...")
+                    wait_sec = 10 * attempt
+                    print(f"[{symbol}] Soft rate limit (429) hit. Pausing {wait_sec}s before retry {attempt}/{RETRIES}...")
                     time.sleep(wait_sec)
                     if attempt == RETRIES:
-                        # Only set a short 5-minute cooldown if all retries fail
                         LLM_BLOCKED_UNTIL = now + datetime.timedelta(minutes=LLM_COOLDOWN_MIN)
             elif getattr(e, "code", None) in PERMANENT_HTTP_CODES:
                 break
@@ -379,7 +384,6 @@ def build_curves(df, target_price, ctx=None):
     curve_interp = PchipInterpolator(xs, ys)(np.clip(np.arange(NUM_SLOTS), first_i, NUM_SLOTS - 1))
     predicted = [round(float(p), 2) for p in curve_interp]
 
-    # Phase 5: Confidence Bands (Upper & Lower bounds based on daily volatility)
     range_pct = (ctx or {}).get("avg_daily_range_pct") or 1.5
     band_offset = (target_price * (range_pct / 100.0) * 0.25)
     upper_curve = [round(p + band_offset * (i / (NUM_SLOTS - 1)), 2) for i, p in enumerate(predicted)]
@@ -411,7 +415,7 @@ def score_session(opening, close_price, log=None):
     baselines = {n: {"target_pct": t, "error_pct": err(t), "direction_hit": _hit(t, move)}
                  for n, t in (opening.get("baselines") or {}).items() if t is not None}
     checkpoints = []
-    for e in (log or []):                                # direction is judged from the price AT forecast time
+    for e in (log or []):
         p0 = e["price_at_forecast"]
         checkpoints.append({"made_at": e["made_at"][11:16], "target_price": e["target_price"], "price_at_forecast": p0,
                             "direction_hit": _hit(e["target_price"] - p0, close_price - p0),
@@ -484,13 +488,13 @@ def process_symbol(symbol, now):
             ctx = fetch_daily_context(ticker, now.date())
         forecast, opening = existing.get("forecast"), existing.get("opening_forecast")
 
-        last_spike = existing.get("last_spike_alert_at")     # alert once per hour per symbol, not every 5 minutes
+        last_spike = existing.get("last_spike_alert_at")
         if m["vol_ratio"] >= 2.5 and now.time() >= datetime.time(9, 45) and \
                 (not last_spike or _age_minutes(last_spike, now) >= SPIKE_ALERT_COOLDOWN_MIN):
             _notify(f"Volume spike: {symbol} at {m['vol_ratio']}x its average 5-min volume (last Rs {m['last_close']:.2f})")
             last_spike = now.isoformat(timespec="seconds")
 
-        too_late = now.time() >= datetime.time(15, 0)       # a forecast this close to the 15:30 close is meaningless
+        too_late = now.time() >= datetime.time(15, 0)
         fresh_llm = forecast and forecast.get("source") == "llm" and \
             (too_late or _age_minutes(forecast.get("made_at"), now) < REFRESH_MINUTES)
         if fresh_llm:
@@ -529,7 +533,6 @@ def process_symbol(symbol, now):
             {"verdict": "IN_PROGRESS", "error_pct": None, "baseline_error_pct": None,
              "direction_hit": None, "baselines": {}}
 
-        # Write to local JSON store
         write_json(path, {
             "symbol": symbol,
             "prediction": {
@@ -556,9 +559,8 @@ def process_symbol(symbol, now):
             "session": {"complete": complete, **score},
         })
 
-        # Phase 3: Sync forecast record directly to Supabase DB
         try:
-            if opening and db is not None and (new_opening or complete):   # not on every 5-min run
+            if opening and db is not None and (new_opening or complete):
                 db.upsert_forecast_record(
                     session_date=today,
                     symbol=symbol,
@@ -719,7 +721,6 @@ def finalize(results, now, errors=None):
     maybe_alert(health, previous, now)
     write_json(health_path, health)
 
-    # Sync health status to Supabase
     try:
         if db is not None:
             db.save_health_status(health["status"], health)
