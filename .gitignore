@@ -1,6 +1,10 @@
-﻿__pycache__/
+__pycache__/
 *.pyc
 .DS_Store
 .venv/
 venv/
 *.log
+.env
+.env.*
+.pytest_cache/
+*.tmp

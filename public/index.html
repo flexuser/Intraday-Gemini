@@ -257,6 +257,24 @@
       document.getElementById("val-actual").innerText = validActuals.length > 0 ? `₹${validActuals[validActuals.length - 1]}` : "--";
       document.getElementById("val-error").innerText = curves.error_pct != null ? `${curves.error_pct}%` : "--";
 
+      let quantLine = document.getElementById("quant-line");
+      if (!quantLine) {
+        document.getElementById("ai-rationale").insertAdjacentHTML("beforebegin", '<p id="quant-line" class="text-sky-300 text-xs mb-2 font-mono"></p>');
+        quantLine = document.getElementById("quant-line");
+      }
+      const qs = curves.quant_summary;
+      if (qs) {
+        const view = qs.direction_validated
+          ? `Model view: ${qs.bias} (P(up) ${Math.round(qs.p_up * 100)}%)`
+          : "Model view: no validated directional edge";
+        const rng = qs.range_validated
+          ? ` | expected range ${qs.expected_range_pct}% | 80% band ${qs.band_lo_pct}% to +${qs.band_hi_pct}%`
+          : " | range model not validated";
+        quantLine.innerText = view + rng;
+      } else {
+        quantLine.innerText = "No validated model forecast yet. The line below is unvalidated AI output.";
+      }
+
       const ctx = document.getElementById('predictionChart').getContext('2d');
       if (chartInstance) chartInstance.destroy();
 
@@ -276,7 +294,7 @@
             },
             {
               type: 'line',
-              label: `Opening forecast (frozen ${curves.opening_made_at || 'n/a'})`,
+              label: curves.forecast_source === 'quant' ? `Model forecast (frozen ${curves.opening_made_at || 'n/a'})` : `AI forecast, UNVALIDATED (frozen ${curves.opening_made_at || 'n/a'})`,
               data: curves.predicted_curve,
               borderColor: '#3b82f6',
               borderDash: [5, 5],
@@ -284,6 +302,31 @@
               tension: 0.2,
               yAxisID: 'y',
               order: 1,
+              spanGaps: false
+            },
+            {
+              type: 'line',
+              label: '80% expected range (calibrated)',
+              data: curves.upper_confidence || [],
+              borderColor: 'rgba(59,130,246,0)',
+              backgroundColor: 'rgba(59,130,246,0.12)',
+              pointRadius: 0,
+              fill: '+1',
+              tension: 0.2,
+              yAxisID: 'y',
+              order: 3,
+              spanGaps: false
+            },
+            {
+              type: 'line',
+              label: '_lower',
+              data: curves.lower_confidence || [],
+              borderColor: 'rgba(59,130,246,0)',
+              pointRadius: 0,
+              fill: false,
+              tension: 0.2,
+              yAxisID: 'y',
+              order: 3,
               spanGaps: false
             },
             {
@@ -303,7 +346,7 @@
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
+          plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 }, filter: (item) => !item.text.startsWith('_') } } },
           scales: {
             x: { ticks: { color: '#64748b' }, grid: { color: '#1e293b' } },
             y: {

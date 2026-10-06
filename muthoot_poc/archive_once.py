@@ -12,6 +12,7 @@ import json
 import math
 import time
 import re
+import threading
 import datetime
 try:
     import db
@@ -25,6 +26,7 @@ import pandas as pd
 import pytz
 import requests
 import yfinance as yf
+from muthoot_poc import quant_model as qm
 from scipy.interpolate import PchipInterpolator
 from google import genai
 from google.genai import types
@@ -47,6 +49,9 @@ REFRESH_MINUTES = int(os.getenv("FORECAST_REFRESH_MINUTES", "120"))
 LLM_COOLDOWN_MIN = int(os.getenv("LLM_COOLDOWN_MIN", "5"))
 SPIKE_ALERT_COOLDOWN_MIN = 60
 LLM_BLOCKED_UNTIL = None                # set after a hard 429 quota block
+QUANT = None                            # trained quant model (python -m muthoot_poc.backtest), loaded in main()
+_INDEX_LOCK = threading.Lock()
+_INDEX_CACHE = {}
 RETRIES = 3
 MAX_WORKERS = 1
 PROMPT_VERSION = "v3-context"
@@ -140,6 +145,88 @@ def baseline_targets(open_price, ctx):
     return {"flat": 0.0,
             "momentum": clip((ctx or {}).get("prev_return_pct")),
             "gap_fade": clip(None if gap is None else -gap)}
+
+
+def load_quant():
+    global QUANT
+    QUANT = qm.load_model(os.path.join(DATA_DIR, "quant_model.json"))
+    if QUANT is None:
+        print("[quant] quant_model.json not found - run `python -m muthoot_poc.backtest`. Forecasts stay 'unvalidated'.")
+    else:
+        print(f"[quant] model {QUANT.get('version')} loaded; gates={QUANT.get('gates')}")
+
+
+def fetch_daily_ohlc(ticker):
+    for _ in range(2):
+        try:
+            raw = yf.Ticker(ticker).history(period="1y", interval="1d")
+            df = qm.clean_daily(normalize_frame(raw)) if raw is not None and len(raw) else pd.DataFrame()
+            if not df.empty:
+                return df
+        except Exception as e:
+            print(f"[daily] {ticker}: {type(e).__name__}: {e}")
+        time.sleep(1)
+    return pd.DataFrame()
+
+
+def get_index_daily(today):
+    with _INDEX_LOCK:                                        # one download per run, shared by all threads
+        if today not in _INDEX_CACHE:
+            _INDEX_CACHE[today] = fetch_daily_ohlc("^NSEI")
+        return _INDEX_CACHE[today]
+
+
+def compute_quant(symbol, ticker, m, now):
+    """Quant forecast from data known at the open. Returns None (and is retried next run) if anything is missing."""
+    d, idx = fetch_daily_ohlc(ticker), get_index_daily(now.date())
+    today = pd.Timestamp(now.date())
+    if d.empty or idx.empty or today not in idx.index:       # without today's index open the gap features would be stale
+        print(f"[{symbol}] quant: waiting for daily/index data")
+        return None
+    d.loc[today, ["Open", "High", "Low", "Close"]] = m["open_price"]     # features read only today's Open
+    feats = qm.build_features(d, idx)
+    pred = qm.predict_today(QUANT, feats.loc[today])
+    if pred is None:
+        print(f"[{symbol}] quant: incomplete features")
+        return None
+    pred.update(made_at=now.isoformat(timespec="seconds"), open_price=round(m["open_price"], 2),
+                features={k: round(float(feats.loc[today, k]), 3) for k in qm.DIR_FEATURES})
+    return pred
+
+
+def quant_curves(q):
+    """Frozen line (flat unless a validated directional view exists) and a calibrated 80% band that widens with time."""
+    t = q["mu_pct"] if (q["direction_validated"] and q["bias"] != "NEUTRAL") else 0.0
+    curve = frozen_curve(q["open_price"], t)
+    if not q["range_validated"]:
+        return curve, [None] * NUM_SLOTS, [None] * NUM_SLOTS
+    fan = [math.sqrt((i + 1) / NUM_SLOTS) for i in range(NUM_SLOTS)]
+    return (curve, [round(q["open_price"] * (1 + q["band_hi_pct"] / 100.0 * f), 2) for f in fan],
+            [round(q["open_price"] * (1 + q["band_lo_pct"] / 100.0 * f), 2) for f in fan])
+
+
+def score_quant(q, close_price):
+    base = q["open_price"]
+    ret = (close_price / base - 1) * 100
+    directional = bool(q["direction_validated"] and q["bias"] != "NEUTRAL")
+    target = q["mu_pct"] if directional else 0.0
+    dir_hit = _hit(q["mu_pct"], close_price - base) if directional else None
+    in_band = bool(q["band_lo_pct"] <= ret <= q["band_hi_pct"])
+    return {"bias": q["bias"], "target_pct": round(target, 3), "close_ret_pct": round(ret, 3),
+            "open_price": base, "close_price": round(close_price, 2), "target_price": round(base * (1 + target / 100.0), 2),
+            "direction_hit": dir_hit, "shadow_direction_hit": _hit(q["mu_pct"], close_price - base),
+            "error_pct": round(abs(ret - target), 3), "flat_error_pct": round(abs(ret), 3), "in_band": in_band,
+            "range_validated": q["range_validated"], "direction_validated": q["direction_validated"],
+            "p_up": q["p_up"], "expected_range_pct": q["expected_range_pct"],
+            "verdict": "FAILED" if not in_band else ("PARTIAL" if dir_hit is False else "SUCCESS")}
+
+
+def _audit_from_quant(row):
+    q = row.get("quant")
+    if not q:
+        return row
+    return dict(row, bias=q["bias"], final_pred=q["target_price"], final_actual=q["close_price"], error_pct=q["error_pct"],
+                verdict=q["verdict"], baseline_error_pct=q["flat_error_pct"], direction_hit=q["direction_hit"])
 
 
 def is_live_session(now=None):
@@ -344,10 +431,11 @@ def query_gemini_regime(symbol, m, news, now, ctx=None):
                     break
                 else:
                     wait_sec = 10 * attempt
-                    print(f"[{symbol}] Soft rate limit (429) hit. Pausing {wait_sec}s before retry {attempt}/{RETRIES}...")
-                    time.sleep(wait_sec)
                     if attempt == RETRIES:
                         LLM_BLOCKED_UNTIL = now + datetime.timedelta(minutes=LLM_COOLDOWN_MIN)
+                    else:
+                        print(f"[{symbol}] Soft rate limit (429) hit. Pausing {wait_sec}s before retry {attempt}/{RETRIES}...")
+                        time.sleep(wait_sec)
             elif getattr(e, "code", None) in PERMANENT_HTTP_CODES:
                 break
             else:
@@ -487,6 +575,9 @@ def process_symbol(symbol, now):
         if not ctx or ctx.get("prev_close") is None:
             ctx = fetch_daily_context(ticker, now.date())
         forecast, opening = existing.get("forecast"), existing.get("opening_forecast")
+        quant = existing.get("quant")
+        if QUANT and not quant:
+            quant = compute_quant(symbol, ticker, m, now)      # computed once at the open, then frozen for the day
 
         last_spike = existing.get("last_spike_alert_at")
         if m["vol_ratio"] >= 2.5 and now.time() >= datetime.time(9, 45) and \
@@ -527,11 +618,23 @@ def process_symbol(symbol, now):
         timeframes, actual, predicted, upper_curve, lower_curve, volume = build_curves(df, target_price, ctx)
         opening_curve = (opening.get("curve") or frozen_curve(opening["base_price"], opening["target_pct"])) \
             if opening else [None] * NUM_SLOTS
+        forecast_source, band_up, band_lo = "llm_unvalidated", [None] * NUM_SLOTS, [None] * NUM_SLOTS
+        display_bias, display_target = pred["bias"], target_price
+        opening_made_at, quant_summary = (opening["made_at"][11:16] if opening else None), None
+        if quant:
+            opening_curve, band_up, band_lo = quant_curves(quant)
+            forecast_source, display_bias = "quant", quant["bias"]
+            q_t = quant["mu_pct"] if (quant["direction_validated"] and quant["bias"] != "NEUTRAL") else 0.0
+            display_target = round(quant["open_price"] * (1 + q_t / 100.0), 2)
+            opening_made_at = quant["made_at"][11:16]
+            quant_summary = {k: quant.get(k) for k in ("bias", "p_up", "expected_range_pct", "band_lo_pct", "band_hi_pct",
+                                                       "direction_validated", "range_validated", "model_version")}
 
         complete = session_complete(df, now)
         score = score_session(opening, m["last_close"], log) if complete else \
             {"verdict": "IN_PROGRESS", "error_pct": None, "baseline_error_pct": None,
              "direction_hit": None, "baselines": {}}
+        score = dict(score, quant=score_quant(quant, m["last_close"]) if (complete and quant) else None)
 
         write_json(path, {
             "symbol": symbol,
@@ -545,15 +648,17 @@ def process_symbol(symbol, now):
                                                   "model", "made_at", "llm_error", "prompt_version")},
             "opening_forecast": opening,
             "forecast_log": log,
+            "quant": quant,
             "last_spike_alert_at": last_spike,
             "context": ctx,
             "curves": {
                 "date": today, "generated_at": now.strftime("%I:%M %p IST"), "symbol": symbol,
-                "bias": pred["bias"], "timeframes": timeframes, "actual_curve": actual,
+                "bias": display_bias, "timeframes": timeframes, "actual_curve": actual,
                 "predicted_curve": opening_curve, "latest_forecast_curve": predicted,
-                "opening_made_at": opening["made_at"][11:16] if opening else None,
-                "upper_confidence": upper_curve, "lower_confidence": lower_curve,
-                "actual_volume": volume, "final_pred": target_price, "final_actual": m["last_close"],
+                "opening_made_at": opening_made_at,
+                "upper_confidence": band_up, "lower_confidence": band_lo,
+                "forecast_source": forecast_source, "quant_summary": quant_summary,
+                "actual_volume": volume, "final_pred": display_target, "final_actual": m["last_close"],
                 "error_pct": score["error_pct"],
             },
             "session": {"complete": complete, **score},
@@ -597,6 +702,21 @@ def _wilson(k, n, z=1.96):
     return [round(centre - half, 3), round(centre + half, 3)]
 
 
+def quant_block(rows):
+    """Live out-of-sample record of the quant model: is the band calibrated, and is any direction call right?"""
+    qs = [r["quant"] for r in rows if r.get("quant")]
+    bands = [q["in_band"] for q in qs if q.get("in_band") is not None]
+    pub = [q["direction_hit"] for q in qs if q.get("direction_hit") is not None]
+    shadow = [q["shadow_direction_hit"] for q in qs if q.get("shadow_direction_hit") is not None]
+    ci = lambda v: _wilson(sum(1 for x in v if x), len(v))
+    return {"forecasts": len(qs), "days": len({r["date"] for r in rows if r.get("quant")}),
+            "band_coverage": _rate([1 if b else 0 for b in bands]), "band_coverage_ci95": ci(bands), "band_coverage_target": 0.8,
+            "published_direction_calls": len(pub), "published_direction_hit_rate": _rate([1 if x else 0 for x in pub]),
+            "published_direction_ci95": ci(pub),
+            "shadow_direction_hit_rate": _rate([1 if x else 0 for x in shadow]), "shadow_direction_ci95": ci(shadow),
+            "mean_error_pct": _rate([q["error_pct"] for q in qs]), "mean_flat_error_pct": _rate([q["flat_error_pct"] for q in qs])}
+
+
 def summarize(history):
     def block(rows):
         scored = [r for r in rows if r.get("error_pct") is not None]
@@ -624,7 +744,7 @@ def summarize(history):
                                    "mean_error_pct": _rate([c["error_pct"] for c in late]),
                                    "mean_flat_error_pct": _rate([c["flat_error_pct"] for c in late])}}
     llm_rows = [r for r in history if r.get("source") == "llm"]
-    return {"overall": block(llm_rows),
+    return {"overall": block(llm_rows), "quant": quant_block(history),
             "by_symbol": {s: block([r for r in llm_rows if r["symbol"] == s]) for s in SYMBOLS}}
 
 
@@ -643,6 +763,7 @@ def build_health(results, now, errors, previous):
             "symbols_updated": len(ok), "llm_fallback_count": len(fallbacks), "llm_error_count": len(llm_errors),
             "llm_cooldown_until": LLM_BLOCKED_UNTIL.isoformat(timespec="seconds") if LLM_BLOCKED_UNTIL else None, "model": MODEL,
             "prompt_version": PROMPT_VERSION,
+            "quant_model": {"loaded": bool(QUANT), "version": (QUANT or {}).get("version"), "gates": (QUANT or {}).get("gates")},
             "sample_llm_error": next((r["llm_error"] for r in llm_errors), None),
             "errors": [{"symbol": s, "error": e} for s, e in (errors or [])][:10],
             "last_alert_at": (previous or {}).get("last_alert_at")}
@@ -692,7 +813,7 @@ def finalize(results, now, errors=None):
             history = [h for h in history if not (h["date"] == r["date"] and h["symbol"] == r["symbol"])]
             history.append({k: r.get(k) for k in ("date", "symbol", "bias", "target_pct", "source", "final_pred",
                                                   "final_actual", "verdict", "error_pct", "baseline_error_pct",
-                                                  "direction_hit", "baselines", "prompt_version", "checkpoints")})
+                                                  "direction_hit", "baselines", "prompt_version", "checkpoints", "quant")})
     history.sort(key=lambda h: (h["symbol"], h["date"]))
     trimmed = []
     for s in SYMBOLS:
@@ -708,6 +829,7 @@ def finalize(results, now, errors=None):
         else:
             prev = [h for h in trimmed if h["symbol"] == s]
             row = dict(prev[-1], session_date=prev[-1]["date"]) if prev else (dict(r, session_date=r["date"]) if r else None)
+        row = _audit_from_quant(row) if row else row
         if row:
             rows.append({k: row.get(k) for k in ("symbol", "bias", "final_pred", "final_actual", "error_pct",
                                                  "verdict", "baseline_error_pct", "direction_hit", "session_date")})
@@ -739,6 +861,7 @@ def main():
     print("Live session confirmed.")
     del RUN_ERRORS[:]
     load_cooldown(now)
+    load_quant()
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
         results = list(pool.map(lambda s: process_symbol(s, now), SYMBOLS))
     health = finalize(results, now, list(RUN_ERRORS))

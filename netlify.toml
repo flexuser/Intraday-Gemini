@@ -1,4 +1,0 @@
-[build]
-  publish = "public"
-  command = "echo 'Static build step completed.'"
-  ignore = "git diff --quiet HEAD^ HEAD -- public/index.html index.html"

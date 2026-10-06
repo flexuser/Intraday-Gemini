@@ -254,15 +254,34 @@ def test_no_opening_forecast_means_no_blue_line(env):
     ao.process_symbol("INFY", at(9, 30))
     assert saved(tmp)["curves"]["predicted_curve"] == [None] * ao.NUM_SLOTS
 
-def test_quota_error_is_not_retried_and_sets_cooldown(env):
+class SoftQuota(Exception):
+    code = 429
+    def __str__(self): return "429 RESOURCE_EXHAUSTED GenerateRequestsPerMinutePerProject"
+
+class DailyQuota(Exception):
+    code = 429
+    def __str__(self): return "429 RESOURCE_EXHAUSTED GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+
+def test_daily_quota_blocks_for_hours_after_one_call(env):
     llm, state, _ = env
-    llm.out = HttpErr(429)
+    llm.out = DailyQuota()
     m = ao.compute_session_metrics(state["df"], at(9, 30))
     r = ao.query_gemini_regime("INFY", m, [], at(9, 30))
-    assert llm.calls == 1 and r["source"] == "fallback" and ao.LLM_BLOCKED_UNTIL is not None
-    r2 = ao.query_gemini_regime("TCS", m, [], at(9, 40))                            # inside the cooldown
-    assert llm.calls == 1 and "cooldown" in r2["llm_error"]
-    r3 = ao.query_gemini_regime("TCS", m, [], at(10, 5)); assert llm.calls == 2     # cooldown over: tries again
+    assert llm.calls == 1 and r["source"] == "fallback"
+    assert ao.LLM_BLOCKED_UNTIL == at(9, 30) + datetime.timedelta(minutes=360)
+    assert "cooldown" in ao.query_gemini_regime("TCS", m, [], at(10, 0))["llm_error"] and llm.calls == 1
+
+def test_soft_429_is_retried_with_backoff_then_short_cooldown(env, monkeypatch):
+    llm, state, _ = env
+    sleeps = []; monkeypatch.setattr(ao.time, "sleep", lambda s: sleeps.append(s))
+    llm.out = SoftQuota()
+    m = ao.compute_session_metrics(state["df"], at(9, 30))
+    r = ao.query_gemini_regime("INFY", m, [], at(9, 30))
+    assert llm.calls == ao.RETRIES and r["source"] == "fallback"
+    assert ao.LLM_BLOCKED_UNTIL == at(9, 30) + datetime.timedelta(minutes=ao.LLM_COOLDOWN_MIN)
+    assert 30 not in sleeps and sleeps.count(4.0) == ao.RETRIES                       # paced every call; no pointless sleep after the last try
+    llm.calls = 0; r2 = ao.query_gemini_regime("TCS", m, [], at(9, 31))
+    assert llm.calls == 0 and "cooldown" in r2["llm_error"]                           # the other symbols skip the API
 
 def test_cooldown_survives_across_runs(env):
     llm, state, tmp = env
@@ -324,3 +343,61 @@ def test_no_new_llm_forecast_after_1500_and_none_logged(env):
     state["df"] = bars(4); ao.process_symbol("TCS", at(9, 30)); n = llm.calls          # normal opening forecast
     state["df"] = bars(75); ao.process_symbol("TCS", at(15, 35))
     assert llm.calls == n and len(saved(tmp, "TCS")["forecast_log"]) == 1             # final run reuses it, logs nothing new
+
+
+@pytest.fixture(scope="module")
+def trained():
+    from muthoot_poc import backtest as bt
+    daily, idx = bt.make_synthetic(n_days=1100, n_sym=5, beta=0.10, seed=7)
+    model = bt.run(daily, idx, n_boot=100, init_days=400)[1]
+    return model, daily, idx
+
+def _live_quant(monkeypatch, trained, gates):
+    """Wiring tests force the gates; the statistics behind them are tested in test_quant_model.py."""
+    model, daily, idx = trained
+    monkeypatch.setattr(ao, "QUANT", dict(model, gates=gates))
+    d, i = daily["SYN0"].copy(), idx.copy()
+    d.index = i.index = pd.bdate_range(end="2026-10-05", periods=len(d))          # last row = "today"
+    monkeypatch.setattr(ao, "fetch_daily_ohlc", lambda t: (i if t == "^NSEI" else d).copy())
+    monkeypatch.setattr(ao, "_INDEX_CACHE", {})
+    return model
+
+def test_quant_forecast_is_frozen_drives_the_chart_and_is_scored(env, monkeypatch, trained):
+    llm, state, tmp = env
+    model = _live_quant(monkeypatch, trained, {"direction": True, "range": True, "tradeable": True})
+    state["df"] = bars(4);  ao.process_symbol("INFY", at(9, 30))
+    s1 = saved(tmp); c1, q1 = s1["curves"], s1["quant"]
+    assert c1["forecast_source"] == "quant" and q1["model_version"] == model["version"] and c1["quant_summary"]["range_validated"]
+    assert len(c1["upper_confidence"]) == ao.NUM_SLOTS and None not in c1["upper_confidence"]
+    assert c1["upper_confidence"][-1] > 100.0 > c1["lower_confidence"][-1]            # band brackets the open
+    state["df"] = bars(55, drift=-1.5);  ao.process_symbol("INFY", at(13, 45))
+    s2 = saved(tmp)
+    assert s2["quant"] == q1 and s2["curves"]["predicted_curve"] == c1["predicted_curve"]   # frozen all day
+    state["df"] = bars(75, drift=0.4);  row = ao.process_symbol("INFY", at(15, 35))
+    qs = row["quant"]
+    assert isinstance(qs["in_band"], bool) and qs["verdict"] in ("SUCCESS", "PARTIAL", "FAILED")
+    ao.finalize([row], at(15, 35))
+    eod = {r["symbol"]: r for r in json.load(open(tmp / "eod_evaluation.json"))}
+    assert eod["INFY"]["verdict"] == qs["verdict"]                                        # audit table now judges the model
+    summ = json.load(open(tmp / "performance_summary.json"))["quant"]
+    assert summ["forecasts"] == 1 and summ["band_coverage"] in (0.0, 1.0) and summ["band_coverage_target"] == 0.8
+
+def test_unvalidated_model_publishes_no_direction_and_no_band(env, monkeypatch, trained):
+    llm, state, tmp = env
+    _live_quant(monkeypatch, trained, {"direction": False, "range": False, "tradeable": False})
+    state["df"] = bars(4);  ao.process_symbol("INFY", at(9, 30))
+    c = saved(tmp)["curves"]
+    assert set(c["predicted_curve"]) == {100.0}                                           # flat line = "no view"
+    assert c["upper_confidence"] == [None] * ao.NUM_SLOTS and c["lower_confidence"] == [None] * ao.NUM_SLOTS
+    assert c["bias"] == "NEUTRAL" and c["quant_summary"]["direction_validated"] is False
+    state["df"] = bars(75, drift=0.4);  row = ao.process_symbol("INFY", at(15, 35))
+    assert row["quant"]["direction_hit"] is None and row["quant"]["shadow_direction_hit"] in (True, False)   # still tracked quietly
+
+def test_quant_waits_instead_of_guessing_when_index_data_is_missing(env, monkeypatch):
+    llm, state, tmp = env
+    monkeypatch.setattr(ao, "QUANT", {"dir": {}, "rng": {}, "gates": {}})
+    monkeypatch.setattr(ao, "fetch_daily_ohlc", lambda t: pd.DataFrame())
+    monkeypatch.setattr(ao, "_INDEX_CACHE", {})
+    ao.process_symbol("INFY", at(9, 30))
+    d = saved(tmp)
+    assert d["quant"] is None and d["curves"]["forecast_source"] == "llm_unvalidated"       # honest label, retried next run
