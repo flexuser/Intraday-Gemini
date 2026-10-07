@@ -9,7 +9,7 @@
     "model": "gemini-3.8-flash",
     "llm_error": "skipped: Gemini quota cooldown until 15:25 IST",
     "made_at": "2026-10-07T09:20:31+05:30",
-    "volume_ratio": 2.72,
+    "volume_ratio": 7.79,
     "has_volume_spike": true,
     "news_feed": []
   },
@@ -152,13 +152,13 @@
     "tradeable_validated": false
   },
   "technical_indicators": {
-    "vwap": 997.7,
+    "vwap": 997.25,
     "rsi_14": 34.59,
     "macd_hist": 0.1677,
     "atr_14": 1.2,
     "atr_pct": 0.12,
     "bollinger_pct_b": 0.196,
-    "vwap_distance_pct": -0.57,
+    "vwap_distance_pct": -0.53,
     "technical_bias": "BEARISH"
   },
   "risk_execution_plan": {
@@ -182,7 +182,7 @@
   },
   "curves": {
     "date": "2026-10-07",
-    "generated_at": "03:30 PM IST",
+    "generated_at": "03:45 PM IST",
     "symbol": "INFY",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -735,7 +735,7 @@
       93598,
       105379,
       155621,
-      258212,
+      796881,
       0,
       0,
       0
