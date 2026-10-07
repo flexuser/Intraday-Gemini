@@ -414,8 +414,12 @@
       document.getElementById("val-base").innerText = validActuals.length > 0 ? `₹${validActuals[0]}` : "--";
       const qs = curves.quant_summary;
       const directionalBias = curves.bias === "BULLISH" || curves.bias === "BEARISH";
-      const hasForecastTarget = directionalBias && (qs ? qs.direction_validated : curves.forecast_source === "llm_unvalidated");
-      document.getElementById("target-label").textContent = qs && !hasForecastTarget ? "Open Price Reference:" : "Close Target (15:30):";
+      const hasForecastTarget = qs
+        ? curves.final_pred != null
+        : directionalBias && curves.forecast_source === "llm_unvalidated" && curves.final_pred != null;
+      document.getElementById("target-label").textContent = qs
+        ? `${qs.direction_validated ? "Quant" : "Unvalidated quant"} Estimate (15:30):`
+        : (hasForecastTarget ? "Unvalidated AI Target (15:30):" : "Close Target (15:30):");
       document.getElementById("val-target").innerText = curves.final_pred == null
         ? "--"
         : (hasForecastTarget || qs ? `₹${curves.final_pred}` : "--");
@@ -440,9 +444,7 @@
         const rng = qs.range_validated
           ? ` | expected close range ${qs.expected_range_pct}% | 80% close band ${qs.band_lo_pct}% to +${qs.band_hi_pct}%`
           : " | close range not validated";
-        quantLine.innerText = hasForecastTarget
-          ? `Open-to-close quant forecast frozen at ${forecastTime}. ${view}${stockGate}${rng}. Dashed line is a straight guide to the close target, not a minute-by-minute path.`
-          : `Open-to-close quant forecast frozen at ${forecastTime}. ${view}${stockGate}${rng}. No validated directional close target; the displayed value is only the opening-price reference.`;
+        quantLine.innerText = `Open-to-close quant estimate frozen at ${forecastTime}. ${view}${stockGate}${rng}. Dashed line is a straight guide to the ${qs.direction_validated ? "model estimate" : "unvalidated estimate"}, not a minute-by-minute path.`;
       } else {
         quantLine.innerText = curves.forecast_source === "llm_unvalidated"
           ? `Unvalidated AI forecast from ${forecastTime}. Dashed line is a straight guide to its close target, not a minute-by-minute path.`

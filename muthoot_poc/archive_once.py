@@ -378,7 +378,7 @@ def validate_regime(data):
 
 def fallback_regime(error):
     return {"bias": "NEUTRAL", "target_pct": 0.0, "archetype": "RANGE_BOUND",
-            "reasoning": "No AI forecast was available for this run; no close target is shown.",
+            "reasoning": "No AI commentary was available for this run.",
             "source": "fallback", "model": MODEL, "llm_error": str(error)[:300]}
 
 
@@ -685,7 +685,7 @@ def process_symbol(symbol, now):
         if quant:
             opening_curve, band_up, band_lo = quant_curves(quant)
             forecast_source, display_bias = "quant", quant["bias"]
-            q_t = quant["mu_pct"] if (quant["direction_validated"] and quant["bias"] != "NEUTRAL") else 0.0
+            q_t = quant["mu_pct"]
             display_target = round(quant["open_price"] * (1 + q_t / 100.0), 2)
             forecast_made_at = quant.get("made_at")
             opening_made_at = quant["made_at"][11:16]
