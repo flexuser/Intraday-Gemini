@@ -121,8 +121,8 @@
             <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800 space-y-2">
               <span class="text-slate-400 font-semibold block uppercase tracking-wider text-[11px]">Metrics & Model Diagnostics:</span>
               <ul class="text-slate-300 space-y-1.5">
-                <li class="flex justify-between border-b border-slate-900 pb-1"><span>Start Price (09:15):</span> <span id="val-base" class="font-mono text-white">--</span></li>
-                <li class="flex justify-between border-b border-slate-900 pb-1"><span>Target Price (15:30):</span> <span id="val-target" class="font-mono text-white">--</span></li>
+                <li class="flex justify-between border-b border-slate-900 pb-1"><span>First 5m Bar Close:</span> <span id="val-base" class="font-mono text-white">--</span></li>
+                <li class="flex justify-between border-b border-slate-900 pb-1"><span id="target-label">Close Target (15:30):</span> <span id="val-target" class="font-mono text-white">--</span></li>
                 <li class="flex justify-between border-b border-slate-900 pb-1"><span>Latest Observed Price:</span> <span id="val-actual" class="font-mono text-white">--</span></li>
                 <li class="flex justify-between"><span>Variance / Error:</span> <span id="val-error" class="font-mono text-white">--</span></li>
               </ul>
@@ -412,7 +412,13 @@
 
       const validActuals = curves.actual_curve ? curves.actual_curve.filter(v => v !== null) : [];
       document.getElementById("val-base").innerText = validActuals.length > 0 ? `₹${validActuals[0]}` : "--";
-      document.getElementById("val-target").innerText = curves.final_pred ? `₹${curves.final_pred}` : "--";
+      const qs = curves.quant_summary;
+      const directionalBias = curves.bias === "BULLISH" || curves.bias === "BEARISH";
+      const hasForecastTarget = directionalBias && (qs ? qs.direction_validated : curves.forecast_source === "llm_unvalidated");
+      document.getElementById("target-label").textContent = qs && !hasForecastTarget ? "Open Price Reference:" : "Close Target (15:30):";
+      document.getElementById("val-target").innerText = curves.final_pred == null
+        ? "--"
+        : (hasForecastTarget || qs ? `₹${curves.final_pred}` : "--");
       document.getElementById("val-actual").innerText = validActuals.length > 0 ? `₹${validActuals[validActuals.length - 1]}` : "--";
       document.getElementById("val-error").innerText = curves.error_pct != null ? `${curves.error_pct}%` : "--";
 
@@ -421,7 +427,6 @@
         document.getElementById("ai-rationale").insertAdjacentHTML("beforebegin", '<p id="quant-line" class="text-sky-300 text-xs mb-2 font-mono"></p>');
         quantLine = document.getElementById("quant-line");
       }
-      const qs = curves.quant_summary;
       const forecastTime = curves.forecast_made_at || curves.generated_at || "unknown time";
       if (qs) {
         const view = qs.direction_validated
@@ -435,10 +440,13 @@
         const rng = qs.range_validated
           ? ` | expected close range ${qs.expected_range_pct}% | 80% close band ${qs.band_lo_pct}% to +${qs.band_hi_pct}%`
           : " | close range not validated";
-        quantLine.innerText = `Open-to-close quant forecast frozen at ${forecastTime}. ${view}${stockGate}${rng}. Dashed line is a straight guide to the close target, not a minute-by-minute path.`;
+        quantLine.innerText = hasForecastTarget
+          ? `Open-to-close quant forecast frozen at ${forecastTime}. ${view}${stockGate}${rng}. Dashed line is a straight guide to the close target, not a minute-by-minute path.`
+          : `Open-to-close quant forecast frozen at ${forecastTime}. ${view}${stockGate}${rng}. No validated directional close target; the displayed value is only the opening-price reference.`;
       } else {
-        const source = curves.forecast_source === "llm_unvalidated" ? "Unvalidated AI target" : "Fallback target";
-        quantLine.innerText = `${source} from ${forecastTime}. Dashed line is a straight guide to the close target, not a minute-by-minute path.`;
+        quantLine.innerText = curves.forecast_source === "llm_unvalidated"
+          ? `Unvalidated AI forecast from ${forecastTime}. Dashed line is a straight guide to its close target, not a minute-by-minute path.`
+          : `No AI forecast was available at ${forecastTime}; no close target is shown.`;
       }
 
       const lastActualIndex = curves.actual_curve.reduce((last, price, index) => price == null ? last : index, -1);
@@ -446,7 +454,7 @@
       const currentPrice = lastActualIndex >= 0 ? Number(curves.actual_curve[lastActualIndex]) : null;
       const targetPrice = curves.final_pred == null ? null : Number(curves.final_pred);
       const projectionData = curves.timeframes.map((_, index) => {
-        if (lastActualIndex < 0 || index < lastActualIndex || !Number.isFinite(currentPrice) || !Number.isFinite(targetPrice)) return null;
+        if (!hasForecastTarget || lastActualIndex < 0 || index < lastActualIndex || !Number.isFinite(currentPrice) || !Number.isFinite(targetPrice)) return null;
         const progress = lastIndex > lastActualIndex ? (index - lastActualIndex) / (lastIndex - lastActualIndex) : 0;
         return currentPrice + (targetPrice - currentPrice) * progress;
       });
@@ -468,7 +476,7 @@
               yAxisID: 'y1',
               order: 2
             },
-            {
+            ...(hasForecastTarget ? [{
               type: 'line',
               label: `Guide to close target (forecast ${forecastTime})`,
               data: projectionData,
@@ -481,7 +489,7 @@
               yAxisID: 'y',
               order: 1,
               spanGaps: false
-            },
+            }] : []),
             {
               type: 'line',
               label: 'Actual Market Curve',

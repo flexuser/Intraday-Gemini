@@ -378,7 +378,7 @@ def validate_regime(data):
 
 def fallback_regime(error):
     return {"bias": "NEUTRAL", "target_pct": 0.0, "archetype": "RANGE_BOUND",
-            "reasoning": "No AI forecast available for this run. Showing a flat reference line.",
+            "reasoning": "No AI forecast was available for this run; no close target is shown.",
             "source": "fallback", "model": MODEL, "llm_error": str(error)[:300]}
 
 
