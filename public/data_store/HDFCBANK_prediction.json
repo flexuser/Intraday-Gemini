@@ -147,12 +147,12 @@
       "idx_ret1_z": 1.333,
       "close_pos": 0.263
     },
-    "symbol_gate_available": false,
-    "symbol_gate_passed": null,
+    "symbol_gate_available": true,
+    "symbol_gate_passed": true,
     "tradeable_validated": false
   },
   "technical_indicators": {
-    "vwap": 706.71,
+    "vwap": 706.69,
     "rsi_14": 49.48,
     "macd_hist": -0.3726,
     "atr_14": 1.52,
@@ -182,7 +182,7 @@
   },
   "curves": {
     "date": "2026-10-07",
-    "generated_at": "11:50 AM IST",
+    "generated_at": "11:53 AM IST",
     "symbol": "HDFCBANK",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -659,8 +659,8 @@
       "direction_validated": true,
       "tradeable_validated": false,
       "range_validated": false,
-      "symbol_gate_available": false,
-      "symbol_gate_passed": null,
+      "symbol_gate_available": true,
+      "symbol_gate_passed": true,
       "model_version": "q1-20261006"
     },
     "actual_volume": [
@@ -695,7 +695,7 @@
       237770,
       158833,
       177376,
-      0,
+      87244,
       0,
       0,
       0,
