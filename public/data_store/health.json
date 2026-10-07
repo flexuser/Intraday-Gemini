@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-07T11:45:34+05:30",
+  "as_of": "2026-10-07T11:55:42+05:30",
   "status": "DEGRADED",
   "symbols_total": 11,
   "symbols_updated": 11,
@@ -10,7 +10,7 @@
   "prompt_version": "v3-context-risk",
   "quant_model": {
     "loaded": true,
-    "version": "q1-20261006",
+    "version": "q2-20261007",
     "gates": {
       "direction": true,
       "range": false,
