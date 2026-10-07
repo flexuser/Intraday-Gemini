@@ -427,11 +427,15 @@
           ? `Model view: ${qs.bias} (P(up) ${Math.round(qs.p_up * 100)}%)`
           : "Model view: no validated directional edge";
         const rng = qs.range_validated
-          ? ` | expected range ${qs.expected_range_pct}% | 80% band ${qs.band_lo_pct}% to +${qs.band_hi_pct}%`
-          : " | range model not validated";
-        quantLine.innerText = view + rng;
+          ? ` | expected close range ${qs.expected_range_pct}% | 80% close band ${qs.band_lo_pct}% to +${qs.band_hi_pct}%`
+          : " | close range not validated";
+        quantLine.innerText = qs.bias === "NEUTRAL"
+          ? `${view}${rng} | no directional close target`
+          : `${view}${rng}`;
       } else {
-        quantLine.innerText = "No validated model forecast yet. The line below is unvalidated AI output.";
+        quantLine.innerText = curves.bias === "NEUTRAL"
+          ? "No directional edge; no close target is plotted."
+          : "AI close target is unvalidated and shown as a marker, not a price path.";
       }
 
       const ctx = document.getElementById('predictionChart').getContext('2d');
@@ -453,39 +457,17 @@
             },
             {
               type: 'line',
-              label: curves.forecast_source === 'quant' ? `Model forecast (frozen ${curves.opening_made_at || 'n/a'})` : `AI forecast, UNVALIDATED (frozen ${curves.opening_made_at || 'n/a'})`,
-              data: curves.predicted_curve,
+              label: curves.bias === 'NEUTRAL' ? 'No directional edge' : curves.forecast_source === 'quant' ? `Model close target (${curves.opening_made_at || 'n/a'})` : `AI close target, unvalidated (${curves.opening_made_at || 'n/a'})`,
+              data: curves.bias !== 'NEUTRAL' && curves.final_pred != null
+                ? curves.timeframes.map((_, i, all) => i === all.length - 1 ? Number(curves.final_pred) : null)
+                : curves.timeframes.map(() => null),
               borderColor: '#3b82f6',
-              borderDash: [5, 5],
-              fill: false,
-              tension: 0.2,
+              showLine: false,
+              pointRadius: curves.bias !== 'NEUTRAL' && curves.final_pred != null ? 5 : 0,
+              pointHoverRadius: 7,
+              pointStyle: 'rectRot',
               yAxisID: 'y',
               order: 1,
-              spanGaps: false
-            },
-            {
-              type: 'line',
-              label: '80% expected range (calibrated)',
-              data: curves.upper_confidence || [],
-              borderColor: 'rgba(59,130,246,0)',
-              backgroundColor: 'rgba(59,130,246,0.12)',
-              pointRadius: 0,
-              fill: '+1',
-              tension: 0.2,
-              yAxisID: 'y',
-              order: 3,
-              spanGaps: false
-            },
-            {
-              type: 'line',
-              label: '_lower',
-              data: curves.lower_confidence || [],
-              borderColor: 'rgba(59,130,246,0)',
-              pointRadius: 0,
-              fill: false,
-              tension: 0.2,
-              yAxisID: 'y',
-              order: 3,
               spanGaps: false
             },
             {
