@@ -171,21 +171,46 @@ def evaluate(oos, cost_bps=6.0, n_boot=500, seed=0):
     log_naive = float(np.mean(np.abs(oos["y_range"].values - oos["lr5"].values)))
 
     by_symbol = {}
-    for sym, g in oos.groupby("symbol"):
-        gr, gm = g["r_oc"].values, g["mu_z"].values * g["sig"].values
-        
-        # Safe correlation calculation for individual symbol groups
-        if len(g) > 1 and np.std(g["mu_z"]) > 0 and np.std(g["z_oc"]) > 0:
-            sym_ic = float(np.corrcoef(g["mu_z"], g["z_oc"].clip(-4, 4))[0, 1])
-            sym_ic = round(sym_ic, 3) if not (math.isnan(sym_ic) or math.isinf(sym_ic)) else None
-        else:
-            sym_ic = None
+    for sym_index, (sym, g) in enumerate(oos.groupby("symbol")):
+        gr, gz = g["r_oc"].values, g["mu_z"].values
+        gm, gy = gz * g["sig"].values, g["z_oc"].clip(-qm.CLIP, qm.CLIP).values
+        sym_inband = ((gr >= g["lo"].values) & (gr <= g["hi"].values)).astype(float)
+        sym_net = np.sign(gm) * gr * 1e4 - cost_bps
+        sym_stats = pd.DataFrame({
+            "one": 1.0, "x": gz, "y": gy, "xy": gz * gy, "xx": gz * gz, "yy": gy * gy,
+            "hit": (np.sign(gm) == np.sign(gr)).astype(float), "net": sym_net, "inband": sym_inband,
+        }, index=g.index).groupby(g["date"].values).sum()
+        sym_columns = {k: i for i, k in enumerate(sym_stats.columns)}
+        sym_tot = sym_stats.values.sum(axis=0)
+        sym_ic = _corr(sym_tot, sym_columns)
+        sym_hit = sym_tot[sym_columns["hit"]] / sym_tot[sym_columns["one"]]
+        sym_rng = np.random.default_rng(seed + sym_index + 1)
+        sym_draws = sym_stats.values[sym_rng.integers(0, len(sym_stats), size=(n_boot, len(sym_stats)))].sum(axis=1)
+
+        def sym_ci(metric):
+            return [round(float(np.quantile(metric, 0.025)), 4), round(float(np.quantile(metric, 0.975)), 4)]
+
+        sym_ic_ci = sym_ci(np.array([_corr(sample, sym_columns) for sample in sym_draws]))
+        sym_hit_ci = sym_ci(sym_draws[:, sym_columns["hit"]] / sym_draws[:, sym_columns["one"]])
+        sym_net_ci = sym_ci(sym_draws[:, sym_columns["net"]] / sym_draws[:, sym_columns["one"]])
+        sym_mae = float(np.mean(np.abs(gr - gm)) * 1e4)
+        sym_flat_mae = float(np.mean(np.abs(gr)) * 1e4)
+        sym_range_mae = float(np.mean(np.abs(g["y_range"].values - g["range_log"].values)))
+        sym_range_naive = float(np.mean(np.abs(g["y_range"].values - g["lr5"].values)))
+        sym_coverage = float(sym_tot[sym_columns["inband"]] / sym_tot[sym_columns["one"]])
+        enough_days = len(sym_stats) >= 252
+        sym_direction = bool(enough_days and sym_ic_ci[0] > 0 and sym_hit_ci[0] > 0.5 and sym_mae <= sym_flat_mae)
+        sym_tradeable = bool(sym_direction and sym_net_ci[0] > 0)
+        sym_range_gate = bool(enough_days and abs(sym_coverage - 0.8) <= 0.04 and sym_range_mae < sym_range_naive)
 
         by_symbol[sym] = {
-            "n": int(len(g)),
-            "hit_rate": round(float(np.mean(np.sign(gm) == np.sign(gr))), 3),
-            "ic": sym_ic,
-            "coverage_80": round(float(np.mean((gr >= g["lo"].values) & (gr <= g["hi"].values))), 3)
+            "n": int(len(g)), "n_days": int(len(sym_stats)),
+            "hit_rate": round(float(sym_hit), 3), "hit_ci95": sym_hit_ci,
+            "ic": round(float(sym_ic), 3), "ic_ci95": sym_ic_ci,
+            "net_ci95": sym_net_ci,
+            "mae_model_bps": round(sym_mae, 2), "mae_flat_bps": round(sym_flat_mae, 2),
+            "coverage_80": round(sym_coverage, 3),
+            "gates": {"direction": sym_direction, "tradeable": sym_tradeable, "range": sym_range_gate},
         }
 
     direction = {"ic": round(ic, 4), "ic_ci95": ic_ci, "hit_rate": round(float(hit_rate), 4), "hit_ci95": hit_ci,
@@ -215,14 +240,17 @@ def run(daily, idx, cost_bps=6.0, n_boot=500, init_days=504, step=21):
     gates = {"direction": report["direction"]["passes_gate"], "range": report["range"]["passes_gate"],
              "tradeable": report["direction"]["tradeable_after_costs"]}
     now = datetime.datetime.now(datetime.timezone.utc)
-    model = {"version": "q1-" + now.strftime("%Y%m%d"), "trained_at": now.isoformat(timespec="seconds"),
+    symbol_gates = {sym: details["gates"] for sym, details in report["by_symbol"].items()}
+    model = {"version": "q2-" + now.strftime("%Y%m%d"), "trained_at": now.isoformat(timespec="seconds"),
              "n_obs": int(len(panel)), "n_symbols": int(panel["symbol"].nunique()),
              "data_span": [str(pd.Timestamp(panel["date"].min()).date()), str(pd.Timestamp(panel["date"].max()).date())],
-             "gates": gates, "dir": models["dir"], "rng": models["rng"],
+             "gates": gates, "symbol_gates": symbol_gates, "dir": models["dir"], "rng": models["rng"],
              "oos_summary": {"direction_hit_rate": report["direction"]["hit_rate"], "ic": report["direction"]["ic"],
                              "coverage_80": report["range"]["coverage_80"]}}
     report.update({"generated_at": now.isoformat(timespec="seconds"), "universe": sorted(daily.keys()), "gates": gates,
                    "caveats": ["Out-of-sample means each day was predicted by a model trained only on earlier days.",
+                               "Per-symbol gates use day-block bootstrap confidence intervals and are screening evidence, not guarantees.",
+                               "Per-symbol intervals are not adjusted for screening across the full universe.",
                                "Results are for open->close moves on liquid large caps; they say nothing about other horizons.",
                                "Costs are a flat per-trade assumption; real slippage can be higher.",
                                "A passed gate is evidence, not a guarantee: re-check every month."]})

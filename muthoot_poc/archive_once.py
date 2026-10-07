@@ -205,13 +205,32 @@ def compute_quant(symbol, ticker, m, now):
         return None
     d.loc[today, ["Open", "High", "Low", "Close"]] = m["open_price"]     # features read only today's Open
     feats = qm.build_features(d, idx)
-    pred = qm.predict_today(QUANT, feats.loc[today])
+    pred = qm.predict_today(QUANT, feats.loc[today], symbol=ticker)
     if pred is None:
         print(f"[{symbol}] quant: incomplete features")
         return None
     pred.update(made_at=now.isoformat(timespec="seconds"), open_price=round(m["open_price"], 2),
                 features={k: round(float(feats.loc[today, k]), 3) for k in qm.DIR_FEATURES})
     return pred
+
+
+def apply_quant_gates(quant, ticker):
+    """Recheck cached opening forecasts against the currently loaded model gates."""
+    if not quant:
+        return None
+    q = dict(quant)
+    gates = (QUANT or {}).get("gates", {})
+    symbol_gates = (QUANT or {}).get("symbol_gates")
+    has_symbol_gates = isinstance(symbol_gates, dict) and bool(symbol_gates)
+    symbol_gate = symbol_gates.get(ticker) if has_symbol_gates else None
+    q["symbol_gate_available"] = bool(symbol_gate) if has_symbol_gates else False
+    q["symbol_gate_passed"] = bool(symbol_gate and symbol_gate.get("direction")) if has_symbol_gates else None
+    q["direction_validated"] = bool(gates.get("direction") and (symbol_gate.get("direction") if symbol_gate else True))
+    q["tradeable_validated"] = bool(gates.get("tradeable") and symbol_gate and symbol_gate.get("tradeable")) if has_symbol_gates else False
+    q["range_validated"] = bool(gates.get("range") and (symbol_gate.get("range") if symbol_gate else True))
+    if not q["direction_validated"]:
+        q["bias"] = "NEUTRAL"
+    return q
 
 
 def quant_curves(q):
@@ -615,6 +634,7 @@ def process_symbol(symbol, now):
         quant = existing.get("quant")
         if QUANT and not quant:
             quant = compute_quant(symbol, ticker, m, now)      # computed once at the open, then frozen for the day
+        quant = apply_quant_gates(quant, ticker)
 
         last_spike = existing.get("last_spike_alert_at")
         if m["vol_ratio"] >= 2.5 and now.time() >= datetime.time(9, 45) and \
@@ -657,16 +677,33 @@ def process_symbol(symbol, now):
             opening["curve"] = frozen_curve(opening["base_price"], opening["target_pct"])
 
         target_price = round(m["open_price"] * (1 + pred["target_pct"] / 100.0), 2)
+
+        forecast_source, band_up, band_lo = f"{pred.get('source', 'unknown')}_unvalidated", [None] * NUM_SLOTS, [None] * NUM_SLOTS
+        display_bias, display_target = pred["bias"], target_price
+        forecast_made_at = pred.get("made_at")
+        opening_made_at, quant_summary = (opening["made_at"][11:16] if opening else None), None
+        if quant:
+            opening_curve, band_up, band_lo = quant_curves(quant)
+            forecast_source, display_bias = "quant", quant["bias"]
+            q_t = quant["mu_pct"] if (quant["direction_validated"] and quant["bias"] != "NEUTRAL") else 0.0
+            display_target = round(quant["open_price"] * (1 + q_t / 100.0), 2)
+            forecast_made_at = quant.get("made_at")
+            opening_made_at = quant["made_at"][11:16]
+            quant_summary = {k: quant.get(k) for k in ("bias", "p_up", "expected_range_pct", "band_lo_pct", "band_hi_pct",
+                                                       "direction_validated", "tradeable_validated", "range_validated",
+                                                       "symbol_gate_available", "symbol_gate_passed", "model_version")}
+        forecast_made_at = f"{forecast_made_at[11:16]} IST" if forecast_made_at and len(forecast_made_at) >= 16 else None
         
         # Evaluate Hard Risk Rules & Guardrail Plan
         atr_val = tech_snapshot.get("atr_14", 0.0) if tech_snapshot else 0.0
         if atr_val <= 0:
             atr_val = m["last_close"] * 0.01
 
-        eval_bias = quant.get("bias", pred["bias"]) if quant else pred["bias"]
+        eval_bias = display_bias
         p_up_val = quant.get("p_up", 0.5) if quant else 0.5
-        dir_val = quant.get("direction_validated", True) if quant else True
-        rng_val = quant.get("range_validated", True) if quant else True
+        dir_val = bool(quant and quant.get("direction_validated"))
+        trade_val = bool(quant and quant.get("tradeable_validated"))
+        rng_val = bool(quant and quant.get("range_validated"))
 
         if RISK_MANAGER:
             risk_plan = RISK_MANAGER.evaluate_execution_plan(
@@ -674,19 +711,25 @@ def process_symbol(symbol, now):
                 current_price=m["last_close"],
                 bias=eval_bias,
                 p_up=p_up_val,
-                target_price=target_price,
+                target_price=display_target,
                 atr_14=atr_val,
                 direction_validated=dir_val,
                 range_validated=rng_val,
+                tradeable_validated=trade_val,
             )
         else:
             risk_plan = {
-                "approved": True,
-                "action": "BUY" if eval_bias == "BULLISH" else ("SELL" if eval_bias == "BEARISH" else "NO_TRADE"),
-                "stop_loss": round(m["last_close"] - 1.5 * atr_val, 2),
-                "take_profit": target_price,
-                "position_size_shares": 100,
-                "rejection_reason": None,
+                "symbol": symbol,
+                "approved": False,
+                "action": "NO_TRADE",
+                "entry_price": round(m["last_close"], 2),
+                "stop_loss": 0.0,
+                "take_profit": 0.0,
+                "position_size_shares": 0,
+                "allocated_capital": 0.0,
+                "max_risk_amount": 0.0,
+                "risk_reward_ratio": 0.0,
+                "rejection_reason": "Risk guardrail module unavailable; no trade approved.",
             }
 
         # Record Telemetry Event
@@ -703,18 +746,6 @@ def process_symbol(symbol, now):
 
         opening_curve = (opening.get("curve") or frozen_curve(opening["base_price"], opening["target_pct"])) \
             if opening else [None] * NUM_SLOTS
-        forecast_source, band_up, band_lo = "llm_unvalidated", [None] * NUM_SLOTS, [None] * NUM_SLOTS
-        display_bias, display_target = pred["bias"], target_price
-        opening_made_at, quant_summary = (opening["made_at"][11:16] if opening else None), None
-        if quant:
-            opening_curve, band_up, band_lo = quant_curves(quant)
-            forecast_source, display_bias = "quant", quant["bias"]
-            q_t = quant["mu_pct"] if (quant["direction_validated"] and quant["bias"] != "NEUTRAL") else 0.0
-            display_target = round(quant["open_price"] * (1 + q_t / 100.0), 2)
-            opening_made_at = quant["made_at"][11:16]
-            quant_summary = {k: quant.get(k) for k in ("bias", "p_up", "expected_range_pct", "band_lo_pct", "band_hi_pct",
-                                                       "direction_validated", "range_validated", "model_version")}
-
         timeframes, actual, predicted, upper_curve, lower_curve, volume = build_curves(df, display_target, ctx)
 
         complete = session_complete(df, now)
@@ -745,6 +776,7 @@ def process_symbol(symbol, now):
                 "bias": display_bias, "timeframes": timeframes, "actual_curve": actual,
                 "predicted_curve": opening_curve, "latest_forecast_curve": predicted,
                 "opening_made_at": opening_made_at,
+                "forecast_made_at": forecast_made_at,
                 "upper_confidence": band_up, "lower_confidence": band_lo,
                 "forecast_source": forecast_source, "quant_summary": quant_summary,
                 "actual_volume": volume, "final_pred": display_target, "final_actual": m["last_close"],

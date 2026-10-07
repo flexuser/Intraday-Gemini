@@ -422,16 +422,23 @@
         quantLine = document.getElementById("quant-line");
       }
       const qs = curves.quant_summary;
+      const forecastTime = curves.forecast_made_at || curves.generated_at || "unknown time";
       if (qs) {
         const view = qs.direction_validated
           ? `Model view: ${qs.bias} (P(up) ${Math.round(qs.p_up * 100)}%)`
           : "Model view: no validated directional edge";
+        const stockGate = qs.symbol_gate_available === false
+          ? (qs.symbol_gate_passed === null
+            ? " | pooled evidence only; refresh quant model for a stock gate; trade approvals disabled"
+            : " | stock is not covered by a validation gate; trade approvals disabled")
+          : (!qs.tradeable_validated ? " | stock trade gate failed; trade approvals disabled" : "");
         const rng = qs.range_validated
           ? ` | expected close range ${qs.expected_range_pct}% | 80% close band ${qs.band_lo_pct}% to +${qs.band_hi_pct}%`
           : " | close range not validated";
-        quantLine.innerText = `${view}${rng} | dashed straight guide runs from the latest price to the close target; only the target is model output`;
+        quantLine.innerText = `Open-to-close quant forecast frozen at ${forecastTime}. ${view}${stockGate}${rng}. Dashed line is a straight guide to the close target, not a minute-by-minute path.`;
       } else {
-        quantLine.innerText = "Dashed straight guide runs from the latest price to the unvalidated AI close target; only the target is an AI output.";
+        const source = curves.forecast_source === "llm_unvalidated" ? "Unvalidated AI target" : "Fallback target";
+        quantLine.innerText = `${source} from ${forecastTime}. Dashed line is a straight guide to the close target, not a minute-by-minute path.`;
       }
 
       const lastActualIndex = curves.actual_curve.reduce((last, price, index) => price == null ? last : index, -1);
@@ -463,7 +470,7 @@
             },
             {
               type: 'line',
-              label: `Straight guide to close target (${curves.generated_at || 'latest snapshot'})`,
+              label: `Guide to close target (forecast ${forecastTime})`,
               data: projectionData,
               borderColor: '#3b82f6',
               borderDash: [5, 5],

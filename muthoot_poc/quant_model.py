@@ -157,7 +157,7 @@ def load_model(path):
         return None
 
 
-def predict_today(model, feature_row, min_prob_edge=0.03):
+def predict_today(model, feature_row, min_prob_edge=0.03, symbol=None):
     """Live forecast from one feature row. Returns None if any feature is missing (never guess)."""
     if not model or not isinstance(model, dict) or not model.get("dir") or not model.get("rng"):
         return None
@@ -185,7 +185,13 @@ def predict_today(model, feature_row, min_prob_edge=0.03):
 
     p_up = _phi(mu_z / resid_sd)
     gates = model.get("gates", {})
-    dir_ok, rng_ok = bool(gates.get("direction")), bool(gates.get("range"))
+    symbol_gates = model.get("symbol_gates")
+    has_symbol_gates = isinstance(symbol_gates, dict) and bool(symbol_gates)
+    symbol_gate = symbol_gates.get(symbol) if (symbol and has_symbol_gates) else None
+    symbol_gate_available = bool(symbol_gate) if symbol and has_symbol_gates else (False if symbol else None)
+    dir_ok = bool(gates.get("direction")) and (bool(symbol_gate.get("direction")) if symbol_gate else True)
+    tradeable_ok = bool(gates.get("tradeable")) and (bool(symbol_gate and symbol_gate.get("tradeable")) if symbol and has_symbol_gates else not symbol)
+    rng_ok = bool(gates.get("range")) and (bool(symbol_gate.get("range")) if symbol_gate else True)
     bias = "NEUTRAL"
     if dir_ok and abs(p_up - 0.5) >= min_prob_edge:
         bias = "BULLISH" if p_up > 0.5 else "BEARISH"
@@ -198,6 +204,9 @@ def predict_today(model, feature_row, min_prob_edge=0.03):
         "band_lo_pct": round((math.exp(lo) - 1) * 100, 2),
         "band_hi_pct": round((math.exp(hi) - 1) * 100, 2),
         "direction_validated": dir_ok,
+        "tradeable_validated": tradeable_ok,
         "range_validated": rng_ok,
+        "symbol_gate_available": symbol_gate_available,
+        "symbol_gate_passed": (bool(symbol_gate and symbol_gate.get("direction")) if has_symbol_gates else None) if symbol else None,
         "model_version": model.get("version"),
     }

@@ -40,6 +40,7 @@ class HardRiskGuardrail:
         atr_14: float,
         direction_validated: bool = True,
         range_validated: bool = True,
+        tradeable_validated: bool = True,
     ) -> Dict[str, Any]:
         """Evaluates raw model prediction against hard risk parameters.
 
@@ -52,6 +53,7 @@ class HardRiskGuardrail:
             atr_14: 14-period Average True Range in rupees (₹).
             direction_validated: Walk-forward backtest directional edge indicator.
             range_validated: Out-of-sample volatility calibration indicator.
+            tradeable_validated: Per-stock net performance passed its cost-adjusted gate.
 
         Returns:
             Dict containing trade recommendation, position size, stop-loss,
@@ -75,6 +77,10 @@ class HardRiskGuardrail:
         # 1. Verification of entry requirements
         if not direction_validated:
             execution_plan["rejection_reason"] = "Direction model failed walk-forward edge test."
+            return execution_plan
+
+        if not tradeable_validated:
+            execution_plan["rejection_reason"] = "Per-stock net performance has not passed validation."
             return execution_plan
 
         if current_price <= 0 or atr_14 <= 0:
