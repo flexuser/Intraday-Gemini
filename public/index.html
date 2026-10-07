@@ -36,16 +36,26 @@
     <header class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
       <div>
         <div class="flex items-center gap-2">
-          <span class="bg-blue-900/60 text-blue-400 text-xs font-semibold px-2.5 py-0.5 rounded border border-blue-700/50">NSE/BSE</span>
+          <span class="bg-blue-900/60 text-blue-400 text-xs font-semibold px-2.5 py-0.5 rounded border border-blue-700/50">NSE</span>
           <h1 class="text-xl md:text-2xl font-bold tracking-tight text-white">Intraday AI Prediction & News Intelligence</h1>
         </div>
-        <p class="text-xs text-slate-400 mt-1">Real-Time Market Trajectory • Volume Spikes • Corporate Catalysts</p>
+        <p class="text-xs text-slate-400 mt-1">Intraday market snapshots • data and forecast timestamps shown below</p>
       </div>
       <div class="flex items-center gap-2 bg-slate-900 p-1 rounded-lg border border-slate-800">
-        <button id="tab-intraday" onclick="switchTab('intraday')" class="px-3 py-1.5 text-xs font-medium rounded-md bg-blue-600 text-white shadow">Live Intraday</button>
-        <button id="tab-audit" onclick="switchTab('audit')" class="px-3 py-1.5 text-xs font-medium rounded-md text-slate-400 hover:text-white">EOD Model Audit</button>
+        <button id="tab-intraday" onclick="switchTab('intraday')" class="px-3 py-1.5 text-xs font-medium rounded-md bg-blue-600 text-white shadow">Market Snapshot</button>
+        <button id="tab-audit" onclick="switchTab('audit')" class="px-3 py-1.5 text-xs font-medium rounded-md text-slate-400 hover:text-white">Forecast Audit</button>
       </div>
     </header>
+
+    <section id="data-status" role="status" aria-live="polite" class="rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 space-y-1">
+      <div class="flex items-center gap-2 text-sm">
+        <span id="data-status-dot" class="h-2.5 w-2.5 rounded-full bg-slate-400"></span>
+        <strong id="data-status-label" class="text-slate-200">Checking snapshot</strong>
+      </div>
+      <p id="data-status-message" class="text-xs text-slate-300">Loading the latest published market data.</p>
+      <p id="data-status-detail" class="text-xs text-slate-500"></p>
+      <p id="track-record" class="text-xs text-slate-400 border-t border-slate-800 pt-2">Loading forecast track record…</p>
+    </section>
 
     <section class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3">
       <div class="flex flex-col sm:flex-row gap-2">
@@ -54,8 +64,8 @@
       </div>
       <div>
         <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
-          <span class="font-semibold uppercase tracking-wider text-slate-500">INDEXED PORTFOLIO WATCHLIST</span>
-          <span class="text-emerald-400">Strict IST Time-Gated Curves Active</span>
+          <span class="font-semibold uppercase tracking-wider text-slate-500">SUPPORTED SYMBOLS</span>
+          <span class="text-slate-500">Snapshot status uses India Standard Time</span>
         </div>
         <div class="flex overflow-x-auto whitespace-nowrap gap-2 pb-2 scrollbar-none" id="watchlist-pills"></div>
       </div>
@@ -79,11 +89,11 @@
               
               <div class="flex flex-wrap items-center gap-2 mt-2 text-xs">
                 <span class="bg-slate-950 text-slate-300 border border-slate-800 px-2.5 py-1 rounded-md font-mono flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  Trade Date: <strong id="meta-date" class="text-white">--</strong>
+                  <span id="session-dot" class="w-2 h-2 rounded-full bg-slate-500"></span>
+                  Session Date: <strong id="meta-date" class="text-white">--</strong>
                 </span>
                 <span class="bg-slate-950 text-slate-400 border border-slate-800 px-2.5 py-1 rounded-md font-mono">
-                  Last Synced: <span id="meta-time" class="text-slate-200">--</span>
+                  Snapshot Updated: <span id="meta-time" class="text-slate-200">--</span>
                 </span>
               </div>
             </div>
@@ -113,7 +123,7 @@
               <ul class="text-slate-300 space-y-1.5">
                 <li class="flex justify-between border-b border-slate-900 pb-1"><span>Start Price (09:15):</span> <span id="val-base" class="font-mono text-white">--</span></li>
                 <li class="flex justify-between border-b border-slate-900 pb-1"><span>Target Price (15:30):</span> <span id="val-target" class="font-mono text-white">--</span></li>
-                <li class="flex justify-between border-b border-slate-900 pb-1"><span>Latest Actual Price:</span> <span id="val-actual" class="font-mono text-white">--</span></li>
+                <li class="flex justify-between border-b border-slate-900 pb-1"><span>Latest Observed Price:</span> <span id="val-actual" class="font-mono text-white">--</span></li>
                 <li class="flex justify-between"><span>Variance / Error:</span> <span id="val-error" class="font-mono text-white">--</span></li>
               </ul>
             </div>
@@ -124,7 +134,7 @@
       <div id="view-audit" class="hidden space-y-4">
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 md:p-6">
           <div class="flex items-center justify-between mb-3">
-            <h3 class="text-lg font-bold text-white">Portfolio Accuracy Audit Matrix</h3>
+            <h3 class="text-lg font-bold text-white">Forecast Outcome Audit</h3>
             <span id="audit-sync-time" class="text-xs text-slate-400 font-mono">--</span>
           </div>
           <div class="overflow-x-auto">
@@ -132,9 +142,10 @@
               <thead class="bg-slate-950 text-slate-400 border-b border-slate-800 uppercase">
                 <tr>
                   <th class="p-2.5">Symbol</th>
-                  <th class="p-2.5">AI Sentiment</th>
-                  <th class="p-2.5">Target Price</th>
-                  <th class="p-2.5">Actual Close</th>
+                  <th class="p-2.5">Session</th>
+                  <th class="p-2.5">Forecast Bias</th>
+                  <th class="p-2.5">Forecast Target</th>
+                  <th class="p-2.5">Observed Price</th>
                   <th class="p-2.5">Error %</th>
                   <th class="p-2.5">Verdict</th>
                 </tr>
@@ -157,6 +168,104 @@
     const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/flexuser/Intraday-Gemini/main/public/data_store";
     let activeSymbol = "MUTHOOTFIN";
     let chartInstance = null;
+    let selectedStockData = null;
+    let stockLoadToken = 0;
+    let healthSnapshot = null;
+    let performanceSnapshot = null;
+    const IST = "Asia/Kolkata";
+
+    function indiaNow() {
+      const parts = new Intl.DateTimeFormat("en-IN", {
+        timeZone: IST, year: "numeric", month: "2-digit", day: "2-digit", weekday: "short",
+        hour: "2-digit", minute: "2-digit", hourCycle: "h23"
+      }).formatToParts(new Date());
+      const p = Object.fromEntries(parts.map(x => [x.type, x.value]));
+      return { date: `${p.year}-${p.month}-${p.day}`, minutes: Number(p.hour) * 60 + Number(p.minute), weekday: !["Sat", "Sun"].includes(p.weekday) };
+    }
+
+    function snapshotTime(curves) {
+      const match = String(curves?.generated_at || "").match(/(\d{1,2}):(\d{2})\s*(AM|PM)\s*IST/i);
+      if (!match || !/^\d{4}-\d{2}-\d{2}$/.test(String(curves.date || ""))) return null;
+      let hour = Number(match[1]) % 12;
+      if (match[3].toUpperCase() === "PM") hour += 12;
+      return new Date(`${curves.date}T${String(hour).padStart(2, "0")}:${match[2]}:00+05:30`);
+    }
+
+    function formatIST(date) {
+      return date && Number.isFinite(date.getTime())
+        ? `${new Intl.DateTimeFormat("en-IN", { timeZone: IST, dateStyle: "medium", timeStyle: "short" }).format(date)} IST`
+        : "timestamp unavailable";
+    }
+
+    function renderDataStatus(data = selectedStockData, error = "") {
+      const now = indiaNow();
+      const curves = data?.curves;
+      const time = snapshotTime(curves);
+      const age = time ? (Date.now() - time.getTime()) / 60000 : Infinity;
+      let state = "live", label = "Current session data", message = `Snapshot updated ${Math.max(0, Math.floor(age))} min ago.`;
+
+      if (!now.weekday || now.minutes >= 930) {
+        state = "closed"; label = "Market closed";
+        message = curves ? `Latest available snapshot: ${curves.date}.` : "No market snapshot is available.";
+        if (curves?.date === now.date && data.session?.complete === false) message += " Final close is not confirmed.";
+      } else if (now.minutes < 555) {
+        state = "premarket"; label = "Pre-market";
+        message = curves ? `Showing previous available session: ${curves.date}. Waiting for today's data.` : "Waiting for today's market data.";
+      } else if (!curves) {
+        state = "unavailable"; label = "Data unavailable"; message = "No snapshot could be loaded for this symbol.";
+      } else if (curves.date !== now.date || !time || age > 20 || age < -2) {
+        state = "stale"; label = "Stale snapshot";
+        message = `Latest snapshot: ${curves.date}${time ? `, ${formatIST(time)}` : "; timestamp unavailable"}. No fresh current-session data is available.`;
+      }
+      if (error) { state = data ? "stale" : "unavailable"; label = data ? "Refresh failed" : "Data unavailable"; message = error; }
+
+      const colors = {
+        live: ["border-emerald-800", "bg-emerald-400", "text-emerald-300"],
+        premarket: ["border-sky-800", "bg-sky-400", "text-sky-300"],
+        closed: ["border-slate-700", "bg-slate-500", "text-slate-300"],
+        stale: ["border-amber-800", "bg-amber-400", "text-amber-300"],
+        unavailable: ["border-rose-800", "bg-rose-400", "text-rose-300"]
+      }[state] || ["border-slate-700", "bg-slate-400", "text-slate-200"];
+      document.getElementById("data-status").className = `rounded-xl border bg-slate-900 px-4 py-3 space-y-1 ${colors[0]}`;
+      document.getElementById("data-status-dot").className = `h-2.5 w-2.5 rounded-full ${colors[1]}`;
+      document.getElementById("session-dot").className = `w-2 h-2 rounded-full ${colors[1]}`;
+      const heading = document.getElementById("data-status-label");
+      heading.className = colors[2];
+      heading.textContent = label;
+      document.getElementById("data-status-message").textContent = message;
+
+      const prediction = data?.forecast || data?.prediction || {};
+      let detail = prediction.source === "fallback" ? "No AI forecast was produced; neutral fallback shown." :
+        `Forecast source: ${prediction.source || "unknown"}${prediction.made_at ? `, ${formatIST(new Date(prediction.made_at))}` : ""}.`;
+      if (prediction.llm_error) detail += " Latest AI refresh reported an error.";
+      if (healthSnapshot?.as_of) {
+        const healthDate = new Date(healthSnapshot.as_of);
+        detail += ` Pipeline ${String(healthSnapshot.status || "unknown").toLowerCase()} as of ${formatIST(healthDate)}.`;
+      }
+      document.getElementById("data-status-detail").textContent = detail;
+    }
+
+    function renderTrackRecord() {
+      const o = performanceSnapshot?.overall;
+      document.getElementById("track-record").textContent = !o || !o.enough_data
+        ? `Track record: ${Number(o?.days) || 0} of 20 trading days collected. Treat forecasts as experimental.`
+        : `Last ${Number(o.days)} trading days: direction hit rate ${o.direction_hit_rate == null ? "--" : `${Math.round(o.direction_hit_rate * 100)}%`} on ${Number(o.directional_calls) || 0} calls; mean error ${o.mean_error_pct ?? "--"}% vs ${o.mean_flat_baseline_error_pct ?? "--"}% for a flat baseline.`;
+    }
+
+    async function refreshStatusData() {
+      try {
+        const [h, p] = await Promise.all(["health.json", "performance_summary.json"].map(async name => {
+          for (const base of [GITHUB_RAW_BASE, "./data_store"]) {
+            try { const r = await fetch(`${base}/${name}?cb=${Date.now()}`, { cache: "no-store" }); if (r.ok) return await r.json(); } catch (_) {}
+          }
+          return null;
+        }));
+        healthSnapshot = h; performanceSnapshot = p;
+        renderDataStatus(); renderTrackRecord();
+      } catch (_) {
+        renderTrackRecord();
+      }
+    }
 
     function renderWatchlistPills() {
       const container = document.getElementById("watchlist-pills");
@@ -181,14 +290,44 @@
     }
 
     async function loadStock(symbol) {
-      activeSymbol = symbol;
+      const requestedSymbol = String(symbol || "").trim().toUpperCase();
+      const requestToken = ++stockLoadToken;
+      const changedSymbol = requestedSymbol !== activeSymbol;
+      activeSymbol = requestedSymbol;
       renderWatchlistPills();
-      document.getElementById("active-symbol").innerText = symbol;
+      document.getElementById("active-symbol").textContent = requestedSymbol || "--";
+      if (changedSymbol) {
+        selectedStockData = null;
+        if (chartInstance) {
+          chartInstance.destroy();
+          chartInstance = null;
+        }
+        document.getElementById("ai-rationale").textContent = "Loading market snapshot…";
+        document.getElementById("bias-badge").textContent = "--";
+        document.getElementById("bias-badge").className = "px-3 py-0.5 rounded-full text-xs font-bold bg-slate-800 text-slate-300";
+        document.getElementById("volume-badge").textContent = "Vol: --";
+        document.getElementById("volume-badge").className = "px-2.5 py-0.5 rounded text-xs font-semibold bg-slate-800 text-slate-400";
+        document.getElementById("news-list").innerHTML = "";
+        const quantLine = document.getElementById("quant-line");
+        if (quantLine) quantLine.textContent = "";
+        document.getElementById("val-base").textContent = "--";
+        document.getElementById("val-target").textContent = "--";
+        document.getElementById("val-actual").textContent = "--";
+        document.getElementById("val-error").textContent = "--";
+        document.getElementById("meta-date").textContent = "--";
+        document.getElementById("meta-time").textContent = "--";
+      }
+      document.getElementById("data-status").className = "rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 space-y-1";
+      document.getElementById("data-status-dot").className = "h-2.5 w-2.5 rounded-full bg-slate-400";
+      document.getElementById("session-dot").className = "w-2 h-2 rounded-full bg-slate-400";
+      document.getElementById("data-status-label").textContent = "Checking snapshot";
+      document.getElementById("data-status-message").textContent = `Loading data for ${requestedSymbol}.`;
+      document.getElementById("data-status-detail").textContent = "";
 
       const cb = Date.now();
       const urlsToTry = [
-        `${GITHUB_RAW_BASE}/${symbol}_prediction.json?cb=${cb}`,
-        `./data_store/${symbol}_prediction.json?cb=${cb}`
+        `${GITHUB_RAW_BASE}/${encodeURIComponent(requestedSymbol)}_prediction.json?cb=${cb}`,
+        `./data_store/${encodeURIComponent(requestedSymbol)}_prediction.json?cb=${cb}`
       ];
 
       let data = null;
@@ -204,10 +343,30 @@
         }
       }
 
+      if (requestToken !== stockLoadToken) return;
       if (data && data.curves) {
-        document.getElementById("meta-date").innerText = data.curves.date || new Date().toISOString().split('T')[0];
-        document.getElementById("meta-time").innerText = data.curves.generated_at || "Just Now";
+        selectedStockData = data;
+        document.getElementById("meta-date").textContent = data.curves.date || "--";
+        document.getElementById("meta-time").textContent = data.curves.generated_at || "--";
         renderChartAndDetails(data.curves, data.prediction);
+        renderDataStatus(data);
+      } else if (selectedStockData) {
+        renderDataStatus(selectedStockData, `Refresh failed for ${requestedSymbol}. Showing the last snapshot loaded successfully.`);
+      } else {
+        selectedStockData = null;
+        if (chartInstance) {
+          chartInstance.destroy();
+          chartInstance = null;
+        }
+        document.getElementById("meta-date").textContent = "--";
+        document.getElementById("meta-time").textContent = "--";
+        document.getElementById("ai-rationale").textContent = `No published snapshot is available for ${requestedSymbol}.`;
+        document.getElementById("news-list").innerHTML = "";
+        document.getElementById("val-base").textContent = "--";
+        document.getElementById("val-target").textContent = "--";
+        document.getElementById("val-actual").textContent = "--";
+        document.getElementById("val-error").textContent = "--";
+        renderDataStatus(null, `Could not load a valid data snapshot for ${requestedSymbol}.`);
       }
     }
 
@@ -373,7 +532,7 @@
 
     async function loadAuditData() {
       const tbody = document.getElementById("audit-table-body");
-      tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-500">Loading evaluation matrix...</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-slate-500">Loading forecast outcomes…</td></tr>`;
       try {
         let data = null;
         for (const url of [`${GITHUB_RAW_BASE}/eod_evaluation.json?cb=${Date.now()}`, `./data_store/eod_evaluation.json?cb=${Date.now()}`]) {
@@ -382,78 +541,39 @@
             if (res.ok) { data = await res.json(); break; }
           } catch (_) { /* try next source */ }
         }
-        if (!data) throw new Error("audit data unavailable");
-        document.getElementById("audit-sync-time").innerText = `Last Refreshed: ${new Date().toLocaleTimeString()}`;
+        if (!Array.isArray(data)) throw new Error("audit data unavailable");
+        const sessionDates = [...new Set(data.map(item => item.session_date).filter(Boolean))];
+        document.getElementById("audit-sync-time").textContent = sessionDates.length
+          ? `Session date: ${sessionDates.join(", ")}`
+          : "No scored session data";
         tbody.innerHTML = data.map(item => 
           `<tr class="hover:bg-slate-900/50">
             <td class="p-2.5 font-bold text-white">${escapeHtml(item.symbol)}</td>
+            <td class="p-2.5">${escapeHtml(item.session_date || "--")}</td>
             <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] rounded font-semibold ${item.bias === 'BULLISH' ? 'bg-emerald-950 text-emerald-400' : item.bias === 'BEARISH' ? 'bg-rose-950 text-rose-400' : 'bg-slate-800 text-slate-300'}">${escapeHtml(item.bias)}</span></td>
-            <td class="p-2.5 font-mono">₹${item.final_pred}</td>
-            <td class="p-2.5 font-mono">₹${item.final_actual}</td>
-            <td class="p-2.5 font-mono">${item.error_pct != null ? item.error_pct + '%' : '--'}</td>
+            <td class="p-2.5 font-mono">${item.final_pred == null ? "--" : `₹${Number(item.final_pred).toFixed(2)}`}</td>
+            <td class="p-2.5 font-mono">${item.final_actual == null ? "--" : `₹${Number(item.final_actual).toFixed(2)}`}<span class="block text-[10px] text-slate-500">${item.verdict === "IN_PROGRESS" ? "Current mark" : item.final_actual == null ? "No observed price" : "Final close"}</span></td>
+            <td class="p-2.5 font-mono">${item.error_pct != null ? `${Number(item.error_pct).toFixed(2)}%` : '--'}</td>
             <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] rounded font-semibold ${item.verdict === 'SUCCESS' ? 'bg-emerald-900/50 text-emerald-300' : item.verdict === 'PARTIAL' ? 'bg-amber-900/50 text-amber-300' : item.verdict === 'FAILED' ? 'bg-rose-900/50 text-rose-300' : 'bg-slate-800 text-slate-300'}">${escapeHtml(item.verdict)}</span></td>
           </tr>`
         ).join('');
       } catch (e) {
-        tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-rose-400">Failed to load audit data. Ensure archive_once.py has run.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-rose-400">Forecast outcome data is unavailable.</td></tr>`;
+        document.getElementById("audit-sync-time").textContent = "Snapshot date unavailable";
       }
     }
 
     loadStock(activeSymbol);
+    refreshStatusData();
 
     setInterval(() => {
       loadStock(activeSymbol);
+      refreshStatusData();
       const auditTab = document.getElementById("view-audit");
       if (auditTab && !auditTab.classList.contains("hidden")) {
         loadAuditData();
       }
     }, 5 * 60 * 1000);
-  </script>
-<script>
-/* Status strip + honest track record + disclaimer. Reads health.json and performance_summary.json. */
-(function () {
-  const RAW_X = "https://raw.githubusercontent.com/flexuser/Intraday-Gemini/main/public/data_store";
-  const NEED_DAYS = 20;
-  async function getJsonX(name) {
-    for (const base of [RAW_X, "./data_store"]) {
-      try {
-        const r = await fetch(`${base}/${name}?cb=${Date.now()}`, { cache: "no-store" });
-        if (r.ok) return await r.json();
-      } catch (_) { /* try next source */ }
-    }
-    return null;
-  }
-  const pctX = v => (v == null ? "--" : `${Math.round(v * 100)}%`);
-  async function renderStatus() {
-    const [health, perf] = await Promise.all([getJsonX("health.json"), getJsonX("performance_summary.json")]);
-    const lines = [];
-    if (health && health.status && health.status !== "OK") {
-      const ageMin = (Date.now() - new Date(health.as_of).getTime()) / 60000;
-      if (ageMin < 30) {
-        lines.push(`<span class="text-amber-400 font-semibold">Pipeline ${escapeHtml(health.status.toLowerCase())}: ` +
-          `${Number(health.llm_fallback_count)} of ${Number(health.symbols_total)} forecasts are flat placeholders (no AI forecast).</span>`);
-      }
-    }
-    if (health && Number(health.llm_error_count) > 0) {
-      const ageMin2 = (Date.now() - new Date(health.as_of).getTime()) / 60000;
-      if (ageMin2 < 30) lines.push(`<span class="text-amber-400">AI refresh errors on ${Number(health.llm_error_count)} of ${Number(health.symbols_total)} symbols (quota?). Latest forecasts may be stale.</span>`);
-    }
-    const o = perf && perf.overall;
-    if (!o || !o.enough_data) {
-      lines.push(`Track record: still collecting data (${o ? Number(o.days) : 0} of ${NEED_DAYS} trading days). Treat every forecast as experimental.`);
-    } else {
-      const ci = o.direction_hit_ci95 ? ` (95% range ${pctX(o.direction_hit_ci95[0])}-${pctX(o.direction_hit_ci95[1])})` : "";
-      lines.push(`Last ${Number(o.days)} trading days: direction hit-rate ${pctX(o.direction_hit_rate)}${ci} on ` +
-        `${Number(o.directional_calls)} calls; mean error ${o.mean_error_pct}% vs ${o.mean_flat_baseline_error_pct}% for a flat "no change" guess.`);
-    }
-    document.body.insertAdjacentHTML("afterbegin",
-      `<div id="status-strip" class="text-xs text-slate-400 bg-slate-900 border-b border-slate-800 px-4 py-2 space-y-0.5">${lines.map(l => `<div>${l}</div>`).join("")}</div>`);
-  }
-  document.body.insertAdjacentHTML("beforeend",
-    `<footer id="disclaimer" class="text-[11px] text-slate-500 px-4 py-4 border-t border-slate-800">` +
-    `For research and education only. Not investment advice. Forecasts are experimental model output and can be wrong.</footer>`);
-  renderStatus().catch(() => {});
-})();
 </script>
 </body>
 </html>
