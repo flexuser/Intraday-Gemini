@@ -430,12 +430,12 @@
           ? ` | expected close range ${qs.expected_range_pct}% | 80% close band ${qs.band_lo_pct}% to +${qs.band_hi_pct}%`
           : " | close range not validated";
         quantLine.innerText = qs.bias === "NEUTRAL"
-          ? `${view}${rng} | no directional close target`
-          : `${view}${rng}`;
+          ? `${view}${rng} | dashed line is the open-price baseline`
+          : `${view}${rng} | dashed line marks the close target`;
       } else {
         quantLine.innerText = curves.bias === "NEUTRAL"
-          ? "No directional edge; no close target is plotted."
-          : "AI close target is unvalidated and shown as a marker, not a price path.";
+          ? "No directional edge; dashed line is the open-price baseline."
+          : "AI close target is unvalidated; dashed line marks its target level, not a price path.";
       }
 
       const ctx = document.getElementById('predictionChart').getContext('2d');
@@ -457,15 +457,13 @@
             },
             {
               type: 'line',
-              label: curves.bias === 'NEUTRAL' ? 'No directional edge' : curves.forecast_source === 'quant' ? `Model close target (${curves.opening_made_at || 'n/a'})` : `AI close target, unvalidated (${curves.opening_made_at || 'n/a'})`,
-              data: curves.bias !== 'NEUTRAL' && curves.final_pred != null
-                ? curves.timeframes.map((_, i, all) => i === all.length - 1 ? Number(curves.final_pred) : null)
-                : curves.timeframes.map(() => null),
+              label: curves.bias === 'NEUTRAL' ? 'No edge • open baseline' : curves.forecast_source === 'quant' ? `Model close target (${curves.opening_made_at || 'n/a'})` : `AI close target, unvalidated (${curves.opening_made_at || 'n/a'})`,
+              data: curves.timeframes.map(() => curves.final_pred == null ? null : Number(curves.final_pred)),
               borderColor: '#3b82f6',
-              showLine: false,
-              pointRadius: curves.bias !== 'NEUTRAL' && curves.final_pred != null ? 5 : 0,
-              pointHoverRadius: 7,
-              pointStyle: 'rectRot',
+              borderDash: [5, 5],
+              showLine: true,
+              pointRadius: 0,
+              tension: 0,
               yAxisID: 'y',
               order: 1,
               spanGaps: false
