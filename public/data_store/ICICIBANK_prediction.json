@@ -9,8 +9,8 @@
     "model": "gemini-3.8-flash",
     "llm_error": "skipped: Gemini quota cooldown until 15:25 IST",
     "made_at": "2026-10-07T09:20:31+05:30",
-    "volume_ratio": 2.28,
-    "has_volume_spike": true,
+    "volume_ratio": 1.57,
+    "has_volume_spike": false,
     "news_feed": []
   },
   "forecast": {
@@ -152,13 +152,13 @@
     "tradeable_validated": false
   },
   "technical_indicators": {
-    "vwap": 1348.95,
+    "vwap": 1349.08,
     "rsi_14": 56.1,
     "macd_hist": 0.0312,
-    "atr_14": 2.26,
-    "atr_pct": 0.17,
+    "atr_14": 2.38,
+    "atr_pct": 0.18,
     "bollinger_pct_b": 0.641,
-    "vwap_distance_pct": 0.46,
+    "vwap_distance_pct": 0.45,
     "technical_bias": "BULLISH"
   },
   "risk_execution_plan": {
@@ -182,7 +182,7 @@
   },
   "curves": {
     "date": "2026-10-07",
-    "generated_at": "03:10 PM IST",
+    "generated_at": "03:15 PM IST",
     "symbol": "ICICIBANK",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -735,7 +735,7 @@
       304911,
       268600,
       440553,
-      0,
+      305959,
       0,
       0,
       0
