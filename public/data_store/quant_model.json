@@ -1,84 +1,266 @@
 {
-  "version": "q1-20261006",
-  "trained_at": "2026-10-06T11:25:52+00:00",
-  "n_obs": 88516,
+  "version": "q2-20261007",
+  "trained_at": "2026-10-07T06:22:07+00:00",
+  "n_obs": 88518,
   "n_symbols": 36,
   "data_span": [
-    "2016-11-02",
-    "2026-10-06"
+    "2016-11-03",
+    "2026-10-07"
   ],
   "gates": {
     "direction": true,
     "range": false,
     "tradeable": true
   },
+  "symbol_gates": {
+    "ASIANPAINT.NS": {
+      "direction": true,
+      "tradeable": false,
+      "range": false
+    },
+    "AXISBANK.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    },
+    "BAJAJFINSV.NS": {
+      "direction": true,
+      "tradeable": true,
+      "range": false
+    },
+    "BAJFINANCE.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    },
+    "BHARTIARTL.NS": {
+      "direction": true,
+      "tradeable": true,
+      "range": false
+    },
+    "CIPLA.NS": {
+      "direction": true,
+      "tradeable": true,
+      "range": false
+    },
+    "COALINDIA.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    },
+    "DRREDDY.NS": {
+      "direction": true,
+      "tradeable": false,
+      "range": false
+    },
+    "EICHERMOT.NS": {
+      "direction": true,
+      "tradeable": true,
+      "range": false
+    },
+    "GRASIM.NS": {
+      "direction": true,
+      "tradeable": true,
+      "range": false
+    },
+    "HCLTECH.NS": {
+      "direction": true,
+      "tradeable": false,
+      "range": false
+    },
+    "HDFCBANK.NS": {
+      "direction": true,
+      "tradeable": false,
+      "range": false
+    },
+    "HINDALCO.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    },
+    "HINDUNILVR.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    },
+    "ICICIBANK.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    },
+    "INFY.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    },
+    "ITC.NS": {
+      "direction": true,
+      "tradeable": true,
+      "range": false
+    },
+    "JSWSTEEL.NS": {
+      "direction": true,
+      "tradeable": false,
+      "range": false
+    },
+    "KOTAKBANK.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    },
+    "LT.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    },
+    "MARUTI.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    },
+    "MUTHOOTFIN.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    },
+    "NESTLEIND.NS": {
+      "direction": true,
+      "tradeable": false,
+      "range": false
+    },
+    "NTPC.NS": {
+      "direction": true,
+      "tradeable": true,
+      "range": false
+    },
+    "ONGC.NS": {
+      "direction": true,
+      "tradeable": false,
+      "range": false
+    },
+    "POWERGRID.NS": {
+      "direction": true,
+      "tradeable": true,
+      "range": false
+    },
+    "RELIANCE.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    },
+    "SBIN.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    },
+    "SUNPHARMA.NS": {
+      "direction": true,
+      "tradeable": true,
+      "range": false
+    },
+    "TATASTEEL.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    },
+    "TCS.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    },
+    "TECHM.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    },
+    "TITAN.NS": {
+      "direction": true,
+      "tradeable": false,
+      "range": false
+    },
+    "TMPV.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    },
+    "ULTRACEMCO.NS": {
+      "direction": true,
+      "tradeable": false,
+      "range": false
+    },
+    "WIPRO.NS": {
+      "direction": false,
+      "tradeable": false,
+      "range": false
+    }
+  },
   "dir": {
     "mu": [
-      0.0791723750464595,
-      0.011179542690899704,
-      0.03294288032662354,
-      0.07815568377204397,
-      0.17306478985452625,
-      0.1344676645320595,
-      0.05365123399763438,
-      -0.014605388383017467
+      0.08066364621485606,
+      0.011171194370466264,
+      0.032929574824409384,
+      0.07837591465614732,
+      0.1729698911957929,
+      0.1374723378662242,
+      0.053837520703520735,
+      -0.014594698730380736
     ],
     "sd": [
-      0.5354660657688854,
-      0.42390095962371027,
-      1.0114479328984618,
-      1.0035785198333553,
-      1.0075349986893944,
-      0.6882484097008353,
-      1.0201909169153605,
-      0.27245865731252994
+      0.5290702799314758,
+      0.42336253558481035,
+      1.0114908474566564,
+      1.0033761611959464,
+      1.0075613593084813,
+      0.6698246437760216,
+      1.0204124723735772,
+      0.27248664591453536
     ],
     "w": [
-      -0.0726490624949173,
-      -0.03535012011726311,
-      -0.013953466421723487,
-      -0.004286350284239919,
-      0.001971817979528077,
-      0.02100476284863536,
-      0.004209785991085833,
-      -0.0029690940184806903
+      -0.05502240318880878,
+      -0.04715684564462597,
+      -0.013628405122473503,
+      -0.0033840418373428565,
+      0.0023744922527838253,
+      0.01455202246207866,
+      0.0028945044641114715,
+      -0.0035828402565742817
     ],
-    "b": -0.04473036425025569,
-    "resid_sd": 1.0117677805791636
+    "b": -0.04598271645758557,
+    "resid_sd": 1.010067822434089
   },
   "rng": {
     "mu": [
-      -3.8438848251109135,
-      -3.791369301112027,
-      -3.7692852056699087,
-      0.005386003224733736,
-      -4.677239684447526,
-      -4.620011602842553
+      -3.844043620690238,
+      -3.7915076419951648,
+      -3.7693646695358654,
+      0.0053865463874616555,
+      -4.677123143110776,
+      -4.619808290892036
     ],
     "sd": [
-      0.48776155083157796,
-      0.37195431425266845,
-      0.3138295675610317,
-      0.007433139956423297,
-      0.5082012889279586,
-      0.3900826317615718
+      0.4877034459399967,
+      0.3719589846197055,
+      0.3138665759921322,
+      0.0074336697073596235,
+      0.5081464959628137,
+      0.3900987474006101
     ],
     "w": [
-      0.07108486129954045,
-      0.08927351311951129,
-      0.11167623015871697,
-      0.103309996768654,
-      0.03746729188888007,
-      -0.013704992347968611
+      0.07111609418755996,
+      0.08920786035820957,
+      0.11186662868134536,
+      0.10323609621757564,
+      0.03755399838616494,
+      -0.01387583069887615
     ],
-    "b": -3.8442795246873938,
-    "smear": 1.0867982534077831,
-    "q_lo": -0.7766346310271235,
-    "q_hi": 0.7378398135808009
+    "b": -3.844485917788756,
+    "smear": 1.0868133542195038,
+    "q_lo": -0.7766591287511614,
+    "q_hi": 0.7378593022123534
   },
   "oos_summary": {
-    "direction_hit_rate": 0.5399,
-    "ic": 0.063,
-    "coverage_80": 0.8083
+    "direction_hit_rate": 0.5401,
+    "ic": 0.066,
+    "coverage_80": 0.8085
   }
 }
