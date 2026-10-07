@@ -8,9 +8,9 @@
     "source": "fallback",
     "model": "gemini-3.8-flash",
     "llm_error": "no new forecasts after 15:00 IST",
-    "made_at": "2026-10-07T15:15:40+05:30",
-    "volume_ratio": 3.05,
-    "has_volume_spike": true,
+    "made_at": "2026-10-07T15:20:45+05:30",
+    "volume_ratio": 0.0,
+    "has_volume_spike": false,
     "news_feed": []
   },
   "forecast": {
@@ -20,7 +20,7 @@
     "reasoning": "No AI commentary was available for this run.",
     "source": "fallback",
     "model": "gemini-3.8-flash",
-    "made_at": "2026-10-07T15:15:40+05:30",
+    "made_at": "2026-10-07T15:20:45+05:30",
     "llm_error": "no new forecasts after 15:00 IST",
     "prompt_version": "v3-context-risk"
   },
@@ -83,7 +83,7 @@
   },
   "curves": {
     "date": "2026-10-07",
-    "generated_at": "03:15 PM IST",
+    "generated_at": "03:20 PM IST",
     "symbol": "MUTHOOTFIN",
     "bias": "NEUTRAL",
     "timeframes": [
