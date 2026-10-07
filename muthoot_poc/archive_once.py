@@ -701,7 +701,6 @@ def process_symbol(symbol, now):
                 risk_plan=risk_plan,
             )
 
-        timeframes, actual, predicted, upper_curve, lower_curve, volume = build_curves(df, target_price, ctx)
         opening_curve = (opening.get("curve") or frozen_curve(opening["base_price"], opening["target_pct"])) \
             if opening else [None] * NUM_SLOTS
         forecast_source, band_up, band_lo = "llm_unvalidated", [None] * NUM_SLOTS, [None] * NUM_SLOTS
@@ -715,6 +714,8 @@ def process_symbol(symbol, now):
             opening_made_at = quant["made_at"][11:16]
             quant_summary = {k: quant.get(k) for k in ("bias", "p_up", "expected_range_pct", "band_lo_pct", "band_hi_pct",
                                                        "direction_validated", "range_validated", "model_version")}
+
+        timeframes, actual, predicted, upper_curve, lower_curve, volume = build_curves(df, display_target, ctx)
 
         complete = session_complete(df, now)
         score = score_session(opening, m["last_close"], log) if complete else \

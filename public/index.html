@@ -429,14 +429,24 @@
         const rng = qs.range_validated
           ? ` | expected close range ${qs.expected_range_pct}% | 80% close band ${qs.band_lo_pct}% to +${qs.band_hi_pct}%`
           : " | close range not validated";
-        quantLine.innerText = qs.bias === "NEUTRAL"
-          ? `${view}${rng} | dashed line is the open-price baseline`
-          : `${view}${rng} | dashed line marks the close target`;
+        quantLine.innerText = `${view}${rng} | dashed segment guides from the latest price to the close target; only the target is model output`;
       } else {
-        quantLine.innerText = curves.bias === "NEUTRAL"
-          ? "No directional edge; dashed line is the open-price baseline."
-          : "AI close target is unvalidated; dashed line marks its target level, not a price path.";
+        quantLine.innerText = "Dashed segment guides from the latest price to the unvalidated AI close target; it is not a five-minute model forecast.";
       }
+
+      const latestCurve = curves.latest_forecast_curve || [];
+      const lastActualIndex = curves.actual_curve.reduce((last, price, index) => price == null ? last : index, -1);
+      const lastIndex = curves.timeframes.length - 1;
+      const rawEndpoint = latestCurve[lastIndex];
+      const targetAdjustment = rawEndpoint == null || curves.final_pred == null
+        ? 0
+        : Number(curves.final_pred) - Number(rawEndpoint);
+      const projectionData = curves.timeframes.map((_, index) => {
+        const price = latestCurve[index];
+        if (lastActualIndex < 0 || index < lastActualIndex || price == null || !Number.isFinite(Number(price))) return null;
+        const progress = lastIndex > lastActualIndex ? (index - lastActualIndex) / (lastIndex - lastActualIndex) : 0;
+        return Number(price) + targetAdjustment * progress;
+      });
 
       const ctx = document.getElementById('predictionChart').getContext('2d');
       if (chartInstance) chartInstance.destroy();
@@ -457,10 +467,11 @@
             },
             {
               type: 'line',
-              label: curves.bias === 'NEUTRAL' ? 'No edge • open baseline' : curves.forecast_source === 'quant' ? `Model close target (${curves.opening_made_at || 'n/a'})` : `AI close target, unvalidated (${curves.opening_made_at || 'n/a'})`,
-              data: curves.timeframes.map(() => curves.final_pred == null ? null : Number(curves.final_pred)),
+              label: `Path guide to close target (${curves.generated_at || 'latest snapshot'})`,
+              data: projectionData,
               borderColor: '#3b82f6',
               borderDash: [5, 5],
+              borderWidth: 2,
               showLine: true,
               pointRadius: 0,
               tension: 0,
