@@ -2,122 +2,122 @@
   {
     "symbol": "MUTHOOTFIN",
     "bias": "NEUTRAL",
-    "final_pred": 2706.2,
-    "final_actual": 2686.0,
+    "final_pred": 2678.7,
+    "final_actual": 2678.699951171875,
     "error_pct": null,
     "verdict": "IN_PROGRESS",
     "baseline_error_pct": null,
     "direction_hit": null,
-    "session_date": "2026-10-06"
+    "session_date": "2026-10-07"
   },
   {
     "symbol": "RELIANCE",
     "bias": "NEUTRAL",
-    "final_pred": 1189.7,
-    "final_actual": 1215.0999755859375,
+    "final_pred": 1207.2,
+    "final_actual": 1207.199951171875,
     "error_pct": null,
     "verdict": "IN_PROGRESS",
     "baseline_error_pct": null,
     "direction_hit": null,
-    "session_date": "2026-10-06"
+    "session_date": "2026-10-07"
   },
   {
     "symbol": "TMPV",
     "bias": "NEUTRAL",
-    "final_pred": 288.95,
-    "final_actual": 285.70001220703125,
+    "final_pred": 283.1,
+    "final_actual": 283.1000061035156,
     "error_pct": null,
     "verdict": "IN_PROGRESS",
     "baseline_error_pct": null,
     "direction_hit": null,
-    "session_date": "2026-10-06"
+    "session_date": "2026-10-07"
   },
   {
     "symbol": "INFY",
     "bias": "NEUTRAL",
-    "final_pred": 1018.75,
-    "final_actual": 1006.4000244140625,
+    "final_pred": 1006.2,
+    "final_actual": 1006.2000122070312,
     "error_pct": null,
     "verdict": "IN_PROGRESS",
     "baseline_error_pct": null,
     "direction_hit": null,
-    "session_date": "2026-10-06"
+    "session_date": "2026-10-07"
   },
   {
     "symbol": "HDFCBANK",
     "bias": "NEUTRAL",
     "final_pred": 707.4,
-    "final_actual": 711.9000244140625,
+    "final_actual": 707.4000244140625,
     "error_pct": null,
     "verdict": "IN_PROGRESS",
     "baseline_error_pct": null,
     "direction_hit": null,
-    "session_date": "2026-10-06"
+    "session_date": "2026-10-07"
   },
   {
     "symbol": "ICICIBANK",
     "bias": "NEUTRAL",
-    "final_pred": 1330.5,
-    "final_actual": 1340.699951171875,
+    "final_pred": 1340.4,
+    "final_actual": 1340.4000244140625,
     "error_pct": null,
     "verdict": "IN_PROGRESS",
     "baseline_error_pct": null,
     "direction_hit": null,
-    "session_date": "2026-10-06"
+    "session_date": "2026-10-07"
   },
   {
     "symbol": "TCS",
     "bias": "NEUTRAL",
-    "final_pred": 2097.8,
-    "final_actual": 2086.699951171875,
+    "final_pred": 2085.0,
+    "final_actual": 2085.0,
     "error_pct": null,
     "verdict": "IN_PROGRESS",
     "baseline_error_pct": null,
     "direction_hit": null,
-    "session_date": "2026-10-06"
+    "session_date": "2026-10-07"
   },
   {
     "symbol": "SBIN",
     "bias": "NEUTRAL",
-    "final_pred": 962.5,
-    "final_actual": 954.2000122070312,
+    "final_pred": 952.6,
+    "final_actual": 952.5999755859375,
     "error_pct": null,
     "verdict": "IN_PROGRESS",
     "baseline_error_pct": null,
     "direction_hit": null,
-    "session_date": "2026-10-06"
+    "session_date": "2026-10-07"
   },
   {
     "symbol": "BHARTIARTL",
     "bias": "NEUTRAL",
-    "final_pred": 1779.0,
-    "final_actual": 1803.300048828125,
+    "final_pred": 1820.5,
+    "final_actual": 1820.5,
     "error_pct": null,
     "verdict": "IN_PROGRESS",
     "baseline_error_pct": null,
     "direction_hit": null,
-    "session_date": "2026-10-06"
+    "session_date": "2026-10-07"
   },
   {
     "symbol": "LT",
     "bias": "NEUTRAL",
-    "final_pred": 3744.0,
-    "final_actual": 3756.60009765625,
+    "final_pred": 3745.2,
+    "final_actual": 3745.199951171875,
     "error_pct": null,
     "verdict": "IN_PROGRESS",
     "baseline_error_pct": null,
     "direction_hit": null,
-    "session_date": "2026-10-06"
+    "session_date": "2026-10-07"
   },
   {
     "symbol": "SUNPHARMA",
     "bias": "NEUTRAL",
-    "final_pred": 1775.0,
-    "final_actual": 1792.4000244140625,
+    "final_pred": 1792.7,
+    "final_actual": 1792.699951171875,
     "error_pct": null,
     "verdict": "IN_PROGRESS",
     "baseline_error_pct": null,
     "direction_hit": null,
-    "session_date": "2026-10-06"
+    "session_date": "2026-10-07"
   }
 ]
