@@ -429,23 +429,19 @@
         const rng = qs.range_validated
           ? ` | expected close range ${qs.expected_range_pct}% | 80% close band ${qs.band_lo_pct}% to +${qs.band_hi_pct}%`
           : " | close range not validated";
-        quantLine.innerText = `${view}${rng} | dashed segment guides from the latest price to the close target; only the target is model output`;
+        quantLine.innerText = `${view}${rng} | dashed straight guide runs from the latest price to the close target; only the target is model output`;
       } else {
-        quantLine.innerText = "Dashed segment guides from the latest price to the unvalidated AI close target; it is not a five-minute model forecast.";
+        quantLine.innerText = "Dashed straight guide runs from the latest price to the unvalidated AI close target; only the target is an AI output.";
       }
 
-      const latestCurve = curves.latest_forecast_curve || [];
       const lastActualIndex = curves.actual_curve.reduce((last, price, index) => price == null ? last : index, -1);
       const lastIndex = curves.timeframes.length - 1;
-      const rawEndpoint = latestCurve[lastIndex];
-      const targetAdjustment = rawEndpoint == null || curves.final_pred == null
-        ? 0
-        : Number(curves.final_pred) - Number(rawEndpoint);
+      const currentPrice = lastActualIndex >= 0 ? Number(curves.actual_curve[lastActualIndex]) : null;
+      const targetPrice = curves.final_pred == null ? null : Number(curves.final_pred);
       const projectionData = curves.timeframes.map((_, index) => {
-        const price = latestCurve[index];
-        if (lastActualIndex < 0 || index < lastActualIndex || price == null || !Number.isFinite(Number(price))) return null;
+        if (lastActualIndex < 0 || index < lastActualIndex || !Number.isFinite(currentPrice) || !Number.isFinite(targetPrice)) return null;
         const progress = lastIndex > lastActualIndex ? (index - lastActualIndex) / (lastIndex - lastActualIndex) : 0;
-        return Number(price) + targetAdjustment * progress;
+        return currentPrice + (targetPrice - currentPrice) * progress;
       });
 
       const ctx = document.getElementById('predictionChart').getContext('2d');
@@ -467,7 +463,7 @@
             },
             {
               type: 'line',
-              label: `Path guide to close target (${curves.generated_at || 'latest snapshot'})`,
+              label: `Straight guide to close target (${curves.generated_at || 'latest snapshot'})`,
               data: projectionData,
               borderColor: '#3b82f6',
               borderDash: [5, 5],
