@@ -1,10 +1,10 @@
 {
-  "as_of": "2026-10-08T15:30:53+05:30",
-  "status": "DEGRADED",
+  "as_of": "2026-10-08T15:35:35+05:30",
+  "status": "FAILED",
   "symbols_total": 11,
-  "symbols_updated": 11,
-  "llm_fallback_count": 11,
-  "llm_error_count": 11,
+  "symbols_updated": 0,
+  "llm_fallback_count": 0,
+  "llm_error_count": 0,
   "llm_cooldown_until": null,
   "model": "gemini-3.8-flash",
   "prompt_version": "v3-context-risk",
@@ -17,7 +17,48 @@
       "tradeable": true
     }
   },
-  "sample_llm_error": "no new forecasts after 15:00 IST",
-  "errors": [],
-  "last_alert_at": "2026-10-08T14:35:35+05:30"
+  "sample_llm_error": null,
+  "errors": [
+    {
+      "symbol": "MUTHOOTFIN",
+      "error": "stale data: newest bar is 21 min old - files left untouched"
+    },
+    {
+      "symbol": "RELIANCE",
+      "error": "stale data: newest bar is 21 min old - files left untouched"
+    },
+    {
+      "symbol": "TMPV",
+      "error": "stale data: newest bar is 21 min old - files left untouched"
+    },
+    {
+      "symbol": "INFY",
+      "error": "stale data: newest bar is 21 min old - files left untouched"
+    },
+    {
+      "symbol": "HDFCBANK",
+      "error": "stale data: newest bar is 21 min old - files left untouched"
+    },
+    {
+      "symbol": "ICICIBANK",
+      "error": "stale data: newest bar is 21 min old - files left untouched"
+    },
+    {
+      "symbol": "TCS",
+      "error": "stale data: newest bar is 21 min old - files left untouched"
+    },
+    {
+      "symbol": "SBIN",
+      "error": "stale data: newest bar is 21 min old - files left untouched"
+    },
+    {
+      "symbol": "BHARTIARTL",
+      "error": "stale data: newest bar is 21 min old - files left untouched"
+    },
+    {
+      "symbol": "LT",
+      "error": "stale data: newest bar is 21 min old - files left untouched"
+    }
+  ],
+  "last_alert_at": "2026-10-08T15:35:35+05:30"
 }
