@@ -8,7 +8,7 @@
     "source": "fallback",
     "model": "gemini-3.8-flash",
     "llm_error": "no new forecasts after 15:00 IST",
-    "made_at": "2026-10-08T15:20:37+05:30",
+    "made_at": "2026-10-08T15:25:40+05:30",
     "volume_ratio": 2.53,
     "has_volume_spike": true,
     "news_feed": []
@@ -20,7 +20,7 @@
     "reasoning": "No AI commentary was available for this run.",
     "source": "fallback",
     "model": "gemini-3.8-flash",
-    "made_at": "2026-10-08T15:20:37+05:30",
+    "made_at": "2026-10-08T15:25:40+05:30",
     "llm_error": "no new forecasts after 15:00 IST",
     "prompt_version": "v3-context-risk"
   },
@@ -174,7 +174,7 @@
     "risk_reward_ratio": 0.0,
     "rejection_reason": "Direction model failed walk-forward edge test."
   },
-  "last_spike_alert_at": "2026-10-08T14:25:37+05:30",
+  "last_spike_alert_at": "2026-10-08T15:25:40+05:30",
   "context": {
     "prev_close": 2080.3,
     "prev_return_pct": -0.94,
@@ -182,7 +182,7 @@
   },
   "curves": {
     "date": "2026-10-08",
-    "generated_at": "03:20 PM IST",
+    "generated_at": "03:25 PM IST",
     "symbol": "TCS",
     "bias": "NEUTRAL",
     "timeframes": [
