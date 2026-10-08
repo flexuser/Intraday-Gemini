@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-10-08T09:20:43+05:30",
+  "as_of": "2026-10-08T09:25:55+05:30",
   "status": "DEGRADED",
   "symbols_total": 11,
   "symbols_updated": 11,
-  "llm_fallback_count": 8,
-  "llm_error_count": 8,
-  "llm_cooldown_until": "2026-10-08T15:20:43+05:30",
+  "llm_fallback_count": 11,
+  "llm_error_count": 11,
+  "llm_cooldown_until": "2026-10-08T15:25:55+05:30",
   "model": "gemini-3.8-flash",
   "prompt_version": "v3-context-risk",
   "quant_model": {
@@ -17,7 +17,7 @@
       "tradeable": true
     }
   },
-  "sample_llm_error": "ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}",
+  "sample_llm_error": "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev",
   "errors": [],
   "last_alert_at": "2026-10-08T09:15:44+05:30"
 }

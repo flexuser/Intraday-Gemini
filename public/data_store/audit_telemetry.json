@@ -27384,7 +27384,7 @@
     }
   },
   {
-    "timestamp": "2026-10-08T03:51:11.366259+00:00",
+    "timestamp": "2026-10-08T03:55:56.875999+00:00",
     "session_date": "2026-10-08",
     "symbol": "MUTHOOTFIN",
     "indicators": {
@@ -27423,13 +27423,13 @@
         "close_pos": -0.23
       }
     },
-    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock MUTHOOTFIN. Time now: 09:20 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 2645.00\n- Latest price: Rs 2637.00 (-0.30% since open)\n- Session VWAP: Rs 2638.63 (price is below VWAP)\n- Volume of the last completed 5-minute bar vs today's average ...",
+    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock MUTHOOTFIN. Time now: 09:25 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 2645.00\n- Latest price: Rs 2635.20 (-0.37% since open)\n- Session VWAP: Rs 2638.04 (price is below VWAP)\n- Volume of the last completed 5-minute bar vs today's average ...",
     "llm_raw_response": null,
     "risk_plan": {
       "symbol": "MUTHOOTFIN",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 2637.0,
+      "entry_price": 2635.2,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -27440,7 +27440,7 @@
     }
   },
   {
-    "timestamp": "2026-10-08T03:51:48.421275+00:00",
+    "timestamp": "2026-10-08T03:55:57.250903+00:00",
     "session_date": "2026-10-08",
     "symbol": "RELIANCE",
     "indicators": {
@@ -27479,13 +27479,13 @@
         "close_pos": -0.257
       }
     },
-    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock RELIANCE. Time now: 09:20 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 1207.70\n- Latest price: Rs 1204.10 (-0.30% since open)\n- Session VWAP: Rs 1205.04 (price is below VWAP)\n- Volume of the last completed 5-minute bar vs today's average ba...",
+    "llm_prompt_snippet": null,
     "llm_raw_response": null,
     "risk_plan": {
       "symbol": "RELIANCE",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 1204.1,
+      "entry_price": 1203.8,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -27496,7 +27496,7 @@
     }
   },
   {
-    "timestamp": "2026-10-08T03:52:15.482512+00:00",
+    "timestamp": "2026-10-08T03:55:57.837604+00:00",
     "session_date": "2026-10-08",
     "symbol": "TMPV",
     "indicators": {
@@ -27535,13 +27535,13 @@
         "close_pos": -0.124
       }
     },
-    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock TMPV. Time now: 09:20 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 283.50\n- Latest price: Rs 281.50 (-0.71% since open)\n- Session VWAP: Rs 281.86 (price is below VWAP)\n- Volume of the last completed 5-minute bar vs today's average bar: 1.0x...",
+    "llm_prompt_snippet": null,
     "llm_raw_response": null,
     "risk_plan": {
       "symbol": "TMPV",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 281.5,
+      "entry_price": 281.2,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -27552,7 +27552,7 @@
     }
   },
   {
-    "timestamp": "2026-10-08T03:52:44.894440+00:00",
+    "timestamp": "2026-10-08T03:55:58.536206+00:00",
     "session_date": "2026-10-08",
     "symbol": "INFY",
     "indicators": {
@@ -27591,13 +27591,13 @@
         "close_pos": -0.399
       }
     },
-    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock INFY. Time now: 09:20 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 996.75\n- Latest price: Rs 1008.85 (+1.21% since open)\n- Session VWAP: Rs 1005.97 (price is above VWAP)\n- Volume of the last completed 5-minute bar vs today's average bar: 1....",
+    "llm_prompt_snippet": null,
     "llm_raw_response": null,
     "risk_plan": {
       "symbol": "INFY",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 1008.85,
+      "entry_price": 1005.0,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -27608,7 +27608,7 @@
     }
   },
   {
-    "timestamp": "2026-10-08T03:54:12.671379+00:00",
+    "timestamp": "2026-10-08T03:55:59.145288+00:00",
     "session_date": "2026-10-08",
     "symbol": "HDFCBANK",
     "indicators": {
@@ -27647,13 +27647,13 @@
         "close_pos": -0.387
       }
     },
-    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock HDFCBANK. Time now: 09:20 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 704.90\n- Latest price: Rs 701.50 (-0.48% since open)\n- Session VWAP: Rs 702.44 (price is below VWAP)\n- Volume of the last completed 5-minute bar vs today's average bar: ...",
+    "llm_prompt_snippet": null,
     "llm_raw_response": null,
     "risk_plan": {
       "symbol": "HDFCBANK",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 701.5,
+      "entry_price": 699.6,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -27664,7 +27664,7 @@
     }
   },
   {
-    "timestamp": "2026-10-08T03:54:25.359217+00:00",
+    "timestamp": "2026-10-08T03:55:59.790384+00:00",
     "session_date": "2026-10-08",
     "symbol": "ICICIBANK",
     "indicators": {
@@ -27703,13 +27703,13 @@
         "close_pos": 0.417
       }
     },
-    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock ICICIBANK. Time now: 09:20 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 1349.50\n- Latest price: Rs 1352.60 (+0.23% since open)\n- Session VWAP: Rs 1347.31 (price is above VWAP)\n- Volume of the last completed 5-minute bar vs today's average b...",
-    "llm_raw_response": "{\n  \"bias\": \"NEUTRAL\",\n  \"target_pct\": 0.35,\n  \"archetype\": \"MEAN_REVERSION\",\n  \"reasoning\": \"ICICIBANK is holding above its session VWAP of Rs 1347.31 following a -0.59% gap down, signaling an attempt to fill the opening gap. Neutral RSI of 50.0 and standard 1.0x volume suggest limited directional momentum within the typical 1.47% daily range.\"\n}",
+    "llm_prompt_snippet": null,
+    "llm_raw_response": null,
     "risk_plan": {
       "symbol": "ICICIBANK",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 1352.6,
+      "entry_price": 1350.4,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -27720,7 +27720,7 @@
     }
   },
   {
-    "timestamp": "2026-10-08T03:54:38.089148+00:00",
+    "timestamp": "2026-10-08T03:56:00.458961+00:00",
     "session_date": "2026-10-08",
     "symbol": "TCS",
     "indicators": {
@@ -27759,13 +27759,13 @@
         "close_pos": -0.352
       }
     },
-    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock TCS. Time now: 09:20 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 2101.80\n- Latest price: Rs 2133.80 (+1.52% since open)\n- Session VWAP: Rs 2128.14 (price is above VWAP)\n- Volume of the last completed 5-minute bar vs today's average bar: 1....",
-    "llm_raw_response": "{\n  \"bias\": \"BULLISH\",\n  \"target_pct\": 1.2,\n  \"archetype\": \"MOMENTUM_BREAKOUT\",\n  \"reasoning\": \"TCS opened with a +1.03% gap and extended gains to Rs 2133.80 (+1.52% above open), holding above the session VWAP of Rs 2128.14. Given the typical 1.79% full-day range, momentum should sustain positive gains through the close despite slight consolidation.\"\n}",
+    "llm_prompt_snippet": null,
+    "llm_raw_response": null,
     "risk_plan": {
       "symbol": "TCS",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 2133.8,
+      "entry_price": 2133.0,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -27776,7 +27776,7 @@
     }
   },
   {
-    "timestamp": "2026-10-08T03:55:15.699020+00:00",
+    "timestamp": "2026-10-08T03:56:00.842769+00:00",
     "session_date": "2026-10-08",
     "symbol": "SBIN",
     "indicators": {
@@ -27815,13 +27815,13 @@
         "close_pos": -0.088
       }
     },
-    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock SBIN. Time now: 09:20 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 952.80\n- Latest price: Rs 949.10 (-0.39% since open)\n- Session VWAP: Rs 948.97 (price is above VWAP)\n- Volume of the last completed 5-minute bar vs today's average bar: 1.0x...",
+    "llm_prompt_snippet": null,
     "llm_raw_response": null,
     "risk_plan": {
       "symbol": "SBIN",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 949.1,
+      "entry_price": 947.75,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -27832,7 +27832,7 @@
     }
   },
   {
-    "timestamp": "2026-10-08T03:55:23.471074+00:00",
+    "timestamp": "2026-10-08T03:56:01.243256+00:00",
     "session_date": "2026-10-08",
     "symbol": "BHARTIARTL",
     "indicators": {
@@ -27871,13 +27871,13 @@
         "close_pos": 0.029
       }
     },
-    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock BHARTIARTL. Time now: 09:20 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 1836.30\n- Latest price: Rs 1833.20 (-0.17% since open)\n- Session VWAP: Rs 1835.88 (price is below VWAP)\n- Volume of the last completed 5-minute bar vs today's average ...",
-    "llm_raw_response": "{\"bias\":\"NEUTRAL\",\"target_pct\":0.0,\"archetype\":\"RANGE_BOUND\",\"reasoning\":\"BHARTIARTL opened with a flat +0.13% gap and is trading just below VWAP at Rs 1833.20 with an RSI of 50.0. With volume tracking at 1.0x and no directional edge, price action is expected to remain range-bound near the open.\"}",
+    "llm_prompt_snippet": null,
+    "llm_raw_response": null,
     "risk_plan": {
       "symbol": "BHARTIARTL",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 1833.2,
+      "entry_price": 1834.9,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -27888,7 +27888,7 @@
     }
   },
   {
-    "timestamp": "2026-10-08T03:55:24.602513+00:00",
+    "timestamp": "2026-10-08T03:56:01.567373+00:00",
     "session_date": "2026-10-08",
     "symbol": "LT",
     "indicators": {
@@ -27927,13 +27927,13 @@
         "close_pos": -0.27
       }
     },
-    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock LT. Time now: 09:20 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 3698.00\n- Latest price: Rs 3673.30 (-0.67% since open)\n- Session VWAP: Rs 3679.24 (price is below VWAP)\n- Volume of the last completed 5-minute bar vs today's average bar: 1.0...",
+    "llm_prompt_snippet": null,
     "llm_raw_response": null,
     "risk_plan": {
       "symbol": "LT",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 3673.3,
+      "entry_price": 3671.3,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -27944,7 +27944,7 @@
     }
   },
   {
-    "timestamp": "2026-10-08T03:55:24.973620+00:00",
+    "timestamp": "2026-10-08T03:56:01.946730+00:00",
     "session_date": "2026-10-08",
     "symbol": "SUNPHARMA",
     "indicators": {
@@ -27989,7 +27989,7 @@
       "symbol": "SUNPHARMA",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 1788.2,
+      "entry_price": 1788.3,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
