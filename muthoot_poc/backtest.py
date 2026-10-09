@@ -71,7 +71,7 @@ def download_daily(tickers, period="10y"):
     return out
 
 
-def make_synthetic(n_days=1500, n_sym=8, beta=0.0, seed=1):
+def make_synthetic(n_days=1500, n_sym=8, beta=0.0, seed=1, drift=0.0):
     """Simulated market: clustering volatility, a shared market factor, optional planted gap-reversal edge (beta)."""
     rng = np.random.default_rng(seed)
     dates = pd.bdate_range("2016-01-01", periods=n_days)
@@ -87,7 +87,7 @@ def make_synthetic(n_days=1500, n_sym=8, beta=0.0, seed=1):
             gz = f_gap[t] if is_index else 0.5 * f_gap[t] + 0.87 * rng.standard_normal()
             noise = f_oc[t] if is_index else 0.5 * f_oc[t] + 0.87 * rng.standard_normal()
             o = close * math.exp(0.6 * sig[t] * gz)
-            c = o * math.exp(sig[t] * (-own_beta * gz + noise))
+            c = o * math.exp(sig[t] * (-own_beta * gz + noise + (0.0 if is_index else drift)))
             hi = max(o, c) * math.exp(0.5 * sig[t] * abs(rng.standard_normal()))
             lo = min(o, c) * math.exp(-0.5 * sig[t] * abs(rng.standard_normal()))
             rows.append((o, hi, lo, c))
@@ -144,10 +144,13 @@ def evaluate(oos, cost_bps=6.0, n_boot=500, seed=0):
     x, y = oos["mu_z"].values, oos["z_oc"].clip(-qm.CLIP, qm.CLIP).values
     hit = (d == np.sign(r)).astype(float)
     net = d * r * 1e4 - cost_bps                              # bps per trade if you traded the sign every time
+    hit_long = (r > 0).astype(float)                          # ALWAYS-LONG baseline: captures pure drift / survivorship
+    net_long = r * 1e4 - cost_bps
     inband = ((r >= oos["lo"].values) & (r <= oos["hi"].values)).astype(float)
 
     T = pd.DataFrame({"one": 1.0, "x": x, "y": y, "xy": x * y, "xx": x * x, "yy": y * y,
-                      "hit": hit, "net": net, "inband": inband})
+                      "hit": hit, "net": net, "inband": inband,
+                      "dhit": hit - hit_long, "dnet": net - net_long})
     per = T.groupby(oos["date"].values).sum()                 # one row per trading day -> block bootstrap
     S, c = per.values, {k: i for i, k in enumerate(per.columns)}
     brng = np.random.default_rng(seed)
@@ -162,13 +165,18 @@ def evaluate(oos, cost_bps=6.0, n_boot=500, seed=0):
     ic_ci = ci(lambda s: _corr(s, c))
     hit_ci = ci(lambda s: s[c["hit"]] / s[c["one"]])
     net_ci = ci(lambda s: s[c["net"]] / s[c["one"]])
+    dhit_ci = ci(lambda s: s[c["dhit"]] / s[c["one"]])        # model minus always-long, paired by day
+    dnet_ci = ci(lambda s: s[c["dnet"]] / s[c["one"]])
     cov_ci = ci(lambda s: s[c["inband"]] / s[c["one"]])
 
     mae_model, mae_flat = float(np.mean(np.abs(r - mu_ret)) * 1e4), float(np.mean(np.abs(r)) * 1e4)
     thr = np.quantile(np.abs(oos["mu_z"].values), 0.8)
     top = np.abs(oos["mu_z"].values) >= thr
-    log_model = float(np.mean(np.abs(oos["y_range"].values - oos["range_log"].values)))
-    log_naive = float(np.mean(np.abs(oos["y_range"].values - oos["lr5"].values)))
+    # Real data has zero-range days (halts / bad bars) -> log(0) = NaN. Score on finite rows only; a NaN here silently
+    # failed the range gate in the first real run.
+    ok = np.isfinite(oos["y_range"].values) & np.isfinite(oos["range_log"].values) & np.isfinite(oos["lr5"].values)
+    log_model = float(np.mean(np.abs(oos["y_range"].values[ok] - oos["range_log"].values[ok])))
+    log_naive = float(np.mean(np.abs(oos["y_range"].values[ok] - oos["lr5"].values[ok])))
 
     by_symbol = {}
     for sym_index, (sym, g) in enumerate(oos.groupby("symbol")):
@@ -219,8 +227,15 @@ def evaluate(oos, cost_bps=6.0, n_boot=500, seed=0):
                  "top_quintile": {"hit_rate": round(float(hit[top].mean()), 4), "mean_net_bps": round(float(net[top].mean()), 2)},
                  "baseline_hit_rates": {"momentum": round(float(np.mean(np.sign(oos["ret1_z"]) == np.sign(r))), 4),
                                         "gap_fade": round(float(np.mean(-np.sign(oos["gap_z"]) == np.sign(r))), 4)}}
-    direction["passes_gate"] = bool(ic_ci[0] > 0 and hit_ci[0] > 0.5 and mae_model <= mae_flat)
-    direction["tradeable_after_costs"] = bool(net_ci[0] > 0)
+    direction["baseline_hit_rates"]["always_long"] = round(float(hit_long.mean()), 4)
+    direction["always_long_net_bps"] = round(float(net_long.mean()), 2)
+    direction["hit_vs_always_long"] = round(float(np.mean(hit - hit_long)), 4)
+    direction["hit_vs_always_long_ci95"] = dhit_ci
+    direction["net_vs_always_long_bps"] = round(float(np.mean(net - net_long)), 2)
+    direction["net_vs_always_long_ci95"] = dnet_ci
+    # The model must beat "just be long" - otherwise a drifting / survivorship-biased universe passes on drift alone.
+    direction["passes_gate"] = bool(ic_ci[0] > 0 and hit_ci[0] > 0.5 and dhit_ci[0] > 0 and mae_model <= mae_flat)
+    direction["tradeable_after_costs"] = bool(net_ci[0] > 0 and dnet_ci[0] > 0)
     rng_ = {"coverage_80": round(float(cov), 4), "coverage_ci95": cov_ci,
             "mae_logrange_model": round(log_model, 4), "mae_logrange_naive_5d_mean": round(log_naive, 4)}
     rng_["passes_gate"] = bool(abs(cov - 0.8) <= 0.04 and log_model < log_naive)
@@ -253,6 +268,7 @@ def run(daily, idx, cost_bps=6.0, n_boot=500, init_days=504, step=21):
                                "Per-symbol intervals are not adjusted for screening across the full universe.",
                                "Results are for open->close moves on liquid large caps; they say nothing about other horizons.",
                                "Costs are a flat per-trade assumption; real slippage can be higher.",
+                               "The universe is today's large caps (survivorship bias) - that is why the model must also beat an always-long baseline.",
                                "A passed gate is evidence, not a guarantee: re-check every month."]})
     return report, model
 
@@ -278,7 +294,8 @@ def summary_text(report):
              "", "DIRECTION (open -> close)",
              f"  hit-rate {_fmt(d['hit_rate'], '.1%')}  (95% range {hit_ci0} - {hit_ci1})   coin flip = 50%",
              f"  IC       {_fmt(d['ic'], '+.3f')}  (95% range {ic_ci0} to {ic_ci1})",
-             f"  baselines: momentum {_fmt(d['baseline_hit_rates']['momentum'], '.1%')}, gap-fade {_fmt(d['baseline_hit_rates']['gap_fade'], '.1%')}",
+             f"  baselines: momentum {_fmt(d['baseline_hit_rates']['momentum'], '.1%')}, gap-fade {_fmt(d['baseline_hit_rates']['gap_fade'], '.1%')}, always-long {_fmt(d['baseline_hit_rates'].get('always_long'), '.1%')}",
+             f"  vs always-long: {_fmt(d.get('hit_vs_always_long'), '+.2%')} hit-rate (95% range {_fmt((d.get('hit_vs_always_long_ci95') or [None, None])[0], '+.2%')} to {_fmt((d.get('hit_vs_always_long_ci95') or [None, None])[1], '+.2%')})",
              f"  net per trade after {_fmt(report['cost_bps_assumed'], '.0f')} bps cost: {_fmt(d['mean_net_bps_per_trade'], '+.1f')} bps "
              f"(95% range {net_ci0} to {net_ci1})",
              f"  GATE: {'PASSED - directional forecasts will be published' if d['passes_gate'] else 'NOT PASSED - no directional forecast will be shown'}"
@@ -293,6 +310,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--synthetic", action="store_true", help="offline dry run on simulated data")
     ap.add_argument("--beta", type=float, default=0.0, help="(synthetic) planted gap-reversal strength")
+    ap.add_argument("--drift", type=float, default=0.0, help="(synthetic) open->close drift in volatility units, no skill")
     ap.add_argument("--period", default="10y")
     ap.add_argument("--cost-bps", type=float, default=6.0)
     ap.add_argument("--boot", type=int, default=500)
@@ -300,7 +318,7 @@ def main(argv=None):
     a = ap.parse_args(argv)
 
     if a.synthetic:
-        daily, idx = make_synthetic(beta=a.beta)
+        daily, idx = make_synthetic(beta=a.beta, drift=a.drift)
     else:
         idx_all = download_daily([INDEX_TICKER], a.period)
         if INDEX_TICKER not in idx_all:

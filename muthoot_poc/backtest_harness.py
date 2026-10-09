@@ -140,6 +140,7 @@ def fetch_data():
             ndf["regime_bullish"] = ndf["close"] > ndf["ema20"]
             data["NIFTY"] = ndf
 
+        data = {k: v for k, v in data.items() if len(v) >= 200}     # Yahoo returns all-NaN columns for tickers it fails on
         missing = [s for s in SYMBOLS if s not in data]
         if "NIFTY" not in data or len(missing) > 2:
             raise ValueError(f"Insufficient data from yfinance (missing: {missing}, index present: {'NIFTY' in data})")

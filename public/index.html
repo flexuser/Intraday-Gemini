@@ -113,7 +113,7 @@
               <p id="ai-rationale" class="text-slate-300 leading-relaxed">Loading intelligence snapshot...</p>
               
               <div id="news-container" class="pt-2 border-t border-slate-800/80 space-y-1.5">
-                <span class="text-slate-400 font-semibold block text-[11px]">Corporate & Government Catalysts:</span>
+                <span class="text-slate-400 font-semibold block text-[11px]">Recent Stock News (Yahoo Finance):</span>
                 <ul id="news-list" class="space-y-1 text-slate-300"></ul>
               </div>
             </div>
@@ -124,8 +124,12 @@
                 <li class="flex justify-between border-b border-slate-900 pb-1"><span>First 5m Bar Close:</span> <span id="val-base" class="font-mono text-white">--</span></li>
                 <li class="flex justify-between border-b border-slate-900 pb-1"><span id="target-label">Close Target (15:30):</span> <span id="val-target" class="font-mono text-white">--</span></li>
                 <li class="flex justify-between border-b border-slate-900 pb-1"><span>Latest Observed Price:</span> <span id="val-actual" class="font-mono text-white">--</span></li>
-                <li class="flex justify-between"><span>Variance / Error:</span> <span id="val-error" class="font-mono text-white">--</span></li>
+                <li class="flex justify-between"><span id="error-label">Live Gap to Estimate:</span> <span id="val-error" class="font-mono text-white">--</span></li>
               </ul>
+              <div class="pt-2 border-t border-slate-800/80">
+                <span class="text-slate-400 font-semibold block text-[11px]">15 / 30 / 60 MINUTE MODEL</span>
+                <p id="intraday-forecast" class="text-slate-500 text-[11px] mt-1">Loading model status…</p>
+              </div>
             </div>
           </div>
         </div>
@@ -314,6 +318,7 @@
         document.getElementById("val-target").textContent = "--";
         document.getElementById("val-actual").textContent = "--";
         document.getElementById("val-error").textContent = "--";
+        document.getElementById("intraday-forecast").textContent = "Loading model status…";
         document.getElementById("meta-date").textContent = "--";
         document.getElementById("meta-time").textContent = "--";
       }
@@ -348,7 +353,7 @@
         selectedStockData = data;
         document.getElementById("meta-date").textContent = data.curves.date || "--";
         document.getElementById("meta-time").textContent = data.curves.generated_at || "--";
-        renderChartAndDetails(data.curves, data.prediction);
+        renderChartAndDetails(data.curves, data.prediction, data.intraday_forecast, data.intraday_evidence);
         renderDataStatus(data);
       } else if (selectedStockData) {
         renderDataStatus(selectedStockData, `Refresh failed for ${requestedSymbol}. Showing the last snapshot loaded successfully.`);
@@ -366,6 +371,7 @@
         document.getElementById("val-target").textContent = "--";
         document.getElementById("val-actual").textContent = "--";
         document.getElementById("val-error").textContent = "--";
+        document.getElementById("intraday-forecast").textContent = "No model status is available.";
         renderDataStatus(null, `Could not load a valid data snapshot for ${requestedSymbol}.`);
       }
     }
@@ -375,7 +381,7 @@
       if (input) loadStock(input);
     }
 
-    function renderChartAndDetails(curves, prediction) {
+    function renderChartAndDetails(curves, prediction, intradayForecast, intradayEvidence) {
       const biasBadge = document.getElementById("bias-badge");
       const volumeBadge = document.getElementById("volume-badge");
       const bias = curves.bias || "NEUTRAL";
@@ -407,7 +413,7 @@
           </li>`
         ).join('');
       } else {
-        newsList.innerHTML = `<li class="text-slate-500 italic">No direct catalysts reported.</li>`;
+        newsList.innerHTML = `<li class="text-slate-500 italic">No recent headlines returned. Corporate-event data is not connected.</li>`;
       }
 
       const validActuals = curves.actual_curve ? curves.actual_curve.filter(v => v !== null) : [];
@@ -424,7 +430,46 @@
         ? "--"
         : (hasForecastTarget || qs ? `₹${curves.final_pred}` : "--");
       document.getElementById("val-actual").innerText = validActuals.length > 0 ? `₹${validActuals[validActuals.length - 1]}` : "--";
-      document.getElementById("val-error").innerText = curves.error_pct != null ? `${curves.error_pct}%` : "--";
+      const errorLabel = document.getElementById("error-label");
+      const errorValue = document.getElementById("val-error");
+      if (curves.error_pct != null) {
+        errorLabel.textContent = "Final Forecast Error:";
+        errorValue.textContent = `${curves.error_pct}%`;
+      } else if (hasForecastTarget && validActuals.length > 0 && Number.isFinite(Number(curves.final_pred))) {
+        const liveGap = Number(curves.final_pred) - Number(validActuals[validActuals.length - 1]);
+        const liveGapPct = liveGap / Number(validActuals[validActuals.length - 1]) * 100;
+        errorLabel.textContent = "Live Gap to Estimate:";
+        errorValue.textContent = `${liveGap >= 0 ? "+" : "−"}₹${Math.abs(liveGap).toFixed(2)} (${liveGapPct >= 0 ? "+" : "−"}${Math.abs(liveGapPct).toFixed(2)}%)`;
+      } else {
+        errorLabel.textContent = "Forecast Error:";
+        errorValue.textContent = "--";
+      }
+
+      const intradayEl = document.getElementById("intraday-forecast");
+      const horizonForecasts = intradayForecast?.forecasts || {};
+      if (intradayForecast?.status === "collecting") {
+        intradayEl.className = "text-slate-500 text-[11px] mt-1";
+        const current = intradayForecast.sessions_available || 0;
+        const minimum = intradayForecast.minimum_sessions || 40;
+        intradayEl.textContent = `Collecting scored five-minute observations: ${current}/${minimum} sessions. No intraday forecast is published until the evidence threshold is met.`;
+      } else if (Object.keys(horizonForecasts).length) {
+        intradayEl.className = "text-slate-300 text-[11px] mt-1 leading-relaxed";
+        intradayEl.innerHTML = Object.entries(horizonForecasts)
+          .sort(([left], [right]) => Number(left) - Number(right))
+          .map(([minutes, item]) => {
+            const status = item.status === "validated" ? "validated" : "shadow only";
+            const colour = item.status === "validated" ? "text-emerald-400" : "text-amber-400";
+            const sign = Number(item.expected_return_pct) >= 0 ? "+" : "";
+            const evidence = intradayEvidence?.[minutes];
+            const proof = evidence && Number.isFinite(Number(evidence.hit_rate))
+              ? ` · OOS ${Number(evidence.n_days)}d, hit ${(Number(evidence.hit_rate) * 100).toFixed(0)}%, MAE ${Number(evidence.mae_model_pct).toFixed(2)}% vs ${Number(evidence.mae_flat_pct).toFixed(2)}%`
+              : "";
+            return `<span class="block"><strong>${minutes}m:</strong> ${sign}${Number(item.expected_return_pct).toFixed(2)}% → ₹${Number(item.target_price).toFixed(2)} · range ${Number(item.band_low_pct).toFixed(2)}% to ${Number(item.band_high_pct).toFixed(2)}% · <span class="${colour}">${status}</span>${proof}</span>`;
+          }).join("");
+      } else {
+        intradayEl.className = "text-slate-500 text-[11px] mt-1";
+        intradayEl.textContent = intradayForecast?.reason || "No five-minute model forecast is available for this snapshot.";
+      }
 
       let quantLine = document.getElementById("quant-line");
       if (!quantLine) {

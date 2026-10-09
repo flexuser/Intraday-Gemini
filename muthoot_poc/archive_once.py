@@ -27,6 +27,8 @@ import pytz
 import requests
 import yfinance as yf
 from muthoot_poc import quant_model as qm
+from muthoot_poc import intraday_observations as io
+from muthoot_poc import intraday_model as im
 from scipy.interpolate import PchipInterpolator
 from google import genai
 from google.genai import types
@@ -64,12 +66,15 @@ SYMBOLS = ["MUTHOOTFIN", "RELIANCE", "TMPV", "INFY", "HDFCBANK", "ICICIBANK",
            "TCS", "SBIN", "BHARTIARTL", "LT", "SUNPHARMA"]
 
 DATA_DIR = os.getenv("DATA_DIR", "public/data_store")
+INTRADAY_HISTORY_PATH = os.path.join(DATA_DIR, "intraday_training_history.json")
 MODEL = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
 REFRESH_MINUTES = int(os.getenv("FORECAST_REFRESH_MINUTES", "120"))
 LLM_COOLDOWN_MIN = int(os.getenv("LLM_COOLDOWN_MIN", "5"))
 SPIKE_ALERT_COOLDOWN_MIN = 60
 LLM_BLOCKED_UNTIL = None                # set after a hard 429 quota block
 QUANT = None                            # trained quant model (python -m muthoot_poc.backtest), loaded in main()
+INTRADAY_MODEL = None                   # five-minute 15/30/60-minute model, trained from scored observations
+INTRADAY_REPORT = {}                    # latest evidence and collection progress for the dashboard
 _INDEX_LOCK = threading.Lock()
 _INDEX_CACHE = {}
 RETRIES = 3
@@ -174,6 +179,25 @@ def load_quant():
         print("[quant] quant_model.json not found - run `python -m muthoot_poc.backtest`. Forecasts stay 'unvalidated'.")
     else:
         print(f"[quant] model {QUANT.get('version')} loaded; gates={QUANT.get('gates')}")
+
+
+def load_intraday_model():
+    global INTRADAY_MODEL, INTRADAY_REPORT
+    candidate = read_json(os.path.join(DATA_DIR, "intraday_model.json"), {})
+    INTRADAY_REPORT = read_json(os.path.join(DATA_DIR, "intraday_backtest_report.json"), {})
+    INTRADAY_MODEL = candidate if candidate.get("horizons") else None
+    if INTRADAY_MODEL:
+        print(f"[intraday] model {INTRADAY_MODEL.get('version')} loaded")
+
+
+def intraday_evidence_for(symbol):
+    """Return only the validation metrics relevant to the displayed stock."""
+    evidence = {}
+    for horizon, payload in (INTRADAY_REPORT.get("horizons") or {}).items():
+        metrics = (payload.get("by_symbol") or {}).get(symbol)
+        if metrics:
+            evidence[horizon] = metrics
+    return evidence
 
 
 def fetch_daily_ohlc(ticker):
@@ -636,6 +660,25 @@ def process_symbol(symbol, now):
             quant = compute_quant(symbol, ticker, m, now)      # computed once at the open, then frozen for the day
         quant = apply_quant_gates(quant, ticker)
 
+        intraday_observations = io.update_outcomes(existing.get("intraday_observations") or [], df)
+        current_observation = io.capture(symbol, df, tech_snapshot or {}, m)
+        if now.time() < SESSION_CLOSE:
+            intraday_observations = io.upsert_observation(
+                intraday_observations,
+                current_observation,
+            )
+            intraday_observations = io.update_outcomes(intraday_observations, df)
+        intraday_forecast = im.predict(INTRADAY_MODEL, current_observation) if INTRADAY_MODEL else {
+            "status": INTRADAY_REPORT.get("status", "collecting"),
+            "forecasts": {},
+            "reason": INTRADAY_REPORT.get("reason"),
+        }
+        intraday_forecast["sessions_available"] = (
+            INTRADAY_MODEL.get("sessions") if INTRADAY_MODEL else INTRADAY_REPORT.get("sessions_available", 0)
+        )
+        intraday_forecast["minimum_sessions"] = im.MIN_HISTORY_SESSIONS
+        intraday_evidence = intraday_evidence_for(symbol)
+
         last_spike = existing.get("last_spike_alert_at")
         if m["vol_ratio"] >= 2.5 and now.time() >= datetime.time(9, 45) and \
                 (not last_spike or _age_minutes(last_spike, now) >= SPIKE_ALERT_COOLDOWN_MIN):
@@ -753,6 +796,10 @@ def process_symbol(symbol, now):
             {"verdict": "IN_PROGRESS", "error_pct": None, "baseline_error_pct": None,
              "direction_hit": None, "baselines": {}}
         score = dict(score, quant=score_quant(quant, m["last_close"]) if (complete and quant) else None)
+        display_error = score["quant"]["error_pct"] if (complete and quant) else (score["error_pct"] if complete else None)
+        if complete:
+            training_history = io.merge_history(read_json(INTRADAY_HISTORY_PATH, []), intraday_observations)
+            write_json(INTRADAY_HISTORY_PATH, training_history)
 
         write_json(path, {
             "symbol": symbol,
@@ -766,6 +813,9 @@ def process_symbol(symbol, now):
                                                   "model", "made_at", "llm_error", "prompt_version")},
             "opening_forecast": opening,
             "forecast_log": log,
+            "intraday_observations": intraday_observations,
+            "intraday_forecast": intraday_forecast,
+            "intraday_evidence": intraday_evidence,
             "quant": quant,
             "technical_indicators": tech_snapshot,
             "risk_execution_plan": risk_plan,
@@ -780,7 +830,7 @@ def process_symbol(symbol, now):
                 "upper_confidence": band_up, "lower_confidence": band_lo,
                 "forecast_source": forecast_source, "quant_summary": quant_summary,
                 "actual_volume": volume, "final_pred": display_target, "final_actual": m["last_close"],
-                "error_pct": score["error_pct"],
+                "error_pct": display_error,
             },
             "session": {"complete": complete, **score},
         })
@@ -983,6 +1033,7 @@ def main():
     del RUN_ERRORS[:]
     load_cooldown(now)
     load_quant()
+    load_intraday_model()
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
         results = list(pool.map(lambda s: process_symbol(s, now), SYMBOLS))
     health = finalize(results, now, list(RUN_ERRORS))
