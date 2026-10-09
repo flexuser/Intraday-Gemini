@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-09T15:40:36+05:30",
+  "as_of": "2026-10-09T15:45:32+05:30",
   "status": "FAILED",
   "symbols_total": 11,
   "symbols_updated": 0,
@@ -21,43 +21,43 @@
   "errors": [
     {
       "symbol": "MUTHOOTFIN",
-      "error": "stale data: newest bar is 26 min old - files left untouched"
+      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
     },
     {
       "symbol": "RELIANCE",
-      "error": "stale data: newest bar is 26 min old - files left untouched"
+      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
     },
     {
       "symbol": "TMPV",
-      "error": "stale data: newest bar is 26 min old - files left untouched"
+      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
     },
     {
       "symbol": "INFY",
-      "error": "stale data: newest bar is 26 min old - files left untouched"
+      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
     },
     {
       "symbol": "HDFCBANK",
-      "error": "stale data: newest bar is 26 min old - files left untouched"
+      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
     },
     {
       "symbol": "ICICIBANK",
-      "error": "stale data: newest bar is 26 min old - files left untouched"
+      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
     },
     {
       "symbol": "TCS",
-      "error": "stale data: newest bar is 26 min old - files left untouched"
+      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
     },
     {
       "symbol": "SBIN",
-      "error": "stale data: newest bar is 26 min old - files left untouched"
+      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
     },
     {
       "symbol": "BHARTIARTL",
-      "error": "stale data: newest bar is 26 min old - files left untouched"
+      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
     },
     {
       "symbol": "LT",
-      "error": "stale data: newest bar is 26 min old - files left untouched"
+      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
     }
   ],
   "last_alert_at": "2026-10-09T15:35:37+05:30"
