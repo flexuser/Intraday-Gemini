@@ -29,6 +29,10 @@ import yfinance as yf
 from muthoot_poc import quant_model as qm
 from muthoot_poc import intraday_observations as io
 from muthoot_poc import intraday_model as im
+try:
+    from muthoot_poc import smart_money as sm
+except ImportError:
+    sm = None
 from scipy.interpolate import PchipInterpolator
 from google import genai
 from google.genai import types
@@ -84,6 +88,7 @@ MAX_DATA_LAG_MIN = 20
 MIN_DAYS_FOR_CLAIMS = 20
 ALERT_COOLDOWN_MIN = 60
 RUN_ERRORS = []
+SMART = {}          # smart-money features, loaded once per run in main()
 PROBE_SYMBOL = "RELIANCE.NS"
 
 MARKET_OPEN = datetime.time(9, 15)
@@ -661,7 +666,8 @@ def process_symbol(symbol, now):
         quant = apply_quant_gates(quant, ticker)
 
         intraday_observations = io.update_outcomes(existing.get("intraday_observations") or [], df)
-        current_observation = io.capture(symbol, df, tech_snapshot or {}, m)
+        sm_feats = sm.features_for_symbol(SMART, symbol) if (sm and SMART) else {}
+        current_observation = io.capture(symbol, df, tech_snapshot or {}, m, smart_money=sm_feats)
         if now.time() < SESSION_CLOSE:
             intraday_observations = io.upsert_observation(
                 intraday_observations,
@@ -1034,6 +1040,18 @@ def main():
     load_cooldown(now)
     load_quant()
     load_intraday_model()
+    # ---- smart-money features (cached, causal) ----
+    global SMART
+    try:
+        if sm is not None:
+            SMART = sm.fetch_smart_money(SYMBOLS)
+            print(f"[smart_money] loaded features for {len(SMART)} symbols")
+        else:
+            SMART = {}
+            print("[smart_money] module not available - continuing without it")
+    except Exception as e:
+        SMART = {}
+        print(f"[smart_money] disabled: {e}")
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
         results = list(pool.map(lambda s: process_symbol(s, now), SYMBOLS))
     health = finalize(results, now, list(RUN_ERRORS))
