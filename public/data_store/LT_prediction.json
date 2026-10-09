@@ -9,8 +9,8 @@
     "model": "gemini-3.8-flash",
     "llm_error": "skipped: Gemini quota cooldown until 15:25 IST",
     "made_at": "2026-10-09T09:20:37+05:30",
-    "volume_ratio": 1.57,
-    "has_volume_spike": false,
+    "volume_ratio": 5.29,
+    "has_volume_spike": true,
     "news_feed": []
   },
   "forecast": {
@@ -156,7 +156,10 @@
         },
         "30": {
           "target_at": "2026-10-09T14:45:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:45:00+05:30",
+          "actual_price": 3691.9,
+          "actual_return_pct": -0.2998
         },
         "60": {
           "target_at": "2026-10-09T15:15:00+05:30",
@@ -187,11 +190,17 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:35:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:35:00+05:30",
+          "actual_price": 3688.9,
+          "actual_return_pct": -0.2757
         },
         "30": {
           "target_at": "2026-10-09T14:50:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:50:00+05:30",
+          "actual_price": 3697.1,
+          "actual_return_pct": -0.0541
         },
         "60": {
           "target_at": "2026-10-09T15:20:00+05:30",
@@ -222,11 +231,17 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:40:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:40:00+05:30",
+          "actual_price": 3691.0,
+          "actual_return_pct": -0.2567
         },
         "30": {
           "target_at": "2026-10-09T14:55:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:55:00+05:30",
+          "actual_price": 3702.1,
+          "actual_return_pct": 0.0432
         },
         "60": {
           "target_at": "2026-10-09T15:25:00+05:30",
@@ -257,14 +272,357 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:45:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:45:00+05:30",
+          "actual_price": 3691.9,
+          "actual_return_pct": 0.0434
         },
         "30": {
           "target_at": "2026-10-09T15:00:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:00:00+05:30",
+          "actual_price": 3705.8,
+          "actual_return_pct": 0.42
         },
         "60": {
           "target_at": "2026-10-09T15:30:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "LT|2026-10-09T14:35:00+05:30",
+      "symbol": "LT",
+      "bar_time": "2026-10-09T14:35:00+05:30",
+      "entry_price": 3688.9,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0488,
+        "return_15m_pct": -0.3,
+        "return_30m_pct": -0.3727,
+        "move_since_open_pct": 1.1988,
+        "vwap_distance_pct": 0.35,
+        "rsi_14": 44.27,
+        "macd_hist": -1.8609,
+        "atr_pct": 0.15,
+        "last_bar_range_pct": 0.1084,
+        "last_bar_volume_ratio": 0.2902,
+        "session_volume_ratio": 2.02,
+        "minutes_since_open": 320,
+        "oi_change_pct": -2.91,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.42,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T14:50:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T14:50:00+05:30",
+          "actual_price": 3697.1,
+          "actual_return_pct": 0.2223
+        },
+        "30": {
+          "target_at": "2026-10-09T15:05:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:05:00+05:30",
+          "actual_price": 3704.4,
+          "actual_return_pct": 0.4202
+        },
+        "60": {
+          "target_at": "2026-10-09T15:35:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "LT|2026-10-09T14:40:00+05:30",
+      "symbol": "LT",
+      "bar_time": "2026-10-09T14:40:00+05:30",
+      "entry_price": 3691.0,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0135,
+        "return_15m_pct": 0.0,
+        "return_30m_pct": -0.3859,
+        "move_since_open_pct": 1.2564,
+        "vwap_distance_pct": 0.4,
+        "rsi_14": 46.64,
+        "macd_hist": -1.8404,
+        "atr_pct": 0.14,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.43,
+        "minutes_since_open": 325,
+        "oi_change_pct": -2.91,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.42,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T14:55:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T14:55:00+05:30",
+          "actual_price": 3702.1,
+          "actual_return_pct": 0.3007
+        },
+        "30": {
+          "target_at": "2026-10-09T15:10:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:40:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "LT|2026-10-09T14:45:00+05:30",
+      "symbol": "LT",
+      "bar_time": "2026-10-09T14:45:00+05:30",
+      "entry_price": 3691.9,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0027,
+        "return_15m_pct": 0.0325,
+        "return_30m_pct": -0.1919,
+        "move_since_open_pct": 1.2811,
+        "vwap_distance_pct": 0.42,
+        "rsi_14": 47.84,
+        "macd_hist": -1.7418,
+        "atr_pct": 0.14,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.49,
+        "minutes_since_open": 330,
+        "oi_change_pct": -2.91,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.42,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:00:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:00:00+05:30",
+          "actual_price": 3705.8,
+          "actual_return_pct": 0.3765
+        },
+        "30": {
+          "target_at": "2026-10-09T15:15:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:45:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "LT|2026-10-09T14:50:00+05:30",
+      "symbol": "LT",
+      "bar_time": "2026-10-09T14:50:00+05:30",
+      "entry_price": 3697.1,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0081,
+        "return_15m_pct": 0.1788,
+        "return_30m_pct": -0.0784,
+        "move_since_open_pct": 1.4238,
+        "vwap_distance_pct": 0.55,
+        "rsi_14": 54.21,
+        "macd_hist": -1.1395,
+        "atr_pct": 0.14,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.15,
+        "minutes_since_open": 335,
+        "oi_change_pct": -2.91,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.42,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:05:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:05:00+05:30",
+          "actual_price": 3704.4,
+          "actual_return_pct": 0.1974
+        },
+        "30": {
+          "target_at": "2026-10-09T15:20:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:50:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "LT|2026-10-09T14:55:00+05:30",
+      "symbol": "LT",
+      "bar_time": "2026-10-09T14:55:00+05:30",
+      "entry_price": 3702.1,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0297,
+        "return_15m_pct": 0.279,
+        "return_30m_pct": 0.3007,
+        "move_since_open_pct": 1.561,
+        "vwap_distance_pct": 0.67,
+        "rsi_14": 59.41,
+        "macd_hist": -0.4643,
+        "atr_pct": 0.14,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.86,
+        "minutes_since_open": 340,
+        "oi_change_pct": -2.91,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.42,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:10:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:25:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:55:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "LT|2026-10-09T15:00:00+05:30",
+      "symbol": "LT",
+      "bar_time": "2026-10-09T15:00:00+05:30",
+      "entry_price": 3705.8,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0216,
+        "return_15m_pct": 0.2435,
+        "return_30m_pct": 0.4091,
+        "move_since_open_pct": 1.6625,
+        "vwap_distance_pct": 0.74,
+        "rsi_14": 62.78,
+        "macd_hist": 0.142,
+        "atr_pct": 0.15,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 2.59,
+        "minutes_since_open": 345,
+        "oi_change_pct": -2.91,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.42,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:15:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:30:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:00:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "LT|2026-10-09T15:05:00+05:30",
+      "symbol": "LT",
+      "bar_time": "2026-10-09T15:05:00+05:30",
+      "entry_price": 3704.4,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0135,
+        "return_15m_pct": 0.0919,
+        "return_30m_pct": 0.3766,
+        "move_since_open_pct": 1.6241,
+        "vwap_distance_pct": 0.65,
+        "rsi_14": 60.95,
+        "macd_hist": 0.2121,
+        "atr_pct": 0.15,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 5.29,
+        "minutes_since_open": 350,
+        "oi_change_pct": -2.91,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.42,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:20:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:35:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:05:00+05:30",
           "status": "pending"
         }
       }
@@ -305,20 +663,20 @@
     }
   },
   "technical_indicators": {
-    "vwap": 3675.35,
-    "rsi_14": 45.77,
-    "macd_hist": -1.516,
-    "atr_14": 5.36,
+    "vwap": 3680.55,
+    "rsi_14": 60.95,
+    "macd_hist": 0.2121,
+    "atr_14": 5.37,
     "atr_pct": 0.15,
-    "bollinger_pct_b": 0.101,
-    "vwap_distance_pct": 0.41,
-    "technical_bias": "BEARISH"
+    "bollinger_pct_b": 0.806,
+    "vwap_distance_pct": 0.65,
+    "technical_bias": "BULLISH"
   },
   "risk_execution_plan": {
     "symbol": "LT",
     "approved": false,
     "action": "NO_TRADE",
-    "entry_price": 3690.3,
+    "entry_price": 3704.4,
     "stop_loss": 0.0,
     "take_profit": 0.0,
     "position_size_shares": 0,
@@ -327,7 +685,7 @@
     "risk_reward_ratio": 0.0,
     "rejection_reason": "Direction model failed walk-forward edge test."
   },
-  "last_spike_alert_at": "2026-10-09T10:10:32+05:30",
+  "last_spike_alert_at": "2026-10-09T14:55:34+05:30",
   "context": {
     "prev_close": 3625.1,
     "prev_return_pct": -2.06,
@@ -335,7 +693,7 @@
   },
   "curves": {
     "date": "2026-10-09",
-    "generated_at": "02:25 PM IST",
+    "generated_at": "03:00 PM IST",
     "symbol": "LT",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -478,14 +836,14 @@
       3699.0,
       3700.0,
       3691.0,
-      3690.3,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
+      3690.7,
+      3690.5,
+      3691.8,
+      3696.8,
+      3701.0,
+      3705.0,
+      3703.9,
+      3704.4,
       null,
       null,
       null,
@@ -571,79 +929,79 @@
     ],
     "latest_forecast_curve": [
       3634.8,
-      3637.44,
-      3640.0,
-      3642.47,
-      3644.86,
-      3647.17,
-      3649.4,
-      3651.56,
-      3653.63,
-      3655.63,
-      3657.56,
-      3659.41,
-      3661.19,
-      3662.9,
-      3664.55,
-      3666.12,
-      3667.63,
-      3669.08,
-      3670.46,
-      3671.79,
-      3673.05,
-      3674.25,
-      3675.4,
-      3676.49,
-      3677.52,
-      3678.5,
-      3679.44,
-      3680.32,
-      3681.15,
-      3681.93,
-      3682.67,
-      3683.36,
-      3684.01,
-      3684.62,
-      3685.19,
-      3685.72,
-      3686.21,
-      3686.66,
-      3687.08,
-      3687.47,
-      3687.82,
-      3688.14,
-      3688.44,
+      3637.78,
+      3640.68,
+      3643.49,
+      3646.22,
+      3648.86,
+      3651.42,
+      3653.91,
+      3656.31,
+      3658.64,
+      3660.89,
+      3663.06,
+      3665.16,
+      3667.19,
+      3669.15,
+      3671.04,
+      3672.86,
+      3674.61,
+      3676.3,
+      3677.92,
+      3679.47,
+      3680.97,
+      3682.4,
+      3683.78,
+      3685.09,
+      3686.35,
+      3687.56,
       3688.7,
-      3688.94,
-      3689.16,
-      3689.35,
-      3689.51,
-      3689.66,
-      3689.79,
-      3689.9,
-      3689.99,
-      3690.07,
-      3690.13,
-      3690.18,
-      3690.22,
-      3690.25,
-      3690.27,
-      3690.29,
-      3690.29,
-      3690.3,
-      3690.3,
-      3690.3,
-      3689.69,
-      3687.94,
-      3685.2,
-      3681.61,
-      3677.32,
-      3672.45,
-      3667.17,
-      3661.61,
-      3655.9,
-      3650.2,
-      3644.65,
+      3689.8,
+      3690.84,
+      3691.83,
+      3692.77,
+      3693.67,
+      3694.52,
+      3695.32,
+      3696.07,
+      3696.79,
+      3697.46,
+      3698.09,
+      3698.68,
+      3699.23,
+      3699.75,
+      3700.23,
+      3700.68,
+      3701.09,
+      3701.47,
+      3701.82,
+      3702.14,
+      3702.44,
+      3702.71,
+      3702.95,
+      3703.16,
+      3703.36,
+      3703.53,
+      3703.68,
+      3703.82,
+      3703.93,
+      3704.03,
+      3704.12,
+      3704.19,
+      3704.25,
+      3704.29,
+      3704.33,
+      3704.35,
+      3704.37,
+      3704.39,
+      3704.39,
+      3704.4,
+      3704.4,
+      3704.4,
+      3699.87,
+      3688.21,
+      3672.31,
+      3655.07,
       3639.38
     ],
     "opening_made_at": "09:15",
@@ -879,13 +1237,13 @@
       10751,
       15007,
       19061,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
+      25026,
+      17802,
+      18764,
+      14487,
+      23756,
+      33810,
+      73687,
       0,
       0,
       0,
@@ -894,7 +1252,7 @@
       0
     ],
     "final_pred": 3639.38,
-    "final_actual": 3690.300048828125,
+    "final_actual": 3704.39990234375,
     "error_pct": null
   },
   "session": {

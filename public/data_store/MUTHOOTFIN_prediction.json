@@ -9,7 +9,7 @@
     "model": "gemini-3.8-flash",
     "llm_error": "skipped: Gemini quota cooldown until 15:25 IST",
     "made_at": "2026-10-09T09:20:37+05:30",
-    "volume_ratio": 0.61,
+    "volume_ratio": 0.98,
     "has_volume_spike": false,
     "news_feed": []
   },
@@ -156,7 +156,10 @@
         },
         "30": {
           "target_at": "2026-10-09T14:45:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:45:00+05:30",
+          "actual_price": 2617.3,
+          "actual_return_pct": -0.2173
         },
         "60": {
           "target_at": "2026-10-09T15:15:00+05:30",
@@ -187,11 +190,17 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:35:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:35:00+05:30",
+          "actual_price": 2619.7,
+          "actual_return_pct": -0.042
         },
         "30": {
           "target_at": "2026-10-09T14:50:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:50:00+05:30",
+          "actual_price": 2623.4,
+          "actual_return_pct": 0.0992
         },
         "60": {
           "target_at": "2026-10-09T15:20:00+05:30",
@@ -222,11 +231,17 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:40:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:40:00+05:30",
+          "actual_price": 2618.1,
+          "actual_return_pct": -0.2932
         },
         "30": {
           "target_at": "2026-10-09T14:55:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:55:00+05:30",
+          "actual_price": 2621.1,
+          "actual_return_pct": -0.179
         },
         "60": {
           "target_at": "2026-10-09T15:25:00+05:30",
@@ -257,14 +272,357 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:45:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:45:00+05:30",
+          "actual_price": 2617.3,
+          "actual_return_pct": -0.2743
         },
         "30": {
           "target_at": "2026-10-09T15:00:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:00:00+05:30",
+          "actual_price": 2620.0,
+          "actual_return_pct": -0.1715
         },
         "60": {
           "target_at": "2026-10-09T15:30:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "MUTHOOTFIN|2026-10-09T14:35:00+05:30",
+      "symbol": "MUTHOOTFIN",
+      "bar_time": "2026-10-09T14:35:00+05:30",
+      "entry_price": 2619.7,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0153,
+        "return_15m_pct": -0.2361,
+        "return_30m_pct": -0.0534,
+        "move_since_open_pct": 1.1858,
+        "vwap_distance_pct": -0.32,
+        "rsi_14": 50.53,
+        "macd_hist": 0.3306,
+        "atr_pct": 0.2,
+        "last_bar_range_pct": 0.0725,
+        "last_bar_volume_ratio": 0.1156,
+        "session_volume_ratio": 0.49,
+        "minutes_since_open": 320,
+        "oi_change_pct": 0.1,
+        "buildup_code": 0,
+        "oi_vs_avg": 1.02,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T14:50:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T14:50:00+05:30",
+          "actual_price": 2623.4,
+          "actual_return_pct": 0.1412
+        },
+        "30": {
+          "target_at": "2026-10-09T15:05:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:05:00+05:30",
+          "actual_price": 2619.0,
+          "actual_return_pct": -0.0267
+        },
+        "60": {
+          "target_at": "2026-10-09T15:35:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "MUTHOOTFIN|2026-10-09T14:40:00+05:30",
+      "symbol": "MUTHOOTFIN",
+      "bar_time": "2026-10-09T14:40:00+05:30",
+      "entry_price": 2618.1,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0076,
+        "return_15m_pct": -0.1868,
+        "return_30m_pct": -0.2096,
+        "move_since_open_pct": 1.124,
+        "vwap_distance_pct": -0.38,
+        "rsi_14": 48.51,
+        "macd_hist": -0.0027,
+        "atr_pct": 0.19,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.98,
+        "minutes_since_open": 325,
+        "oi_change_pct": 0.1,
+        "buildup_code": 0,
+        "oi_vs_avg": 1.02,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T14:55:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T14:55:00+05:30",
+          "actual_price": 2621.1,
+          "actual_return_pct": 0.1146
+        },
+        "30": {
+          "target_at": "2026-10-09T15:10:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:40:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "MUTHOOTFIN|2026-10-09T14:45:00+05:30",
+      "symbol": "MUTHOOTFIN",
+      "bar_time": "2026-10-09T14:45:00+05:30",
+      "entry_price": 2617.3,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0306,
+        "return_15m_pct": -0.1069,
+        "return_30m_pct": -0.1564,
+        "move_since_open_pct": 1.0931,
+        "vwap_distance_pct": -0.4,
+        "rsi_14": 47.43,
+        "macd_hist": -0.2106,
+        "atr_pct": 0.18,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.82,
+        "minutes_since_open": 330,
+        "oi_change_pct": 0.1,
+        "buildup_code": 0,
+        "oi_vs_avg": 1.02,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:00:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:00:00+05:30",
+          "actual_price": 2620.0,
+          "actual_return_pct": 0.1032
+        },
+        "30": {
+          "target_at": "2026-10-09T15:15:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:45:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "MUTHOOTFIN|2026-10-09T14:50:00+05:30",
+      "symbol": "MUTHOOTFIN",
+      "bar_time": "2026-10-09T14:50:00+05:30",
+      "entry_price": 2623.4,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0114,
+        "return_15m_pct": 0.1948,
+        "return_30m_pct": -0.0952,
+        "move_since_open_pct": 1.3287,
+        "vwap_distance_pct": -0.16,
+        "rsi_14": 55.32,
+        "macd_hist": 0.2675,
+        "atr_pct": 0.18,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 3.43,
+        "minutes_since_open": 335,
+        "oi_change_pct": 0.1,
+        "buildup_code": 0,
+        "oi_vs_avg": 1.02,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:05:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:05:00+05:30",
+          "actual_price": 2619.0,
+          "actual_return_pct": -0.1677
+        },
+        "30": {
+          "target_at": "2026-10-09T15:20:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:50:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "MUTHOOTFIN|2026-10-09T14:55:00+05:30",
+      "symbol": "MUTHOOTFIN",
+      "bar_time": "2026-10-09T14:55:00+05:30",
+      "entry_price": 2621.1,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0305,
+        "return_15m_pct": 0.1146,
+        "return_30m_pct": -0.0724,
+        "move_since_open_pct": 1.2399,
+        "vwap_distance_pct": -0.24,
+        "rsi_14": 52.13,
+        "macd_hist": 0.0562,
+        "atr_pct": 0.18,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.14,
+        "minutes_since_open": 340,
+        "oi_change_pct": 0.1,
+        "buildup_code": 0,
+        "oi_vs_avg": 1.02,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:10:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:25:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:55:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "MUTHOOTFIN|2026-10-09T15:00:00+05:30",
+      "symbol": "MUTHOOTFIN",
+      "bar_time": "2026-10-09T15:00:00+05:30",
+      "entry_price": 2620.0,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0458,
+        "return_15m_pct": -0.1182,
+        "return_30m_pct": -0.0038,
+        "move_since_open_pct": 1.1974,
+        "vwap_distance_pct": -0.28,
+        "rsi_14": 50.54,
+        "macd_hist": -0.0265,
+        "atr_pct": 0.18,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.24,
+        "minutes_since_open": 345,
+        "oi_change_pct": 0.1,
+        "buildup_code": 0,
+        "oi_vs_avg": 1.02,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:15:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:30:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:00:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "MUTHOOTFIN|2026-10-09T15:05:00+05:30",
+      "symbol": "MUTHOOTFIN",
+      "bar_time": "2026-10-09T15:05:00+05:30",
+      "entry_price": 2619.0,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0115,
+        "return_15m_pct": -0.0496,
+        "return_30m_pct": 0.0267,
+        "move_since_open_pct": 1.1587,
+        "vwap_distance_pct": -0.31,
+        "rsi_14": 49.23,
+        "macd_hist": -0.1969,
+        "atr_pct": 0.17,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.98,
+        "minutes_since_open": 350,
+        "oi_change_pct": 0.1,
+        "buildup_code": 0,
+        "oi_vs_avg": 1.02,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:20:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:35:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:05:00+05:30",
           "status": "pending"
         }
       }
@@ -305,20 +663,20 @@
     }
   },
   "technical_indicators": {
-    "vwap": 2628.2,
-    "rsi_14": 56.58,
-    "macd_hist": 0.8643,
-    "atr_14": 5.25,
-    "atr_pct": 0.2,
-    "bollinger_pct_b": 0.871,
-    "vwap_distance_pct": -0.14,
-    "technical_bias": "BULLISH"
+    "vwap": 2627.22,
+    "rsi_14": 49.23,
+    "macd_hist": -0.1969,
+    "atr_14": 4.55,
+    "atr_pct": 0.17,
+    "bollinger_pct_b": 0.397,
+    "vwap_distance_pct": -0.31,
+    "technical_bias": "BEARISH"
   },
   "risk_execution_plan": {
     "symbol": "MUTHOOTFIN",
     "approved": false,
     "action": "NO_TRADE",
-    "entry_price": 2624.5,
+    "entry_price": 2619.0,
     "stop_loss": 0.0,
     "take_profit": 0.0,
     "position_size_shares": 0,
@@ -327,7 +685,7 @@
     "risk_reward_ratio": 0.0,
     "rejection_reason": "Direction model failed walk-forward edge test."
   },
-  "last_spike_alert_at": "2026-10-09T12:15:47+05:30",
+  "last_spike_alert_at": "2026-10-09T14:45:39+05:30",
   "context": {
     "prev_close": 2559.6,
     "prev_return_pct": -3.57,
@@ -335,7 +693,7 @@
   },
   "curves": {
     "date": "2026-10-09",
-    "generated_at": "02:25 PM IST",
+    "generated_at": "03:00 PM IST",
     "symbol": "MUTHOOTFIN",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -478,14 +836,14 @@
       2621.4,
       2625.9,
       2623.0,
-      2624.5,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
+      2620.1,
+      2618.3,
+      2618.1,
+      2623.1,
+      2620.3,
+      2621.2,
+      2618.7,
+      2619.0,
       null,
       null,
       null,
@@ -571,79 +929,79 @@
     ],
     "latest_forecast_curve": [
       2605.0,
-      2605.93,
-      2606.83,
-      2607.7,
-      2608.54,
-      2609.35,
-      2610.13,
-      2610.89,
-      2611.62,
-      2612.32,
-      2613.0,
-      2613.65,
-      2614.27,
-      2614.87,
-      2615.45,
-      2616.01,
-      2616.54,
-      2617.04,
-      2617.53,
-      2617.99,
-      2618.44,
-      2618.86,
-      2619.26,
-      2619.65,
-      2620.01,
-      2620.36,
-      2620.68,
-      2620.99,
-      2621.28,
-      2621.56,
-      2621.82,
-      2622.06,
-      2622.29,
-      2622.5,
-      2622.7,
-      2622.89,
-      2623.06,
-      2623.22,
-      2623.37,
-      2623.5,
-      2623.63,
-      2623.74,
-      2623.85,
-      2623.94,
-      2624.02,
-      2624.1,
-      2624.16,
-      2624.22,
-      2624.28,
-      2624.32,
-      2624.36,
-      2624.39,
-      2624.42,
-      2624.44,
-      2624.46,
-      2624.47,
-      2624.48,
-      2624.49,
-      2624.49,
-      2624.5,
-      2624.5,
-      2624.5,
-      2624.5,
-      2624.16,
-      2623.19,
-      2621.68,
-      2619.69,
+      2605.6,
+      2606.18,
+      2606.75,
+      2607.3,
+      2607.83,
+      2608.34,
+      2608.84,
+      2609.33,
+      2609.79,
+      2610.25,
+      2610.68,
+      2611.11,
+      2611.52,
+      2611.91,
+      2612.29,
+      2612.66,
+      2613.01,
+      2613.35,
+      2613.67,
+      2613.99,
+      2614.29,
+      2614.58,
+      2614.85,
+      2615.12,
+      2615.37,
+      2615.61,
+      2615.84,
+      2616.06,
+      2616.27,
+      2616.47,
+      2616.66,
+      2616.84,
+      2617.01,
+      2617.17,
       2617.32,
-      2614.64,
-      2611.72,
-      2608.66,
-      2605.52,
-      2602.4,
-      2599.35,
+      2617.47,
+      2617.6,
+      2617.73,
+      2617.85,
+      2617.96,
+      2618.06,
+      2618.16,
+      2618.25,
+      2618.33,
+      2618.41,
+      2618.48,
+      2618.55,
+      2618.61,
+      2618.66,
+      2618.71,
+      2618.75,
+      2618.79,
+      2618.83,
+      2618.86,
+      2618.88,
+      2618.91,
+      2618.93,
+      2618.94,
+      2618.96,
+      2618.97,
+      2618.98,
+      2618.99,
+      2618.99,
+      2618.99,
+      2619.0,
+      2619.0,
+      2619.0,
+      2619.0,
+      2619.0,
+      2617.43,
+      2613.39,
+      2607.88,
+      2601.91,
       2596.48
     ],
     "opening_made_at": "09:15",
@@ -879,13 +1237,13 @@
       5393,
       16318,
       5362,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
+      4320,
+      8522,
+      7132,
+      31057,
+      10318,
+      11325,
+      8929,
       0,
       0,
       0,
@@ -894,7 +1252,7 @@
       0
     ],
     "final_pred": 2596.48,
-    "final_actual": 2624.5,
+    "final_actual": 2619.0,
     "error_pct": null
   },
   "session": {

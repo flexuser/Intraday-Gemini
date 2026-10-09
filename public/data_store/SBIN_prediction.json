@@ -9,7 +9,7 @@
     "model": "gemini-3.8-flash",
     "llm_error": "skipped: Gemini quota cooldown until 15:25 IST",
     "made_at": "2026-10-09T09:25:36+05:30",
-    "volume_ratio": 0.71,
+    "volume_ratio": 1.09,
     "has_volume_spike": false,
     "news_feed": []
   },
@@ -156,7 +156,10 @@
         },
         "30": {
           "target_at": "2026-10-09T14:45:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:45:00+05:30",
+          "actual_price": 957.95,
+          "actual_return_pct": 0.1568
         },
         "60": {
           "target_at": "2026-10-09T15:15:00+05:30",
@@ -187,11 +190,17 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:35:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:35:00+05:30",
+          "actual_price": 957.8,
+          "actual_return_pct": 0.0888
         },
         "30": {
           "target_at": "2026-10-09T14:50:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:50:00+05:30",
+          "actual_price": 958.65,
+          "actual_return_pct": 0.1777
         },
         "60": {
           "target_at": "2026-10-09T15:20:00+05:30",
@@ -222,11 +231,17 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:40:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:40:00+05:30",
+          "actual_price": 957.95,
+          "actual_return_pct": -0.0574
         },
         "30": {
           "target_at": "2026-10-09T14:55:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:55:00+05:30",
+          "actual_price": 958.0,
+          "actual_return_pct": -0.0522
         },
         "60": {
           "target_at": "2026-10-09T15:25:00+05:30",
@@ -257,14 +272,357 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:45:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:45:00+05:30",
+          "actual_price": 957.95,
+          "actual_return_pct": -0.0834
         },
         "30": {
           "target_at": "2026-10-09T15:00:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:00:00+05:30",
+          "actual_price": 958.55,
+          "actual_return_pct": -0.0209
         },
         "60": {
           "target_at": "2026-10-09T15:30:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "SBIN|2026-10-09T14:35:00+05:30",
+      "symbol": "SBIN",
+      "bar_time": "2026-10-09T14:35:00+05:30",
+      "entry_price": 957.8,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0365,
+        "return_15m_pct": -0.1564,
+        "return_30m_pct": 0.2407,
+        "move_since_open_pct": 1.6018,
+        "vwap_distance_pct": 0.51,
+        "rsi_14": 63.87,
+        "macd_hist": 0.2445,
+        "atr_pct": 0.13,
+        "last_bar_range_pct": 0.0835,
+        "last_bar_volume_ratio": 0.5507,
+        "session_volume_ratio": 0.51,
+        "minutes_since_open": 320,
+        "oi_change_pct": -2.25,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.55,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T14:50:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T14:50:00+05:30",
+          "actual_price": 958.65,
+          "actual_return_pct": 0.0887
+        },
+        "30": {
+          "target_at": "2026-10-09T15:05:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:05:00+05:30",
+          "actual_price": 957.95,
+          "actual_return_pct": 0.0157
+        },
+        "60": {
+          "target_at": "2026-10-09T15:35:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "SBIN|2026-10-09T14:40:00+05:30",
+      "symbol": "SBIN",
+      "bar_time": "2026-10-09T14:40:00+05:30",
+      "entry_price": 957.95,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0261,
+        "return_15m_pct": -0.0313,
+        "return_30m_pct": 0.1516,
+        "move_since_open_pct": 1.6177,
+        "vwap_distance_pct": 0.52,
+        "rsi_14": 64.21,
+        "macd_hist": 0.1878,
+        "atr_pct": 0.13,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.99,
+        "minutes_since_open": 325,
+        "oi_change_pct": -2.25,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.55,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T14:55:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T14:55:00+05:30",
+          "actual_price": 958.0,
+          "actual_return_pct": 0.0052
+        },
+        "30": {
+          "target_at": "2026-10-09T15:10:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:40:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "SBIN|2026-10-09T14:45:00+05:30",
+      "symbol": "SBIN",
+      "bar_time": "2026-10-09T14:45:00+05:30",
+      "entry_price": 957.95,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0052,
+        "return_15m_pct": -0.0209,
+        "return_30m_pct": 0.1045,
+        "move_since_open_pct": 1.6177,
+        "vwap_distance_pct": 0.51,
+        "rsi_14": 64.03,
+        "macd_hist": 0.1387,
+        "atr_pct": 0.12,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.73,
+        "minutes_since_open": 330,
+        "oi_change_pct": -2.25,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.55,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:00:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:00:00+05:30",
+          "actual_price": 958.55,
+          "actual_return_pct": 0.0626
+        },
+        "30": {
+          "target_at": "2026-10-09T15:15:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:45:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "SBIN|2026-10-09T14:50:00+05:30",
+      "symbol": "SBIN",
+      "bar_time": "2026-10-09T14:50:00+05:30",
+      "entry_price": 958.65,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0261,
+        "return_15m_pct": 0.0992,
+        "return_30m_pct": -0.0678,
+        "move_since_open_pct": 1.6919,
+        "vwap_distance_pct": 0.58,
+        "rsi_14": 66.98,
+        "macd_hist": 0.1499,
+        "atr_pct": 0.12,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.72,
+        "minutes_since_open": 335,
+        "oi_change_pct": -2.25,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.55,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:05:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:05:00+05:30",
+          "actual_price": 957.95,
+          "actual_return_pct": -0.073
+        },
+        "30": {
+          "target_at": "2026-10-09T15:20:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:50:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "SBIN|2026-10-09T14:55:00+05:30",
+      "symbol": "SBIN",
+      "bar_time": "2026-10-09T14:55:00+05:30",
+      "entry_price": 958.0,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0052,
+        "return_15m_pct": 0.0,
+        "return_30m_pct": -0.0261,
+        "move_since_open_pct": 1.623,
+        "vwap_distance_pct": 0.51,
+        "rsi_14": 62.84,
+        "macd_hist": 0.0538,
+        "atr_pct": 0.12,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.95,
+        "minutes_since_open": 340,
+        "oi_change_pct": -2.25,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.55,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:10:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:25:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:55:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "SBIN|2026-10-09T15:00:00+05:30",
+      "symbol": "SBIN",
+      "bar_time": "2026-10-09T15:00:00+05:30",
+      "entry_price": 958.55,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0052,
+        "return_15m_pct": 0.0156,
+        "return_30m_pct": 0.0417,
+        "move_since_open_pct": 1.6813,
+        "vwap_distance_pct": 0.56,
+        "rsi_14": 64.97,
+        "macd_hist": 0.0655,
+        "atr_pct": 0.12,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.01,
+        "minutes_since_open": 345,
+        "oi_change_pct": -2.25,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.55,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:15:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:30:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:00:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "SBIN|2026-10-09T15:05:00+05:30",
+      "symbol": "SBIN",
+      "bar_time": "2026-10-09T15:05:00+05:30",
+      "entry_price": 957.95,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0365,
+        "return_15m_pct": 0.0,
+        "return_30m_pct": 0.0261,
+        "move_since_open_pct": 1.6177,
+        "vwap_distance_pct": 0.48,
+        "rsi_14": 60.37,
+        "macd_hist": -0.0125,
+        "atr_pct": 0.12,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.09,
+        "minutes_since_open": 350,
+        "oi_change_pct": -2.25,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.55,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:20:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:35:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:05:00+05:30",
           "status": "pending"
         }
       }
@@ -305,20 +663,20 @@
     }
   },
   "technical_indicators": {
-    "vwap": 952.87,
-    "rsi_14": 68.6,
-    "macd_hist": 0.3479,
-    "atr_14": 1.31,
-    "atr_pct": 0.14,
-    "bollinger_pct_b": 0.942,
-    "vwap_distance_pct": 0.62,
+    "vwap": 953.33,
+    "rsi_14": 60.37,
+    "macd_hist": -0.0125,
+    "atr_14": 1.16,
+    "atr_pct": 0.12,
+    "bollinger_pct_b": 0.663,
+    "vwap_distance_pct": 0.48,
     "technical_bias": "BULLISH"
   },
   "risk_execution_plan": {
     "symbol": "SBIN",
     "approved": false,
     "action": "NO_TRADE",
-    "entry_price": 958.75,
+    "entry_price": 957.95,
     "stop_loss": 0.0,
     "take_profit": 0.0,
     "position_size_shares": 0,
@@ -335,7 +693,7 @@
   },
   "curves": {
     "date": "2026-10-09",
-    "generated_at": "02:25 PM IST",
+    "generated_at": "03:00 PM IST",
     "symbol": "SBIN",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -478,14 +836,14 @@
       956.95,
       959.3,
       958.25,
-      958.75,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
+      958.15,
+      957.7,
+      958.0,
+      958.4,
+      957.95,
+      958.6,
+      958.3,
+      957.95,
       null,
       null,
       null,
@@ -571,79 +929,79 @@
     ],
     "latest_forecast_curve": [
       941.55,
-      942.37,
-      943.16,
-      943.93,
-      944.67,
-      945.38,
-      946.08,
-      946.74,
-      947.39,
-      948.01,
-      948.6,
+      942.25,
+      942.94,
+      943.6,
+      944.24,
+      944.86,
+      945.47,
+      946.05,
+      946.62,
+      947.17,
+      947.7,
+      948.21,
+      948.7,
       949.18,
-      949.73,
-      950.26,
-      950.77,
-      951.26,
-      951.73,
-      952.17,
-      952.6,
-      953.01,
+      949.64,
+      950.09,
+      950.52,
+      950.93,
+      951.33,
+      951.71,
+      952.08,
+      952.43,
+      952.77,
+      953.09,
       953.4,
-      953.78,
-      954.13,
-      954.47,
-      954.79,
-      955.09,
-      955.38,
-      955.66,
-      955.91,
+      953.7,
+      953.98,
+      954.25,
+      954.51,
+      954.75,
+      954.99,
+      955.21,
+      955.42,
+      955.62,
+      955.81,
+      955.99,
       956.16,
-      956.39,
+      956.31,
+      956.46,
       956.6,
-      956.8,
-      956.99,
+      956.73,
+      956.85,
+      956.97,
+      957.07,
       957.17,
-      957.33,
-      957.48,
-      957.62,
+      957.26,
+      957.34,
+      957.42,
+      957.49,
+      957.55,
+      957.61,
+      957.66,
+      957.7,
       957.75,
-      957.87,
-      957.98,
-      958.08,
-      958.17,
-      958.25,
-      958.33,
-      958.4,
-      958.45,
-      958.51,
-      958.55,
-      958.59,
-      958.63,
-      958.65,
-      958.68,
-      958.7,
-      958.71,
-      958.73,
-      958.73,
-      958.74,
-      958.75,
-      958.75,
-      958.75,
-      958.75,
-      958.75,
-      958.56,
-      958.01,
-      957.14,
-      956.01,
-      954.66,
-      953.12,
-      951.46,
-      949.7,
-      947.91,
-      946.11,
-      944.36,
+      957.78,
+      957.81,
+      957.84,
+      957.86,
+      957.88,
+      957.9,
+      957.91,
+      957.92,
+      957.93,
+      957.94,
+      957.94,
+      957.95,
+      957.95,
+      957.95,
+      957.95,
+      957.95,
+      956.89,
+      954.15,
+      950.42,
+      946.38,
       942.7
     ],
     "opening_made_at": "09:15",
@@ -879,13 +1237,13 @@
       155908,
       127145,
       55301,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
+      39374,
+      76164,
+      55992,
+      54915,
+      72733,
+      77632,
+      83538,
       0,
       0,
       0,
@@ -894,7 +1252,7 @@
       0
     ],
     "final_pred": 942.7,
-    "final_actual": 958.75,
+    "final_actual": 957.9500122070312,
     "error_pct": null
   },
   "session": {

@@ -9,8 +9,8 @@
     "model": "gemini-3.8-flash",
     "llm_error": "skipped: Gemini quota cooldown until 15:25 IST",
     "made_at": "2026-10-09T09:20:37+05:30",
-    "volume_ratio": 0.92,
-    "has_volume_spike": false,
+    "volume_ratio": 2.46,
+    "has_volume_spike": true,
     "news_feed": []
   },
   "forecast": {
@@ -156,7 +156,10 @@
         },
         "30": {
           "target_at": "2026-10-09T14:45:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:45:00+05:30",
+          "actual_price": 708.05,
+          "actual_return_pct": 0.1202
         },
         "60": {
           "target_at": "2026-10-09T15:15:00+05:30",
@@ -187,11 +190,17 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:35:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:35:00+05:30",
+          "actual_price": 708.0,
+          "actual_return_pct": 0.1131
         },
         "30": {
           "target_at": "2026-10-09T14:50:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:50:00+05:30",
+          "actual_price": 708.7,
+          "actual_return_pct": 0.2121
         },
         "60": {
           "target_at": "2026-10-09T15:20:00+05:30",
@@ -222,11 +231,17 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:40:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:40:00+05:30",
+          "actual_price": 708.4,
+          "actual_return_pct": 0.0494
         },
         "30": {
           "target_at": "2026-10-09T14:55:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:55:00+05:30",
+          "actual_price": 709.0,
+          "actual_return_pct": 0.1342
         },
         "60": {
           "target_at": "2026-10-09T15:25:00+05:30",
@@ -257,14 +272,357 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:45:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:45:00+05:30",
+          "actual_price": 708.05,
+          "actual_return_pct": -0.0212
         },
         "30": {
           "target_at": "2026-10-09T15:00:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:00:00+05:30",
+          "actual_price": 709.55,
+          "actual_return_pct": 0.1906
         },
         "60": {
           "target_at": "2026-10-09T15:30:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "HDFCBANK|2026-10-09T14:35:00+05:30",
+      "symbol": "HDFCBANK",
+      "bar_time": "2026-10-09T14:35:00+05:30",
+      "entry_price": 708.0,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0,
+        "return_15m_pct": -0.0353,
+        "return_30m_pct": 0.1556,
+        "move_since_open_pct": 1.6073,
+        "vwap_distance_pct": 0.6,
+        "rsi_14": 63.88,
+        "macd_hist": 0.0567,
+        "atr_pct": 0.12,
+        "last_bar_range_pct": 0.0071,
+        "last_bar_volume_ratio": 0.1647,
+        "session_volume_ratio": 0.79,
+        "minutes_since_open": 320,
+        "oi_change_pct": -3.11,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.38,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T14:50:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T14:50:00+05:30",
+          "actual_price": 708.7,
+          "actual_return_pct": 0.0989
+        },
+        "30": {
+          "target_at": "2026-10-09T15:05:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:05:00+05:30",
+          "actual_price": 709.1,
+          "actual_return_pct": 0.1554
+        },
+        "60": {
+          "target_at": "2026-10-09T15:35:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "HDFCBANK|2026-10-09T14:40:00+05:30",
+      "symbol": "HDFCBANK",
+      "bar_time": "2026-10-09T14:40:00+05:30",
+      "entry_price": 708.4,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0494,
+        "return_15m_pct": 0.0565,
+        "return_30m_pct": 0.1343,
+        "move_since_open_pct": 1.6648,
+        "vwap_distance_pct": 0.65,
+        "rsi_14": 66.08,
+        "macd_hist": 0.065,
+        "atr_pct": 0.11,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.02,
+        "minutes_since_open": 325,
+        "oi_change_pct": -3.11,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.38,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T14:55:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T14:55:00+05:30",
+          "actual_price": 709.0,
+          "actual_return_pct": 0.0847
+        },
+        "30": {
+          "target_at": "2026-10-09T15:10:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:40:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "HDFCBANK|2026-10-09T14:45:00+05:30",
+      "symbol": "HDFCBANK",
+      "bar_time": "2026-10-09T14:45:00+05:30",
+      "entry_price": 708.05,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0071,
+        "return_15m_pct": 0.0071,
+        "return_30m_pct": 0.1485,
+        "move_since_open_pct": 1.6145,
+        "vwap_distance_pct": 0.59,
+        "rsi_14": 63.94,
+        "macd_hist": 0.0203,
+        "atr_pct": 0.1,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.62,
+        "minutes_since_open": 330,
+        "oi_change_pct": -3.11,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.38,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:00:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:00:00+05:30",
+          "actual_price": 709.55,
+          "actual_return_pct": 0.2118
+        },
+        "30": {
+          "target_at": "2026-10-09T15:15:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:45:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "HDFCBANK|2026-10-09T14:50:00+05:30",
+      "symbol": "HDFCBANK",
+      "bar_time": "2026-10-09T14:50:00+05:30",
+      "entry_price": 708.7,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0353,
+        "return_15m_pct": 0.0918,
+        "return_30m_pct": 0.0635,
+        "move_since_open_pct": 1.7078,
+        "vwap_distance_pct": 0.66,
+        "rsi_14": 67.67,
+        "macd_hist": 0.0559,
+        "atr_pct": 0.1,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.85,
+        "minutes_since_open": 335,
+        "oi_change_pct": -3.11,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.38,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:05:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:05:00+05:30",
+          "actual_price": 709.1,
+          "actual_return_pct": 0.0564
+        },
+        "30": {
+          "target_at": "2026-10-09T15:20:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:50:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "HDFCBANK|2026-10-09T14:55:00+05:30",
+      "symbol": "HDFCBANK",
+      "bar_time": "2026-10-09T14:55:00+05:30",
+      "entry_price": 709.0,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.12,
+        "return_15m_pct": 0.1412,
+        "return_30m_pct": 0.1412,
+        "move_since_open_pct": 1.7509,
+        "vwap_distance_pct": 0.7,
+        "rsi_14": 67.85,
+        "macd_hist": 0.0508,
+        "atr_pct": 0.11,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.82,
+        "minutes_since_open": 340,
+        "oi_change_pct": -3.11,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.38,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:10:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:25:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:55:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "HDFCBANK|2026-10-09T15:00:00+05:30",
+      "symbol": "HDFCBANK",
+      "bar_time": "2026-10-09T15:00:00+05:30",
+      "entry_price": 709.55,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.007,
+        "return_15m_pct": 0.1553,
+        "return_30m_pct": 0.2189,
+        "move_since_open_pct": 1.8298,
+        "vwap_distance_pct": 0.74,
+        "rsi_14": 70.38,
+        "macd_hist": 0.1125,
+        "atr_pct": 0.11,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 3.46,
+        "minutes_since_open": 345,
+        "oi_change_pct": -3.11,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.38,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:15:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:30:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:00:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "HDFCBANK|2026-10-09T15:05:00+05:30",
+      "symbol": "HDFCBANK",
+      "bar_time": "2026-10-09T15:05:00+05:30",
+      "entry_price": 709.1,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0634,
+        "return_15m_pct": 0.1341,
+        "return_30m_pct": 0.1483,
+        "move_since_open_pct": 1.7652,
+        "vwap_distance_pct": 0.65,
+        "rsi_14": 65.52,
+        "macd_hist": 0.0886,
+        "atr_pct": 0.12,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 2.46,
+        "minutes_since_open": 350,
+        "oi_change_pct": -3.11,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.38,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:20:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:35:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:05:00+05:30",
           "status": "pending"
         }
       }
@@ -305,20 +663,20 @@
     }
   },
   "technical_indicators": {
-    "vwap": 703.73,
-    "rsi_14": 64.87,
-    "macd_hist": 0.0835,
-    "atr_14": 0.87,
+    "vwap": 704.52,
+    "rsi_14": 65.52,
+    "macd_hist": 0.0886,
+    "atr_14": 0.83,
     "atr_pct": 0.12,
-    "bollinger_pct_b": 0.917,
-    "vwap_distance_pct": 0.64,
+    "bollinger_pct_b": 0.835,
+    "vwap_distance_pct": 0.65,
     "technical_bias": "BULLISH"
   },
   "risk_execution_plan": {
     "symbol": "HDFCBANK",
     "approved": false,
     "action": "NO_TRADE",
-    "entry_price": 708.2,
+    "entry_price": 709.1,
     "stop_loss": 0.0,
     "take_profit": 0.0,
     "position_size_shares": 0,
@@ -327,7 +685,7 @@
     "risk_reward_ratio": 0.0,
     "rejection_reason": "Per-stock net performance has not passed validation."
   },
-  "last_spike_alert_at": null,
+  "last_spike_alert_at": "2026-10-09T14:55:34+05:30",
   "context": {
     "prev_close": 692.25,
     "prev_return_pct": -1.49,
@@ -335,7 +693,7 @@
   },
   "curves": {
     "date": "2026-10-09",
-    "generated_at": "02:25 PM IST",
+    "generated_at": "03:00 PM IST",
     "symbol": "HDFCBANK",
     "bias": "BEARISH",
     "timeframes": [
@@ -478,14 +836,14 @@
       707.0,
       708.25,
       708.0,
-      708.2,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
+      708.0,
+      708.05,
+      708.0,
+      708.45,
+      708.15,
+      709.5,
+      709.55,
+      709.1,
       null,
       null,
       null,
@@ -571,79 +929,79 @@
     ],
     "latest_forecast_curve": [
       698.75,
-      699.2,
-      699.64,
-      700.06,
-      700.46,
-      700.86,
-      701.24,
-      701.6,
-      701.96,
-      702.3,
-      702.62,
-      702.94,
-      703.24,
-      703.54,
-      703.81,
-      704.08,
-      704.34,
-      704.59,
-      704.82,
-      705.05,
-      705.26,
-      705.47,
-      705.66,
-      705.85,
-      706.02,
-      706.19,
-      706.35,
-      706.5,
-      706.64,
-      706.78,
-      706.9,
-      707.02,
-      707.13,
+      699.19,
+      699.62,
+      700.04,
+      700.45,
+      700.84,
+      701.22,
+      701.59,
+      701.95,
+      702.29,
+      702.63,
+      702.95,
+      703.27,
+      703.57,
+      703.86,
+      704.14,
+      704.41,
+      704.67,
+      704.92,
+      705.16,
+      705.39,
+      705.62,
+      705.83,
+      706.03,
+      706.23,
+      706.42,
+      706.6,
+      706.77,
+      706.93,
+      707.08,
       707.23,
-      707.33,
-      707.42,
+      707.37,
       707.5,
-      707.58,
-      707.65,
-      707.72,
-      707.78,
-      707.83,
-      707.88,
-      707.93,
+      707.63,
+      707.75,
+      707.86,
       707.97,
-      708.01,
-      708.04,
       708.07,
-      708.09,
-      708.11,
-      708.13,
-      708.15,
       708.16,
-      708.17,
-      708.18,
-      708.19,
-      708.19,
-      708.2,
-      708.2,
-      708.2,
-      708.2,
-      708.2,
-      708.2,
-      708.06,
-      707.67,
-      707.05,
-      706.24,
-      705.27,
-      704.17,
-      702.98,
-      701.72,
-      700.44,
-      699.16,
-      697.91,
+      708.25,
+      708.33,
+      708.41,
+      708.48,
+      708.55,
+      708.61,
+      708.66,
+      708.72,
+      708.76,
+      708.81,
+      708.85,
+      708.88,
+      708.92,
+      708.95,
+      708.97,
+      708.99,
+      709.01,
+      709.03,
+      709.05,
+      709.06,
+      709.07,
+      709.08,
+      709.08,
+      709.09,
+      709.09,
+      709.1,
+      709.1,
+      709.1,
+      709.1,
+      709.1,
+      709.1,
+      708.24,
+      706.02,
+      702.99,
+      699.71,
       696.73
     ],
     "opening_made_at": "09:15",
@@ -879,13 +1237,13 @@
       111893,
       310406,
       196660,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
+      166813,
+      215687,
+      130597,
+      396610,
+      174785,
+      766837,
+      556143,
       0,
       0,
       0,
@@ -894,7 +1252,7 @@
       0
     ],
     "final_pred": 696.73,
-    "final_actual": 708.2000122070312,
+    "final_actual": 709.0999755859375,
     "error_pct": null
   },
   "session": {

@@ -7,10 +7,10 @@
     "reasoning": "No AI commentary was available for this run.",
     "source": "fallback",
     "model": "gemini-3.8-flash",
-    "llm_error": "skipped: Gemini quota cooldown until 15:25 IST",
-    "made_at": "2026-10-09T14:25:31+05:30",
-    "volume_ratio": 2.07,
-    "has_volume_spike": true,
+    "llm_error": "no new forecasts after 15:00 IST",
+    "made_at": "2026-10-09T15:00:48+05:30",
+    "volume_ratio": 1.38,
+    "has_volume_spike": false,
     "news_feed": []
   },
   "forecast": {
@@ -20,8 +20,8 @@
     "reasoning": "No AI commentary was available for this run.",
     "source": "fallback",
     "model": "gemini-3.8-flash",
-    "made_at": "2026-10-09T14:25:31+05:30",
-    "llm_error": "skipped: Gemini quota cooldown until 15:25 IST",
+    "made_at": "2026-10-09T15:00:48+05:30",
+    "llm_error": "no new forecasts after 15:00 IST",
     "prompt_version": "v3-context-risk"
   },
   "opening_forecast": null,
@@ -57,7 +57,10 @@
         },
         "30": {
           "target_at": "2026-10-09T14:45:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:45:00+05:30",
+          "actual_price": 1759.9,
+          "actual_return_pct": -0.368
         },
         "60": {
           "target_at": "2026-10-09T15:15:00+05:30",
@@ -88,11 +91,17 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:35:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:35:00+05:30",
+          "actual_price": 1758.4,
+          "actual_return_pct": -0.4642
         },
         "30": {
           "target_at": "2026-10-09T14:50:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:50:00+05:30",
+          "actual_price": 1757.9,
+          "actual_return_pct": -0.4925
         },
         "60": {
           "target_at": "2026-10-09T15:20:00+05:30",
@@ -123,11 +132,17 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:40:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:40:00+05:30",
+          "actual_price": 1759.7,
+          "actual_return_pct": -0.1135
         },
         "30": {
           "target_at": "2026-10-09T14:55:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:55:00+05:30",
+          "actual_price": 1759.6,
+          "actual_return_pct": -0.1192
         },
         "60": {
           "target_at": "2026-10-09T15:25:00+05:30",
@@ -158,14 +173,357 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:45:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:45:00+05:30",
+          "actual_price": 1759.9,
+          "actual_return_pct": -0.1475
         },
         "30": {
           "target_at": "2026-10-09T15:00:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:00:00+05:30",
+          "actual_price": 1757.2,
+          "actual_return_pct": -0.3007
         },
         "60": {
           "target_at": "2026-10-09T15:30:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "SUNPHARMA|2026-10-09T14:35:00+05:30",
+      "symbol": "SUNPHARMA",
+      "bar_time": "2026-10-09T14:35:00+05:30",
+      "entry_price": 1758.4,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0227,
+        "return_15m_pct": -0.176,
+        "return_30m_pct": -0.3739,
+        "move_since_open_pct": 0.1538,
+        "vwap_distance_pct": -0.49,
+        "rsi_14": 32.19,
+        "macd_hist": -0.3946,
+        "atr_pct": 0.15,
+        "last_bar_range_pct": 0.0682,
+        "last_bar_volume_ratio": 0.3019,
+        "session_volume_ratio": 3.93,
+        "minutes_since_open": 320,
+        "oi_change_pct": -1.48,
+        "buildup_code": 0,
+        "oi_vs_avg": 0.7,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T14:50:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T14:50:00+05:30",
+          "actual_price": 1757.9,
+          "actual_return_pct": -0.0284
+        },
+        "30": {
+          "target_at": "2026-10-09T15:05:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:05:00+05:30",
+          "actual_price": 1758.8,
+          "actual_return_pct": 0.0228
+        },
+        "60": {
+          "target_at": "2026-10-09T15:35:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "SUNPHARMA|2026-10-09T14:40:00+05:30",
+      "symbol": "SUNPHARMA",
+      "bar_time": "2026-10-09T14:40:00+05:30",
+      "entry_price": 1759.7,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0114,
+        "return_15m_pct": -0.1135,
+        "return_30m_pct": -0.3229,
+        "move_since_open_pct": 0.2278,
+        "vwap_distance_pct": -0.41,
+        "rsi_14": 36.59,
+        "macd_hist": -0.3709,
+        "atr_pct": 0.14,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.69,
+        "minutes_since_open": 325,
+        "oi_change_pct": -1.48,
+        "buildup_code": 0,
+        "oi_vs_avg": 0.7,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T14:55:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T14:55:00+05:30",
+          "actual_price": 1759.6,
+          "actual_return_pct": -0.0057
+        },
+        "30": {
+          "target_at": "2026-10-09T15:10:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:40:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "SUNPHARMA|2026-10-09T14:45:00+05:30",
+      "symbol": "SUNPHARMA",
+      "bar_time": "2026-10-09T14:45:00+05:30",
+      "entry_price": 1759.9,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0512,
+        "return_15m_pct": 0.0625,
+        "return_30m_pct": -0.3454,
+        "move_since_open_pct": 0.2392,
+        "vwap_distance_pct": -0.39,
+        "rsi_14": 38.37,
+        "macd_hist": -0.3859,
+        "atr_pct": 0.14,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.53,
+        "minutes_since_open": 330,
+        "oi_change_pct": -1.48,
+        "buildup_code": 0,
+        "oi_vs_avg": 0.7,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:00:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:00:00+05:30",
+          "actual_price": 1757.2,
+          "actual_return_pct": -0.1534
+        },
+        "30": {
+          "target_at": "2026-10-09T15:15:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:45:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "SUNPHARMA|2026-10-09T14:50:00+05:30",
+      "symbol": "SUNPHARMA",
+      "bar_time": "2026-10-09T14:50:00+05:30",
+      "entry_price": 1757.9,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0114,
+        "return_15m_pct": -0.0909,
+        "return_30m_pct": -0.2044,
+        "move_since_open_pct": 0.1253,
+        "vwap_distance_pct": -0.49,
+        "rsi_14": 32.27,
+        "macd_hist": -0.532,
+        "atr_pct": 0.14,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.41,
+        "minutes_since_open": 335,
+        "oi_change_pct": -1.48,
+        "buildup_code": 0,
+        "oi_vs_avg": 0.7,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:05:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:05:00+05:30",
+          "actual_price": 1758.8,
+          "actual_return_pct": 0.0512
+        },
+        "30": {
+          "target_at": "2026-10-09T15:20:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:50:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "SUNPHARMA|2026-10-09T14:55:00+05:30",
+      "symbol": "SUNPHARMA",
+      "bar_time": "2026-10-09T14:55:00+05:30",
+      "entry_price": 1759.6,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0341,
+        "return_15m_pct": 0.0341,
+        "return_30m_pct": -0.1192,
+        "move_since_open_pct": 0.2221,
+        "vwap_distance_pct": -0.38,
+        "rsi_14": 39.09,
+        "macd_hist": -0.3651,
+        "atr_pct": 0.14,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.63,
+        "minutes_since_open": 340,
+        "oi_change_pct": -1.48,
+        "buildup_code": 0,
+        "oi_vs_avg": 0.7,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:10:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:25:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:55:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "SUNPHARMA|2026-10-09T15:00:00+05:30",
+      "symbol": "SUNPHARMA",
+      "bar_time": "2026-10-09T15:00:00+05:30",
+      "entry_price": 1757.2,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0,
+        "return_15m_pct": -0.0512,
+        "return_30m_pct": -0.091,
+        "move_since_open_pct": 0.0854,
+        "vwap_distance_pct": -0.5,
+        "rsi_14": 32.54,
+        "macd_hist": -0.5155,
+        "atr_pct": 0.14,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 3.32,
+        "minutes_since_open": 345,
+        "oi_change_pct": -1.48,
+        "buildup_code": 0,
+        "oi_vs_avg": 0.7,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:15:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:30:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:00:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "SUNPHARMA|2026-10-09T15:05:00+05:30",
+      "symbol": "SUNPHARMA",
+      "bar_time": "2026-10-09T15:05:00+05:30",
+      "entry_price": 1758.8,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0171,
+        "return_15m_pct": -0.0114,
+        "return_30m_pct": -0.0398,
+        "move_since_open_pct": 0.1766,
+        "vwap_distance_pct": -0.4,
+        "rsi_14": 39.07,
+        "macd_hist": -0.325,
+        "atr_pct": 0.13,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.38,
+        "minutes_since_open": 350,
+        "oi_change_pct": -1.48,
+        "buildup_code": 0,
+        "oi_vs_avg": 0.7,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:20:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:35:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:05:00+05:30",
           "status": "pending"
         }
       }
@@ -206,20 +564,20 @@
     }
   },
   "technical_indicators": {
-    "vwap": 1767.57,
-    "rsi_14": 42.77,
-    "macd_hist": 0.044,
-    "atr_14": 2.38,
-    "atr_pct": 0.14,
-    "bollinger_pct_b": 0.43,
-    "vwap_distance_pct": -0.29,
+    "vwap": 1765.79,
+    "rsi_14": 39.07,
+    "macd_hist": -0.325,
+    "atr_14": 2.37,
+    "atr_pct": 0.13,
+    "bollinger_pct_b": 0.246,
+    "vwap_distance_pct": -0.4,
     "technical_bias": "BEARISH"
   },
   "risk_execution_plan": {
     "symbol": "SUNPHARMA",
     "approved": false,
     "action": "NO_TRADE",
-    "entry_price": 1762.5,
+    "entry_price": 1758.8,
     "stop_loss": 0.0,
     "take_profit": 0.0,
     "position_size_shares": 0,
@@ -236,7 +594,7 @@
   },
   "curves": {
     "date": "2026-10-09",
-    "generated_at": "02:25 PM IST",
+    "generated_at": "03:00 PM IST",
     "symbol": "SUNPHARMA",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -379,14 +737,14 @@
       1766.0,
       1761.5,
       1761.7,
-      1762.5,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
+      1758.8,
+      1759.5,
+      1759.0,
+      1758.1,
+      1759.0,
+      1757.2,
+      1758.5,
+      1758.8,
       null,
       null,
       null,
@@ -472,79 +830,79 @@
     ],
     "latest_forecast_curve": [
       1755.6,
-      1755.93,
-      1756.25,
-      1756.55,
-      1756.85,
-      1757.14,
-      1757.42,
+      1755.6,
+      1755.6,
+      1755.61,
+      1755.61,
+      1755.62,
+      1755.62,
+      1755.63,
+      1755.64,
+      1755.65,
+      1755.66,
+      1755.68,
+      1755.69,
+      1755.71,
+      1755.72,
+      1755.74,
+      1755.76,
+      1755.78,
+      1755.8,
+      1755.83,
+      1755.85,
+      1755.88,
+      1755.91,
+      1755.94,
+      1755.97,
+      1756.0,
+      1756.03,
+      1756.07,
+      1756.1,
+      1756.14,
+      1756.18,
+      1756.22,
+      1756.26,
+      1756.3,
+      1756.34,
+      1756.39,
+      1756.44,
+      1756.49,
+      1756.53,
+      1756.59,
+      1756.64,
+      1756.69,
+      1756.75,
+      1756.8,
+      1756.86,
+      1756.92,
+      1756.98,
+      1757.05,
+      1757.11,
+      1757.18,
+      1757.24,
+      1757.31,
+      1757.38,
+      1757.45,
+      1757.53,
+      1757.6,
       1757.68,
-      1757.94,
-      1758.19,
+      1757.75,
+      1757.83,
+      1757.91,
+      1757.99,
+      1758.08,
+      1758.16,
+      1758.25,
+      1758.34,
       1758.43,
-      1758.66,
-      1758.88,
-      1759.09,
-      1759.3,
-      1759.49,
-      1759.68,
-      1759.86,
-      1760.03,
-      1760.2,
-      1760.36,
-      1760.5,
-      1760.65,
-      1760.78,
-      1760.91,
-      1761.03,
-      1761.15,
-      1761.26,
-      1761.36,
-      1761.46,
-      1761.55,
-      1761.64,
-      1761.72,
-      1761.79,
-      1761.86,
-      1761.93,
-      1761.99,
-      1762.05,
-      1762.1,
-      1762.15,
-      1762.19,
-      1762.23,
-      1762.27,
-      1762.3,
-      1762.33,
-      1762.36,
-      1762.38,
-      1762.4,
-      1762.42,
-      1762.44,
-      1762.45,
-      1762.46,
-      1762.47,
-      1762.48,
-      1762.49,
-      1762.49,
-      1762.49,
-      1762.5,
-      1762.5,
-      1762.5,
-      1762.5,
-      1762.5,
-      1762.5,
-      1762.47,
-      1762.39,
-      1762.26,
-      1762.08,
-      1761.88,
-      1761.64,
-      1761.38,
-      1761.11,
-      1760.83,
-      1760.55,
-      1760.27,
+      1758.52,
+      1758.61,
+      1758.7,
+      1758.8,
+      1758.95,
+      1759.17,
+      1759.44,
+      1759.73,
       1760.0
     ],
     "opening_made_at": "09:15",
@@ -780,13 +1138,13 @@
       5575,
       48360,
       29954,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
+      59691,
+      26017,
+      23634,
+      21915,
+      25576,
+      54079,
+      22610,
       0,
       0,
       0,
@@ -795,7 +1153,7 @@
       0
     ],
     "final_pred": 1760.0,
-    "final_actual": 1762.5,
+    "final_actual": 1758.800048828125,
     "error_pct": null
   },
   "session": {

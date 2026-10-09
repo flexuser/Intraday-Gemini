@@ -9,7 +9,7 @@
     "model": "gemini-3.8-flash",
     "llm_error": "skipped: Gemini quota cooldown until 15:25 IST",
     "made_at": "2026-10-09T09:25:36+05:30",
-    "volume_ratio": 0.94,
+    "volume_ratio": 0.76,
     "has_volume_spike": false,
     "news_feed": []
   },
@@ -156,7 +156,10 @@
         },
         "30": {
           "target_at": "2026-10-09T14:45:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:45:00+05:30",
+          "actual_price": 2165.5,
+          "actual_return_pct": -0.3497
         },
         "60": {
           "target_at": "2026-10-09T15:15:00+05:30",
@@ -187,11 +190,17 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:35:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:35:00+05:30",
+          "actual_price": 2165.0,
+          "actual_return_pct": -0.1614
         },
         "30": {
           "target_at": "2026-10-09T14:50:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:50:00+05:30",
+          "actual_price": 2167.0,
+          "actual_return_pct": -0.0692
         },
         "60": {
           "target_at": "2026-10-09T15:20:00+05:30",
@@ -222,11 +231,17 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:40:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:40:00+05:30",
+          "actual_price": 2167.3,
+          "actual_return_pct": 0.0138
         },
         "30": {
           "target_at": "2026-10-09T14:55:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:55:00+05:30",
+          "actual_price": 2166.8,
+          "actual_return_pct": -0.0092
         },
         "60": {
           "target_at": "2026-10-09T15:25:00+05:30",
@@ -257,14 +272,357 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:45:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:45:00+05:30",
+          "actual_price": 2165.5,
+          "actual_return_pct": 0.0323
         },
         "30": {
           "target_at": "2026-10-09T15:00:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:00:00+05:30",
+          "actual_price": 2167.2,
+          "actual_return_pct": 0.1109
         },
         "60": {
           "target_at": "2026-10-09T15:30:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "TCS|2026-10-09T14:35:00+05:30",
+      "symbol": "TCS",
+      "bar_time": "2026-10-09T14:35:00+05:30",
+      "entry_price": 2165.0,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0092,
+        "return_15m_pct": -0.2304,
+        "return_30m_pct": -0.4048,
+        "move_since_open_pct": 3.3413,
+        "vwap_distance_pct": -0.24,
+        "rsi_14": 48.56,
+        "macd_hist": -0.5047,
+        "atr_pct": 0.29,
+        "last_bar_range_pct": 0.0878,
+        "last_bar_volume_ratio": 0.0298,
+        "session_volume_ratio": 0.53,
+        "minutes_since_open": 320,
+        "oi_change_pct": 10.21,
+        "buildup_code": 1,
+        "oi_vs_avg": 3.04,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T14:50:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T14:50:00+05:30",
+          "actual_price": 2167.0,
+          "actual_return_pct": 0.0924
+        },
+        "30": {
+          "target_at": "2026-10-09T15:05:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:05:00+05:30",
+          "actual_price": 2167.5,
+          "actual_return_pct": 0.1155
+        },
+        "60": {
+          "target_at": "2026-10-09T15:35:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "TCS|2026-10-09T14:40:00+05:30",
+      "symbol": "TCS",
+      "bar_time": "2026-10-09T14:40:00+05:30",
+      "entry_price": 2167.3,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0785,
+        "return_15m_pct": 0.0554,
+        "return_30m_pct": -0.2439,
+        "move_since_open_pct": 3.4511,
+        "vwap_distance_pct": -0.13,
+        "rsi_14": 51.18,
+        "macd_hist": -0.4606,
+        "atr_pct": 0.28,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.56,
+        "minutes_since_open": 325,
+        "oi_change_pct": 10.21,
+        "buildup_code": 1,
+        "oi_vs_avg": 3.04,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T14:55:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T14:55:00+05:30",
+          "actual_price": 2166.8,
+          "actual_return_pct": -0.0231
+        },
+        "30": {
+          "target_at": "2026-10-09T15:10:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:40:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "TCS|2026-10-09T14:45:00+05:30",
+      "symbol": "TCS",
+      "bar_time": "2026-10-09T14:45:00+05:30",
+      "entry_price": 2165.5,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0784,
+        "return_15m_pct": 0.0139,
+        "return_30m_pct": -0.143,
+        "move_since_open_pct": 3.3652,
+        "vwap_distance_pct": -0.21,
+        "rsi_14": 49.03,
+        "macd_hist": -0.5565,
+        "atr_pct": 0.27,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.72,
+        "minutes_since_open": 330,
+        "oi_change_pct": 10.21,
+        "buildup_code": 1,
+        "oi_vs_avg": 3.04,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:00:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:00:00+05:30",
+          "actual_price": 2167.2,
+          "actual_return_pct": 0.0785
+        },
+        "30": {
+          "target_at": "2026-10-09T15:15:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:45:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "TCS|2026-10-09T14:50:00+05:30",
+      "symbol": "TCS",
+      "bar_time": "2026-10-09T14:50:00+05:30",
+      "entry_price": 2167.0,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0646,
+        "return_15m_pct": 0.0646,
+        "return_30m_pct": -0.1382,
+        "move_since_open_pct": 3.4368,
+        "vwap_distance_pct": -0.14,
+        "rsi_14": 50.65,
+        "macd_hist": -0.3857,
+        "atr_pct": 0.27,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.48,
+        "minutes_since_open": 335,
+        "oi_change_pct": 10.21,
+        "buildup_code": 1,
+        "oi_vs_avg": 3.04,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:05:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:05:00+05:30",
+          "actual_price": 2167.5,
+          "actual_return_pct": 0.0231
+        },
+        "30": {
+          "target_at": "2026-10-09T15:20:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:50:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "TCS|2026-10-09T14:55:00+05:30",
+      "symbol": "TCS",
+      "bar_time": "2026-10-09T14:55:00+05:30",
+      "entry_price": 2166.8,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.1063,
+        "return_15m_pct": -0.0185,
+        "return_30m_pct": 0.0323,
+        "move_since_open_pct": 3.4272,
+        "vwap_distance_pct": -0.15,
+        "rsi_14": 50.55,
+        "macd_hist": -0.4819,
+        "atr_pct": 0.26,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.75,
+        "minutes_since_open": 340,
+        "oi_change_pct": 10.21,
+        "buildup_code": 1,
+        "oi_vs_avg": 3.04,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:10:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:25:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:55:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "TCS|2026-10-09T15:00:00+05:30",
+      "symbol": "TCS",
+      "bar_time": "2026-10-09T15:00:00+05:30",
+      "entry_price": 2167.2,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0785,
+        "return_15m_pct": -0.0553,
+        "return_30m_pct": 0.0924,
+        "move_since_open_pct": 3.4463,
+        "vwap_distance_pct": -0.13,
+        "rsi_14": 51.16,
+        "macd_hist": -0.4409,
+        "atr_pct": 0.25,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.77,
+        "minutes_since_open": 345,
+        "oi_change_pct": 10.21,
+        "buildup_code": 1,
+        "oi_vs_avg": 3.04,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:15:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:30:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:00:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "TCS|2026-10-09T15:05:00+05:30",
+      "symbol": "TCS",
+      "bar_time": "2026-10-09T15:05:00+05:30",
+      "entry_price": 2167.5,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0462,
+        "return_15m_pct": 0.1386,
+        "return_30m_pct": 0.0877,
+        "move_since_open_pct": 3.4606,
+        "vwap_distance_pct": -0.11,
+        "rsi_14": 51.62,
+        "macd_hist": -0.3472,
+        "atr_pct": 0.24,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.76,
+        "minutes_since_open": 350,
+        "oi_change_pct": 10.21,
+        "buildup_code": 1,
+        "oi_vs_avg": 3.04,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:20:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:35:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:05:00+05:30",
           "status": "pending"
         }
       }
@@ -305,20 +663,20 @@
     }
   },
   "technical_indicators": {
-    "vwap": 2170.21,
-    "rsi_14": 48.38,
-    "macd_hist": -0.2991,
-    "atr_14": 6.41,
-    "atr_pct": 0.3,
-    "bollinger_pct_b": 0.396,
-    "vwap_distance_pct": -0.25,
+    "vwap": 2169.94,
+    "rsi_14": 51.62,
+    "macd_hist": -0.3472,
+    "atr_14": 5.21,
+    "atr_pct": 0.24,
+    "bollinger_pct_b": 0.365,
+    "vwap_distance_pct": -0.11,
     "technical_bias": "BEARISH"
   },
   "risk_execution_plan": {
     "symbol": "TCS",
     "approved": false,
     "action": "NO_TRADE",
-    "entry_price": 2164.8,
+    "entry_price": 2167.5,
     "stop_loss": 0.0,
     "take_profit": 0.0,
     "position_size_shares": 0,
@@ -335,7 +693,7 @@
   },
   "curves": {
     "date": "2026-10-09",
-    "generated_at": "02:25 PM IST",
+    "generated_at": "03:00 PM IST",
     "symbol": "TCS",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -478,14 +836,14 @@
       2168.6,
       2170.0,
       2166.1,
-      2164.8,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
+      2165.2,
+      2165.6,
+      2167.2,
+      2168.4,
+      2164.5,
+      2165.5,
+      2166.5,
+      2167.5,
       null,
       null,
       null,
@@ -571,79 +929,79 @@
     ],
     "latest_forecast_curve": [
       2148.9,
-      2149.66,
-      2150.39,
-      2151.1,
-      2151.78,
-      2152.44,
-      2153.08,
-      2153.7,
-      2154.29,
-      2154.87,
-      2155.42,
-      2155.95,
-      2156.46,
-      2156.95,
-      2157.42,
-      2157.87,
-      2158.31,
-      2158.72,
-      2159.12,
-      2159.5,
-      2159.86,
-      2160.2,
-      2160.53,
+      2149.7,
+      2150.47,
+      2151.22,
+      2151.95,
+      2152.66,
+      2153.34,
+      2154.01,
+      2154.65,
+      2155.27,
+      2155.87,
+      2156.45,
+      2157.01,
+      2157.56,
+      2158.08,
+      2158.58,
+      2159.07,
+      2159.54,
+      2159.99,
+      2160.42,
       2160.84,
-      2161.14,
-      2161.42,
-      2161.69,
-      2161.94,
-      2162.18,
-      2162.4,
-      2162.61,
-      2162.81,
+      2161.24,
+      2161.62,
+      2161.99,
+      2162.34,
+      2162.68,
       2163.0,
-      2163.17,
-      2163.34,
-      2163.49,
-      2163.63,
-      2163.76,
+      2163.31,
+      2163.6,
       2163.88,
-      2163.99,
-      2164.09,
-      2164.18,
-      2164.27,
-      2164.34,
-      2164.41,
-      2164.47,
-      2164.53,
-      2164.57,
-      2164.62,
-      2164.65,
-      2164.68,
-      2164.71,
-      2164.73,
-      2164.75,
-      2164.77,
-      2164.78,
-      2164.79,
-      2164.79,
-      2164.8,
-      2164.8,
-      2164.8,
-      2164.8,
-      2164.8,
-      2164.13,
-      2162.22,
-      2159.22,
-      2155.31,
-      2150.63,
-      2145.35,
-      2139.61,
-      2133.59,
-      2127.44,
-      2121.31,
-      2115.37,
+      2164.14,
+      2164.39,
+      2164.63,
+      2164.86,
+      2165.07,
+      2165.27,
+      2165.47,
+      2165.64,
+      2165.81,
+      2165.97,
+      2166.12,
+      2166.26,
+      2166.39,
+      2166.5,
+      2166.62,
+      2166.72,
+      2166.81,
+      2166.9,
+      2166.98,
+      2167.05,
+      2167.11,
+      2167.17,
+      2167.22,
+      2167.27,
+      2167.31,
+      2167.34,
+      2167.38,
+      2167.4,
+      2167.42,
+      2167.44,
+      2167.46,
+      2167.47,
+      2167.48,
+      2167.49,
+      2167.49,
+      2167.5,
+      2167.5,
+      2167.5,
+      2167.5,
+      2167.5,
+      2163.47,
+      2153.11,
+      2138.98,
+      2123.68,
       2109.78
     ],
     "opening_made_at": "09:15",
@@ -879,13 +1237,13 @@
       99994,
       132626,
       146173,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
+      81716,
+      86765,
+      110766,
+      72444,
+      113338,
+      115471,
+      113557,
       0,
       0,
       0,
@@ -894,7 +1252,7 @@
       0
     ],
     "final_pred": 2109.78,
-    "final_actual": 2164.800048828125,
+    "final_actual": 2167.5,
     "error_pct": null
   },
   "session": {

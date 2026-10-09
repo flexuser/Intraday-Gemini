@@ -9,7 +9,7 @@
     "model": "gemini-3.8-flash",
     "llm_error": "skipped: Gemini quota cooldown until 15:25 IST",
     "made_at": "2026-10-09T09:20:37+05:30",
-    "volume_ratio": 0.38,
+    "volume_ratio": 1.51,
     "has_volume_spike": false,
     "news_feed": []
   },
@@ -156,7 +156,10 @@
         },
         "30": {
           "target_at": "2026-10-09T14:45:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:45:00+05:30",
+          "actual_price": 1808.0,
+          "actual_return_pct": 0.0664
         },
         "60": {
           "target_at": "2026-10-09T15:15:00+05:30",
@@ -187,11 +190,17 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:35:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:35:00+05:30",
+          "actual_price": 1806.9,
+          "actual_return_pct": -0.0055
         },
         "30": {
           "target_at": "2026-10-09T14:50:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:50:00+05:30",
+          "actual_price": 1808.7,
+          "actual_return_pct": 0.0941
         },
         "60": {
           "target_at": "2026-10-09T15:20:00+05:30",
@@ -222,11 +231,17 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:40:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:40:00+05:30",
+          "actual_price": 1808.3,
+          "actual_return_pct": 0.0055
         },
         "30": {
           "target_at": "2026-10-09T14:55:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:55:00+05:30",
+          "actual_price": 1808.4,
+          "actual_return_pct": 0.0111
         },
         "60": {
           "target_at": "2026-10-09T15:25:00+05:30",
@@ -257,14 +272,357 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T14:45:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T14:45:00+05:30",
+          "actual_price": 1808.0,
+          "actual_return_pct": -0.0055
         },
         "30": {
           "target_at": "2026-10-09T15:00:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:00:00+05:30",
+          "actual_price": 1810.4,
+          "actual_return_pct": 0.1272
         },
         "60": {
           "target_at": "2026-10-09T15:30:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "BHARTIARTL|2026-10-09T14:35:00+05:30",
+      "symbol": "BHARTIARTL",
+      "bar_time": "2026-10-09T14:35:00+05:30",
+      "entry_price": 1806.9,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0498,
+        "return_15m_pct": -0.094,
+        "return_30m_pct": 0.0886,
+        "move_since_open_pct": -0.0055,
+        "vwap_distance_pct": -0.08,
+        "rsi_14": 50.15,
+        "macd_hist": 0.1545,
+        "atr_pct": 0.11,
+        "last_bar_range_pct": 0.0885,
+        "last_bar_volume_ratio": 0.0515,
+        "session_volume_ratio": 0.43,
+        "minutes_since_open": 320,
+        "oi_change_pct": -3.43,
+        "buildup_code": 0,
+        "oi_vs_avg": 0.31,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T14:50:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T14:50:00+05:30",
+          "actual_price": 1808.7,
+          "actual_return_pct": 0.0996
+        },
+        "30": {
+          "target_at": "2026-10-09T15:05:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:05:00+05:30",
+          "actual_price": 1811.6,
+          "actual_return_pct": 0.2601
+        },
+        "60": {
+          "target_at": "2026-10-09T15:35:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "BHARTIARTL|2026-10-09T14:40:00+05:30",
+      "symbol": "BHARTIARTL",
+      "bar_time": "2026-10-09T14:40:00+05:30",
+      "entry_price": 1808.3,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0166,
+        "return_15m_pct": 0.0443,
+        "return_30m_pct": 0.0609,
+        "move_since_open_pct": 0.0719,
+        "vwap_distance_pct": -0.0,
+        "rsi_14": 55.41,
+        "macd_hist": 0.2491,
+        "atr_pct": 0.11,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.57,
+        "minutes_since_open": 325,
+        "oi_change_pct": -3.43,
+        "buildup_code": 0,
+        "oi_vs_avg": 0.31,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T14:55:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T14:55:00+05:30",
+          "actual_price": 1808.4,
+          "actual_return_pct": 0.0055
+        },
+        "30": {
+          "target_at": "2026-10-09T15:10:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:40:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "BHARTIARTL|2026-10-09T14:45:00+05:30",
+      "symbol": "BHARTIARTL",
+      "bar_time": "2026-10-09T14:45:00+05:30",
+      "entry_price": 1808.0,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0276,
+        "return_15m_pct": 0.0111,
+        "return_30m_pct": 0.072,
+        "move_since_open_pct": 0.0553,
+        "vwap_distance_pct": -0.02,
+        "rsi_14": 53.84,
+        "macd_hist": 0.241,
+        "atr_pct": 0.11,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.47,
+        "minutes_since_open": 330,
+        "oi_change_pct": -3.43,
+        "buildup_code": 0,
+        "oi_vs_avg": 0.31,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:00:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:00:00+05:30",
+          "actual_price": 1810.4,
+          "actual_return_pct": 0.1327
+        },
+        "30": {
+          "target_at": "2026-10-09T15:15:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:45:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "BHARTIARTL|2026-10-09T14:50:00+05:30",
+      "symbol": "BHARTIARTL",
+      "bar_time": "2026-10-09T14:50:00+05:30",
+      "entry_price": 1808.7,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0277,
+        "return_15m_pct": 0.0387,
+        "return_30m_pct": 0.0055,
+        "move_since_open_pct": 0.0941,
+        "vwap_distance_pct": 0.02,
+        "rsi_14": 56.65,
+        "macd_hist": 0.2681,
+        "atr_pct": 0.11,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.91,
+        "minutes_since_open": 335,
+        "oi_change_pct": -3.43,
+        "buildup_code": 0,
+        "oi_vs_avg": 0.31,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:05:00+05:30",
+          "status": "scored",
+          "actual_at": "2026-10-09T15:05:00+05:30",
+          "actual_price": 1811.6,
+          "actual_return_pct": 0.1603
+        },
+        "30": {
+          "target_at": "2026-10-09T15:20:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:50:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "BHARTIARTL|2026-10-09T14:55:00+05:30",
+      "symbol": "BHARTIARTL",
+      "bar_time": "2026-10-09T14:55:00+05:30",
+      "entry_price": 1808.4,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0,
+        "return_15m_pct": -0.0055,
+        "return_30m_pct": 0.0498,
+        "move_since_open_pct": 0.0775,
+        "vwap_distance_pct": 0.0,
+        "rsi_14": 55.52,
+        "macd_hist": 0.2331,
+        "atr_pct": 0.1,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.64,
+        "minutes_since_open": 340,
+        "oi_change_pct": -3.43,
+        "buildup_code": 0,
+        "oi_vs_avg": 0.31,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:10:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:25:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T15:55:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "BHARTIARTL|2026-10-09T15:00:00+05:30",
+      "symbol": "BHARTIARTL",
+      "bar_time": "2026-10-09T15:00:00+05:30",
+      "entry_price": 1810.4,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0055,
+        "return_15m_pct": 0.1217,
+        "return_30m_pct": 0.1438,
+        "move_since_open_pct": 0.1882,
+        "vwap_distance_pct": 0.11,
+        "rsi_14": 62.57,
+        "macd_hist": 0.4077,
+        "atr_pct": 0.11,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 3.06,
+        "minutes_since_open": 345,
+        "oi_change_pct": -3.43,
+        "buildup_code": 0,
+        "oi_vs_avg": 0.31,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:15:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:30:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:00:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "BHARTIARTL|2026-10-09T15:05:00+05:30",
+      "symbol": "BHARTIARTL",
+      "bar_time": "2026-10-09T15:05:00+05:30",
+      "entry_price": 1811.6,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0772,
+        "return_15m_pct": 0.1769,
+        "return_30m_pct": 0.1991,
+        "move_since_open_pct": 0.2546,
+        "vwap_distance_pct": 0.17,
+        "rsi_14": 62.76,
+        "macd_hist": 0.5897,
+        "atr_pct": 0.12,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.51,
+        "minutes_since_open": 350,
+        "oi_change_pct": -3.43,
+        "buildup_code": 0,
+        "oi_vs_avg": 0.31,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:20:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:35:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:05:00+05:30",
           "status": "pending"
         }
       }
@@ -305,20 +663,20 @@
     }
   },
   "technical_indicators": {
-    "vwap": 1808.34,
-    "rsi_14": 54.59,
-    "macd_hist": 0.2197,
-    "atr_14": 2.03,
-    "atr_pct": 0.11,
-    "bollinger_pct_b": 0.733,
-    "vwap_distance_pct": -0.01,
+    "vwap": 1808.49,
+    "rsi_14": 62.76,
+    "macd_hist": 0.5897,
+    "atr_14": 2.14,
+    "atr_pct": 0.12,
+    "bollinger_pct_b": 0.956,
+    "vwap_distance_pct": 0.17,
     "technical_bias": "BULLISH"
   },
   "risk_execution_plan": {
     "symbol": "BHARTIARTL",
     "approved": false,
     "action": "NO_TRADE",
-    "entry_price": 1808.1,
+    "entry_price": 1811.6,
     "stop_loss": 0.0,
     "take_profit": 0.0,
     "position_size_shares": 0,
@@ -327,7 +685,7 @@
     "risk_reward_ratio": 0.0,
     "rejection_reason": "Model stance is NEUTRAL."
   },
-  "last_spike_alert_at": "2026-10-09T11:55:37+05:30",
+  "last_spike_alert_at": "2026-10-09T14:55:34+05:30",
   "context": {
     "prev_close": 1804.6,
     "prev_return_pct": -1.6,
@@ -335,7 +693,7 @@
   },
   "curves": {
     "date": "2026-10-09",
-    "generated_at": "02:25 PM IST",
+    "generated_at": "03:00 PM IST",
     "symbol": "BHARTIARTL",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -478,14 +836,14 @@
       1806.7,
       1808.6,
       1807.5,
-      1808.1,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
+      1807.8,
+      1808.0,
+      1808.5,
+      1808.2,
+      1808.4,
+      1810.3,
+      1813.0,
+      1811.6,
       null,
       null,
       null,
@@ -571,79 +929,79 @@
     ],
     "latest_forecast_curve": [
       1807.6,
-      1807.62,
-      1807.65,
-      1807.67,
-      1807.69,
-      1807.71,
-      1807.73,
-      1807.75,
       1807.77,
-      1807.79,
-      1807.81,
-      1807.82,
-      1807.84,
-      1807.85,
-      1807.87,
-      1807.88,
-      1807.9,
-      1807.91,
-      1807.92,
-      1807.93,
       1807.94,
-      1807.96,
-      1807.97,
-      1807.98,
-      1807.98,
-      1807.99,
-      1808.0,
-      1808.01,
-      1808.02,
-      1808.02,
-      1808.03,
-      1808.04,
-      1808.04,
-      1808.05,
-      1808.05,
-      1808.06,
-      1808.06,
-      1808.07,
-      1808.07,
-      1808.07,
-      1808.08,
-      1808.08,
-      1808.08,
-      1808.09,
-      1808.09,
-      1808.09,
-      1808.09,
-      1808.09,
-      1808.09,
       1808.1,
-      1808.1,
-      1808.1,
-      1808.1,
-      1808.1,
-      1808.1,
-      1808.1,
-      1808.1,
-      1808.1,
-      1808.1,
-      1808.1,
-      1808.1,
-      1808.1,
-      1808.1,
-      1808.06,
-      1807.95,
-      1807.77,
-      1807.54,
-      1807.26,
-      1806.95,
-      1806.61,
-      1806.25,
-      1805.88,
-      1805.52,
-      1805.17,
+      1808.26,
+      1808.41,
+      1808.56,
+      1808.7,
+      1808.84,
+      1808.97,
+      1809.1,
+      1809.22,
+      1809.35,
+      1809.46,
+      1809.57,
+      1809.68,
+      1809.79,
+      1809.89,
+      1809.98,
+      1810.08,
+      1810.17,
+      1810.25,
+      1810.34,
+      1810.41,
+      1810.49,
+      1810.56,
+      1810.63,
+      1810.7,
+      1810.76,
+      1810.82,
+      1810.88,
+      1810.93,
+      1810.98,
+      1811.03,
+      1811.08,
+      1811.12,
+      1811.16,
+      1811.2,
+      1811.24,
+      1811.27,
+      1811.3,
+      1811.33,
+      1811.36,
+      1811.39,
+      1811.41,
+      1811.43,
+      1811.45,
+      1811.47,
+      1811.49,
+      1811.5,
+      1811.52,
+      1811.53,
+      1811.54,
+      1811.55,
+      1811.56,
+      1811.57,
+      1811.57,
+      1811.58,
+      1811.58,
+      1811.59,
+      1811.59,
+      1811.59,
+      1811.6,
+      1811.6,
+      1811.6,
+      1811.6,
+      1811.6,
+      1811.6,
+      1811.6,
+      1811.6,
+      1811.13,
+      1809.92,
+      1808.26,
+      1806.47,
       1804.84
     ],
     "opening_made_at": "09:15",
@@ -879,13 +1237,13 @@
       11289,
       43194,
       14384,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
+      16220,
+      21448,
+      17556,
+      33847,
+      23654,
+      117045,
+      58287,
       0,
       0,
       0,
@@ -894,7 +1252,7 @@
       0
     ],
     "final_pred": 1804.84,
-    "final_actual": 1808.0999755859375,
+    "final_actual": 1811.5999755859375,
     "error_pct": null
   },
   "session": {
