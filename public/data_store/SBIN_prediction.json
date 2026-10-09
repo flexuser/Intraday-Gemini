@@ -9,8 +9,8 @@
     "model": "gemini-3.8-flash",
     "llm_error": "skipped: Gemini quota cooldown until 15:25 IST",
     "made_at": "2026-10-09T09:25:36+05:30",
-    "volume_ratio": 1.09,
-    "has_volume_spike": false,
+    "volume_ratio": 2.36,
+    "has_volume_spike": true,
     "news_feed": []
   },
   "forecast": {
@@ -163,7 +163,10 @@
         },
         "60": {
           "target_at": "2026-10-09T15:15:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:15:00+05:30",
+          "actual_price": 957.15,
+          "actual_return_pct": 0.0732
         }
       }
     },
@@ -204,7 +207,10 @@
         },
         "60": {
           "target_at": "2026-10-09T15:20:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:20:00+05:30",
+          "actual_price": 956.9,
+          "actual_return_pct": -0.0052
         }
       }
     },
@@ -383,7 +389,10 @@
         },
         "30": {
           "target_at": "2026-10-09T15:10:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:10:00+05:30",
+          "actual_price": 956.95,
+          "actual_return_pct": -0.1044
         },
         "60": {
           "target_at": "2026-10-09T15:40:00+05:30",
@@ -432,7 +441,10 @@
         },
         "30": {
           "target_at": "2026-10-09T15:15:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:15:00+05:30",
+          "actual_price": 957.15,
+          "actual_return_pct": -0.0835
         },
         "60": {
           "target_at": "2026-10-09T15:45:00+05:30",
@@ -481,7 +493,10 @@
         },
         "30": {
           "target_at": "2026-10-09T15:20:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:20:00+05:30",
+          "actual_price": 956.9,
+          "actual_return_pct": -0.1825
         },
         "60": {
           "target_at": "2026-10-09T15:50:00+05:30",
@@ -523,7 +538,10 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T15:10:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:10:00+05:30",
+          "actual_price": 956.95,
+          "actual_return_pct": -0.1096
         },
         "30": {
           "target_at": "2026-10-09T15:25:00+05:30",
@@ -569,7 +587,10 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T15:15:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:15:00+05:30",
+          "actual_price": 957.15,
+          "actual_return_pct": -0.1461
         },
         "30": {
           "target_at": "2026-10-09T15:30:00+05:30",
@@ -615,7 +636,10 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T15:20:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:20:00+05:30",
+          "actual_price": 956.9,
+          "actual_return_pct": -0.1096
         },
         "30": {
           "target_at": "2026-10-09T15:35:00+05:30",
@@ -626,16 +650,228 @@
           "status": "pending"
         }
       }
+    },
+    {
+      "key": "SBIN|2026-10-09T15:10:00+05:30",
+      "symbol": "SBIN",
+      "bar_time": "2026-10-09T15:10:00+05:30",
+      "entry_price": 956.95,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0366,
+        "return_15m_pct": -0.1721,
+        "return_30m_pct": -0.1096,
+        "move_since_open_pct": 1.5116,
+        "vwap_distance_pct": 0.37,
+        "rsi_14": 53.67,
+        "macd_hist": -0.1487,
+        "atr_pct": 0.12,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 2.15,
+        "minutes_since_open": 355,
+        "oi_change_pct": -2.25,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.55,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:25:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:40:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:10:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "SBIN|2026-10-09T15:15:00+05:30",
+      "symbol": "SBIN",
+      "bar_time": "2026-10-09T15:15:00+05:30",
+      "entry_price": 957.15,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0052,
+        "return_15m_pct": -0.12,
+        "return_30m_pct": -0.1304,
+        "move_since_open_pct": 1.5328,
+        "vwap_distance_pct": 0.38,
+        "rsi_14": 54.91,
+        "macd_hist": -0.192,
+        "atr_pct": 0.12,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.76,
+        "minutes_since_open": 360,
+        "oi_change_pct": -2.25,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.55,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:30:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:45:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:15:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "SBIN|2026-10-09T15:20:00+05:30",
+      "symbol": "SBIN",
+      "bar_time": "2026-10-09T15:20:00+05:30",
+      "entry_price": 956.9,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0157,
+        "return_15m_pct": -0.0418,
+        "return_30m_pct": -0.1096,
+        "move_since_open_pct": 1.5063,
+        "vwap_distance_pct": 0.34,
+        "rsi_14": 53.18,
+        "macd_hist": -0.2443,
+        "atr_pct": 0.12,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 2.36,
+        "minutes_since_open": 365,
+        "oi_change_pct": -2.25,
+        "buildup_code": 3,
+        "oi_vs_avg": 0.55,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:35:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:50:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:20:00+05:30",
+          "status": "pending"
+        }
+      }
     }
   ],
   "intraday_forecast": {
-    "status": "collecting",
-    "forecasts": {},
-    "reason": null,
-    "sessions_available": 0,
+    "status": "ready",
+    "forecasts": {
+      "15": {
+        "expected_return_pct": 0.0045,
+        "target_price": 957.09,
+        "band_low_pct": -0.2337,
+        "band_high_pct": 0.2427,
+        "status": "shadow"
+      },
+      "30": {
+        "expected_return_pct": 0.0082,
+        "target_price": 957.13,
+        "band_low_pct": -0.3251,
+        "band_high_pct": 0.3416,
+        "status": "shadow"
+      },
+      "60": {
+        "expected_return_pct": 0.0617,
+        "target_price": 957.64,
+        "band_low_pct": -0.4073,
+        "band_high_pct": 0.5307,
+        "status": "shadow"
+      }
+    },
+    "model_version": "intraday-v1-20261009",
+    "sessions_available": 60,
     "minimum_sessions": 40
   },
-  "intraday_evidence": {},
+  "intraday_evidence": {
+    "15": {
+      "n": 2555,
+      "n_days": 40,
+      "ic": -0.0015,
+      "ic_ci95": [
+        -0.0345,
+        0.0734
+      ],
+      "hit_rate": 0.4744,
+      "hit_ci95": [
+        0.4465,
+        0.5007
+      ],
+      "mae_model_pct": 0.1154,
+      "mae_flat_pct": 0.1132,
+      "passes_gate": false
+    },
+    "30": {
+      "n": 2435,
+      "n_days": 40,
+      "ic": 0.0124,
+      "ic_ci95": [
+        -0.0645,
+        0.0882
+      ],
+      "hit_rate": 0.4883,
+      "hit_ci95": [
+        0.4472,
+        0.5281
+      ],
+      "mae_model_pct": 0.166,
+      "mae_flat_pct": 0.1619,
+      "passes_gate": false
+    },
+    "60": {
+      "n": 2195,
+      "n_days": 40,
+      "ic": 0.0323,
+      "ic_ci95": [
+        -0.027,
+        0.1123
+      ],
+      "hit_rate": 0.4907,
+      "hit_ci95": [
+        0.4461,
+        0.5434
+      ],
+      "mae_model_pct": 0.2424,
+      "mae_flat_pct": 0.2299,
+      "passes_gate": false
+    }
+  },
   "quant": {
     "mu_pct": -0.048,
     "p_up": 0.484,
@@ -663,20 +899,20 @@
     }
   },
   "technical_indicators": {
-    "vwap": 953.33,
-    "rsi_14": 60.37,
-    "macd_hist": -0.0125,
-    "atr_14": 1.16,
+    "vwap": 953.66,
+    "rsi_14": 54.27,
+    "macd_hist": -0.1984,
+    "atr_14": 1.19,
     "atr_pct": 0.12,
-    "bollinger_pct_b": 0.663,
-    "vwap_distance_pct": 0.48,
-    "technical_bias": "BULLISH"
+    "bollinger_pct_b": 0.466,
+    "vwap_distance_pct": 0.36,
+    "technical_bias": "NEUTRAL"
   },
   "risk_execution_plan": {
     "symbol": "SBIN",
     "approved": false,
     "action": "NO_TRADE",
-    "entry_price": 957.95,
+    "entry_price": 957.05,
     "stop_loss": 0.0,
     "take_profit": 0.0,
     "position_size_shares": 0,
@@ -693,7 +929,7 @@
   },
   "curves": {
     "date": "2026-10-09",
-    "generated_at": "03:00 PM IST",
+    "generated_at": "03:30 PM IST",
     "symbol": "SBIN",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -843,9 +1079,9 @@
       957.95,
       958.6,
       958.3,
-      957.95,
-      null,
-      null,
+      957.3,
+      957.1,
+      957.05,
       null,
       null,
       null
@@ -929,79 +1165,79 @@
     ],
     "latest_forecast_curve": [
       941.55,
-      942.25,
-      942.94,
-      943.6,
-      944.24,
-      944.86,
-      945.47,
-      946.05,
-      946.62,
-      947.17,
+      942.2,
+      942.82,
+      943.43,
+      944.02,
+      944.6,
+      945.16,
+      945.7,
+      946.22,
+      946.73,
+      947.22,
       947.7,
-      948.21,
-      948.7,
-      949.18,
-      949.64,
-      950.09,
-      950.52,
-      950.93,
-      951.33,
-      951.71,
-      952.08,
-      952.43,
-      952.77,
-      953.09,
-      953.4,
-      953.7,
-      953.98,
-      954.25,
-      954.51,
-      954.75,
-      954.99,
-      955.21,
-      955.42,
-      955.62,
-      955.81,
+      948.16,
+      948.6,
+      949.03,
+      949.44,
+      949.84,
+      950.23,
+      950.6,
+      950.96,
+      951.31,
+      951.64,
+      951.95,
+      952.26,
+      952.55,
+      952.83,
+      953.1,
+      953.36,
+      953.61,
+      953.84,
+      954.07,
+      954.28,
+      954.48,
+      954.67,
+      954.86,
+      955.03,
+      955.19,
+      955.35,
+      955.49,
+      955.63,
+      955.76,
+      955.88,
       955.99,
-      956.16,
-      956.31,
-      956.46,
-      956.6,
-      956.73,
-      956.85,
-      956.97,
-      957.07,
-      957.17,
-      957.26,
-      957.34,
-      957.42,
-      957.49,
-      957.55,
-      957.61,
-      957.66,
-      957.7,
-      957.75,
-      957.78,
-      957.81,
-      957.84,
-      957.86,
-      957.88,
-      957.9,
-      957.91,
-      957.92,
-      957.93,
-      957.94,
-      957.94,
-      957.95,
-      957.95,
-      957.95,
-      957.95,
-      957.95,
-      956.89,
-      954.15,
-      950.42,
-      946.38,
+      956.1,
+      956.2,
+      956.29,
+      956.37,
+      956.45,
+      956.52,
+      956.59,
+      956.65,
+      956.7,
+      956.75,
+      956.8,
+      956.84,
+      956.87,
+      956.9,
+      956.93,
+      956.95,
+      956.98,
+      956.99,
+      957.01,
+      957.02,
+      957.03,
+      957.04,
+      957.04,
+      957.04,
+      957.05,
+      957.05,
+      957.05,
+      957.05,
+      957.05,
+      954.44,
+      948.64,
       942.7
     ],
     "opening_made_at": "09:15",
@@ -1244,15 +1480,15 @@
       72733,
       77632,
       83538,
-      0,
-      0,
-      0,
+      167487,
+      139026,
+      189433,
       0,
       0,
       0
     ],
     "final_pred": 942.7,
-    "final_actual": 957.9500122070312,
+    "final_actual": 957.0499877929688,
     "error_pct": null
   },
   "session": {
