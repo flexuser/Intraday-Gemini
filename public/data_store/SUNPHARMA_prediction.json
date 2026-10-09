@@ -8,9 +8,9 @@
     "source": "fallback",
     "model": "gemini-3.8-flash",
     "llm_error": "no new forecasts after 15:00 IST",
-    "made_at": "2026-10-09T15:15:37+05:30",
-    "volume_ratio": 5.39,
-    "has_volume_spike": true,
+    "made_at": "2026-10-09T15:20:43+05:30",
+    "volume_ratio": 0.0,
+    "has_volume_spike": false,
     "news_feed": []
   },
   "forecast": {
@@ -20,7 +20,7 @@
     "reasoning": "No AI commentary was available for this run.",
     "source": "fallback",
     "model": "gemini-3.8-flash",
-    "made_at": "2026-10-09T15:15:37+05:30",
+    "made_at": "2026-10-09T15:20:43+05:30",
     "llm_error": "no new forecasts after 15:00 IST",
     "prompt_version": "v3-context-risk"
   },
@@ -695,24 +695,24 @@
     "status": "ready",
     "forecasts": {
       "15": {
-        "expected_return_pct": -0.0439,
-        "target_price": 1759.23,
-        "band_low_pct": -0.2914,
-        "band_high_pct": 0.2036,
+        "expected_return_pct": 0.0086,
+        "target_price": 1760.15,
+        "band_low_pct": -0.2389,
+        "band_high_pct": 0.2561,
         "status": "shadow"
       },
       "30": {
-        "expected_return_pct": -0.0585,
-        "target_price": 1758.97,
-        "band_low_pct": -0.379,
-        "band_high_pct": 0.2619,
+        "expected_return_pct": 0.0144,
+        "target_price": 1760.25,
+        "band_low_pct": -0.3061,
+        "band_high_pct": 0.3349,
         "status": "shadow"
       },
       "60": {
-        "expected_return_pct": -0.0467,
-        "target_price": 1759.18,
-        "band_low_pct": -0.4835,
-        "band_high_pct": 0.3901,
+        "expected_return_pct": 0.0548,
+        "target_price": 1760.96,
+        "band_low_pct": -0.382,
+        "band_high_pct": 0.4916,
         "status": "shadow"
       }
     },
@@ -830,7 +830,7 @@
   },
   "curves": {
     "date": "2026-10-09",
-    "generated_at": "03:15 PM IST",
+    "generated_at": "03:20 PM IST",
     "symbol": "SUNPHARMA",
     "bias": "NEUTRAL",
     "timeframes": [

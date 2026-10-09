@@ -9,8 +9,8 @@
     "model": "gemini-3.8-flash",
     "llm_error": "skipped: Gemini quota cooldown until 15:25 IST",
     "made_at": "2026-10-09T09:20:37+05:30",
-    "volume_ratio": 2.31,
-    "has_volume_spike": true,
+    "volume_ratio": 0.0,
+    "has_volume_spike": false,
     "news_feed": []
   },
   "forecast": {
@@ -794,24 +794,24 @@
     "status": "ready",
     "forecasts": {
       "15": {
-        "expected_return_pct": 0.1165,
-        "target_price": 709.02,
-        "band_low_pct": -0.0912,
-        "band_high_pct": 0.3242,
+        "expected_return_pct": 0.0128,
+        "target_price": 708.29,
+        "band_low_pct": -0.1949,
+        "band_high_pct": 0.2205,
         "status": "shadow"
       },
       "30": {
-        "expected_return_pct": 0.1924,
-        "target_price": 709.56,
-        "band_low_pct": -0.0955,
-        "band_high_pct": 0.4803,
+        "expected_return_pct": 0.0129,
+        "target_price": 708.29,
+        "band_low_pct": -0.275,
+        "band_high_pct": 0.3008,
         "status": "shadow"
       },
       "60": {
-        "expected_return_pct": 0.2179,
-        "target_price": 709.74,
-        "band_low_pct": -0.1898,
-        "band_high_pct": 0.6257,
+        "expected_return_pct": 0.0474,
+        "target_price": 708.54,
+        "band_low_pct": -0.3603,
+        "band_high_pct": 0.4552,
         "status": "shadow"
       }
     },
@@ -929,7 +929,7 @@
   },
   "curves": {
     "date": "2026-10-09",
-    "generated_at": "03:15 PM IST",
+    "generated_at": "03:20 PM IST",
     "symbol": "HDFCBANK",
     "bias": "BEARISH",
     "timeframes": [

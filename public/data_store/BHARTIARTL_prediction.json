@@ -9,7 +9,7 @@
     "model": "gemini-3.8-flash",
     "llm_error": "skipped: Gemini quota cooldown until 15:25 IST",
     "made_at": "2026-10-09T09:20:37+05:30",
-    "volume_ratio": 1.58,
+    "volume_ratio": 0.0,
     "has_volume_spike": false,
     "news_feed": []
   },
@@ -794,24 +794,24 @@
     "status": "ready",
     "forecasts": {
       "15": {
-        "expected_return_pct": -0.0104,
-        "target_price": 1817.81,
-        "band_low_pct": -0.2356,
-        "band_high_pct": 0.2149,
+        "expected_return_pct": 0.0053,
+        "target_price": 1818.1,
+        "band_low_pct": -0.2199,
+        "band_high_pct": 0.2305,
         "status": "shadow"
       },
       "30": {
-        "expected_return_pct": -0.0295,
-        "target_price": 1817.46,
-        "band_low_pct": -0.3273,
-        "band_high_pct": 0.2684,
+        "expected_return_pct": -0.0042,
+        "target_price": 1817.92,
+        "band_low_pct": -0.302,
+        "band_high_pct": 0.2936,
         "status": "shadow"
       },
       "60": {
-        "expected_return_pct": -0.0648,
-        "target_price": 1816.82,
-        "band_low_pct": -0.4785,
-        "band_high_pct": 0.3489,
+        "expected_return_pct": -0.023,
+        "target_price": 1817.58,
+        "band_low_pct": -0.4367,
+        "band_high_pct": 0.3907,
         "status": "shadow"
       }
     },
@@ -929,7 +929,7 @@
   },
   "curves": {
     "date": "2026-10-09",
-    "generated_at": "03:15 PM IST",
+    "generated_at": "03:20 PM IST",
     "symbol": "BHARTIARTL",
     "bias": "NEUTRAL",
     "timeframes": [
