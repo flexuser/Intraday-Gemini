@@ -18,15 +18,16 @@ from muthoot_poc.intraday_observations import FEATURE_VERSION, HORIZONS_MINUTES
 
 
 FEATURE_NAMES = (
-    # original
+    # core price / volume / technical
     "return_5m_pct", "return_15m_pct", "return_30m_pct", "move_since_open_pct",
     "vwap_distance_pct", "rsi_14", "macd_hist", "atr_pct", "last_bar_range_pct",
     "last_bar_volume_ratio", "session_volume_ratio", "minutes_since_open",
-    # smart-money extras
+    # smart-money + delivery (free sources)
     "oi_change_pct", "buildup_code", "oi_vs_avg",
     "bulk_buy_flag_5d", "bulk_sell_flag_5d", "bulk_net_value_cr",
     "block_buy_flag_5d", "insider_like_buy_flag",
     "promoter_delta_q", "fii_delta_q", "dii_delta_q",
+    "delivery_pct", "delivery_vs_avg",
 )
 MIN_HISTORY_SESSIONS = 40
 MIN_TRAIN_SESSIONS = 20

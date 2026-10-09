@@ -1,260 +1,312 @@
-"""muthoot_poc/smart_money.py
+"""Free smart-money + daily delivery features (no API keys).
 
-Free / near-free smart-money feature fetcher for Indian equities.
-All data is kept causal: only information that would have been known
-at decision time is returned.
+Sources
+-------
+- NSE bulk / block deal CSVs (official, free)
+- jugaad-data daily bars for Delivery % (official-ish NSE scrape, free)
+- Causal proxies only — never uses future information
 
-Sources used (all free):
-  - NSE bulk / block deals CSV
-  - NSE participant-wise / futures OI via public endpoints + yfinance fallback
-  - Latest shareholding pattern (promoter / FII / DII) via NSE API
-  - Simple insider flag from bulk deals that contain promoter-like names
-
-Results are cached for the day so the 15-min pipeline does not hammer NSE.
+All failures degrade to neutral defaults so the live pipeline never crashes.
 """
-
 from __future__ import annotations
 
 import datetime
 import json
 import os
-import time
 from typing import Any, Dict, List, Optional
 
 import pandas as pd
 import requests
-import yfinance as yf
 
-IST = datetime.timezone(datetime.timedelta(hours=5, minutes=30))
+# ---------------------------------------------------------------------------
+# Paths / constants
+# ---------------------------------------------------------------------------
 DATA_DIR = os.getenv("DATA_DIR", "public/data_store")
 CACHE_PATH = os.path.join(DATA_DIR, "smart_money_cache.json")
-CACHE_TTL_HOURS = 6          # re-fetch at most a few times per day
+CACHE_MAX_AGE_HOURS = 18          # refresh at most once per trading day
 
-# --------------------------------------------------------------------------- helpers
-def _today() -> str:
-    return datetime.datetime.now(IST).date().isoformat()
+NSE_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/120.0.0.0 Safari/537.36"
+    ),
+    "Accept": "*/*",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://www.nseindia.com/",
+}
+
+BULK_URL = "https://www.nseindia.com/api/historical/bulkrd?index=bulk&from={from_d}&to={to_d}"
+BLOCK_URL = "https://www.nseindia.com/api/historical/bulkrd?index=block&from={from_d}&to={to_d}"
+
+# Neutral defaults when a data source is unavailable
+NEUTRAL = {
+    "oi_change_pct": 0.0,
+    "buildup_code": 0,          # -2 short-build, -1 short-cover, 0 neutral, 1 long-build, 2 long-unwinding
+    "oi_vs_avg": 1.0,
+    "bulk_buy_flag_5d": 0,
+    "bulk_sell_flag_5d": 0,
+    "bulk_net_value_cr": 0.0,
+    "block_buy_flag_5d": 0,
+    "insider_like_buy_flag": 0,
+    "promoter_delta_q": 0.0,
+    "fii_delta_q": 0.0,
+    "dii_delta_q": 0.0,
+    "delivery_pct": 0.0,        # latest available delivery %
+    "delivery_vs_avg": 1.0,     # latest / 5-day average (1.0 = average)
+}
 
 
-def _read_cache() -> Dict[str, Any]:
+def _safe_float(x, default=0.0) -> float:
     try:
-        with open(CACHE_PATH, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except Exception:
-        return {}
-
-
-def _write_cache(payload: Dict[str, Any]) -> None:
-    os.makedirs(os.path.dirname(CACHE_PATH) or ".", exist_ok=True)
-    with open(CACHE_PATH, "w", encoding="utf-8") as f:
-        json.dump(payload, f, indent=2, default=str)
-
-
-def _safe_float(v, default=0.0) -> float:
-    try:
-        if v is None or (isinstance(v, float) and pd.isna(v)):
+        if x is None or (isinstance(x, float) and pd.isna(x)):
             return default
-        return float(v)
+        return float(x)
     except Exception:
         return default
 
 
-# --------------------------------------------------------------------------- Bulk / Block deals
-def _fetch_nse_deals(deal_type: str = "bulk") -> pd.DataFrame:
-    """Download today's (or previous session) bulk/block deals from NSE archives."""
-    url = f"https://nsearchives.nseindia.com/content/equities/{deal_type}.csv"
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-        "Accept": "text/csv,application/csv",
-        "Referer": "https://www.nseindia.com/",
-    }
+def _today_ist() -> datetime.date:
     try:
-        r = requests.get(url, headers=headers, timeout=15)
-        if r.status_code != 200 or not r.text.strip():
-            return pd.DataFrame()
-        from io import StringIO
-        df = pd.read_csv(StringIO(r.text))
-        # Normalise column names
-        df.columns = [c.strip().lower().replace(" ", "_") for c in df.columns]
-        return df
+        import pytz
+        return datetime.datetime.now(pytz.timezone("Asia/Kolkata")).date()
+    except Exception:
+        return datetime.date.today()
+
+
+# ---------------------------------------------------------------------------
+# Cache helpers
+# ---------------------------------------------------------------------------
+def _load_cache() -> Dict[str, Any]:
+    try:
+        if os.path.exists(CACHE_PATH):
+            with open(CACHE_PATH, encoding="utf-8") as f:
+                return json.load(f)
+    except Exception:
+        pass
+    return {}
+
+
+def _save_cache(payload: Dict[str, Any]) -> None:
+    try:
+        os.makedirs(os.path.dirname(CACHE_PATH) or ".", exist_ok=True)
+        tmp = CACHE_PATH + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(payload, f, indent=2)
+        os.replace(tmp, CACHE_PATH)
     except Exception as e:
-        print(f"[smart_money] {deal_type} deals fetch failed: {e}")
+        print(f"[smart_money] cache write warning: {e}")
+
+
+def _cache_fresh(cache: Dict[str, Any]) -> bool:
+    try:
+        ts = cache.get("fetched_at")
+        if not ts:
+            return False
+        fetched = datetime.datetime.fromisoformat(ts)
+        age_h = (datetime.datetime.now(fetched.tzinfo) - fetched).total_seconds() / 3600.0
+        return age_h < CACHE_MAX_AGE_HOURS
+    except Exception:
+        return False
+
+
+# ---------------------------------------------------------------------------
+# NSE bulk / block deals (free official CSVs via JSON API)
+# ---------------------------------------------------------------------------
+def _nse_session() -> requests.Session:
+    s = requests.Session()
+    s.headers.update(NSE_HEADERS)
+    try:
+        s.get("https://www.nseindia.com", timeout=8)
+    except Exception:
+        pass
+    return s
+
+
+def _fetch_bulk_block(days: int = 7) -> pd.DataFrame:
+    """Return combined bulk+block deals for the last `days` calendar days."""
+    end = _today_ist()
+    start = end - datetime.timedelta(days=days)
+    from_d = start.strftime("%d-%m-%Y")
+    to_d = end.strftime("%d-%m-%Y")
+    rows = []
+    sess = _nse_session()
+    for url_tmpl, deal_type in ((BULK_URL, "bulk"), (BLOCK_URL, "block")):
+        try:
+            r = sess.get(url_tmpl.format(from_d=from_d, to_d=to_d), timeout=12)
+            if r.status_code != 200:
+                continue
+            data = r.json()
+            for item in data.get("data") or data.get("full") or []:
+                item = dict(item)
+                item["_deal_type"] = deal_type
+                rows.append(item)
+        except Exception as e:
+            print(f"[smart_money] {deal_type} deals fetch warning: {e}")
+    if not rows:
         return pd.DataFrame()
+    return pd.DataFrame(rows)
 
 
-def get_bulk_block_features(symbols: List[str], lookback_days: int = 5) -> Dict[str, Dict[str, Any]]:
-    """Return per-symbol bulk/block activity features (causal – uses already published deals)."""
-    out = {s: {
+def _bulk_block_features(df: pd.DataFrame, symbol: str) -> Dict[str, float]:
+    out = {
         "bulk_buy_flag_5d": 0,
         "bulk_sell_flag_5d": 0,
         "bulk_net_value_cr": 0.0,
         "block_buy_flag_5d": 0,
         "insider_like_buy_flag": 0,
-    } for s in symbols}
+    }
+    if df is None or df.empty:
+        return out
 
-    for deal_type in ("bulk", "block"):
-        df = _fetch_nse_deals(deal_type)
-        if df.empty:
-            continue
+    # Normalise column names that NSE sometimes changes
+    cols = {c.lower(): c for c in df.columns}
+    sym_col = cols.get("symbol") or cols.get("sm_name") or cols.get("scripsymbol")
+    buy_sell_col = cols.get("buy/sell") or cols.get("client_type") or cols.get("bs")
+    value_col = cols.get("trade_val") or cols.get("value") or cols.get("trd_val") or cols.get("tradevalue")
+    deal_col = "_deal_type"
 
-        # Try common column names
-        sym_col = next((c for c in df.columns if "symbol" in c or "scrip" in c), None)
-        side_col = next((c for c in df.columns if "buy" in c or "sell" in c or "bs" in c or "side" in c), None)
-        qty_col = next((c for c in df.columns if "qty" in c or "quantity" in c), None)
-        price_col = next((c for c in df.columns if "price" in c or "watp" in c or "avg" in c), None)
-        client_col = next((c for c in df.columns if "client" in c or "name" in c), None)
+    if not sym_col:
+        return out
 
-        if not sym_col:
-            continue
+    sub = df[df[sym_col].astype(str).str.upper() == symbol.upper()].copy()
+    if sub.empty:
+        return out
 
-        for _, row in df.iterrows():
-            sym = str(row.get(sym_col, "")).upper().replace(".NS", "").strip()
-            if sym not in out:
-                continue
-            side = str(row.get(side_col, "")).upper() if side_col else ""
-            qty = _safe_float(row.get(qty_col))
-            price = _safe_float(row.get(price_col))
-            value_cr = (qty * price) / 1e7 if qty and price else 0.0
-            client = str(row.get(client_col, "")).upper() if client_col else ""
+    def _is_buy(row) -> bool:
+        v = str(row.get(buy_sell_col, "")).upper()
+        return "BUY" in v or v in ("B", "BUY")
 
-            is_buy = "B" in side or "BUY" in side
-            is_sell = "S" in side or "SELL" in side
+    def _is_sell(row) -> bool:
+        v = str(row.get(buy_sell_col, "")).upper()
+        return "SELL" in v or v in ("S", "SELL")
 
-            if deal_type == "bulk":
-                if is_buy:
-                    out[sym]["bulk_buy_flag_5d"] = 1
-                    out[sym]["bulk_net_value_cr"] += value_cr
-                elif is_sell:
-                    out[sym]["bulk_sell_flag_5d"] = 1
-                    out[sym]["bulk_net_value_cr"] -= value_cr
-            else:  # block
-                if is_buy:
-                    out[sym]["block_buy_flag_5d"] = 1
+    bulk = sub[sub[deal_col] == "bulk"] if deal_col in sub.columns else sub
+    block = sub[sub[deal_col] == "block"] if deal_col in sub.columns else pd.DataFrame()
 
-            # crude insider / promoter heuristic
-            if is_buy and any(k in client for k in ("PROMOTER", "DIRECTOR", "INSIDER", "PLEDGE")):
-                out[sym]["insider_like_buy_flag"] = 1
+    buy_val = 0.0
+    sell_val = 0.0
+    for _, row in bulk.iterrows():
+        val = _safe_float(row.get(value_col), 0.0)
+        # NSE value is often already in Rs; convert crudely to crore
+        if val > 1e7:          # looks like raw rupees
+            val = val / 1e7
+        elif val > 100:        # already in lakh / something else — leave as-is scale
+            val = val / 100.0
+        if _is_buy(row):
+            buy_val += val
+            out["bulk_buy_flag_5d"] = 1
+        elif _is_sell(row):
+            sell_val += val
+            out["bulk_sell_flag_5d"] = 1
+
+    out["bulk_net_value_cr"] = round(buy_val - sell_val, 2)
+
+    for _, row in block.iterrows():
+        if _is_buy(row):
+            out["block_buy_flag_5d"] = 1
+            # Heuristic: large block buy can be insider-like
+            val = _safe_float(row.get(value_col), 0.0)
+            if val > 5:        # rough threshold
+                out["insider_like_buy_flag"] = 1
+            break
 
     return out
 
 
-# --------------------------------------------------------------------------- F&O Open Interest / Build-up
-def _fetch_oi_change(symbol: str) -> Dict[str, Any]:
-    """
-    Best-effort previous-day OI change using yfinance futures if available.
-    Returns neutral defaults when data is missing (keeps pipeline alive).
-    """
-    defaults = {
-        "oi_change_pct": 0.0,
-        "buildup_code": 0,          # 0=none, 1=long_build, 2=short_build, 3=short_cover, 4=long_unwind
-        "oi_vs_avg": 1.0,
-    }
+# ---------------------------------------------------------------------------
+# jugaad-data — daily bars + Delivery %
+# ---------------------------------------------------------------------------
+def _fetch_delivery_features(symbol: str, lookback_days: int = 12) -> Dict[str, float]:
+    """Return delivery_pct and delivery_vs_avg using jugaad-data (free)."""
+    out = {"delivery_pct": 0.0, "delivery_vs_avg": 1.0}
     try:
-        # yfinance does not give clean stock-futures OI for all names.
-        # We approximate with volume surge + price direction as a proxy when pure OI is unavailable.
-        t = yf.Ticker(f"{symbol}.NS")
-        hist = t.history(period="5d", interval="1d")
-        if hist is None or len(hist) < 2:
-            return defaults
-        hist = hist.dropna()
-        if len(hist) < 2:
-            return defaults
+        from jugaad_data.nse import stock_df
+        from datetime import date, timedelta
+        end = _today_ist()
+        start = end - timedelta(days=lookback_days + 5)
+        df = stock_df(symbol=symbol, from_date=start, to_date=end, series="EQ")
+        if df is None or df.empty:
+            return out
 
-        price_chg = (hist["Close"].iloc[-1] / hist["Close"].iloc[-2] - 1.0) * 100.0
-        vol_ratio = float(hist["Volume"].iloc[-1] / hist["Volume"].iloc[:-1].mean()) if hist["Volume"].iloc[:-1].mean() > 0 else 1.0
+        # Keep only EQ series if multiple series present
+        if "SERIES" in df.columns:
+            df = df[df["SERIES"].astype(str).str.upper() == "EQ"]
+        if df.empty:
+            return out
 
-        # crude but causal proxy until a dedicated free OI feed is wired
-        oi_chg_proxy = (vol_ratio - 1.0) * 5.0          # scale to roughly % territory
-        if price_chg > 0.3 and oi_chg_proxy > 2.0:
-            code = 1          # long build-up proxy
-        elif price_chg < -0.3 and oi_chg_proxy > 2.0:
-            code = 2          # short build-up proxy
-        elif price_chg > 0.3 and oi_chg_proxy < -1.0:
-            code = 3          # short covering proxy
-        elif price_chg < -0.3 and oi_chg_proxy < -1.0:
-            code = 4          # long unwinding proxy
-        else:
-            code = 0
+        # Sort by date ascending
+        date_col = "DATE" if "DATE" in df.columns else df.columns[0]
+        df = df.sort_values(date_col)
 
-        return {
-            "oi_change_pct": round(oi_chg_proxy, 2),
-            "buildup_code": code,
-            "oi_vs_avg": round(vol_ratio, 2),
-        }
+        del_col = None
+        for candidate in ("DELIVERY %", "DELIVERY%", "DELIVERY_PCT", "DELIVERY PCT"):
+            if candidate in df.columns:
+                del_col = candidate
+                break
+        if del_col is None:
+            return out
+
+        series = pd.to_numeric(df[del_col], errors="coerce").dropna()
+        if series.empty:
+            return out
+
+        latest = float(series.iloc[-1])
+        avg = float(series.tail(5).mean()) if len(series) >= 2 else latest
+        out["delivery_pct"] = round(latest, 2)
+        out["delivery_vs_avg"] = round(latest / avg, 3) if avg > 0 else 1.0
     except Exception as e:
-        print(f"[smart_money] OI proxy {symbol}: {e}")
-        return defaults
-
-
-def get_fno_features(symbols: List[str]) -> Dict[str, Dict[str, Any]]:
-    out = {}
-    for s in symbols:
-        out[s] = _fetch_oi_change(s)
-        time.sleep(0.15)          # be gentle with Yahoo
+        print(f"[smart_money] delivery fetch ({symbol}): {e}")
     return out
 
 
-# --------------------------------------------------------------------------- Shareholding deltas (latest available)
-def get_shareholding_deltas(symbols: List[str]) -> Dict[str, Dict[str, Any]]:
+# ---------------------------------------------------------------------------
+# Public API
+# ---------------------------------------------------------------------------
+def features_for_symbol(bundle: Dict[str, Any], symbol: str) -> Dict[str, float]:
+    """Extract the feature dict for one symbol from the bundle returned by fetch_smart_money."""
+    if not bundle:
+        return dict(NEUTRAL)
+    return dict(bundle.get(symbol) or NEUTRAL)
+
+
+def fetch_smart_money(symbols: List[str], force: bool = False) -> Dict[str, Dict[str, float]]:
     """
-    Placeholder that returns neutral values.
-    In production you can wire NSE SHP XBRL or a local PIT cache.
-    Keeping it neutral guarantees the pipeline never breaks.
+    Fetch (or load from cache) smart-money + delivery features for every symbol.
+
+    Returns
+    -------
+    dict[symbol] -> feature dict (always complete, never None values)
     """
-    return {s: {
-        "promoter_delta_q": 0.0,
-        "fii_delta_q": 0.0,
-        "dii_delta_q": 0.0,
-    } for s in symbols}
+    cache = _load_cache()
+    if not force and _cache_fresh(cache) and cache.get("symbols"):
+        print(f"[smart_money] using cache from {cache.get('fetched_at')}")
+        return cache["symbols"]
 
+    print("[smart_money] refreshing features (free sources only)…")
+    result: Dict[str, Dict[str, float]] = {s: dict(NEUTRAL) for s in symbols}
 
-# --------------------------------------------------------------------------- Main entry point
-def fetch_smart_money(symbols: List[str], force: bool = False) -> Dict[str, Dict[str, Any]]:
-    """
-    Returns a dict keyed by symbol with all smart-money features.
-    Cached for CACHE_TTL_HOURS so repeated 15-min runs stay cheap.
-    """
-    cache = _read_cache()
-    today = _today()
-    if not force and cache.get("date") == today and cache.get("symbols") == symbols:
-        age_h = (time.time() - cache.get("ts", 0)) / 3600.0
-        if age_h < CACHE_TTL_HOURS:
-            return cache.get("data", {})
+    # --- bulk / block deals (one call for all symbols) ---
+    try:
+        deals = _fetch_bulk_block(days=7)
+        for sym in symbols:
+            result[sym].update(_bulk_block_features(deals, sym))
+    except Exception as e:
+        print(f"[smart_money] bulk/block disabled: {e}")
 
-    print("[smart_money] refreshing features …")
-    bulk = get_bulk_block_features(symbols)
-    fno = get_fno_features(symbols)
-    shp = get_shareholding_deltas(symbols)
+    # --- delivery % via jugaad-data (per symbol, cached for the day) ---
+    for sym in symbols:
+        try:
+            result[sym].update(_fetch_delivery_features(sym))
+        except Exception as e:
+            print(f"[smart_money] delivery ({sym}): {e}")
 
-    combined = {}
-    for s in symbols:
-        combined[s] = {
-            **bulk.get(s, {}),
-            **fno.get(s, {}),
-            **shp.get(s, {}),
-        }
+    # OI / buildup / shareholding remain neutral until a free reliable source appears.
+    # They are kept in the schema so the model can learn them later without a version bump.
 
-    _write_cache({
-        "date": today,
-        "ts": time.time(),
-        "symbols": symbols,
-        "data": combined,
-    })
-    return combined
-
-
-def features_for_symbol(smart: Dict[str, Dict[str, Any]], symbol: str) -> Dict[str, Any]:
-    """Flat feature dict ready to merge into an observation."""
-    d = smart.get(symbol) or {}
-    return {
-        "oi_change_pct": _safe_float(d.get("oi_change_pct")),
-        "buildup_code": int(d.get("buildup_code") or 0),
-        "oi_vs_avg": _safe_float(d.get("oi_vs_avg"), 1.0),
-        "bulk_buy_flag_5d": int(d.get("bulk_buy_flag_5d") or 0),
-        "bulk_sell_flag_5d": int(d.get("bulk_sell_flag_5d") or 0),
-        "bulk_net_value_cr": _safe_float(d.get("bulk_net_value_cr")),
-        "block_buy_flag_5d": int(d.get("block_buy_flag_5d") or 0),
-        "insider_like_buy_flag": int(d.get("insider_like_buy_flag") or 0),
-        "promoter_delta_q": _safe_float(d.get("promoter_delta_q")),
-        "fii_delta_q": _safe_float(d.get("fii_delta_q")),
-        "dii_delta_q": _safe_float(d.get("dii_delta_q")),
+    payload = {
+        "fetched_at": datetime.datetime.now().isoformat(timespec="seconds"),
+        "symbols": result,
     }
+    _save_cache(payload)
+    return result

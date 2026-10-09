@@ -7,3 +7,4 @@ pytz
 scipy
 supabase>=2.0.0
 holidays>=0.40
+jugaad-data>=0.35
