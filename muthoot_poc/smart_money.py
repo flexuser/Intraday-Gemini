@@ -136,13 +136,18 @@ def _fetch_bulk_block(days: int = 7) -> pd.DataFrame:
             r = sess.get(url_tmpl.format(from_d=from_d, to_d=to_d), timeout=12)
             if r.status_code != 200:
                 continue
+            # NSE sometimes returns HTML challenge pages
+            ctype = (r.headers.get("content-type") or "").lower()
+            if "json" not in ctype and not r.text.strip().startswith(("{", "[")):
+                continue
             data = r.json()
             for item in data.get("data") or data.get("full") or []:
                 item = dict(item)
                 item["_deal_type"] = deal_type
                 rows.append(item)
         except Exception as e:
-            print(f"[smart_money] {deal_type} deals fetch warning: {e}")
+            # NSE frequently returns HTML/empty on cloud runners — degrade silently
+            print(f"[smart_money] {deal_type} deals unavailable ({type(e).__name__}) — using neutral defaults")
     if not rows:
         return pd.DataFrame()
     return pd.DataFrame(rows)
@@ -221,7 +226,10 @@ def _fetch_delivery_features(symbol: str, lookback_days: int = 12) -> Dict[str, 
     """Return delivery_pct and delivery_vs_avg using jugaad-data (free)."""
     out = {"delivery_pct": 0.0, "delivery_vs_avg": 1.0}
     try:
-        from jugaad_data.nse import stock_df
+        import warnings
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", message="no explicit representation of timezones")
+            from jugaad_data.nse import stock_df
         from datetime import date, timedelta
         end = _today_ist()
         start = end - timedelta(days=lookback_days + 5)

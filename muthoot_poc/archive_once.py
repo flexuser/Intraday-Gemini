@@ -641,8 +641,15 @@ def process_symbol(symbol, now):
         if df.empty:
             return _fail(symbol, "no bars for today - files left untouched")
         lag = (now - (df.index[-1] + datetime.timedelta(minutes=5))).total_seconds() / 60.0
-        if lag > MAX_DATA_LAG_MIN and now.time() < datetime.time(15, 45):
-            return _fail(symbol, f"stale data: newest bar is {lag:.0f} min old - files left untouched")
+        # Soft lag policy:
+        # - During core hours (before 15:15) enforce the normal 20-min limit.
+        # - After 15:15 allow up to 45 min so post-close / delayed Yahoo bars still get scored.
+        # - Only hard-skip when data is truly unusable.
+        lag_limit = MAX_DATA_LAG_MIN if now.time() < datetime.time(15, 15) else 45
+        if lag > lag_limit:
+            return _fail(symbol, f"stale data: newest bar is {lag:.0f} min old (limit {lag_limit}) - files left untouched")
+        if lag > MAX_DATA_LAG_MIN:
+            print(f"[{symbol}] data lag {lag:.0f} min (soft tolerance after 15:15) - continuing")
         
         # Calculate technical snapshot (VWAP, RSI, MACD, ATR, technical bias)
         tech_snapshot = calculate_technical_snapshot(df) if calculate_technical_snapshot else {}
@@ -930,8 +937,11 @@ def build_health(results, now, errors, previous):
     fallbacks = [r for r in ok if r.get("forecast_source") != "llm"]
     llm_errors = [r for r in ok if r.get("llm_error")]
     total = len(SYMBOLS)
+    stale_only = bool(errors) and all("stale data" in str(e).lower() or "no bars" in str(e).lower()
+                                       for _, e in errors)
     if not ok:
-        status = "FAILED"
+        # All symbols skipped only because of lag / missing bars → DEGRADED, not FAILED
+        status = "DEGRADED" if stale_only else "FAILED"
     elif len(ok) < total * 0.7 or len(fallbacks) >= total * 0.5 or len(llm_errors) >= total * 0.5:
         status = "DEGRADED"
     else:
