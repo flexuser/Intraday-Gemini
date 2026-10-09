@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-10-09T15:25:32+05:30",
+  "as_of": "2026-10-09T15:30:48+05:30",
   "status": "DEGRADED",
   "symbols_total": 11,
   "symbols_updated": 11,
   "llm_fallback_count": 1,
   "llm_error_count": 11,
-  "llm_cooldown_until": "2026-10-09T15:25:36+05:30",
+  "llm_cooldown_until": null,
   "model": "gemini-3.8-flash",
   "prompt_version": "v3-context-risk",
   "quant_model": {
