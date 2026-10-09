@@ -44,6 +44,7 @@
       <div class="flex items-center gap-2 bg-slate-900 p-1 rounded-lg border border-slate-800">
         <button id="tab-intraday" onclick="switchTab('intraday')" class="px-3 py-1.5 text-xs font-medium rounded-md bg-blue-600 text-white shadow">Market Snapshot</button>
         <button id="tab-audit" onclick="switchTab('audit')" class="px-3 py-1.5 text-xs font-medium rounded-md text-slate-400 hover:text-white">Forecast Audit</button>
+        <button id="tab-history" onclick="switchTab('history')" class="px-3 py-1.5 text-xs font-medium rounded-md text-slate-400 hover:text-white">Track Record</button>
       </div>
     </header>
 
@@ -126,11 +127,69 @@
                 <li class="flex justify-between border-b border-slate-900 pb-1"><span>Latest Observed Price:</span> <span id="val-actual" class="font-mono text-white">--</span></li>
                 <li class="flex justify-between"><span id="error-label">Live Gap to Estimate:</span> <span id="val-error" class="font-mono text-white">--</span></li>
               </ul>
+              <div id="gap-callout" class="mt-3 rounded-lg border border-slate-800 bg-slate-950 px-3 py-2 text-[11px] leading-relaxed">
+                <div class="text-slate-500 font-semibold uppercase tracking-wider mb-1">Prediction vs Reality</div>
+                <p id="gap-callout-text" class="text-slate-400">Waiting for a completed market session. After close, this shows forecast target vs actual close and the error gap.</p>
+              </div>
               <div class="pt-2 border-t border-slate-800/80">
                 <span class="text-slate-400 font-semibold block text-[11px]">15 / 30 / 60 MINUTE MODEL</span>
                 <p id="intraday-forecast" class="text-slate-500 text-[11px] mt-1">Loading model status…</p>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="view-history" class="hidden space-y-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 md:p-6 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h3 class="text-lg font-bold text-white">Track Record</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Scored sessions only. Empty until the first full trading day is completed and written.</p>
+            </div>
+            <span id="history-sync-time" class="text-xs text-slate-400 font-mono">--</span>
+          </div>
+          <div id="history-summary" class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="bg-slate-950 border border-slate-800 rounded-lg p-3">
+              <div class="text-[10px] uppercase text-slate-500 tracking-wider">Sessions</div>
+              <div id="hist-sessions" class="text-xl font-bold text-white mt-1">--</div>
+            </div>
+            <div class="bg-slate-950 border border-slate-800 rounded-lg p-3">
+              <div class="text-[10px] uppercase text-slate-500 tracking-wider">Direction hit</div>
+              <div id="hist-hit" class="text-xl font-bold text-white mt-1">--</div>
+            </div>
+            <div class="bg-slate-950 border border-slate-800 rounded-lg p-3">
+              <div class="text-[10px] uppercase text-slate-500 tracking-wider">Mean error</div>
+              <div id="hist-error" class="text-xl font-bold text-white mt-1">--</div>
+            </div>
+            <div class="bg-slate-950 border border-slate-800 rounded-lg p-3">
+              <div class="text-[10px] uppercase text-slate-500 tracking-wider">vs Flat baseline</div>
+              <div id="hist-baseline" class="text-xl font-bold text-white mt-1">--</div>
+            </div>
+          </div>
+          <div id="history-empty" class="rounded-lg border border-dashed border-slate-700 bg-slate-950/50 px-4 py-6 text-center text-sm text-slate-400">
+            No scored history yet. History is written only after a <strong class="text-slate-200">completed</strong> NSE session (after ~15:30 IST). Weekend and stale-data runs do not create history rows.
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-950 text-slate-400 border-b border-slate-800 uppercase">
+                <tr>
+                  <th class="p-2.5">Date</th>
+                  <th class="p-2.5">Symbol</th>
+                  <th class="p-2.5">Bias</th>
+                  <th class="p-2.5">Target</th>
+                  <th class="p-2.5">Actual</th>
+                  <th class="p-2.5">Error %</th>
+                  <th class="p-2.5">Dir hit</th>
+                  <th class="p-2.5">Verdict</th>
+                </tr>
+              </thead>
+              <tbody id="history-table-body" class="divide-y divide-slate-800"></tbody>
+            </table>
+          </div>
+          <div>
+            <h4 class="text-sm font-semibold text-slate-200 mb-2">By symbol</h4>
+            <div id="history-by-symbol" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2"></div>
           </div>
         </div>
       </div>
@@ -278,19 +337,22 @@
       ).join("");
     }
 
-    function switchTab(tab) {
-      if (tab === 'intraday') {
-        document.getElementById('view-intraday').classList.remove('hidden');
-        document.getElementById('view-audit').classList.add('hidden');
-        document.getElementById('tab-intraday').className = "px-3 py-1.5 text-xs font-medium rounded-md bg-blue-600 text-white shadow";
-        document.getElementById('tab-audit').className = "px-3 py-1.5 text-xs font-medium rounded-md text-slate-400 hover:text-white";
-      } else {
-        document.getElementById('view-intraday').classList.add('hidden');
-        document.getElementById('view-audit').classList.remove('hidden');
-        document.getElementById('tab-audit').className = "px-3 py-1.5 text-xs font-medium rounded-md bg-blue-600 text-white shadow";
-        document.getElementById('tab-intraday').className = "px-3 py-1.5 text-xs font-medium rounded-md text-slate-400 hover:text-white";
-        loadAuditData();
-      }
+        function switchTab(tab) {
+      const views = ['intraday', 'audit', 'history'];
+      views.forEach(v => {
+        const el = document.getElementById('view-' + v);
+        const btn = document.getElementById('tab-' + v);
+        if (!el || !btn) return;
+        if (v === tab) {
+          el.classList.remove('hidden');
+          btn.className = 'px-3 py-1.5 text-xs font-medium rounded-md bg-blue-600 text-white shadow';
+        } else {
+          el.classList.add('hidden');
+          btn.className = 'px-3 py-1.5 text-xs font-medium rounded-md text-slate-400 hover:text-white';
+        }
+      });
+      if (tab === 'audit') loadAuditData();
+      if (tab === 'history') loadHistoryData();
     }
 
     async function loadStock(symbol) {
@@ -432,17 +494,30 @@
       document.getElementById("val-actual").innerText = validActuals.length > 0 ? `₹${validActuals[validActuals.length - 1]}` : "--";
       const errorLabel = document.getElementById("error-label");
       const errorValue = document.getElementById("val-error");
+      const gapEl = document.getElementById("gap-callout-text");
       if (curves.error_pct != null) {
         errorLabel.textContent = "Final Forecast Error:";
         errorValue.textContent = `${curves.error_pct}%`;
+        if (gapEl) {
+          const pred = curves.final_pred != null ? `₹${Number(curves.final_pred).toFixed(2)}` : "--";
+          const act = validActuals.length ? `₹${Number(validActuals[validActuals.length - 1]).toFixed(2)}` : "--";
+          const sign = Number(curves.error_pct) >= 0 ? "above" : "below";
+          gapEl.innerHTML = `Session complete. Target <span class="text-white font-mono">${pred}</span> vs actual <span class="text-white font-mono">${act}</span> — error <span class="text-white font-mono">${curves.error_pct}%</span> (${sign} target magnitude).`;
+        }
       } else if (hasForecastTarget && validActuals.length > 0 && Number.isFinite(Number(curves.final_pred))) {
         const liveGap = Number(curves.final_pred) - Number(validActuals[validActuals.length - 1]);
         const liveGapPct = liveGap / Number(validActuals[validActuals.length - 1]) * 100;
         errorLabel.textContent = "Live Gap to Estimate:";
         errorValue.textContent = `${liveGap >= 0 ? "+" : "−"}₹${Math.abs(liveGap).toFixed(2)} (${liveGapPct >= 0 ? "+" : "−"}${Math.abs(liveGapPct).toFixed(2)}%)`;
+        if (gapEl) {
+          gapEl.innerHTML = `In progress. Current price is <span class="text-white font-mono">${liveGap >= 0 ? "below" : "above"}</span> the close estimate by <span class="text-white font-mono">₹${Math.abs(liveGap).toFixed(2)}</span> (<span class="text-white font-mono">${Math.abs(liveGapPct).toFixed(2)}%</span>). Gap closes when the session is scored after 15:30.`;
+        }
       } else {
         errorLabel.textContent = "Forecast Error:";
         errorValue.textContent = "--";
+        if (gapEl) {
+          gapEl.textContent = "Waiting for a forecast target and observed prices. After the first completed session you will see target vs actual here.";
+        }
       }
 
       const intradayEl = document.getElementById("intraday-forecast");
@@ -579,6 +654,91 @@
       });
     }
 
+    
+    async function loadHistoryData() {
+      const tbody = document.getElementById("history-table-body");
+      const empty = document.getElementById("history-empty");
+      const bySym = document.getElementById("history-by-symbol");
+      if (!tbody) return;
+      try {
+        let history = [];
+        let perf = performanceSnapshot;
+        for (const url of [`${GITHUB_RAW_BASE}/history.json?cb=${Date.now()}`, `./data_store/history.json?cb=${Date.now()}`]) {
+          try {
+            const res = await fetch(url, { cache: "no-store" });
+            if (res.ok) { history = await res.json(); break; }
+          } catch (_) {}
+        }
+        if (!perf) {
+          for (const url of [`${GITHUB_RAW_BASE}/performance_summary.json?cb=${Date.now()}`, `./data_store/performance_summary.json?cb=${Date.now()}`]) {
+            try {
+              const res = await fetch(url, { cache: "no-store" });
+              if (res.ok) { perf = await res.json(); break; }
+            } catch (_) {}
+          }
+        }
+        const o = perf?.overall || {};
+        const sessions = Number(o.sessions || (Array.isArray(history) ? history.length : 0)) || 0;
+        document.getElementById("hist-sessions").textContent = sessions || "--";
+        document.getElementById("hist-hit").textContent =
+          o.direction_hit_rate == null ? "--" : `${Math.round(o.direction_hit_rate * 100)}%`;
+        document.getElementById("hist-error").textContent =
+          o.mean_error_pct == null ? "--" : `${Number(o.mean_error_pct).toFixed(2)}%`;
+        document.getElementById("hist-baseline").textContent =
+          o.mean_flat_baseline_error_pct == null ? "--" : `${Number(o.mean_flat_baseline_error_pct).toFixed(2)}%`;
+        document.getElementById("history-sync-time").textContent = perf?.as_of
+          ? `As of ${perf.as_of}`
+          : (sessions ? `${sessions} scored rows` : "No scored sessions yet");
+
+        if (!Array.isArray(history) || history.length === 0) {
+          empty.classList.remove("hidden");
+          tbody.innerHTML = "";
+          bySym.innerHTML = `<p class="text-xs text-slate-500 col-span-full">Per-symbol stats will appear after the first completed sessions.</p>`;
+          return;
+        }
+        empty.classList.add("hidden");
+        // newest first
+        const rows = [...history].reverse();
+        tbody.innerHTML = rows.slice(0, 100).map(item => {
+          const hit = item.direction_hit;
+          const hitLabel = hit === true ? "YES" : hit === false ? "NO" : "--";
+          const hitCls = hit === true ? "text-emerald-400" : hit === false ? "text-rose-400" : "text-slate-500";
+          return `<tr class="hover:bg-slate-900/50">
+            <td class="p-2.5 font-mono text-slate-400">${escapeHtml(item.date || item.session_date || "--")}</td>
+            <td class="p-2.5 font-bold text-white">${escapeHtml(item.symbol || "--")}</td>
+            <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] rounded font-semibold ${item.bias === 'BULLISH' ? 'bg-emerald-950 text-emerald-400' : item.bias === 'BEARISH' ? 'bg-rose-950 text-rose-400' : 'bg-slate-800 text-slate-300'}">${escapeHtml(item.bias || "--")}</span></td>
+            <td class="p-2.5 font-mono">${item.final_pred == null ? "--" : "₹" + Number(item.final_pred).toFixed(2)}</td>
+            <td class="p-2.5 font-mono">${item.final_actual == null ? "--" : "₹" + Number(item.final_actual).toFixed(2)}</td>
+            <td class="p-2.5 font-mono">${item.error_pct != null ? Number(item.error_pct).toFixed(2) + "%" : "--"}</td>
+            <td class="p-2.5 font-semibold ${hitCls}">${hitLabel}</td>
+            <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] rounded font-semibold ${item.verdict === 'SUCCESS' ? 'bg-emerald-900/50 text-emerald-300' : item.verdict === 'PARTIAL' ? 'bg-amber-900/50 text-amber-300' : item.verdict === 'FAILED' ? 'bg-rose-900/50 text-rose-300' : 'bg-slate-800 text-slate-300'}">${escapeHtml(item.verdict || "--")}</span></td>
+          </tr>`;
+        }).join("");
+
+        const by = perf?.by_symbol || {};
+        const cards = Object.keys(by).length ? Object.entries(by) : WATCHLIST.map(s => [s, {}]);
+        bySym.innerHTML = cards.map(([sym, s]) => {
+          const hit = s.direction_hit_rate == null ? "--" : Math.round(s.direction_hit_rate * 100) + "%";
+          const err = s.mean_error_pct == null ? "--" : Number(s.mean_error_pct).toFixed(2) + "%";
+          const n = s.sessions || s.days || 0;
+          return `<div class="bg-slate-950 border border-slate-800 rounded-lg p-3">
+            <div class="flex justify-between items-center mb-1">
+              <span class="font-bold text-white text-sm">${escapeHtml(sym)}</span>
+              <span class="text-[10px] text-slate-500">${n} sessions</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1 text-[11px] text-slate-400">
+              <div>Hit rate: <span class="text-slate-200 font-mono">${hit}</span></div>
+              <div>Mean err: <span class="text-slate-200 font-mono">${err}</span></div>
+            </div>
+          </div>`;
+        }).join("");
+      } catch (e) {
+        empty.classList.remove("hidden");
+        empty.textContent = "Could not load history: " + (e.message || e);
+        tbody.innerHTML = "";
+      }
+    }
+
     async function loadAuditData() {
       const tbody = document.getElementById("audit-table-body");
       tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-slate-500">Loading forecast outcomes…</td></tr>`;
@@ -591,6 +751,11 @@
           } catch (_) { /* try next source */ }
         }
         if (!Array.isArray(data)) throw new Error("audit data unavailable");
+        if (data.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-slate-400">No scored sessions yet. Come back after the first full trading day closes.</td></tr>`;
+          document.getElementById("audit-sync-time").textContent = "Waiting for first completed session";
+          return;
+        }
         const sessionDates = [...new Set(data.map(item => item.session_date).filter(Boolean))];
         document.getElementById("audit-sync-time").textContent = sessionDates.length
           ? `Session date: ${sessionDates.join(", ")}`
@@ -607,7 +772,7 @@
           </tr>`
         ).join('');
       } catch (e) {
-        tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-rose-400">Forecast outcome data is unavailable.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-slate-400">No audit rows yet. Rows appear after a completed session is scored (typically after 15:30 IST on a trading day).</td></tr>`;
         document.getElementById("audit-sync-time").textContent = "Snapshot date unavailable";
       }
     }
@@ -619,9 +784,9 @@
       loadStock(activeSymbol);
       refreshStatusData();
       const auditTab = document.getElementById("view-audit");
-      if (auditTab && !auditTab.classList.contains("hidden")) {
-        loadAuditData();
-      }
+      if (auditTab && !auditTab.classList.contains("hidden")) loadAuditData();
+      const histTab = document.getElementById("view-history");
+      if (histTab && !histTab.classList.contains("hidden")) loadHistoryData();
     }, 5 * 60 * 1000);
 </script>
 </body>
