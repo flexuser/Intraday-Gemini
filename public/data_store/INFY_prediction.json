@@ -9,8 +9,8 @@
     "model": "gemini-3.8-flash",
     "llm_error": "skipped: Gemini quota cooldown until 15:25 IST",
     "made_at": "2026-10-09T09:20:37+05:30",
-    "volume_ratio": 1.89,
-    "has_volume_spike": false,
+    "volume_ratio": 2.62,
+    "has_volume_spike": true,
     "news_feed": []
   },
   "forecast": {
@@ -163,7 +163,10 @@
         },
         "60": {
           "target_at": "2026-10-09T15:15:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:15:00+05:30",
+          "actual_price": 1024.5,
+          "actual_return_pct": 0.3379
         }
       }
     },
@@ -435,7 +438,10 @@
         },
         "30": {
           "target_at": "2026-10-09T15:15:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:15:00+05:30",
+          "actual_price": 1024.5,
+          "actual_return_pct": 0.083
         },
         "60": {
           "target_at": "2026-10-09T15:45:00+05:30",
@@ -575,7 +581,10 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T15:15:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:15:00+05:30",
+          "actual_price": 1024.5,
+          "actual_return_pct": 0.2593
         },
         "30": {
           "target_at": "2026-10-09T15:30:00+05:30",
@@ -678,16 +687,136 @@
           "status": "pending"
         }
       }
+    },
+    {
+      "key": "INFY|2026-10-09T15:15:00+05:30",
+      "symbol": "INFY",
+      "bar_time": "2026-10-09T15:15:00+05:30",
+      "entry_price": 1024.5,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0244,
+        "return_15m_pct": 0.1956,
+        "return_30m_pct": 0.0977,
+        "move_since_open_pct": 1.5362,
+        "vwap_distance_pct": 0.23,
+        "rsi_14": 61.57,
+        "macd_hist": 0.1787,
+        "atr_pct": 0.19,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 2.62,
+        "minutes_since_open": 360,
+        "oi_change_pct": 0.55,
+        "buildup_code": 0,
+        "oi_vs_avg": 1.11,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:30:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:45:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:15:00+05:30",
+          "status": "pending"
+        }
+      }
     }
   ],
   "intraday_forecast": {
-    "status": "collecting",
-    "forecasts": {},
-    "reason": null,
-    "sessions_available": 0,
+    "status": "ready",
+    "forecasts": {
+      "15": {
+        "expected_return_pct": 0.0636,
+        "target_price": 1025.15,
+        "band_low_pct": -0.2088,
+        "band_high_pct": 0.336,
+        "status": "shadow"
+      },
+      "30": {
+        "expected_return_pct": 0.0031,
+        "target_price": 1024.53,
+        "band_low_pct": -0.3627,
+        "band_high_pct": 0.369,
+        "status": "shadow"
+      },
+      "60": {
+        "expected_return_pct": -0.1378,
+        "target_price": 1023.09,
+        "band_low_pct": -0.6439,
+        "band_high_pct": 0.3683,
+        "status": "shadow"
+      }
+    },
+    "model_version": "intraday-v1-20261009",
+    "sessions_available": 60,
     "minimum_sessions": 40
   },
-  "intraday_evidence": {},
+  "intraday_evidence": {
+    "15": {
+      "n": 2549,
+      "n_days": 40,
+      "ic": 0.0754,
+      "ic_ci95": [
+        0.03,
+        0.1361
+      ],
+      "hit_rate": 0.5179,
+      "hit_ci95": [
+        0.4902,
+        0.5458
+      ],
+      "mae_model_pct": 0.1446,
+      "mae_flat_pct": 0.145,
+      "passes_gate": false
+    },
+    "30": {
+      "n": 2429,
+      "n_days": 40,
+      "ic": 0.0437,
+      "ic_ci95": [
+        -0.0145,
+        0.1093
+      ],
+      "hit_rate": 0.5146,
+      "hit_ci95": [
+        0.4783,
+        0.548
+      ],
+      "mae_model_pct": 0.2027,
+      "mae_flat_pct": 0.2019,
+      "passes_gate": false
+    },
+    "60": {
+      "n": 2189,
+      "n_days": 40,
+      "ic": 0.0295,
+      "ic_ci95": [
+        -0.061,
+        0.1198
+      ],
+      "hit_rate": 0.5482,
+      "hit_ci95": [
+        0.4966,
+        0.6028
+      ],
+      "mae_model_pct": 0.2884,
+      "mae_flat_pct": 0.2895,
+      "passes_gate": false
+    }
+  },
   "quant": {
     "mu_pct": -0.377,
     "p_up": 0.422,
@@ -715,20 +844,20 @@
     }
   },
   "technical_indicators": {
-    "vwap": 1022.07,
-    "rsi_14": 56.89,
-    "macd_hist": 0.0004,
-    "atr_14": 1.81,
-    "atr_pct": 0.18,
-    "bollinger_pct_b": 0.7,
-    "vwap_distance_pct": 0.06,
+    "vwap": 1022.16,
+    "rsi_14": 61.57,
+    "macd_hist": 0.1787,
+    "atr_14": 1.98,
+    "atr_pct": 0.19,
+    "bollinger_pct_b": 0.926,
+    "vwap_distance_pct": 0.23,
     "technical_bias": "BULLISH"
   },
   "risk_execution_plan": {
     "symbol": "INFY",
     "approved": false,
     "action": "NO_TRADE",
-    "entry_price": 1022.7,
+    "entry_price": 1024.5,
     "stop_loss": 0.0,
     "take_profit": 0.0,
     "position_size_shares": 0,
@@ -737,7 +866,7 @@
     "risk_reward_ratio": 0.0,
     "rejection_reason": "Direction model failed walk-forward edge test."
   },
-  "last_spike_alert_at": null,
+  "last_spike_alert_at": "2026-10-09T15:10:42+05:30",
   "context": {
     "prev_close": 997.0,
     "prev_return_pct": 0.5,
@@ -745,7 +874,7 @@
   },
   "curves": {
     "date": "2026-10-09",
-    "generated_at": "03:05 PM IST",
+    "generated_at": "03:10 PM IST",
     "symbol": "INFY",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -896,8 +1025,8 @@
       1020.5,
       1022.5,
       1022.4,
-      1022.7,
-      null,
+      1024.75,
+      1024.5,
       null,
       null,
       null
@@ -981,79 +1110,79 @@
     ],
     "latest_forecast_curve": [
       1020.35,
-      1020.45,
-      1020.55,
-      1020.64,
-      1020.73,
-      1020.82,
-      1020.9,
-      1020.99,
-      1021.07,
-      1021.14,
-      1021.22,
-      1021.29,
-      1021.36,
-      1021.43,
-      1021.5,
-      1021.56,
-      1021.62,
-      1021.68,
+      1020.52,
+      1020.69,
+      1020.85,
+      1021.01,
+      1021.17,
+      1021.32,
+      1021.46,
+      1021.6,
       1021.74,
-      1021.79,
-      1021.84,
-      1021.89,
-      1021.94,
-      1021.99,
-      1022.03,
-      1022.08,
+      1021.87,
+      1022.0,
       1022.12,
-      1022.16,
-      1022.19,
-      1022.23,
-      1022.26,
-      1022.29,
-      1022.32,
+      1022.24,
       1022.35,
-      1022.38,
-      1022.41,
-      1022.43,
-      1022.45,
-      1022.48,
-      1022.5,
-      1022.52,
-      1022.53,
-      1022.55,
+      1022.46,
       1022.57,
-      1022.58,
-      1022.59,
-      1022.61,
-      1022.62,
-      1022.63,
-      1022.64,
-      1022.65,
-      1022.65,
-      1022.66,
       1022.67,
-      1022.67,
-      1022.68,
-      1022.68,
-      1022.68,
-      1022.69,
-      1022.69,
-      1022.69,
-      1022.7,
-      1022.7,
-      1022.7,
-      1022.7,
-      1022.7,
-      1022.7,
-      1022.7,
-      1022.7,
-      1022.7,
-      1022.7,
-      1021.28,
-      1017.81,
-      1013.47,
+      1022.77,
+      1022.87,
+      1022.96,
+      1023.05,
+      1023.14,
+      1023.22,
+      1023.3,
+      1023.37,
+      1023.44,
+      1023.51,
+      1023.58,
+      1023.64,
+      1023.7,
+      1023.76,
+      1023.81,
+      1023.86,
+      1023.91,
+      1023.96,
+      1024.0,
+      1024.04,
+      1024.08,
+      1024.12,
+      1024.15,
+      1024.19,
+      1024.22,
+      1024.25,
+      1024.27,
+      1024.3,
+      1024.32,
+      1024.34,
+      1024.36,
+      1024.38,
+      1024.39,
+      1024.41,
+      1024.42,
+      1024.43,
+      1024.44,
+      1024.45,
+      1024.46,
+      1024.47,
+      1024.47,
+      1024.48,
+      1024.48,
+      1024.49,
+      1024.49,
+      1024.49,
+      1024.5,
+      1024.5,
+      1024.5,
+      1024.5,
+      1024.5,
+      1024.5,
+      1024.5,
+      1024.5,
+      1021.76,
+      1015.66,
       1009.43
     ],
     "opening_made_at": "09:15",
@@ -1297,14 +1426,14 @@
       159475,
       187669,
       336748,
-      0,
+      478739,
       0,
       0,
       0,
       0
     ],
     "final_pred": 1009.43,
-    "final_actual": 1022.7000122070312,
+    "final_actual": 1024.5,
     "error_pct": null
   },
   "session": {

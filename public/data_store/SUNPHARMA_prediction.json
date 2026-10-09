@@ -8,8 +8,8 @@
     "source": "fallback",
     "model": "gemini-3.8-flash",
     "llm_error": "no new forecasts after 15:00 IST",
-    "made_at": "2026-10-09T15:05:34+05:30",
-    "volume_ratio": 0.98,
+    "made_at": "2026-10-09T15:10:42+05:30",
+    "volume_ratio": 1.34,
     "has_volume_spike": false,
     "news_feed": []
   },
@@ -20,7 +20,7 @@
     "reasoning": "No AI commentary was available for this run.",
     "source": "fallback",
     "model": "gemini-3.8-flash",
-    "made_at": "2026-10-09T15:05:34+05:30",
+    "made_at": "2026-10-09T15:10:42+05:30",
     "llm_error": "no new forecasts after 15:00 IST",
     "prompt_version": "v3-context-risk"
   },
@@ -64,7 +64,10 @@
         },
         "60": {
           "target_at": "2026-10-09T15:15:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:15:00+05:30",
+          "actual_price": 1759.2,
+          "actual_return_pct": -0.4076
         }
       }
     },
@@ -336,7 +339,10 @@
         },
         "30": {
           "target_at": "2026-10-09T15:15:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:15:00+05:30",
+          "actual_price": 1759.2,
+          "actual_return_pct": -0.0398
         },
         "60": {
           "target_at": "2026-10-09T15:45:00+05:30",
@@ -476,7 +482,10 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-09T15:15:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-09T15:15:00+05:30",
+          "actual_price": 1759.2,
+          "actual_return_pct": 0.1138
         },
         "30": {
           "target_at": "2026-10-09T15:30:00+05:30",
@@ -579,16 +588,136 @@
           "status": "pending"
         }
       }
+    },
+    {
+      "key": "SUNPHARMA|2026-10-09T15:15:00+05:30",
+      "symbol": "SUNPHARMA",
+      "bar_time": "2026-10-09T15:15:00+05:30",
+      "entry_price": 1759.2,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": -0.0341,
+        "return_15m_pct": 0.0398,
+        "return_30m_pct": 0.0626,
+        "move_since_open_pct": 0.1994,
+        "vwap_distance_pct": -0.36,
+        "rsi_14": 41.19,
+        "macd_hist": -0.0592,
+        "atr_pct": 0.13,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 1.34,
+        "minutes_since_open": 360,
+        "oi_change_pct": -1.48,
+        "buildup_code": 0,
+        "oi_vs_avg": 0.7,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-09T15:30:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-09T15:45:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-09T16:15:00+05:30",
+          "status": "pending"
+        }
+      }
     }
   ],
   "intraday_forecast": {
-    "status": "collecting",
-    "forecasts": {},
-    "reason": null,
-    "sessions_available": 0,
+    "status": "ready",
+    "forecasts": {
+      "15": {
+        "expected_return_pct": -0.0102,
+        "target_price": 1759.02,
+        "band_low_pct": -0.2577,
+        "band_high_pct": 0.2373,
+        "status": "shadow"
+      },
+      "30": {
+        "expected_return_pct": -0.0097,
+        "target_price": 1759.03,
+        "band_low_pct": -0.3301,
+        "band_high_pct": 0.3108,
+        "status": "shadow"
+      },
+      "60": {
+        "expected_return_pct": 0.0349,
+        "target_price": 1759.81,
+        "band_low_pct": -0.4019,
+        "band_high_pct": 0.4717,
+        "status": "shadow"
+      }
+    },
+    "model_version": "intraday-v1-20261009",
+    "sessions_available": 60,
     "minimum_sessions": 40
   },
-  "intraday_evidence": {},
+  "intraday_evidence": {
+    "15": {
+      "n": 2550,
+      "n_days": 40,
+      "ic": 0.0475,
+      "ic_ci95": [
+        -0.0109,
+        0.1402
+      ],
+      "hit_rate": 0.5067,
+      "hit_ci95": [
+        0.4765,
+        0.5362
+      ],
+      "mae_model_pct": 0.126,
+      "mae_flat_pct": 0.1236,
+      "passes_gate": false
+    },
+    "30": {
+      "n": 2430,
+      "n_days": 40,
+      "ic": 0.0271,
+      "ic_ci95": [
+        -0.0629,
+        0.1446
+      ],
+      "hit_rate": 0.5091,
+      "hit_ci95": [
+        0.4754,
+        0.5419
+      ],
+      "mae_model_pct": 0.1717,
+      "mae_flat_pct": 0.1667,
+      "passes_gate": false
+    },
+    "60": {
+      "n": 2190,
+      "n_days": 40,
+      "ic": 0.0141,
+      "ic_ci95": [
+        -0.124,
+        0.1607
+      ],
+      "hit_rate": 0.4785,
+      "hit_ci95": [
+        0.4186,
+        0.5301
+      ],
+      "mae_model_pct": 0.245,
+      "mae_flat_pct": 0.2299,
+      "passes_gate": false
+    }
+  },
   "quant": {
     "mu_pct": 0.023,
     "p_up": 0.507,
@@ -616,20 +745,20 @@
     }
   },
   "technical_indicators": {
-    "vwap": 1765.7,
-    "rsi_14": 43.42,
-    "macd_hist": -0.1075,
-    "atr_14": 2.28,
+    "vwap": 1765.6,
+    "rsi_14": 41.19,
+    "macd_hist": -0.0592,
+    "atr_14": 2.3,
     "atr_pct": 0.13,
-    "bollinger_pct_b": 0.349,
-    "vwap_distance_pct": -0.32,
+    "bollinger_pct_b": 0.303,
+    "vwap_distance_pct": -0.36,
     "technical_bias": "BEARISH"
   },
   "risk_execution_plan": {
     "symbol": "SUNPHARMA",
     "approved": false,
     "action": "NO_TRADE",
-    "entry_price": 1760.0,
+    "entry_price": 1759.2,
     "stop_loss": 0.0,
     "take_profit": 0.0,
     "position_size_shares": 0,
@@ -646,7 +775,7 @@
   },
   "curves": {
     "date": "2026-10-09",
-    "generated_at": "03:05 PM IST",
+    "generated_at": "03:10 PM IST",
     "symbol": "SUNPHARMA",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -797,8 +926,8 @@
       1757.2,
       1758.5,
       1760.0,
-      1760.0,
-      null,
+      1759.8,
+      1759.2,
       null,
       null,
       null
@@ -882,79 +1011,79 @@
     ],
     "latest_forecast_curve": [
       1755.6,
-      1755.72,
-      1755.84,
-      1755.96,
+      1755.6,
+      1755.6,
+      1755.61,
+      1755.61,
+      1755.62,
+      1755.62,
+      1755.63,
+      1755.64,
+      1755.65,
+      1755.66,
+      1755.68,
+      1755.69,
+      1755.71,
+      1755.73,
+      1755.75,
+      1755.77,
+      1755.79,
+      1755.81,
+      1755.83,
+      1755.86,
+      1755.89,
+      1755.92,
+      1755.95,
+      1755.98,
+      1756.01,
+      1756.05,
       1756.08,
-      1756.19,
-      1756.3,
+      1756.12,
+      1756.16,
+      1756.2,
+      1756.24,
+      1756.28,
+      1756.33,
+      1756.37,
       1756.42,
-      1756.53,
-      1756.64,
+      1756.47,
+      1756.52,
+      1756.57,
+      1756.63,
+      1756.68,
       1756.74,
-      1756.85,
-      1756.95,
+      1756.8,
+      1756.86,
+      1756.92,
+      1756.98,
       1757.05,
-      1757.15,
+      1757.11,
+      1757.18,
       1757.25,
-      1757.35,
-      1757.44,
+      1757.32,
+      1757.39,
+      1757.47,
       1757.54,
-      1757.63,
-      1757.72,
-      1757.81,
-      1757.9,
-      1757.98,
-      1758.06,
-      1758.15,
-      1758.23,
-      1758.31,
-      1758.38,
-      1758.46,
-      1758.53,
-      1758.6,
-      1758.67,
-      1758.74,
-      1758.81,
-      1758.87,
-      1758.93,
+      1757.62,
+      1757.7,
+      1757.78,
+      1757.86,
+      1757.95,
+      1758.03,
+      1758.12,
+      1758.21,
+      1758.3,
+      1758.4,
+      1758.49,
+      1758.59,
+      1758.68,
+      1758.78,
+      1758.89,
       1758.99,
-      1759.05,
-      1759.11,
-      1759.17,
-      1759.22,
-      1759.27,
-      1759.32,
-      1759.37,
-      1759.42,
-      1759.46,
-      1759.51,
-      1759.55,
-      1759.59,
-      1759.63,
-      1759.66,
-      1759.7,
-      1759.73,
-      1759.76,
-      1759.79,
-      1759.82,
-      1759.84,
-      1759.86,
-      1759.89,
-      1759.91,
-      1759.92,
-      1759.94,
-      1759.95,
-      1759.97,
-      1759.98,
-      1759.98,
-      1759.99,
-      1760.0,
-      1760.0,
-      1760.0,
-      1760.0,
-      1760.0,
-      1760.0,
+      1759.09,
+      1759.2,
+      1759.39,
+      1759.69,
       1760.0
     ],
     "opening_made_at": "09:15",
@@ -1198,14 +1327,14 @@
       54079,
       22610,
       15996,
-      0,
+      21998,
       0,
       0,
       0,
       0
     ],
     "final_pred": 1760.0,
-    "final_actual": 1760.0,
+    "final_actual": 1759.199951171875,
     "error_pct": null
   },
   "session": {
