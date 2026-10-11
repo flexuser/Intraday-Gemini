@@ -401,3 +401,46 @@ def test_quant_waits_instead_of_guessing_when_index_data_is_missing(env, monkeyp
     ao.process_symbol("INFY", at(9, 30))
     d = saved(tmp)
     assert d["quant"] is None and d["curves"]["forecast_source"] == "llm_unvalidated"       # honest label, retried next run
+
+
+# ---- v9 fixes ----
+def test_intraday_model_trained_on_fewer_features_still_predicts():
+    import numpy as np, pandas as pd
+    from muthoot_poc import intraday_model as im
+    names = list(im.FEATURE_NAMES)[:23]                                   # a model trained before 2 features were added
+    fit = {"feature_names": names, "mean": [0.0] * 23, "scale": [1.0] * 23, "weights": [0.1] * 23, "intercept": 0.0}
+    row = pd.DataFrame([{n: 0.5 for n in im.FEATURE_NAMES}])
+    assert float(im.predict_rows(fit, row)[0]) == pytest.approx(0.1 * 0.5 * 23)   # used to raise: shapes (1,25) (23,)
+
+def test_a_broken_intraday_model_cannot_stop_the_core_pipeline(env, monkeypatch):
+    llm, state, tmp = env
+    monkeypatch.setattr(ao, "INTRADAY_MODEL", {"horizons": {"15": {}}, "version": "x"})
+    def boom(*a, **k): raise ValueError("operands could not be broadcast together with shapes (1,25) (23,)")
+    monkeypatch.setattr(ao.im, "predict", boom)
+    state["df"] = bars(4)
+    assert ao.process_symbol("INFY", at(9, 30)) is not None               # symbol still processed and written
+    assert saved(tmp)["curves"]["date"] == "2026-10-05"
+
+def test_session_settles_on_the_official_daily_close_when_the_5m_feed_stops_early(env, monkeypatch):
+    llm, state, tmp = env
+    state["df"] = bars(4);  ao.process_symbol("INFY", at(9, 30))          # opening forecast
+    state["df"] = bars(72, drift=0.6)                                     # 5-min feed stops at the 15:10 bar (never reaches 15:25)
+    day = pd.Timestamp("2026-10-05")
+    monkeypatch.setattr(ao, "fetch_daily_ohlc", lambda t: pd.DataFrame({"Open": [100.0], "High": [101.5], "Low": [99.5], "Close": [100.9]}, index=[day]))
+    row = ao.process_symbol("INFY", at(15, 45))
+    assert row is not None and row["complete"] is True and row["close_source"] == "daily_bar"
+    assert row["final_actual"] == 100.9                                   # scored against the official close, not the stale 5-min bar
+    ao.finalize([row], at(15, 45))
+    assert len(json.load(open(tmp / "history.json"))) == 1                # first real scored session in history
+
+def test_session_is_not_settled_before_15_40_or_without_a_daily_bar(env, monkeypatch):
+    llm, state, tmp = env
+    state["df"] = bars(72)
+    monkeypatch.setattr(ao, "fetch_daily_ohlc", lambda t: pd.DataFrame())
+    assert ao.process_symbol("INFY", at(15, 45))["complete"] is False
+    day = pd.Timestamp("2026-10-05")
+    monkeypatch.setattr(ao, "fetch_daily_ohlc", lambda t: pd.DataFrame({"Open": [100.0], "High": [101.0], "Low": [99.0], "Close": [100.5]}, index=[day]))
+    assert ao.process_symbol("INFY", at(15, 35))["complete"] is False     # too early to trust the daily close
+
+def test_guard_window_now_reaches_the_settle_time():
+    assert ao.LAST_RUN >= datetime.time(16, 0) and ao.SETTLE_AFTER < ao.LAST_RUN

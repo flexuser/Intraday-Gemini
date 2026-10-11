@@ -100,7 +100,8 @@ def fit_ridge(rows: pd.DataFrame) -> Optional[Dict[str, Any]]:
 
 
 def predict_rows(fit: Dict[str, Any], rows: pd.DataFrame) -> np.ndarray:
-    x = rows.loc[:, FEATURE_NAMES].to_numpy(dtype=float)
+    names = list(fit.get("feature_names") or FEATURE_NAMES)   # the features THIS fit was trained on: old models survive new features
+    x = rows.loc[:, names].to_numpy(dtype=float)
     mean = np.asarray(fit["mean"], dtype=float)
     scale = np.asarray(fit["scale"], dtype=float)
     weights = np.asarray(fit["weights"], dtype=float)

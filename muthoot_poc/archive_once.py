@@ -92,7 +92,8 @@ SMART = {}          # smart-money features, loaded once per run in main()
 PROBE_SYMBOL = "RELIANCE.NS"
 
 MARKET_OPEN = datetime.time(9, 15)
-LAST_RUN = datetime.time(15, 50)
+LAST_RUN = datetime.time(16, 15)            # was 15:50: Yahoo's final bars arrive late, settling needs the extra time
+SETTLE_AFTER = datetime.time(15, 40)        # from here the official daily close is used if the 5-min feed stopped early
 SESSION_CLOSE = datetime.time(15, 30)
 NUM_SLOTS = 75
 BIASES = ("BULLISH", "BEARISH", "NEUTRAL")
@@ -561,6 +562,19 @@ def build_curves(df, target_price, ctx=None):
     return timeframes, actual, predicted, upper_curve, lower_curve, volume
 
 
+def official_close(ticker, now):
+    """Yahoo's 5-minute feed often stops around 15:10, so the 15:25 bar never arrives and no session was ever scored.
+    After the close the DAILY bar carries the final price."""
+    try:
+        d = fetch_daily_ohlc(ticker)
+        day = pd.Timestamp(now.date())
+        if not d.empty and day in d.index and float(d.loc[day, "Close"]) > 0:
+            return float(d.loc[day, "Close"])
+    except Exception as e:
+        print(f"[{ticker}] official close unavailable: {type(e).__name__}: {e}")
+    return None
+
+
 def session_complete(df, now):
     return now.time() >= SESSION_CLOSE and df.index[-1].time() >= datetime.time(15, 25)
 
@@ -645,7 +659,7 @@ def process_symbol(symbol, now):
         # - During core hours (before 15:15) enforce the normal 20-min limit.
         # - After 15:15 allow up to 45 min so post-close / delayed Yahoo bars still get scored.
         # - Only hard-skip when data is truly unusable.
-        lag_limit = MAX_DATA_LAG_MIN if now.time() < datetime.time(15, 15) else 45
+        lag_limit = MAX_DATA_LAG_MIN if now.time() < datetime.time(15, 15) else 120
         if lag > lag_limit:
             return _fail(symbol, f"stale data: newest bar is {lag:.0f} min old (limit {lag_limit}) - files left untouched")
         if lag > MAX_DATA_LAG_MIN:
@@ -681,11 +695,15 @@ def process_symbol(symbol, now):
                 current_observation,
             )
             intraday_observations = io.update_outcomes(intraday_observations, df)
-        intraday_forecast = im.predict(INTRADAY_MODEL, current_observation) if INTRADAY_MODEL else {
-            "status": INTRADAY_REPORT.get("status", "collecting"),
-            "forecasts": {},
-            "reason": INTRADAY_REPORT.get("reason"),
-        }
+        try:                                                    # an experimental model must never stop the core pipeline
+            intraday_forecast = im.predict(INTRADAY_MODEL, current_observation) if INTRADAY_MODEL else {
+                "status": INTRADAY_REPORT.get("status", "collecting"),
+                "forecasts": {},
+                "reason": INTRADAY_REPORT.get("reason"),
+            }
+        except Exception as e:
+            print(f"[{symbol}] intraday model error (ignored): {type(e).__name__}: {e}")
+            intraday_forecast = {"status": "error", "forecasts": {}, "reason": f"{type(e).__name__}: {e}"}
         intraday_forecast["sessions_available"] = (
             INTRADAY_MODEL.get("sessions") if INTRADAY_MODEL else INTRADAY_REPORT.get("sessions_available", 0)
         )
@@ -741,7 +759,7 @@ def process_symbol(symbol, now):
         if quant:
             opening_curve, band_up, band_lo = quant_curves(quant)
             forecast_source, display_bias = "quant", quant["bias"]
-            q_t = quant["mu_pct"]
+            q_t = quant["mu_pct"] if quant["direction_validated"] else 0.0     # never show an unvalidated target
             display_target = round(quant["open_price"] * (1 + q_t / 100.0), 2)
             forecast_made_at = quant.get("made_at")
             opening_made_at = quant["made_at"][11:16]
@@ -805,10 +823,15 @@ def process_symbol(symbol, now):
         timeframes, actual, predicted, upper_curve, lower_curve, volume = build_curves(df, display_target, ctx)
 
         complete = session_complete(df, now)
-        score = score_session(opening, m["last_close"], log) if complete else \
+        close_price, close_source = m["last_close"], "5m_bar"
+        if not complete and now.time() >= SETTLE_AFTER:
+            official = official_close(ticker, now)
+            if official is not None:
+                complete, close_price, close_source = True, official, "daily_bar"
+        score = score_session(opening, close_price, log) if complete else \
             {"verdict": "IN_PROGRESS", "error_pct": None, "baseline_error_pct": None,
              "direction_hit": None, "baselines": {}}
-        score = dict(score, quant=score_quant(quant, m["last_close"]) if (complete and quant) else None)
+        score = dict(score, quant=score_quant(quant, close_price) if (complete and quant) else None)
         display_error = score["quant"]["error_pct"] if (complete and quant) else (score["error_pct"] if complete else None)
         if complete:
             training_history = io.merge_history(read_json(INTRADAY_HISTORY_PATH, []), intraday_observations)
@@ -842,7 +865,7 @@ def process_symbol(symbol, now):
                 "forecast_made_at": forecast_made_at,
                 "upper_confidence": band_up, "lower_confidence": band_lo,
                 "forecast_source": forecast_source, "quant_summary": quant_summary,
-                "actual_volume": volume, "final_pred": display_target, "final_actual": m["last_close"],
+                "actual_volume": volume, "final_pred": display_target, "final_actual": close_price,
                 "error_pct": display_error,
             },
             "session": {"complete": complete, **score},
@@ -856,7 +879,7 @@ def process_symbol(symbol, now):
                     prompt_version=pred.get("prompt_version", PROMPT_VERSION),
                     opening_forecast=opening,
                     baseline_targets=baseline_targets(m["open_price"], ctx),
-                    closing_actuals={"final_actual": m["last_close"]} if complete else None,
+                    closing_actuals={"final_actual": close_price} if complete else None,
                     score=score if complete else None,
                 )
         except Exception as db_err:
@@ -868,7 +891,7 @@ def process_symbol(symbol, now):
                 "forecast_source": pred["source"], "llm_error": pred.get("llm_error"),
                 "prompt_version": opening["prompt_version"] if opening else PROMPT_VERSION,
                 "final_pred": round(opening["base_price"] * (1 + opening["target_pct"] / 100.0), 2) if opening else target_price,
-                "final_actual": m["last_close"], "complete": complete, **score}
+                "final_actual": close_price, "close_source": close_source, "complete": complete, **score}
     except Exception as e:
         return _fail(symbol, f"pipeline error: {type(e).__name__}: {e}")
 
