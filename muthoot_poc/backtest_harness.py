@@ -16,11 +16,8 @@ warnings.filterwarnings("ignore")
 # =====================================================================
 # CONFIGURATION & CONSTANTS
 # =====================================================================
-SYMBOLS = [
-    "MUTHOOTFIN.NS", "MANAPPURAM.NS", "SBIN.NS", "ICICIBANK.NS",
-    "AXISBANK.NS", "HDFCBANK.NS", "BAJFINANCE.NS", "CHOLAFIN.NS",
-    "RELIANCE.NS", "INFY.NS", "TCS.NS"
-]
+from muthoot_poc.universe import SYMBOLS as _CASH_SYMBOLS
+SYMBOLS = [f"{s}.NS" for s in _CASH_SYMBOLS]
 NIFTY_SYMBOL = "^NSEI"
 ALLOW_SYNTHETIC = os.getenv("ALLOW_SYNTHETIC", "") == "1"   # offline dry runs only; never silently
 MIN_TRADES = 30                 # below this the numbers are noise and no verdict is given

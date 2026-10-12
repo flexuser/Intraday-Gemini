@@ -3,6 +3,10 @@
 Yahoo supplies only a short intraday window, so this is a bootstrap and shadow-model
 source, not a substitute for a durable market-data vendor.  Features are created
 from each bar's past only; outcomes are attached after the session slice is complete.
+
+Smart-money / delivery features are passed as neutral defaults so the observation
+schema matches live v3 capture.  Bootstrap does not call NSE/jugaad (avoids rate
+limits and keeps this job offline-friendly except for Yahoo bars).
 """
 import argparse
 import json
@@ -19,8 +23,25 @@ from muthoot_poc.indicators import calculate_technical_snapshot
 
 
 IST = pytz.timezone("Asia/Kolkata")
-SYMBOLS = ("MUTHOOTFIN", "RELIANCE", "TMPV", "INFY", "HDFCBANK", "ICICIBANK",
-           "TCS", "SBIN", "BHARTIARTL", "LT", "SUNPHARMA")
+from muthoot_poc.universe import SYMBOLS
+
+# Neutral smart-money payload so capture() always emits full v3 feature keys.
+# Live archive_once fills these from free NSE/jugaad sources; bootstrap stays price/volume-only.
+NEUTRAL_SMART_MONEY = {
+    "oi_change_pct": 0.0,
+    "buildup_code": 0,
+    "oi_vs_avg": 1.0,
+    "bulk_buy_flag_5d": 0,
+    "bulk_sell_flag_5d": 0,
+    "bulk_net_value_cr": 0.0,
+    "block_buy_flag_5d": 0,
+    "insider_like_buy_flag": 0,
+    "promoter_delta_q": 0.0,
+    "fii_delta_q": 0.0,
+    "dii_delta_q": 0.0,
+    "delivery_pct": 0.0,
+    "delivery_vs_avg": 1.0,
+}
 
 
 def _write_json(path, value):
@@ -57,7 +78,13 @@ def build_observations(symbol, frame):
         for index in range(6, len(session)):
             known = session.iloc[:index + 1]
             technical = calculate_technical_snapshot(known)
-            row = observations.capture(symbol, known, technical, _session_metrics(known))
+            row = observations.capture(
+                symbol,
+                known,
+                technical,
+                _session_metrics(known),
+                smart_money=NEUTRAL_SMART_MONEY,
+            )
             if row:
                 session_rows.append(row)
         rows.extend(observations.update_outcomes(session_rows, session))
@@ -93,7 +120,11 @@ def main(argv=None):
     merged = observations.merge_history(history if isinstance(history, list) else [], fresh)
     _write_json(args.history, merged)
     trained, report = model.train(merged)
-    report["bootstrap"] = {"source": "Yahoo Finance 5-minute history", "fresh_rows": len(fresh)}
+    report["bootstrap"] = {
+        "source": "Yahoo Finance 5-minute history",
+        "fresh_rows": len(fresh),
+        "smart_money": "neutral_defaults_v3",
+    }
     _write_json(args.report, report)
     if trained:
         _write_json(args.model, trained)

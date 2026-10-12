@@ -66,8 +66,7 @@ except ImportError:
 
 IST = pytz.timezone("Asia/Kolkata")
 
-SYMBOLS = ["MUTHOOTFIN", "RELIANCE", "TMPV", "INFY", "HDFCBANK", "ICICIBANK",
-           "TCS", "SBIN", "BHARTIARTL", "LT", "SUNPHARMA"]
+from muthoot_poc.universe import SYMBOLS, MIN_PROB_EDGE
 
 DATA_DIR = os.getenv("DATA_DIR", "public/data_store")
 INTRADAY_HISTORY_PATH = os.path.join(DATA_DIR, "intraday_training_history.json")
@@ -235,7 +234,7 @@ def compute_quant(symbol, ticker, m, now):
         return None
     d.loc[today, ["Open", "High", "Low", "Close"]] = m["open_price"]     # features read only today's Open
     feats = qm.build_features(d, idx)
-    pred = qm.predict_today(QUANT, feats.loc[today], symbol=ticker)
+    pred = qm.predict_today(QUANT, feats.loc[today], symbol=ticker, min_prob_edge=MIN_PROB_EDGE)
     if pred is None:
         print(f"[{symbol}] quant: incomplete features")
         return None
@@ -315,7 +314,7 @@ def is_live_session(now=None):
                   f"(not necessarily an NSE one) - confirming with market data.")
 
     if not (MARKET_OPEN <= now.time() <= LAST_RUN):
-        print(f"[SessionGuard] {now.strftime('%H:%M')} IST is outside 09:15-15:50.")
+        print(f"[SessionGuard] {now.strftime('%H:%M')} IST is outside 09:15-16:15.")
         return False
     try:
         df = fetch_5m(PROBE_SYMBOL, now.date())
@@ -818,8 +817,9 @@ def process_symbol(symbol, now):
                 risk_plan=risk_plan,
             )
 
-        opening_curve = (opening.get("curve") or frozen_curve(opening["base_price"], opening["target_pct"])) \
-            if opening else [None] * NUM_SLOTS
+        if not quant:       # with a quant forecast, quant_curves() above already chose the line; do NOT overwrite it with the LLM's
+            opening_curve = (opening.get("curve") or frozen_curve(opening["base_price"], opening["target_pct"])) \
+                if opening else [None] * NUM_SLOTS
         timeframes, actual, predicted, upper_curve, lower_curve, volume = build_curves(df, display_target, ctx)
 
         complete = session_complete(df, now)
@@ -891,7 +891,15 @@ def process_symbol(symbol, now):
                 "forecast_source": pred["source"], "llm_error": pred.get("llm_error"),
                 "prompt_version": opening["prompt_version"] if opening else PROMPT_VERSION,
                 "final_pred": round(opening["base_price"] * (1 + opening["target_pct"] / 100.0), 2) if opening else target_price,
-                "final_actual": close_price, "close_source": close_source, "complete": complete, **score}
+                "final_actual": close_price, "close_source": close_source, "complete": complete,
+                "p_up": p_up_val,
+                "direction_validated": dir_val,
+                "range_validated": rng_val,
+                "tradeable_validated": trade_val,
+                "trade_approved": bool(risk_plan.get("approved")),
+                "trade_action": risk_plan.get("action") or "NO_TRADE",
+                "rejection_reason": risk_plan.get("rejection_reason"),
+                **score}
     except Exception as e:
         return _fail(symbol, f"pipeline error: {type(e).__name__}: {e}")
 
@@ -1022,8 +1030,10 @@ def finalize(results, now, errors=None):
         if r["complete"]:
             history = [h for h in history if not (h["date"] == r["date"] and h["symbol"] == r["symbol"])]
             history.append({k: r.get(k) for k in ("date", "symbol", "bias", "target_pct", "source", "final_pred",
-                                                  "final_actual", "verdict", "error_pct", "baseline_error_pct",
-                                                  "direction_hit", "baselines", "prompt_version", "checkpoints", "quant")})
+                                                  "final_actual", "close_source", "verdict", "error_pct", "baseline_error_pct",
+                                                  "direction_hit", "baselines", "prompt_version", "checkpoints", "quant",
+                                                  "p_up", "direction_validated", "range_validated", "tradeable_validated",
+                                                  "trade_approved", "trade_action", "rejection_reason")})
     history.sort(key=lambda h: (h["symbol"], h["date"]))
     trimmed = []
     for s in SYMBOLS:
@@ -1041,7 +1051,7 @@ def finalize(results, now, errors=None):
             row = dict(prev[-1], session_date=prev[-1]["date"]) if prev else (dict(r, session_date=r["date"]) if r else None)
         row = _audit_from_quant(row) if row else row
         if row:
-            rows.append({k: row.get(k) for k in ("symbol", "bias", "final_pred", "final_actual", "error_pct",
+            rows.append({k: row.get(k) for k in ("symbol", "bias", "final_pred", "final_actual", "close_source", "error_pct",
                                                  "verdict", "baseline_error_pct", "direction_hit", "session_date")})
     write_json(os.path.join(DATA_DIR, "eod_evaluation.json"), rows)
     write_json(os.path.join(DATA_DIR, "performance_summary.json"),

@@ -5,6 +5,9 @@ import muthoot_poc.archive_once as ao
 
 IST = ao.IST
 ORIG_NOTIFY = ao._notify
+def qgr(*a, **k):
+    return ao.query_gemini_regime(*a, **k)[0]            # (regime, prompt, raw_text) -> regime
+
 def at(h, m, day=(2026, 10, 5)):
     return IST.localize(datetime.datetime(*day, h, m))
 
@@ -41,6 +44,8 @@ def env(monkeypatch, tmp_path):
     monkeypatch.setattr(ao, "LLM_BLOCKED_UNTIL", None)
     monkeypatch.setattr(ao, "REFRESH_MINUTES", 30)
     monkeypatch.setattr(ao, "_notify", lambda text: None)
+    _orig_metrics = ao.compute_session_metrics                     # flat synthetic bars would trip the quiet-stock noise filter
+    monkeypatch.setattr(ao, "compute_session_metrics", lambda df, now: {**_orig_metrics(df, now), "vol_ratio": 2.6, "has_spike": True})
     state = {"df": bars(4)}
     monkeypatch.setattr(ao, "fetch_5m", lambda t, today: state["df"])
     return llm, state, tmp_path
@@ -77,7 +82,7 @@ def test_nan_never_reaches_json(tmp_path):
     (at(12, 0), bars(30), True),
     (at(10, 0), pd.DataFrame(), False),            # holiday / Yahoo has no bar for today
     (at(8, 30), bars(2), False),                   # pre-open
-    (at(16, 5), bars(75), False),                  # after window
+    (at(16, 20), bars(75), False),                 # after window (guard runs until 16:15 for settling)
     (at(10, 0, (2026, 10, 3)), bars(30), False),   # Saturday
 ])
 def test_guard(monkeypatch, now, df, expect):
@@ -101,14 +106,14 @@ def test_force_run(monkeypatch):
 def test_invalid_output_retries_then_neutral_fallback(env, bad):
     llm, state, _ = env
     llm.out = json.dumps(bad) if "nan" not in str(bad["target_pct"]) else '{"bias":"BULLISH","target_pct":NaN,"archetype":"RANGE_BOUND","reasoning":"x"}'
-    r = ao.query_gemini_regime("INFY", ao.compute_session_metrics(state["df"], at(9, 30)), [], at(9, 30))
+    r = qgr("INFY", ao.compute_session_metrics(state["df"], at(9, 30)), [], at(9, 30))
     assert llm.calls == ao.RETRIES and r["source"] == "fallback"
     assert (r["bias"], r["target_pct"], r["archetype"]) == ("NEUTRAL", 0.0, "RANGE_BOUND") and r["llm_error"]
 
 def test_permanent_error_is_not_retried(env):
     llm, state, _ = env
     llm.out = HttpErr(404)
-    r = ao.query_gemini_regime("INFY", ao.compute_session_metrics(state["df"], at(9, 30)), [], at(9, 30))
+    r = qgr("INFY", ao.compute_session_metrics(state["df"], at(9, 30)), [], at(9, 30))
     assert llm.calls == 1 and "404" in r["llm_error"]
 
 def test_sdk_accepts_config(monkeypatch):
@@ -266,21 +271,21 @@ def test_daily_quota_blocks_for_hours_after_one_call(env):
     llm, state, _ = env
     llm.out = DailyQuota()
     m = ao.compute_session_metrics(state["df"], at(9, 30))
-    r = ao.query_gemini_regime("INFY", m, [], at(9, 30))
+    r = qgr("INFY", m, [], at(9, 30))
     assert llm.calls == 1 and r["source"] == "fallback"
     assert ao.LLM_BLOCKED_UNTIL == at(9, 30) + datetime.timedelta(minutes=360)
-    assert "cooldown" in ao.query_gemini_regime("TCS", m, [], at(10, 0))["llm_error"] and llm.calls == 1
+    assert "cooldown" in qgr("TCS", m, [], at(10, 0))["llm_error"] and llm.calls == 1
 
 def test_soft_429_is_retried_with_backoff_then_short_cooldown(env, monkeypatch):
     llm, state, _ = env
     sleeps = []; monkeypatch.setattr(ao.time, "sleep", lambda s: sleeps.append(s))
     llm.out = SoftQuota()
     m = ao.compute_session_metrics(state["df"], at(9, 30))
-    r = ao.query_gemini_regime("INFY", m, [], at(9, 30))
+    r = qgr("INFY", m, [], at(9, 30))
     assert llm.calls == ao.RETRIES and r["source"] == "fallback"
     assert ao.LLM_BLOCKED_UNTIL == at(9, 30) + datetime.timedelta(minutes=ao.LLM_COOLDOWN_MIN)
-    assert 30 not in sleeps and sleeps.count(4.0) == ao.RETRIES                       # paced every call; no pointless sleep after the last try
-    llm.calls = 0; r2 = ao.query_gemini_regime("TCS", m, [], at(9, 31))
+    assert sleeps == [10, 20]                                                         # backoff between tries, none after the last (4s pacing now lives in the engine)
+    llm.calls = 0; r2 = qgr("TCS", m, [], at(9, 31))
     assert llm.calls == 0 and "cooldown" in r2["llm_error"]                           # the other symbols skip the API
 
 def test_cooldown_survives_across_runs(env):
@@ -317,7 +322,7 @@ def test_volume_spike_alert_has_a_cooldown(env, monkeypatch):
     sent = []; monkeypatch.setattr(ao, "_notify", lambda text: sent.append(text))
     def spiky(n):
         d = bars(n); d.iloc[-1, d.columns.get_loc("Volume")] = 30000; return d
-    state["df"] = spiky(10);  ao.process_symbol("INFY", at(10, 0, ) .replace(minute=5)); assert len(sent) == 1
+    state["df"] = spiky(10);  ao.process_symbol("INFY", at(10, 5)); assert len(sent) == 1
     state["df"] = spiky(11);  ao.process_symbol("INFY", at(10, 10));                      assert len(sent) == 1   # 5 min later: silent
     state["df"] = spiky(23);  ao.process_symbol("INFY", at(11, 10));                      assert len(sent) == 2   # > 60 min: alerts again
 
@@ -444,3 +449,20 @@ def test_session_is_not_settled_before_15_40_or_without_a_daily_bar(env, monkeyp
 
 def test_guard_window_now_reaches_the_settle_time():
     assert ao.LAST_RUN >= datetime.time(16, 0) and ao.SETTLE_AFTER < ao.LAST_RUN
+
+
+def test_quiet_stock_skips_the_llm_but_an_active_one_calls_it(env):
+    llm, state, _ = env
+    m = ao.compute_session_metrics(state["df"], at(9, 30))
+    quiet = dict(m, last_close=m["open_price"], vol_ratio=1.0)
+    assert qgr("INFY", quiet, [], at(9, 30))["source"] == "fallback" and llm.calls == 0       # noise filter: no API call
+    active = dict(m, last_close=m["open_price"] * 1.005, vol_ratio=1.0)
+    assert qgr("INFY", active, [], at(9, 30))["source"] == "llm" and llm.calls == 1
+
+def test_quant_line_is_never_overwritten_by_the_llm_line(env, monkeypatch, trained):
+    llm, state, tmp = env
+    _live_quant(monkeypatch, trained, {"direction": False, "range": True, "tradeable": False})
+    state["df"] = bars(4);  ao.process_symbol("INFY", at(9, 30))
+    s = saved(tmp)
+    assert s["opening_forecast"]["target_pct"] == 1.0                                          # the LLM did forecast +1.0%...
+    assert set(s["curves"]["predicted_curve"]) == {100.0}                                      # ...but the plotted line is the flat quant line

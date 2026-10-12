@@ -157,7 +157,7 @@ def load_model(path):
         return None
 
 
-def predict_today(model, feature_row, min_prob_edge=0.03, symbol=None):
+def predict_today(model, feature_row, min_prob_edge=0.08, symbol=None):
     """Live forecast from one feature row. Returns None if any feature is missing (never guess)."""
     if not model or not isinstance(model, dict) or not model.get("dir") or not model.get("rng"):
         return None
