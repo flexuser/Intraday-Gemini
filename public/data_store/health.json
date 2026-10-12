@@ -1,64 +1,23 @@
 {
-  "as_of": "2026-10-09T15:45:32+05:30",
-  "status": "FAILED",
+  "as_of": "2026-10-12T09:30:53+05:30",
+  "status": "DEGRADED",
   "symbols_total": 11,
-  "symbols_updated": 0,
-  "llm_fallback_count": 0,
-  "llm_error_count": 0,
-  "llm_cooldown_until": null,
+  "symbols_updated": 11,
+  "llm_fallback_count": 10,
+  "llm_error_count": 9,
+  "llm_cooldown_until": "2026-10-12T09:35:53+05:30",
   "model": "gemini-3.8-flash",
   "prompt_version": "v3-context-risk",
   "quant_model": {
     "loaded": true,
-    "version": "q2-20261007",
+    "version": "q2-20261010",
     "gates": {
       "direction": true,
-      "range": false,
+      "range": true,
       "tradeable": true
     }
   },
-  "sample_llm_error": null,
-  "errors": [
-    {
-      "symbol": "MUTHOOTFIN",
-      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
-    },
-    {
-      "symbol": "RELIANCE",
-      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
-    },
-    {
-      "symbol": "TMPV",
-      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
-    },
-    {
-      "symbol": "INFY",
-      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
-    },
-    {
-      "symbol": "HDFCBANK",
-      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
-    },
-    {
-      "symbol": "ICICIBANK",
-      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
-    },
-    {
-      "symbol": "TCS",
-      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
-    },
-    {
-      "symbol": "SBIN",
-      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
-    },
-    {
-      "symbol": "BHARTIARTL",
-      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
-    },
-    {
-      "symbol": "LT",
-      "error": "pipeline error: ValueError: operands could not be broadcast together with shapes (1,25) (23,) "
-    }
-  ],
-  "last_alert_at": "2026-10-09T15:35:37+05:30"
+  "sample_llm_error": "ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}",
+  "errors": [],
+  "last_alert_at": "2026-10-12T09:30:53+05:30"
 }
