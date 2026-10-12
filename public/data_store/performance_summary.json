@@ -33,64 +33,7 @@
     "mean_flat_error_pct": null
   },
   "by_symbol": {
-    "MUTHOOTFIN": {
-      "sessions": 0,
-      "days": 0,
-      "enough_data": false,
-      "direction_hit_rate": null,
-      "directional_calls": 0,
-      "direction_hit_ci95": null,
-      "mean_error_pct": null,
-      "mean_flat_baseline_error_pct": null,
-      "beat_flat_baseline_rate": null,
-      "baselines": {},
-      "late_forecasts": {
-        "calls": 0,
-        "direction_hit_ci95": null,
-        "direction_hit_rate": null,
-        "mean_error_pct": null,
-        "mean_flat_error_pct": null
-      }
-    },
     "RELIANCE": {
-      "sessions": 0,
-      "days": 0,
-      "enough_data": false,
-      "direction_hit_rate": null,
-      "directional_calls": 0,
-      "direction_hit_ci95": null,
-      "mean_error_pct": null,
-      "mean_flat_baseline_error_pct": null,
-      "beat_flat_baseline_rate": null,
-      "baselines": {},
-      "late_forecasts": {
-        "calls": 0,
-        "direction_hit_ci95": null,
-        "direction_hit_rate": null,
-        "mean_error_pct": null,
-        "mean_flat_error_pct": null
-      }
-    },
-    "TMPV": {
-      "sessions": 0,
-      "days": 0,
-      "enough_data": false,
-      "direction_hit_rate": null,
-      "directional_calls": 0,
-      "direction_hit_ci95": null,
-      "mean_error_pct": null,
-      "mean_flat_baseline_error_pct": null,
-      "beat_flat_baseline_rate": null,
-      "baselines": {},
-      "late_forecasts": {
-        "calls": 0,
-        "direction_hit_ci95": null,
-        "direction_hit_rate": null,
-        "mean_error_pct": null,
-        "mean_flat_error_pct": null
-      }
-    },
-    "INFY": {
       "sessions": 0,
       "days": 0,
       "enough_data": false,
@@ -147,7 +90,7 @@
         "mean_flat_error_pct": null
       }
     },
-    "TCS": {
+    "SBIN": {
       "sessions": 0,
       "days": 0,
       "enough_data": false,
@@ -166,7 +109,26 @@
         "mean_flat_error_pct": null
       }
     },
-    "SBIN": {
+    "INFY": {
+      "sessions": 0,
+      "days": 0,
+      "enough_data": false,
+      "direction_hit_rate": null,
+      "directional_calls": 0,
+      "direction_hit_ci95": null,
+      "mean_error_pct": null,
+      "mean_flat_baseline_error_pct": null,
+      "beat_flat_baseline_rate": null,
+      "baselines": {},
+      "late_forecasts": {
+        "calls": 0,
+        "direction_hit_ci95": null,
+        "direction_hit_rate": null,
+        "mean_error_pct": null,
+        "mean_flat_error_pct": null
+      }
+    },
+    "TCS": {
       "sessions": 0,
       "days": 0,
       "enough_data": false,
@@ -204,7 +166,7 @@
         "mean_flat_error_pct": null
       }
     },
-    "LT": {
+    "TATASTEEL": {
       "sessions": 0,
       "days": 0,
       "enough_data": false,
@@ -223,7 +185,26 @@
         "mean_flat_error_pct": null
       }
     },
-    "SUNPHARMA": {
+    "ITC": {
+      "sessions": 0,
+      "days": 0,
+      "enough_data": false,
+      "direction_hit_rate": null,
+      "directional_calls": 0,
+      "direction_hit_ci95": null,
+      "mean_error_pct": null,
+      "mean_flat_baseline_error_pct": null,
+      "beat_flat_baseline_rate": null,
+      "baselines": {},
+      "late_forecasts": {
+        "calls": 0,
+        "direction_hit_ci95": null,
+        "direction_hit_rate": null,
+        "mean_error_pct": null,
+        "mean_flat_error_pct": null
+      }
+    },
+    "AXISBANK": {
       "sessions": 0,
       "days": 0,
       "enough_data": false,
@@ -243,5 +224,5 @@
       }
     }
   },
-  "as_of": "2026-10-12T12:00:45+05:30"
+  "as_of": "2026-10-12T12:30:59+05:30"
 }
