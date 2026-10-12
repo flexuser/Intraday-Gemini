@@ -301,7 +301,7 @@ def test_health_is_degraded_when_llm_errors_even_if_old_forecasts_are_kept(env):
              "baseline_error_pct": None, "direction_hit": None, "baselines": {}, "checkpoints": [], "source": "llm",
              "target_pct": 0.0} for s in ao.SYMBOLS]
     h = ao.build_health(rows, at(13, 45), [], {})
-    assert h["status"] == "DEGRADED" and h["llm_error_count"] == 11
+    assert h["status"] == "DEGRADED" and h["llm_error_count"] == len(ao.SYMBOLS)
 
 def test_checkpoint_forecasts_are_scored_from_their_own_start_price(env):
     llm, state, tmp = env
