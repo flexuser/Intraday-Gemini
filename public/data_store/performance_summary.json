@@ -1,15 +1,34 @@
 {
   "overall": {
-    "sessions": 0,
-    "days": 0,
+    "sessions": 4,
+    "days": 1,
     "enough_data": false,
-    "direction_hit_rate": null,
-    "directional_calls": 0,
-    "direction_hit_ci95": null,
-    "mean_error_pct": null,
-    "mean_flat_baseline_error_pct": null,
-    "beat_flat_baseline_rate": null,
-    "baselines": {},
+    "direction_hit_rate": 1.0,
+    "directional_calls": 2,
+    "direction_hit_ci95": [
+      0.342,
+      1.0
+    ],
+    "mean_error_pct": 0.972,
+    "mean_flat_baseline_error_pct": 1.59,
+    "beat_flat_baseline_rate": 0.75,
+    "baselines": {
+      "flat": {
+        "sessions": 4,
+        "mean_error_pct": 1.59,
+        "direction_hit_rate": null
+      },
+      "gap_fade": {
+        "sessions": 4,
+        "mean_error_pct": 0.948,
+        "direction_hit_rate": 0.75
+      },
+      "momentum": {
+        "sessions": 4,
+        "mean_error_pct": 2.95,
+        "direction_hit_rate": 0.25
+      }
+    },
     "late_forecasts": {
       "calls": 0,
       "direction_hit_ci95": null,
@@ -19,31 +38,53 @@
     }
   },
   "quant": {
-    "forecasts": 0,
-    "days": 0,
-    "band_coverage": null,
-    "band_coverage_ci95": null,
+    "forecasts": 10,
+    "days": 1,
+    "band_coverage": 0.5,
+    "band_coverage_ci95": [
+      0.237,
+      0.763
+    ],
     "band_coverage_target": 0.8,
     "published_direction_calls": 0,
     "published_direction_hit_rate": null,
     "published_direction_ci95": null,
-    "shadow_direction_hit_rate": null,
-    "shadow_direction_ci95": null,
-    "mean_error_pct": null,
-    "mean_flat_error_pct": null
+    "shadow_direction_hit_rate": 0.9,
+    "shadow_direction_ci95": [
+      0.596,
+      0.982
+    ],
+    "mean_error_pct": 1.607,
+    "mean_flat_error_pct": 1.607
   },
   "by_symbol": {
     "RELIANCE": {
-      "sessions": 0,
-      "days": 0,
+      "sessions": 1,
+      "days": 1,
       "enough_data": false,
       "direction_hit_rate": null,
       "directional_calls": 0,
       "direction_hit_ci95": null,
-      "mean_error_pct": null,
-      "mean_flat_baseline_error_pct": null,
-      "beat_flat_baseline_rate": null,
-      "baselines": {},
+      "mean_error_pct": 1.73,
+      "mean_flat_baseline_error_pct": 1.73,
+      "beat_flat_baseline_rate": 0.0,
+      "baselines": {
+        "flat": {
+          "sessions": 1,
+          "mean_error_pct": 1.73,
+          "direction_hit_rate": null
+        },
+        "gap_fade": {
+          "sessions": 1,
+          "mean_error_pct": 0.96,
+          "direction_hit_rate": 1.0
+        },
+        "momentum": {
+          "sessions": 1,
+          "mean_error_pct": 1.08,
+          "direction_hit_rate": 1.0
+        }
+      },
       "late_forecasts": {
         "calls": 0,
         "direction_hit_ci95": null,
@@ -72,16 +113,32 @@
       }
     },
     "ICICIBANK": {
-      "sessions": 0,
-      "days": 0,
+      "sessions": 1,
+      "days": 1,
       "enough_data": false,
       "direction_hit_rate": null,
       "directional_calls": 0,
       "direction_hit_ci95": null,
-      "mean_error_pct": null,
-      "mean_flat_baseline_error_pct": null,
-      "beat_flat_baseline_rate": null,
-      "baselines": {},
+      "mean_error_pct": 0.48,
+      "mean_flat_baseline_error_pct": 0.73,
+      "beat_flat_baseline_rate": 1.0,
+      "baselines": {
+        "flat": {
+          "sessions": 1,
+          "mean_error_pct": 0.73,
+          "direction_hit_rate": null
+        },
+        "gap_fade": {
+          "sessions": 1,
+          "mean_error_pct": 1.11,
+          "direction_hit_rate": 0.0
+        },
+        "momentum": {
+          "sessions": 1,
+          "mean_error_pct": 1.17,
+          "direction_hit_rate": 0.0
+        }
+      },
       "late_forecasts": {
         "calls": 0,
         "direction_hit_ci95": null,
@@ -110,16 +167,35 @@
       }
     },
     "INFY": {
-      "sessions": 0,
-      "days": 0,
+      "sessions": 1,
+      "days": 1,
       "enough_data": false,
-      "direction_hit_rate": null,
-      "directional_calls": 0,
-      "direction_hit_ci95": null,
-      "mean_error_pct": null,
-      "mean_flat_baseline_error_pct": null,
-      "beat_flat_baseline_rate": null,
-      "baselines": {},
+      "direction_hit_rate": 1.0,
+      "directional_calls": 1,
+      "direction_hit_ci95": [
+        0.207,
+        1.0
+      ],
+      "mean_error_pct": 0.04,
+      "mean_flat_baseline_error_pct": 1.16,
+      "beat_flat_baseline_rate": 1.0,
+      "baselines": {
+        "flat": {
+          "sessions": 1,
+          "mean_error_pct": 1.16,
+          "direction_hit_rate": null
+        },
+        "gap_fade": {
+          "sessions": 1,
+          "mean_error_pct": 0.32,
+          "direction_hit_rate": 1.0
+        },
+        "momentum": {
+          "sessions": 1,
+          "mean_error_pct": 3.81,
+          "direction_hit_rate": 0.0
+        }
+      },
       "late_forecasts": {
         "calls": 0,
         "direction_hit_ci95": null,
@@ -129,16 +205,35 @@
       }
     },
     "TCS": {
-      "sessions": 0,
-      "days": 0,
+      "sessions": 1,
+      "days": 1,
       "enough_data": false,
-      "direction_hit_rate": null,
-      "directional_calls": 0,
-      "direction_hit_ci95": null,
-      "mean_error_pct": null,
-      "mean_flat_baseline_error_pct": null,
-      "beat_flat_baseline_rate": null,
-      "baselines": {},
+      "direction_hit_rate": 1.0,
+      "directional_calls": 1,
+      "direction_hit_ci95": [
+        0.207,
+        1.0
+      ],
+      "mean_error_pct": 1.64,
+      "mean_flat_baseline_error_pct": 2.74,
+      "beat_flat_baseline_rate": 1.0,
+      "baselines": {
+        "flat": {
+          "sessions": 1,
+          "mean_error_pct": 2.74,
+          "direction_hit_rate": null
+        },
+        "gap_fade": {
+          "sessions": 1,
+          "mean_error_pct": 1.4,
+          "direction_hit_rate": 1.0
+        },
+        "momentum": {
+          "sessions": 1,
+          "mean_error_pct": 5.74,
+          "direction_hit_rate": 0.0
+        }
+      },
       "late_forecasts": {
         "calls": 0,
         "direction_hit_ci95": null,
@@ -224,5 +319,5 @@
       }
     }
   },
-  "as_of": "2026-10-12T13:30:55+05:30"
+  "as_of": "2026-10-13T10:30:51+05:30"
 }
