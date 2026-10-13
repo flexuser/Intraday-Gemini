@@ -531,17 +531,32 @@ def frozen_curve(base_price, target_pct):
     return [round(float(base_price + (target - base_price) * i / (NUM_SLOTS - 1)), 2) for i in range(NUM_SLOTS)]
 
 
-def build_curves(df, target_price, ctx=None):
+def build_curves(df, target_price, ctx=None, vwap=None):
+    """Build session grids: close series, OHLC candles, volume, and optional VWAP line."""
     start = datetime.datetime.combine(df.index[0].date(), MARKET_OPEN)
     timeframes = [(start + datetime.timedelta(minutes=5 * i)).strftime("%H:%M") for i in range(NUM_SLOTS)]
     price_by_slot = {t.strftime("%H:%M"): round(float(p), 2) for t, p in zip(df.index, df["Close"])}
     vol_by_slot = {t.strftime("%H:%M"): int(v) for t, v in zip(df.index, df["Volume"])}
+    ohlc_by_slot = {}
+    for t, row in df.iterrows():
+        tf = t.strftime("%H:%M")
+        ohlc_by_slot[tf] = {
+            "o": round(float(row["Open"]), 2),
+            "h": round(float(row["High"]), 2),
+            "l": round(float(row["Low"]), 2),
+            "c": round(float(row["Close"]), 2),
+        }
     actual = [price_by_slot.get(tf) for tf in timeframes]
     volume = [vol_by_slot.get(tf, 0) for tf in timeframes]
+    candles = [ohlc_by_slot.get(tf) for tf in timeframes]
+    vwap_line = [
+        (round(float(vwap), 2) if (vwap is not None and price_by_slot.get(tf) is not None) else None)
+        for tf in timeframes
+    ]
 
     valid = [i for i, p in enumerate(actual) if p is not None]
     if not valid:
-        return timeframes, actual, [], [], [], volume
+        return timeframes, actual, [], [], [], volume, candles, vwap_line
     first_i, last_i = valid[0], valid[-1]
     if last_i == first_i:
         xs, ys = [first_i, NUM_SLOTS - 1], [actual[first_i], target_price]
@@ -549,7 +564,7 @@ def build_curves(df, target_price, ctx=None):
         xs, ys = [first_i, NUM_SLOTS - 1], [actual[first_i], actual[last_i]]
     else:
         xs, ys = [first_i, last_i, NUM_SLOTS - 1], [actual[first_i], actual[last_i], target_price]
-    
+
     curve_interp = PchipInterpolator(xs, ys)(np.clip(np.arange(NUM_SLOTS), first_i, NUM_SLOTS - 1))
     predicted = [round(float(p), 2) for p in curve_interp]
 
@@ -558,7 +573,7 @@ def build_curves(df, target_price, ctx=None):
     upper_curve = [round(p + band_offset * (i / (NUM_SLOTS - 1)), 2) for i, p in enumerate(predicted)]
     lower_curve = [round(p - band_offset * (i / (NUM_SLOTS - 1)), 2) for i, p in enumerate(predicted)]
 
-    return timeframes, actual, predicted, upper_curve, lower_curve, volume
+    return timeframes, actual, predicted, upper_curve, lower_curve, volume, candles, vwap_line
 
 
 def official_close(ticker, now):
@@ -758,7 +773,7 @@ def process_symbol(symbol, now):
         if quant:
             opening_curve, band_up, band_lo = quant_curves(quant)
             forecast_source, display_bias = "quant", quant["bias"]
-            q_t = quant["mu_pct"] if quant["direction_validated"] else 0.0     # never show an unvalidated target
+            q_t = quant["mu_pct"] if (quant["direction_validated"] and quant.get("bias") != "NEUTRAL") else 0.0  # flat when no edge
             display_target = round(quant["open_price"] * (1 + q_t / 100.0), 2)
             forecast_made_at = quant.get("made_at")
             opening_made_at = quant["made_at"][11:16]
@@ -820,7 +835,14 @@ def process_symbol(symbol, now):
         if not quant:       # with a quant forecast, quant_curves() above already chose the line; do NOT overwrite it with the LLM's
             opening_curve = (opening.get("curve") or frozen_curve(opening["base_price"], opening["target_pct"])) \
                 if opening else [None] * NUM_SLOTS
-        timeframes, actual, predicted, upper_curve, lower_curve, volume = build_curves(df, display_target, ctx)
+            # LLM-only path: flatten guide when NEUTRAL
+            if display_bias == "NEUTRAL":
+                base = m["open_price"]
+                opening_curve = frozen_curve(base, 0.0)
+                display_target = round(base, 2)
+        timeframes, actual, predicted, upper_curve, lower_curve, volume, candles, vwap_line = build_curves(
+            df, display_target, ctx, vwap=m.get("vwap")
+        )
 
         complete = session_complete(df, now)
         close_price, close_source = m["last_close"], "5m_bar"
@@ -836,6 +858,13 @@ def process_symbol(symbol, now):
         if complete:
             training_history = io.merge_history(read_json(INTRADAY_HISTORY_PATH, []), intraday_observations)
             write_json(INTRADAY_HISTORY_PATH, training_history)
+
+        if risk_plan.get("approved"):
+            operator_stance = "TRADE"
+        elif display_bias in ("BULLISH", "BEARISH"):
+            operator_stance = "WATCH"
+        else:
+            operator_stance = "IGNORE"
 
         write_json(path, {
             "symbol": symbol,
@@ -860,6 +889,7 @@ def process_symbol(symbol, now):
             "curves": {
                 "date": today, "generated_at": now.strftime("%I:%M %p IST"), "symbol": symbol,
                 "bias": display_bias, "timeframes": timeframes, "actual_curve": actual,
+                "candles": candles, "vwap_line": vwap_line,
                 "predicted_curve": opening_curve, "latest_forecast_curve": predicted,
                 "opening_made_at": opening_made_at,
                 "forecast_made_at": forecast_made_at,
@@ -867,6 +897,9 @@ def process_symbol(symbol, now):
                 "forecast_source": forecast_source, "quant_summary": quant_summary,
                 "actual_volume": volume, "final_pred": display_target, "final_actual": close_price,
                 "error_pct": display_error,
+                "operator_stance": operator_stance,
+                "rejection_reason": risk_plan.get("rejection_reason"),
+                "vwap": m.get("vwap"),
             },
             "session": {"complete": complete, **score},
         })

@@ -9,6 +9,7 @@
   <link rel="manifest" href="./manifest.json">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then(registrations => {
@@ -104,9 +105,18 @@
             </button>
           </div>
 
-          <div class="h-64 md:h-80 w-full relative">
-            <canvas id="predictionChart"></canvas>
+          <div id="stance-banner" class="mb-3 rounded-lg border px-3 py-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Operator stance</span>
+              <span id="stance-label" class="text-sm font-bold tracking-wide">--</span>
+            </div>
+            <p id="stance-reason" class="text-[11px] text-slate-400 max-w-xl"></p>
           </div>
+
+          <div class="h-72 md:h-96 w-full relative rounded-lg border border-slate-800 bg-slate-950/80 overflow-hidden">
+            <div id="predictionChart" class="w-full h-full"></div>
+          </div>
+          <p class="text-[10px] text-slate-500 mt-1.5">Candles = 5m OHLC · Orange = session VWAP (context) · Blue dashed = open→close guide (flat when IGNORE)</p>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-2">
             <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800 space-y-2">
@@ -114,18 +124,20 @@
               <p id="ai-rationale" class="text-slate-300 leading-relaxed">Loading intelligence snapshot...</p>
               
               <div id="news-container" class="pt-2 border-t border-slate-800/80 space-y-1.5">
-                <span class="text-slate-400 font-semibold block text-[11px]">Recent Stock News (Yahoo Finance):</span>
+                <span class="text-slate-400 font-semibold block text-[11px]">Headlines (context only — not the signal):</span>
                 <ul id="news-list" class="space-y-1 text-slate-300"></ul>
               </div>
             </div>
 
             <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800 space-y-2">
-              <span class="text-slate-400 font-semibold block uppercase tracking-wider text-[11px]">Metrics & Model Diagnostics:</span>
+              <span class="text-slate-400 font-semibold block uppercase tracking-wider text-[11px]">Model call (signal)</span>
               <ul class="text-slate-300 space-y-1.5">
                 <li class="flex justify-between border-b border-slate-900 pb-1"><span>First 5m Bar Close:</span> <span id="val-base" class="font-mono text-white">--</span></li>
                 <li class="flex justify-between border-b border-slate-900 pb-1"><span id="target-label">Close Target (15:30):</span> <span id="val-target" class="font-mono text-white">--</span></li>
                 <li class="flex justify-between border-b border-slate-900 pb-1"><span>Latest Observed Price:</span> <span id="val-actual" class="font-mono text-white">--</span></li>
-                <li class="flex justify-between"><span id="error-label">Live Gap to Estimate:</span> <span id="val-error" class="font-mono text-white">--</span></li>
+                <li class="flex justify-between border-b border-slate-900 pb-1"><span id="error-label">Live Gap to Estimate:</span> <span id="val-error" class="font-mono text-white">--</span></li>
+                <li class="flex justify-between border-b border-slate-900 pb-1"><span>Session VWAP <span class="text-slate-500">(context)</span>:</span> <span id="val-vwap" class="font-mono text-amber-300/90">--</span></li>
+                <li class="flex justify-between"><span>RSI(14) <span class="text-slate-500">(context, not signal)</span>:</span> <span id="val-rsi" class="font-mono text-slate-400">--</span></li>
               </ul>
               <div id="gap-callout" class="mt-3 rounded-lg border border-slate-800 bg-slate-950 px-3 py-2 text-[11px] leading-relaxed">
                 <div class="text-slate-500 font-semibold uppercase tracking-wider mb-1">Prediction vs Reality</div>
@@ -366,7 +378,7 @@
       if (changedSymbol) {
         selectedStockData = null;
         if (chartInstance) {
-          chartInstance.destroy();
+          try { chartInstance.remove(); } catch (e) { try { chartInstance.destroy(); } catch (e2) {} }
           chartInstance = null;
         }
         document.getElementById("ai-rationale").textContent = "Loading market snapshot…";
@@ -416,14 +428,14 @@
         selectedStockData = data;
         document.getElementById("meta-date").textContent = data.curves.date || "--";
         document.getElementById("meta-time").textContent = data.curves.generated_at || "--";
-        renderChartAndDetails(data.curves, data.prediction, data.intraday_forecast, data.intraday_evidence);
+        renderChartAndDetails(data.curves, data.prediction, data.intraday_forecast, data.intraday_evidence, data.risk_execution_plan, data.technical_indicators);
         renderDataStatus(data);
       } else if (selectedStockData) {
         renderDataStatus(selectedStockData, `Refresh failed for ${requestedSymbol}. Showing the last snapshot loaded successfully.`);
       } else {
         selectedStockData = null;
         if (chartInstance) {
-          chartInstance.destroy();
+          try { chartInstance.remove(); } catch (e) { try { chartInstance.destroy(); } catch (e2) {} }
           chartInstance = null;
         }
         document.getElementById("meta-date").textContent = "--";
@@ -444,7 +456,7 @@
       if (input) loadStock(input);
     }
 
-    function renderChartAndDetails(curves, prediction, intradayForecast, intradayEvidence) {
+    function renderChartAndDetails(curves, prediction, intradayForecast, intradayEvidence, riskPlan, tech) {
       const biasBadge = document.getElementById("bias-badge");
       const volumeBadge = document.getElementById("volume-badge");
       const bias = curves.bias || "NEUTRAL";
@@ -465,197 +477,203 @@
         ? "px-2.5 py-0.5 rounded text-xs font-bold bg-amber-950 text-amber-400 border border-amber-800 animate-pulse" 
         : "px-2.5 py-0.5 rounded text-xs font-semibold bg-slate-800 text-slate-400";
 
+      // --- Operator stance: TRADE / WATCH / IGNORE ---
+      let stance = curves.operator_stance;
+      if (!stance) {
+        if (riskPlan && riskPlan.approved) stance = "TRADE";
+        else if (bias === "BULLISH" || bias === "BEARISH") stance = "WATCH";
+        else stance = "IGNORE";
+      }
+      const stanceLabel = document.getElementById("stance-label");
+      const stanceReason = document.getElementById("stance-reason");
+      const stanceBanner = document.getElementById("stance-banner");
+      stanceLabel.textContent = stance;
+      const reason = curves.rejection_reason || (riskPlan && riskPlan.rejection_reason) || "";
+      if (stance === "TRADE") {
+        stanceBanner.className = "mb-3 rounded-lg border px-3 py-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 border-emerald-700/60 bg-emerald-950/40";
+        stanceLabel.className = "text-sm font-bold tracking-wide text-emerald-400";
+        stanceReason.textContent = reason || "Risk plan approved — size and stops in execution plan.";
+      } else if (stance === "WATCH") {
+        stanceBanner.className = "mb-3 rounded-lg border px-3 py-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 border-amber-700/50 bg-amber-950/30";
+        stanceLabel.className = "text-sm font-bold tracking-wide text-amber-400";
+        stanceReason.textContent = reason || "Directional lean present but trade not approved — observe only.";
+      } else {
+        stanceBanner.className = "mb-3 rounded-lg border px-3 py-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 border-slate-700 bg-slate-900/80";
+        stanceLabel.className = "text-sm font-bold tracking-wide text-slate-300";
+        stanceReason.textContent = reason || "No validated edge — do not trade off the chart.";
+      }
+
       document.getElementById("ai-rationale").innerText = prediction?.reasoning || "Market analysis active.";
 
       const newsList = document.getElementById("news-list");
       if (prediction?.news_feed && prediction.news_feed.length > 0) {
         newsList.innerHTML = prediction.news_feed.map(item => 
-          `<li class="bg-slate-900 p-2 rounded border border-slate-800/80">
-            <a href="${escapeHtml(item.link)}" target="_blank" class="text-blue-400 hover:underline font-medium block leading-snug">${escapeHtml(item.title)}</a>
-            <span class="text-[10px] text-slate-500 block mt-0.5">Source: ${escapeHtml(item.publisher)}</span>
-          </li>`
-        ).join('');
+          `<li class="truncate"><a href="${escapeHtml(item.link || '#')}" target="_blank" rel="noopener" class="text-blue-400 hover:underline">${escapeHtml(item.title)}</a>
+           <span class="text-slate-500"> · ${escapeHtml(item.publisher || '')}</span></li>`
+        ).join("");
       } else {
-        newsList.innerHTML = `<li class="text-slate-500 italic">No recent headlines returned. Corporate-event data is not connected.</li>`;
+        newsList.innerHTML = `<li class="text-slate-500">No headlines in this snapshot.</li>`;
       }
 
       const validActuals = curves.actual_curve ? curves.actual_curve.filter(v => v !== null) : [];
-      document.getElementById("val-base").innerText = validActuals.length > 0 ? `₹${validActuals[0]}` : "--";
-      const qs = curves.quant_summary;
-      const directionalBias = curves.bias === "BULLISH" || curves.bias === "BEARISH";
-      const hasForecastTarget = qs
-        ? curves.final_pred != null
-        : directionalBias && curves.forecast_source === "llm_unvalidated" && curves.final_pred != null;
-      document.getElementById("target-label").textContent = qs
-        ? `${qs.direction_validated ? "Quant" : "Unvalidated quant"} Estimate (15:30):`
-        : (hasForecastTarget ? "Unvalidated AI Target (15:30):" : "Close Target (15:30):");
-      document.getElementById("val-target").innerText = curves.final_pred == null
-        ? "--"
-        : (hasForecastTarget || qs ? `₹${curves.final_pred}` : "--");
-      document.getElementById("val-actual").innerText = validActuals.length > 0 ? `₹${validActuals[validActuals.length - 1]}` : "--";
-      const errorLabel = document.getElementById("error-label");
-      const errorValue = document.getElementById("val-error");
-      const gapEl = document.getElementById("gap-callout-text");
-      if (curves.error_pct != null) {
-        errorLabel.textContent = "Final Forecast Error:";
-        errorValue.textContent = `${curves.error_pct}%`;
-        if (gapEl) {
-          const pred = curves.final_pred != null ? `₹${Number(curves.final_pred).toFixed(2)}` : "--";
-          const act = validActuals.length ? `₹${Number(validActuals[validActuals.length - 1]).toFixed(2)}` : "--";
-          const sign = Number(curves.error_pct) >= 0 ? "above" : "below";
-          gapEl.innerHTML = `Session complete. Target <span class="text-white font-mono">${pred}</span> vs actual <span class="text-white font-mono">${act}</span> — error <span class="text-white font-mono">${curves.error_pct}%</span> (${sign} target magnitude).`;
-        }
-      } else if (hasForecastTarget && validActuals.length > 0 && Number.isFinite(Number(curves.final_pred))) {
-        const liveGap = Number(curves.final_pred) - Number(validActuals[validActuals.length - 1]);
-        const liveGapPct = liveGap / Number(validActuals[validActuals.length - 1]) * 100;
-        errorLabel.textContent = "Live Gap to Estimate:";
-        errorValue.textContent = `${liveGap >= 0 ? "+" : "−"}₹${Math.abs(liveGap).toFixed(2)} (${liveGapPct >= 0 ? "+" : "−"}${Math.abs(liveGapPct).toFixed(2)}%)`;
-        if (gapEl) {
-          gapEl.innerHTML = `In progress. Current price is <span class="text-white font-mono">${liveGap >= 0 ? "below" : "above"}</span> the close estimate by <span class="text-white font-mono">₹${Math.abs(liveGap).toFixed(2)}</span> (<span class="text-white font-mono">${Math.abs(liveGapPct).toFixed(2)}%</span>). Gap closes when the session is scored after 15:30.`;
-        }
+      const firstPx = validActuals.length ? validActuals[0] : null;
+      const lastPx = validActuals.length ? validActuals[validActuals.length - 1] : null;
+      document.getElementById("val-base").textContent = firstPx != null ? `₹${Number(firstPx).toFixed(2)}` : "--";
+      document.getElementById("val-target").textContent = curves.final_pred != null ? `₹${Number(curves.final_pred).toFixed(2)}` : "--";
+      document.getElementById("val-actual").textContent = lastPx != null ? `₹${Number(lastPx).toFixed(2)}` : "--";
+      if (curves.final_pred != null && lastPx != null) {
+        const gap = lastPx - curves.final_pred;
+        const gapPct = curves.final_pred ? (gap / curves.final_pred) * 100 : 0;
+        document.getElementById("val-error").textContent = `${gap >= 0 ? '+' : ''}₹${gap.toFixed(2)} (${gapPct >= 0 ? '+' : ''}${gapPct.toFixed(2)}%)`;
       } else {
-        errorLabel.textContent = "Forecast Error:";
-        errorValue.textContent = "--";
-        if (gapEl) {
-          gapEl.textContent = "Waiting for a forecast target and observed prices. After the first completed session you will see target vs actual here.";
+        document.getElementById("val-error").textContent = "--";
+      }
+      const vwapVal = curves.vwap != null ? curves.vwap : (curves.vwap_line || []).find(v => v != null);
+      document.getElementById("val-vwap").textContent = vwapVal != null ? `₹${Number(vwapVal).toFixed(2)}` : "--";
+      const rsi = tech && tech.rsi_14 != null ? tech.rsi_14 : null;
+      document.getElementById("val-rsi").textContent = rsi != null ? Number(rsi).toFixed(1) : "--";
+
+      // Intraday status text (unchanged pattern if element exists)
+      const idf = document.getElementById("intraday-forecast");
+      if (idf) {
+        if (intradayForecast && Object.keys(intradayForecast).length) {
+          idf.textContent = JSON.stringify(intradayForecast).slice(0, 180);
+        } else {
+          idf.textContent = "Short-horizon model status in snapshot when available.";
         }
       }
 
-      const intradayEl = document.getElementById("intraday-forecast");
-      const horizonForecasts = intradayForecast?.forecasts || {};
-      if (intradayForecast?.status === "collecting") {
-        intradayEl.className = "text-slate-500 text-[11px] mt-1";
-        const current = intradayForecast.sessions_available || 0;
-        const minimum = intradayForecast.minimum_sessions || 40;
-        intradayEl.textContent = `Collecting scored five-minute observations: ${current}/${minimum} sessions. No intraday forecast is published until the evidence threshold is met.`;
-      } else if (Object.keys(horizonForecasts).length) {
-        intradayEl.className = "text-slate-300 text-[11px] mt-1 leading-relaxed";
-        intradayEl.innerHTML = Object.entries(horizonForecasts)
-          .sort(([left], [right]) => Number(left) - Number(right))
-          .map(([minutes, item]) => {
-            const status = item.status === "validated" ? "validated" : "shadow only";
-            const colour = item.status === "validated" ? "text-emerald-400" : "text-amber-400";
-            const sign = Number(item.expected_return_pct) >= 0 ? "+" : "";
-            const evidence = intradayEvidence?.[minutes];
-            const proof = evidence && Number.isFinite(Number(evidence.hit_rate))
-              ? ` · OOS ${Number(evidence.n_days)}d, hit ${(Number(evidence.hit_rate) * 100).toFixed(0)}%, MAE ${Number(evidence.mae_model_pct).toFixed(2)}% vs ${Number(evidence.mae_flat_pct).toFixed(2)}%`
-              : "";
-            return `<span class="block"><strong>${minutes}m:</strong> ${sign}${Number(item.expected_return_pct).toFixed(2)}% → ₹${Number(item.target_price).toFixed(2)} · range ${Number(item.band_low_pct).toFixed(2)}% to ${Number(item.band_high_pct).toFixed(2)}% · <span class="${colour}">${status}</span>${proof}</span>`;
-          }).join("");
-      } else {
-        intradayEl.className = "text-slate-500 text-[11px] mt-1";
-        intradayEl.textContent = intradayForecast?.reason || "No five-minute model forecast is available for this snapshot.";
+      // --- Candlestick chart (Lightweight Charts) ---
+      const container = document.getElementById("predictionChart");
+      if (chartInstance) {
+        try { chartInstance.remove(); } catch (e) {}
+        chartInstance = null;
+      }
+      container.innerHTML = "";
+
+      if (typeof LightweightCharts === "undefined") {
+        container.innerHTML = `<p class="text-slate-500 text-xs p-4">Chart library failed to load.</p>`;
+        return;
       }
 
-      let quantLine = document.getElementById("quant-line");
-      if (!quantLine) {
-        document.getElementById("ai-rationale").insertAdjacentHTML("beforebegin", '<p id="quant-line" class="text-sky-300 text-xs mb-2 font-mono"></p>');
-        quantLine = document.getElementById("quant-line");
-      }
-      const forecastTime = curves.forecast_made_at || curves.generated_at || "unknown time";
-      if (qs) {
-        const view = qs.direction_validated
-          ? `Model view: ${qs.bias} (P(up) ${Math.round(qs.p_up * 100)}%)`
-          : "Model view: no validated directional edge";
-        const stockGate = qs.symbol_gate_available === false
-          ? (qs.symbol_gate_passed === null
-            ? " | pooled evidence only; refresh quant model for a stock gate; trade approvals disabled"
-            : " | stock is not covered by a validation gate; trade approvals disabled")
-          : (!qs.tradeable_validated ? " | stock trade gate failed; trade approvals disabled" : "");
-        const rng = qs.range_validated
-          ? ` | expected close range ${qs.expected_range_pct}% | 80% close band ${qs.band_lo_pct}% to +${qs.band_hi_pct}%`
-          : " | close range not validated";
-        quantLine.innerText = `Open-to-close quant estimate frozen at ${forecastTime}. ${view}${stockGate}${rng}. Dashed line is a straight guide to the ${qs.direction_validated ? "model estimate" : "unvalidated estimate"}, not a minute-by-minute path.`;
-      } else {
-        quantLine.innerText = curves.forecast_source === "llm_unvalidated"
-          ? `Unvalidated AI forecast from ${forecastTime}. Dashed line is a straight guide to its close target, not a minute-by-minute path.`
-          : `No AI forecast was available at ${forecastTime}; no close target is shown.`;
-      }
-
-      const lastActualIndex = curves.actual_curve.reduce((last, price, index) => price == null ? last : index, -1);
-      const lastIndex = curves.timeframes.length - 1;
-      const currentPrice = lastActualIndex >= 0 ? Number(curves.actual_curve[lastActualIndex]) : null;
-      const targetPrice = curves.final_pred == null ? null : Number(curves.final_pred);
-      const projectionData = curves.timeframes.map((_, index) => {
-        if (!hasForecastTarget || lastActualIndex < 0 || index < lastActualIndex || !Number.isFinite(currentPrice) || !Number.isFinite(targetPrice)) return null;
-        const progress = lastIndex > lastActualIndex ? (index - lastActualIndex) / (lastIndex - lastActualIndex) : 0;
-        return currentPrice + (targetPrice - currentPrice) * progress;
-      });
-
-      const ctx = document.getElementById('predictionChart').getContext('2d');
-      if (chartInstance) chartInstance.destroy();
-
-      chartInstance = new Chart(ctx, {
-        data: {
-          labels: curves.timeframes,
-          datasets: [
-            {
-              type: 'bar',
-              label: '5m Volume',
-              data: curves.actual_volume || [],
-              backgroundColor: 'rgba(51, 65, 85, 0.45)',
-              borderColor: 'rgba(100, 116, 139, 0.6)',
-              borderWidth: 1,
-              yAxisID: 'y1',
-              order: 2
-            },
-            ...(hasForecastTarget ? [{
-              type: 'line',
-              label: `Guide to close target (forecast ${forecastTime})`,
-              data: projectionData,
-              borderColor: '#3b82f6',
-              borderDash: [5, 5],
-              borderWidth: 2,
-              showLine: true,
-              pointRadius: 0,
-              tension: 0,
-              yAxisID: 'y',
-              order: 1,
-              spanGaps: false
-            }] : []),
-            {
-              type: 'line',
-              label: 'Actual Market Curve',
-              data: curves.actual_curve,
-              borderColor: '#10b981',
-              borderWidth: 2,
-              fill: false,
-              tension: 0.2,
-              yAxisID: 'y',
-              order: 1,
-              spanGaps: false
-            }
-          ]
+      const chart = LightweightCharts.createChart(container, {
+        layout: {
+          background: { color: "#020617" },
+          textColor: "#94a3b8",
         },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 }, filter: (item) => !item.text.startsWith('_') } } },
-          scales: {
-            x: { ticks: { color: '#64748b' }, grid: { color: '#1e293b' } },
-            y: {
-              type: 'linear',
-              position: 'left',
-              ticks: { color: '#94a3b8' },
-              grid: { color: '#1e293b' },
-              title: { display: true, text: 'Price (₹)', color: '#64748b', font: { size: 10 } }
-            },
-            y1: {
-              type: 'linear',
-              position: 'right',
-              ticks: { 
-                color: '#475569',
-                callback: (val) => val >= 1e6 ? (val/1e6).toFixed(1) + 'M' : val >= 1e3 ? (val/1e3).toFixed(0) + 'k' : val
-              },
-              grid: { drawOnChartArea: false },
-              title: { display: true, text: 'Volume', color: '#475569', font: { size: 10 } }
-            }
-          }
+        grid: {
+          vertLines: { color: "#1e293b" },
+          horzLines: { color: "#1e293b" },
+        },
+        rightPriceScale: { borderColor: "#334155" },
+        timeScale: { borderColor: "#334155", timeVisible: true, secondsVisible: false },
+        crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
+        width: container.clientWidth,
+        height: container.clientHeight || 320,
+      });
+      chartInstance = chart;
+
+      const day = curves.date || "2026-01-01";
+      const tfs = curves.timeframes || [];
+      const toTs = (tf) => {
+        // tf = "HH:MM" IST → unix seconds
+        const [hh, mm] = tf.split(":").map(Number);
+        const iso = `${day}T${String(hh).padStart(2,"0")}:${String(mm).padStart(2,"0")}:00+05:30`;
+        return Math.floor(new Date(iso).getTime() / 1000);
+      };
+
+      const candleData = [];
+      const candles = curves.candles || [];
+      for (let i = 0; i < tfs.length; i++) {
+        const c = candles[i];
+        if (!c || c.o == null) continue;
+        candleData.push({ time: toTs(tfs[i]), open: c.o, high: c.h, low: c.l, close: c.c });
+      }
+      // Fallback: close-only as synthetic candles if OHLC missing (old snapshots)
+      if (candleData.length === 0 && curves.actual_curve) {
+        for (let i = 0; i < tfs.length; i++) {
+          const px = curves.actual_curve[i];
+          if (px == null) continue;
+          candleData.push({ time: toTs(tfs[i]), open: px, high: px, low: px, close: px });
+        }
+      }
+
+      const candleSeries = chart.addCandlestickSeries({
+        upColor: "#34d399",
+        downColor: "#f87171",
+        borderUpColor: "#34d399",
+        borderDownColor: "#f87171",
+        wickUpColor: "#34d399",
+        wickDownColor: "#f87171",
+      });
+      candleSeries.setData(candleData);
+
+      // VWAP line (context)
+      const vwapData = [];
+      const vwapLine = curves.vwap_line || [];
+      for (let i = 0; i < tfs.length; i++) {
+        if (vwapLine[i] == null) continue;
+        vwapData.push({ time: toTs(tfs[i]), value: vwapLine[i] });
+      }
+      if (vwapData.length) {
+        const vwapSeries = chart.addLineSeries({
+          color: "#f59e0b",
+          lineWidth: 2,
+          lineStyle: LightweightCharts.LineStyle.Solid,
+          title: "VWAP",
+          lastValueVisible: false,
+          priceLineVisible: false,
+        });
+        vwapSeries.setData(vwapData);
+      }
+
+      // Guide to close (flat when IGNORE / NEUTRAL)
+      const guide = curves.predicted_curve || [];
+      const guideData = [];
+      for (let i = 0; i < tfs.length; i++) {
+        if (guide[i] == null) continue;
+        guideData.push({ time: toTs(tfs[i]), value: guide[i] });
+      }
+      if (guideData.length) {
+        const guideSeries = chart.addLineSeries({
+          color: "#60a5fa",
+          lineWidth: 2,
+          lineStyle: LightweightCharts.LineStyle.Dashed,
+          title: "Guide",
+          lastValueVisible: true,
+          priceLineVisible: false,
+        });
+        guideSeries.setData(guideData);
+      }
+
+      // Volume histogram
+      const volData = [];
+      const vols = curves.actual_volume || [];
+      for (let i = 0; i < tfs.length; i++) {
+        if (vols[i] == null || (candles[i] == null && curves.actual_curve && curves.actual_curve[i] == null)) continue;
+        const up = candles[i] ? candles[i].c >= candles[i].o : true;
+        volData.push({ time: toTs(tfs[i]), value: vols[i] || 0, color: up ? "rgba(52,211,153,0.35)" : "rgba(248,113,113,0.35)" });
+      }
+      if (volData.length) {
+        const volSeries = chart.addHistogramSeries({
+          priceFormat: { type: "volume" },
+          priceScaleId: "vol",
+          lastValueVisible: false,
+          priceLineVisible: false,
+        });
+        chart.priceScale("vol").applyOptions({ scaleMargins: { top: 0.8, bottom: 0 } });
+        volSeries.setData(volData);
+      }
+
+      chart.timeScale().fitContent();
+      window.addEventListener("resize", () => {
+        if (chartInstance === chart) {
+          chart.applyOptions({ width: container.clientWidth, height: container.clientHeight || 320 });
         }
       });
     }
 
-    
+
     async function loadHistoryData() {
       const tbody = document.getElementById("history-table-body");
       const empty = document.getElementById("history-empty");
