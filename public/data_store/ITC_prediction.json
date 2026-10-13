@@ -1019,7 +1019,7 @@
   },
   "curves": {
     "date": "2026-10-13",
-    "generated_at": "03:30 PM IST",
+    "generated_at": "04:00 PM IST",
     "symbol": "ITC",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -2097,19 +2097,62 @@
       0
     ],
     "final_pred": 259.0,
-    "final_actual": 261.04998779296875,
-    "error_pct": null,
+    "final_actual": 261.0,
+    "error_pct": 0.772,
     "operator_stance": "IGNORE",
     "rejection_reason": "Direction model failed walk-forward edge test.",
     "vwap": 259.79
   },
   "session": {
-    "complete": false,
-    "verdict": "IN_PROGRESS",
-    "error_pct": null,
-    "baseline_error_pct": null,
+    "complete": true,
+    "verdict": "SUCCESS",
+    "error_pct": 0.57,
+    "baseline_error_pct": 0.77,
     "direction_hit": null,
-    "baselines": {},
-    "quant": null
+    "baselines": {
+      "flat": {
+        "target_pct": 0.0,
+        "error_pct": 0.77,
+        "direction_hit": null
+      },
+      "momentum": {
+        "target_pct": 3.0,
+        "error_pct": 2.23,
+        "direction_hit": true
+      },
+      "gap_fade": {
+        "target_pct": 2.63,
+        "error_pct": 1.86,
+        "direction_hit": true
+      }
+    },
+    "checkpoints": [
+      {
+        "made_at": "09:45",
+        "target_price": 259.52,
+        "price_at_forecast": 259.3,
+        "direction_hit": true,
+        "error_pct": 0.57,
+        "flat_error_pct": 0.66
+      }
+    ],
+    "quant": {
+      "bias": "NEUTRAL",
+      "target_pct": 0.0,
+      "close_ret_pct": 0.772,
+      "open_price": 259.0,
+      "close_price": 261.0,
+      "target_price": 259.0,
+      "direction_hit": null,
+      "shadow_direction_hit": true,
+      "error_pct": 0.772,
+      "flat_error_pct": 0.772,
+      "in_band": true,
+      "range_validated": false,
+      "direction_validated": false,
+      "p_up": 0.558,
+      "expected_range_pct": 3.96,
+      "verdict": "SUCCESS"
+    }
   }
 }

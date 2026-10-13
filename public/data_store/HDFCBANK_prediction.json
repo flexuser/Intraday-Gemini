@@ -1020,7 +1020,7 @@
   },
   "curves": {
     "date": "2026-10-13",
-    "generated_at": "03:30 PM IST",
+    "generated_at": "04:00 PM IST",
     "symbol": "HDFCBANK",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -2093,19 +2093,70 @@
       0
     ],
     "final_pred": 707.0,
-    "final_actual": 714.9500122070312,
-    "error_pct": null,
+    "final_actual": 714.0,
+    "error_pct": 0.99,
     "operator_stance": "IGNORE",
     "rejection_reason": "Per-stock net performance has not passed validation.",
     "vwap": 712.79
   },
   "session": {
-    "complete": false,
-    "verdict": "IN_PROGRESS",
-    "error_pct": null,
-    "baseline_error_pct": null,
+    "complete": true,
+    "verdict": "SUCCESS",
+    "error_pct": 0.59,
+    "baseline_error_pct": 0.99,
     "direction_hit": null,
-    "baselines": {},
-    "quant": null
+    "baselines": {
+      "flat": {
+        "target_pct": 0.0,
+        "error_pct": 0.99,
+        "direction_hit": null
+      },
+      "momentum": {
+        "target_pct": 2.17,
+        "error_pct": 1.18,
+        "direction_hit": true
+      },
+      "gap_fade": {
+        "target_pct": 0.04,
+        "error_pct": 0.95,
+        "direction_hit": true
+      }
+    },
+    "checkpoints": [
+      {
+        "made_at": "09:45",
+        "target_price": 709.83,
+        "price_at_forecast": 715.05,
+        "direction_hit": true,
+        "error_pct": 0.58,
+        "flat_error_pct": 0.15
+      },
+      {
+        "made_at": "12:00",
+        "target_price": 708.41,
+        "price_at_forecast": 710.85,
+        "direction_hit": false,
+        "error_pct": 0.79,
+        "flat_error_pct": 0.44
+      }
+    ],
+    "quant": {
+      "bias": "NEUTRAL",
+      "target_pct": 0.0,
+      "close_ret_pct": 0.99,
+      "open_price": 707.0,
+      "close_price": 714.0,
+      "target_price": 707.0,
+      "direction_hit": null,
+      "shadow_direction_hit": false,
+      "error_pct": 0.99,
+      "flat_error_pct": 0.99,
+      "in_band": true,
+      "range_validated": false,
+      "direction_validated": true,
+      "p_up": 0.454,
+      "expected_range_pct": 2.18,
+      "verdict": "SUCCESS"
+    }
   }
 }
