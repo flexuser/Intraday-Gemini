@@ -1,205 +1,194 @@
-﻿<!-- index_4.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Intraday AI Prediction & News Intelligence</title>
+  <title>Intraday AI — Market Snapshot</title>
   <meta name="theme-color" content="#0f172a">
   <link rel="manifest" href="./manifest.json">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(registrations => {
-        for (let registration of registrations) {
-          registration.unregister();
-        }
-      });
-    }
-  </script>
   <script>
     function escapeHtml(str) {
       if (!str) return '';
       return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
     }
   </script>
+  <style>
+    html, body { height: 100%; }
+    /* Dense desktop: keep snapshot in viewport */
+    @media (min-width: 1024px) {
+      .snapshot-grid { min-height: calc(100vh - 11rem); }
+      #predictionChart { min-height: 420px; }
+    }
+    #watchlist-pills::-webkit-scrollbar { height: 4px; }
+  </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen font-sans p-4 md:p-8">
-  <div class="max-w-5xl mx-auto space-y-6">
-    
-    <header class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
-      <div>
-        <div class="flex items-center gap-2">
-          <span class="bg-blue-900/60 text-blue-400 text-xs font-semibold px-2.5 py-0.5 rounded border border-blue-700/50">NSE</span>
-          <h1 class="text-xl md:text-2xl font-bold tracking-tight text-white">Intraday AI Prediction & News Intelligence</h1>
-        </div>
-        <p class="text-xs text-slate-400 mt-1">Intraday market snapshots • data and forecast timestamps shown below</p>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans">
+  <div class="max-w-[1400px] mx-auto px-3 md:px-5 py-3 space-y-3">
+
+    <!-- Compact header -->
+    <header class="flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2 min-w-0">
+        <span class="bg-blue-900/60 text-blue-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-blue-700/50">NSE</span>
+        <h1 class="text-base md:text-lg font-bold text-white truncate">Intraday AI</h1>
+        <span id="status-pill" class="hidden sm:inline-flex items-center gap-1.5 text-[11px] text-slate-400 border border-slate-800 rounded-full px-2 py-0.5">
+          <span id="data-status-dot" class="h-1.5 w-1.5 rounded-full bg-slate-400"></span>
+          <span id="data-status-label">Checking…</span>
+        </span>
       </div>
-      <div class="flex items-center gap-2 bg-slate-900 p-1 rounded-lg border border-slate-800">
-        <button id="tab-intraday" onclick="switchTab('intraday')" class="px-3 py-1.5 text-xs font-medium rounded-md bg-blue-600 text-white shadow">Market Snapshot</button>
-        <button id="tab-audit" onclick="switchTab('audit')" class="px-3 py-1.5 text-xs font-medium rounded-md text-slate-400 hover:text-white">Forecast Audit</button>
-        <button id="tab-history" onclick="switchTab('history')" class="px-3 py-1.5 text-xs font-medium rounded-md text-slate-400 hover:text-white">Track Record</button>
+      <div class="flex items-center gap-1 bg-slate-900 p-0.5 rounded-lg border border-slate-800">
+        <button id="tab-intraday" onclick="switchTab('intraday')" class="px-2.5 py-1 text-[11px] font-medium rounded-md bg-blue-600 text-white">Snapshot</button>
+        <button id="tab-audit" onclick="switchTab('audit')" class="px-2.5 py-1 text-[11px] font-medium rounded-md text-slate-400 hover:text-white">Audit</button>
+        <button id="tab-history" onclick="switchTab('history')" class="px-2.5 py-1 text-[11px] font-medium rounded-md text-slate-400 hover:text-white">Track Record</button>
       </div>
     </header>
 
-    <section id="data-status" role="status" aria-live="polite" class="rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 space-y-1">
-      <div class="flex items-center gap-2 text-sm">
-        <span id="data-status-dot" class="h-2.5 w-2.5 rounded-full bg-slate-400"></span>
-        <strong id="data-status-label" class="text-slate-200">Checking snapshot</strong>
-      </div>
-      <p id="data-status-message" class="text-xs text-slate-300">Loading the latest published market data.</p>
-      <p id="data-status-detail" class="text-xs text-slate-500"></p>
-      <p id="track-record" class="text-xs text-slate-400 border-t border-slate-800 pt-2">Loading forecast track record…</p>
-    </section>
+    <p id="data-status-message" class="text-[11px] text-slate-500 -mt-1 truncate"></p>
+    <p id="data-status-detail" class="hidden"></p>
+    <p id="track-record" class="hidden"></p>
 
-    <section class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3">
-      <div class="flex flex-col sm:flex-row gap-2">
-        <input id="symbol-input" type="text" placeholder="SYMBOL (E.G. SUNPHARMA, TMPV)" class="bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-blue-500 flex-1 uppercase">
-        <button onclick="analyzeStock()" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-2 rounded-lg transition">Analyze</button>
+    <!-- Symbols row -->
+    <div class="flex flex-wrap items-center gap-2">
+      <div class="flex overflow-x-auto gap-1.5 flex-1 min-w-0" id="watchlist-pills"></div>
+      <div class="flex gap-1.5">
+        <input id="symbol-input" type="text" placeholder="SYMBOL" class="w-24 bg-slate-900 border border-slate-800 rounded-md px-2 py-1 text-xs uppercase focus:outline-none focus:border-blue-500">
+        <button onclick="analyzeStock()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-md">Go</button>
       </div>
-      <div>
-        <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
-          <span class="font-semibold uppercase tracking-wider text-slate-500">SUPPORTED SYMBOLS</span>
-          <span class="text-slate-500">Snapshot status uses India Standard Time</span>
-        </div>
-        <div class="flex overflow-x-auto whitespace-nowrap gap-2 pb-2 scrollbar-none" id="watchlist-pills"></div>
-      </div>
-    </section>
+    </div>
 
     <main id="view-container">
-      <div id="view-intraday" class="space-y-6">
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 md:p-6 space-y-4">
-          
-          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 pb-3">
-            <div>
-              <div class="flex items-center gap-3">
-                <h2 id="active-symbol" class="text-2xl font-bold text-white tracking-wide">RELIANCE</h2>
-                <div id="bias-badge" class="px-3 py-0.5 rounded-full text-xs font-bold bg-slate-800 text-slate-300">
-                  NEUTRAL
-                </div>
-                <div id="volume-badge" class="px-2.5 py-0.5 rounded text-xs font-semibold bg-slate-800 text-slate-400">
-                  Vol: --
-                </div>
-              </div>
-              
-              <div class="flex flex-wrap items-center gap-2 mt-2 text-xs">
-                <span class="bg-slate-950 text-slate-300 border border-slate-800 px-2.5 py-1 rounded-md font-mono flex items-center gap-1.5">
-                  <span id="session-dot" class="w-2 h-2 rounded-full bg-slate-500"></span>
-                  Session Date: <strong id="meta-date" class="text-white">--</strong>
-                </span>
-                <span class="bg-slate-950 text-slate-400 border border-slate-800 px-2.5 py-1 rounded-md font-mono">
-                  Snapshot Updated: <span id="meta-time" class="text-slate-200">--</span>
-                </span>
-              </div>
+      <!-- ========== SNAPSHOT (above the fold) ========== -->
+      <div id="view-intraday" class="snapshot-grid grid grid-cols-1 lg:grid-cols-12 gap-3">
+
+        <!-- LEFT: chart (~8 cols) -->
+        <section class="lg:col-span-8 bg-slate-900 border border-slate-800 rounded-xl p-3 flex flex-col min-h-0">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <div class="flex items-center gap-2 flex-wrap">
+              <h2 id="active-symbol" class="text-xl font-bold text-white tracking-wide">RELIANCE</h2>
+              <div id="bias-badge" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-800 text-slate-300">NEUTRAL</div>
+              <div id="volume-badge" class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-800 text-slate-400">Vol: --</div>
+              <span class="text-[10px] text-slate-500 font-mono">
+                <span id="meta-date">--</span> · <span id="meta-time">--</span>
+              </span>
             </div>
-            
-            <button onclick="loadStock(activeSymbol)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition">
-              🔄 Force Refresh
-            </button>
+            <button onclick="loadStock(activeSymbol)" class="text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-2.5 py-1 rounded-md">Refresh</button>
           </div>
 
-          <div id="stance-banner" class="mb-3 rounded-lg border px-3 py-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+          <div id="stance-banner" class="mb-2 rounded-md border border-slate-700 bg-slate-950/80 px-2.5 py-1.5 flex flex-wrap items-center justify-between gap-1">
             <div class="flex items-center gap-2">
-              <span class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Operator stance</span>
-              <span id="stance-label" class="text-sm font-bold tracking-wide">--</span>
+              <span class="text-[9px] uppercase tracking-wider text-slate-500 font-semibold">Stance</span>
+              <span id="stance-label" class="text-sm font-bold tracking-wide text-slate-300">--</span>
             </div>
-            <p id="stance-reason" class="text-[11px] text-slate-400 max-w-xl"></p>
+            <p id="stance-reason" class="text-[10px] text-slate-400 max-w-md text-right"></p>
           </div>
 
-          <div class="h-72 md:h-96 w-full relative rounded-lg border border-slate-800 bg-slate-950/80 overflow-hidden">
-            <div id="predictionChart" class="w-full h-full"></div>
+          <div class="flex-1 min-h-[280px] md:min-h-[360px] lg:min-h-[420px] rounded-lg border border-slate-800 bg-slate-950 overflow-hidden relative">
+            <div id="predictionChart" class="absolute inset-0"></div>
           </div>
-          <p class="text-[10px] text-slate-500 mt-1.5">Candles = 5m OHLC · Orange = session VWAP (context) · Blue dashed = open→close guide (flat when IGNORE)</p>
+          <p class="text-[9px] text-slate-600 mt-1">Candles 5m · Orange VWAP (context) · Blue guide (flat when IGNORE) · Times IST</p>
+        </section>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-2">
-            <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800 space-y-2">
-              <span class="text-slate-400 font-semibold block uppercase tracking-wider text-[11px]">AI Event Classification & Rationale:</span>
-              <p id="ai-rationale" class="text-slate-300 leading-relaxed">Loading intelligence snapshot...</p>
-              
-              <div id="news-container" class="pt-2 border-t border-slate-800/80 space-y-1.5">
-                <span class="text-slate-400 font-semibold block text-[11px]">Headlines (context only — not the signal):</span>
-                <ul id="news-list" class="space-y-1 text-slate-300"></ul>
-              </div>
+        <!-- RIGHT: signal stack (~4 cols) -->
+        <aside class="lg:col-span-4 flex flex-col gap-3 min-h-0">
+          <!-- Model call -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
+            <div class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Model call (signal)</div>
+            <ul class="text-xs text-slate-300 space-y-1.5">
+              <li class="flex justify-between gap-2"><span class="text-slate-500">Open / first 5m</span><span id="val-base" class="font-mono text-white">--</span></li>
+              <li class="flex justify-between gap-2"><span class="text-slate-500" id="target-label">Close target</span><span id="val-target" class="font-mono text-white">--</span></li>
+              <li class="flex justify-between gap-2"><span class="text-slate-500">Last price</span><span id="val-actual" class="font-mono text-white">--</span></li>
+              <li class="flex justify-between gap-2"><span class="text-slate-500" id="error-label">Gap to estimate</span><span id="val-error" class="font-mono text-white">--</span></li>
+            </ul>
+            <div class="border-t border-slate-800 pt-2 space-y-1.5 text-xs">
+              <div class="text-[10px] uppercase tracking-wider text-slate-600 font-semibold">Context only</div>
+              <li class="flex justify-between gap-2 list-none"><span class="text-slate-500">VWAP</span><span id="val-vwap" class="font-mono text-amber-300/90">--</span></li>
+              <li class="flex justify-between gap-2 list-none"><span class="text-slate-500">RSI(14)</span><span id="val-rsi" class="font-mono text-slate-400">--</span></li>
             </div>
-
-            <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800 space-y-2">
-              <span class="text-slate-400 font-semibold block uppercase tracking-wider text-[11px]">Model call (signal)</span>
-              <ul class="text-slate-300 space-y-1.5">
-                <li class="flex justify-between border-b border-slate-900 pb-1"><span>First 5m Bar Close:</span> <span id="val-base" class="font-mono text-white">--</span></li>
-                <li class="flex justify-between border-b border-slate-900 pb-1"><span id="target-label">Close Target (15:30):</span> <span id="val-target" class="font-mono text-white">--</span></li>
-                <li class="flex justify-between border-b border-slate-900 pb-1"><span>Latest Observed Price:</span> <span id="val-actual" class="font-mono text-white">--</span></li>
-                <li class="flex justify-between border-b border-slate-900 pb-1"><span id="error-label">Live Gap to Estimate:</span> <span id="val-error" class="font-mono text-white">--</span></li>
-                <li class="flex justify-between border-b border-slate-900 pb-1"><span>Session VWAP <span class="text-slate-500">(context)</span>:</span> <span id="val-vwap" class="font-mono text-amber-300/90">--</span></li>
-                <li class="flex justify-between"><span>RSI(14) <span class="text-slate-500">(context, not signal)</span>:</span> <span id="val-rsi" class="font-mono text-slate-400">--</span></li>
-              </ul>
-              <div id="gap-callout" class="mt-3 rounded-lg border border-slate-800 bg-slate-950 px-3 py-2 text-[11px] leading-relaxed">
-                <div class="text-slate-500 font-semibold uppercase tracking-wider mb-1">Prediction vs Reality</div>
-                <p id="gap-callout-text" class="text-slate-400">Waiting for a completed market session. After close, this shows forecast target vs actual close and the error gap.</p>
-              </div>
-              <div class="pt-2 border-t border-slate-800/80">
-                <span class="text-slate-400 font-semibold block text-[11px]">15 / 30 / 60 MINUTE MODEL</span>
-                <p id="intraday-forecast" class="text-slate-500 text-[11px] mt-1">Loading model status…</p>
-              </div>
+            <div id="gap-callout" class="rounded-md border border-slate-800 bg-slate-950 px-2.5 py-2 text-[10px] leading-relaxed">
+              <div class="text-slate-500 font-semibold uppercase tracking-wider mb-0.5">Prediction vs reality</div>
+              <p id="gap-callout-text" class="text-slate-400">Waiting for session complete.</p>
             </div>
           </div>
-        </div>
+
+          <!-- 15 / 30 / 60 -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2 flex-1">
+            <div class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">15 / 30 / 60 min model</div>
+            <div id="horizon-cards" class="grid grid-cols-3 gap-1.5">
+              <div class="rounded-md border border-slate-800 bg-slate-950 p-2 text-center">
+                <div class="text-[9px] text-slate-500">15m</div>
+                <div id="h15-ret" class="text-sm font-mono font-semibold text-slate-300">--</div>
+                <div id="h15-px" class="text-[9px] text-slate-500 font-mono truncate">--</div>
+              </div>
+              <div class="rounded-md border border-slate-800 bg-slate-950 p-2 text-center">
+                <div class="text-[9px] text-slate-500">30m</div>
+                <div id="h30-ret" class="text-sm font-mono font-semibold text-slate-300">--</div>
+                <div id="h30-px" class="text-[9px] text-slate-500 font-mono truncate">--</div>
+              </div>
+              <div class="rounded-md border border-slate-800 bg-slate-950 p-2 text-center">
+                <div class="text-[9px] text-slate-500">60m</div>
+                <div id="h60-ret" class="text-sm font-mono font-semibold text-slate-300">--</div>
+                <div id="h60-px" class="text-[9px] text-slate-500 font-mono truncate">--</div>
+              </div>
+            </div>
+            <p id="horizon-status" class="text-[10px] text-slate-500">Loading…</p>
+          </div>
+
+          <!-- Rationale + news compact -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
+            <div class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Rationale</div>
+            <p id="ai-rationale" class="text-[11px] text-slate-300 leading-snug line-clamp-4">Loading…</p>
+            <div class="border-t border-slate-800 pt-2">
+              <div class="text-[10px] text-slate-600 font-semibold mb-1">Headlines (context only)</div>
+              <ul id="news-list" class="text-[10px] text-slate-400 space-y-0.5 max-h-16 overflow-y-auto"></ul>
+            </div>
+          </div>
+        </aside>
       </div>
 
-      <div id="view-history" class="hidden space-y-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 md:p-6 space-y-4">
+      <!-- History (unchanged structure, denser) -->
+      <div id="view-history" class="hidden space-y-3">
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div>
               <h3 class="text-lg font-bold text-white">Track Record</h3>
-              <p class="text-xs text-slate-400 mt-0.5">Scored sessions only. Empty until the first full trading day is completed and written.</p>
+              <p class="text-xs text-slate-400">Scored sessions only.</p>
             </div>
             <span id="history-sync-time" class="text-xs text-slate-400 font-mono">--</span>
           </div>
-          <div id="history-summary" class="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <div class="bg-slate-950 border border-slate-800 rounded-lg p-3">
-              <div class="text-[10px] uppercase text-slate-500 tracking-wider">Sessions</div>
-              <div id="hist-sessions" class="text-xl font-bold text-white mt-1">--</div>
+          <div id="history-summary" class="grid grid-cols-2 md:grid-cols-4 gap-2">
+            <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5">
+              <div class="text-[10px] uppercase text-slate-500">Sessions</div>
+              <div id="hist-sessions" class="text-lg font-bold text-white">--</div>
             </div>
-            <div class="bg-slate-950 border border-slate-800 rounded-lg p-3">
-              <div class="text-[10px] uppercase text-slate-500 tracking-wider">Direction hit</div>
-              <div id="hist-hit" class="text-xl font-bold text-white mt-1">--</div>
+            <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5">
+              <div class="text-[10px] uppercase text-slate-500">Direction hit</div>
+              <div id="hist-hit" class="text-lg font-bold text-white">--</div>
             </div>
-            <div class="bg-slate-950 border border-slate-800 rounded-lg p-3">
-              <div class="text-[10px] uppercase text-slate-500 tracking-wider">Mean error</div>
-              <div id="hist-error" class="text-xl font-bold text-white mt-1">--</div>
+            <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5">
+              <div class="text-[10px] uppercase text-slate-500">Mean error</div>
+              <div id="hist-error" class="text-lg font-bold text-white">--</div>
             </div>
-            <div class="bg-slate-950 border border-slate-800 rounded-lg p-3">
-              <div class="text-[10px] uppercase text-slate-500 tracking-wider">vs Flat baseline</div>
-              <div id="hist-baseline" class="text-xl font-bold text-white mt-1">--</div>
+            <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5">
+              <div class="text-[10px] uppercase text-slate-500">Vs flat baseline</div>
+              <div id="hist-baseline" class="text-lg font-bold text-white">--</div>
             </div>
           </div>
-          <div id="history-empty" class="rounded-lg border border-dashed border-slate-700 bg-slate-950/50 px-4 py-6 text-center text-sm text-slate-400">
-            No scored history yet. History is written only after a <strong class="text-slate-200">completed</strong> NSE session (after ~15:30 IST). Weekend and stale-data runs do not create history rows.
-          </div>
-          <div class="overflow-x-auto">
+          <div class="overflow-x-auto max-h-[50vh]">
             <table class="w-full text-left text-xs text-slate-300">
-              <thead class="bg-slate-950 text-slate-400 border-b border-slate-800 uppercase">
+              <thead class="bg-slate-950 text-slate-400 border-b border-slate-800 uppercase sticky top-0">
                 <tr>
-                  <th class="p-2.5">Date</th>
-                  <th class="p-2.5">Symbol</th>
-                  <th class="p-2.5">Bias</th>
-                  <th class="p-2.5">Target</th>
-                  <th class="p-2.5">Actual</th>
-                  <th class="p-2.5">Error %</th>
-                  <th class="p-2.5">Dir hit</th>
-                  <th class="p-2.5">Trade?</th>
-                  <th class="p-2.5">Verdict</th>
+                  <th class="p-2">Date</th><th class="p-2">Symbol</th><th class="p-2">Bias</th>
+                  <th class="p-2">Target</th><th class="p-2">Actual</th><th class="p-2">Error %</th>
+                  <th class="p-2">Dir hit</th><th class="p-2">Trade?</th><th class="p-2">Verdict</th>
                 </tr>
               </thead>
               <tbody id="history-table-body" class="divide-y divide-slate-800"></tbody>
             </table>
           </div>
+          <p id="history-empty" class="hidden text-xs text-slate-500">No scored sessions yet.</p>
           <div>
             <h4 class="text-sm font-semibold text-slate-200 mb-2">By symbol</h4>
             <div id="history-by-symbol" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2"></div>
@@ -207,8 +196,8 @@
         </div>
       </div>
 
-      <div id="view-audit" class="hidden space-y-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 md:p-6">
+      <div id="view-audit" class="hidden space-y-3">
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
           <div class="flex items-center justify-between mb-3">
             <h3 class="text-lg font-bold text-white">Forecast Outcome Audit</h3>
             <span id="audit-sync-time" class="text-xs text-slate-400 font-mono">--</span>
@@ -217,13 +206,9 @@
             <table class="w-full text-left text-xs text-slate-300">
               <thead class="bg-slate-950 text-slate-400 border-b border-slate-800 uppercase">
                 <tr>
-                  <th class="p-2.5">Symbol</th>
-                  <th class="p-2.5">Session</th>
-                  <th class="p-2.5">Forecast Bias</th>
-                  <th class="p-2.5">Forecast Target</th>
-                  <th class="p-2.5">Observed Price</th>
-                  <th class="p-2.5">Error %</th>
-                  <th class="p-2.5">Verdict</th>
+                  <th class="p-2.5">Symbol</th><th class="p-2.5">Session</th><th class="p-2.5">Forecast Bias</th>
+                  <th class="p-2.5">Forecast Target</th><th class="p-2.5">Observed Price</th>
+                  <th class="p-2.5">Error %</th><th class="p-2.5">Verdict</th>
                 </tr>
               </thead>
               <tbody id="audit-table-body" class="divide-y divide-slate-800"></tbody>
@@ -233,11 +218,10 @@
       </div>
     </main>
 
+    <footer class="text-center text-[10px] text-slate-600 py-2">
+      Educational / testing only — not financial advice.
+    </footer>
   </div>
-
-  <footer class="text-center text-[11px] text-slate-500 pt-6 pb-2">
-    Disclaimer: AI predictions are for educational/testing purposes only and do not constitute financial advice.
-  </footer>
 
   <script>
     const WATCHLIST = ["RELIANCE", "HDFCBANK", "ICICIBANK", "SBIN", "INFY", "TCS", "BHARTIARTL", "TATASTEEL", "ITC", "AXISBANK"];
@@ -278,176 +262,94 @@
       const curves = data?.curves;
       const time = snapshotTime(curves);
       const age = time ? (Date.now() - time.getTime()) / 60000 : Infinity;
-      let state = "live", label = "Current session data", message = `Snapshot updated ${Math.max(0, Math.floor(age))} min ago.`;
+      let state = "live", label = "Live", message = `Updated ${Math.max(0, Math.floor(age))} min ago`;
 
       if (!now.weekday || now.minutes >= 930) {
-        state = "closed"; label = "Market closed";
-        message = curves ? `Latest available snapshot: ${curves.date}.` : "No market snapshot is available.";
-        if (curves?.date === now.date && data.session?.complete === false) message += " Final close is not confirmed.";
+        state = "closed"; label = "Closed";
+        message = curves ? `Last snapshot ${curves.date}` : "No snapshot";
       } else if (now.minutes < 555) {
         state = "premarket"; label = "Pre-market";
-        message = curves ? `Showing previous available session: ${curves.date}. Waiting for today's data.` : "Waiting for today's market data.";
+        message = curves ? `Showing ${curves.date}` : "Waiting for open";
       } else if (!curves) {
-        state = "unavailable"; label = "Data unavailable"; message = "No snapshot could be loaded for this symbol.";
+        state = "unavailable"; label = "No data"; message = "Could not load snapshot";
       } else if (curves.date !== now.date || !time || age > 20 || age < -2) {
-        state = "stale"; label = "Stale snapshot";
-        message = `Latest snapshot: ${curves.date}${time ? `, ${formatIST(time)}` : "; timestamp unavailable"}. No fresh current-session data is available.`;
+        state = "stale"; label = "Stale";
+        message = `Snapshot ${curves.date}${time ? ", " + formatIST(time) : ""}`;
       }
-      if (error) { state = data ? "stale" : "unavailable"; label = data ? "Refresh failed" : "Data unavailable"; message = error; }
+      if (error) { state = data ? "stale" : "unavailable"; label = data ? "Refresh failed" : "No data"; message = error; }
 
-      const colors = {
-        live: ["border-emerald-800", "bg-emerald-400", "text-emerald-300"],
-        premarket: ["border-sky-800", "bg-sky-400", "text-sky-300"],
-        closed: ["border-slate-700", "bg-slate-500", "text-slate-300"],
-        stale: ["border-amber-800", "bg-amber-400", "text-amber-300"],
-        unavailable: ["border-rose-800", "bg-rose-400", "text-rose-300"]
-      }[state] || ["border-slate-700", "bg-slate-400", "text-slate-200"];
-      document.getElementById("data-status").className = `rounded-xl border bg-slate-900 px-4 py-3 space-y-1 ${colors[0]}`;
-      document.getElementById("data-status-dot").className = `h-2.5 w-2.5 rounded-full ${colors[1]}`;
-      document.getElementById("session-dot").className = `w-2 h-2 rounded-full ${colors[1]}`;
-      const heading = document.getElementById("data-status-label");
-      heading.className = colors[2];
-      heading.textContent = label;
+      const colors = { live: "bg-emerald-400", closed: "bg-slate-500", premarket: "bg-amber-400", stale: "bg-amber-500", unavailable: "bg-rose-500" };
+      document.getElementById("data-status-dot").className = `h-1.5 w-1.5 rounded-full ${colors[state] || "bg-slate-400"}`;
+      document.getElementById("data-status-label").textContent = label;
       document.getElementById("data-status-message").textContent = message;
-
-      const prediction = data?.forecast || data?.prediction || {};
-      let detail = prediction.source === "fallback" ? "No AI forecast was produced; neutral fallback shown." :
-        `Forecast source: ${prediction.source || "unknown"}${prediction.made_at ? `, ${formatIST(new Date(prediction.made_at))}` : ""}.`;
-      if (prediction.llm_error) detail += " Latest AI refresh reported an error.";
-      if (healthSnapshot?.as_of) {
-        const healthDate = new Date(healthSnapshot.as_of);
-        detail += ` Pipeline ${String(healthSnapshot.status || "unknown").toLowerCase()} as of ${formatIST(healthDate)}.`;
-      }
-      document.getElementById("data-status-detail").textContent = detail;
     }
 
-    function renderTrackRecord() {
-      const o = performanceSnapshot?.overall;
-      document.getElementById("track-record").textContent = !o || !o.enough_data
-        ? `Track record: ${Number(o?.days) || 0} of 20 trading days collected. Treat forecasts as experimental.`
-        : `Last ${Number(o.days)} trading days: direction hit rate ${o.direction_hit_rate == null ? "--" : `${Math.round(o.direction_hit_rate * 100)}%`} on ${Number(o.directional_calls) || 0} calls; mean error ${o.mean_error_pct ?? "--"}% vs ${o.mean_flat_baseline_error_pct ?? "--"}% for a flat baseline.`;
-    }
-
-    async function refreshStatusData() {
-      try {
-        const [h, p] = await Promise.all(["health.json", "performance_summary.json"].map(async name => {
-          for (const base of [GITHUB_RAW_BASE, "./data_store"]) {
-            try { const r = await fetch(`${base}/${name}?cb=${Date.now()}`, { cache: "no-store" }); if (r.ok) return await r.json(); } catch (_) {}
-          }
-          return null;
-        }));
-        healthSnapshot = h; performanceSnapshot = p;
-        renderDataStatus(); renderTrackRecord();
-      } catch (_) {
-        renderTrackRecord();
-      }
-    }
-
-    function renderWatchlistPills() {
-      const container = document.getElementById("watchlist-pills");
-      container.innerHTML = WATCHLIST.map(sym => 
-        `<button onclick="loadStock('${sym}')" class="px-3 py-1 rounded-md text-xs font-semibold transition ${sym === activeSymbol ? 'bg-blue-600 text-white' : 'bg-slate-900 text-slate-400 hover:text-white'}">${sym}</button>`
-      ).join("");
-    }
-
-        function switchTab(tab) {
-      const views = ['intraday', 'audit', 'history'];
-      views.forEach(v => {
-        const el = document.getElementById('view-' + v);
-        const btn = document.getElementById('tab-' + v);
-        if (!el || !btn) return;
-        if (v === tab) {
-          el.classList.remove('hidden');
-          btn.className = 'px-3 py-1.5 text-xs font-medium rounded-md bg-blue-600 text-white shadow';
+    function switchTab(tab) {
+      ["intraday", "audit", "history"].forEach(t => {
+        document.getElementById(`view-${t}`).classList.toggle("hidden", t !== tab);
+        const btn = document.getElementById(`tab-${t}`);
+        if (t === tab) {
+          btn.className = "px-2.5 py-1 text-[11px] font-medium rounded-md bg-blue-600 text-white";
         } else {
-          el.classList.add('hidden');
-          btn.className = 'px-3 py-1.5 text-xs font-medium rounded-md text-slate-400 hover:text-white';
+          btn.className = "px-2.5 py-1 text-[11px] font-medium rounded-md text-slate-400 hover:text-white";
         }
       });
-      if (tab === 'audit') loadAuditData();
-      if (tab === 'history') loadHistoryData();
+      if (tab === "history") loadHistoryData();
+      if (tab === "audit") loadAuditData();
+    }
+
+    function renderWatchlist() {
+      const el = document.getElementById("watchlist-pills");
+      el.innerHTML = WATCHLIST.map(sym => {
+        const on = sym === activeSymbol;
+        return `<button onclick="loadStock('${sym}')" class="px-2.5 py-1 rounded-md text-[11px] font-semibold border transition ${on ? "bg-blue-600 border-blue-500 text-white" : "bg-slate-900 border-slate-800 text-slate-400 hover:text-white"}">${sym}</button>`;
+      }).join("");
+    }
+
+    async function fetchJson(url) {
+      const r = await fetch(url + (url.includes("?") ? "&" : "?") + "t=" + Date.now());
+      if (!r.ok) throw new Error(r.status + " " + url);
+      return r.json();
     }
 
     async function loadStock(symbol) {
-      const requestedSymbol = String(symbol || "").trim().toUpperCase();
-      const requestToken = ++stockLoadToken;
-      const changedSymbol = requestedSymbol !== activeSymbol;
+      const requestedSymbol = (symbol || activeSymbol || "RELIANCE").toUpperCase();
       activeSymbol = requestedSymbol;
-      renderWatchlistPills();
-      document.getElementById("active-symbol").textContent = requestedSymbol || "--";
-      if (changedSymbol) {
-        selectedStockData = null;
-        if (chartInstance) {
-          try { chartInstance.remove(); } catch (e) { try { chartInstance.destroy(); } catch (e2) {} }
-          chartInstance = null;
-        }
-        document.getElementById("ai-rationale").textContent = "Loading market snapshot…";
-        document.getElementById("bias-badge").textContent = "--";
-        document.getElementById("bias-badge").className = "px-3 py-0.5 rounded-full text-xs font-bold bg-slate-800 text-slate-300";
-        document.getElementById("volume-badge").textContent = "Vol: --";
-        document.getElementById("volume-badge").className = "px-2.5 py-0.5 rounded text-xs font-semibold bg-slate-800 text-slate-400";
-        document.getElementById("news-list").innerHTML = "";
-        const quantLine = document.getElementById("quant-line");
-        if (quantLine) quantLine.textContent = "";
-        document.getElementById("val-base").textContent = "--";
-        document.getElementById("val-target").textContent = "--";
-        document.getElementById("val-actual").textContent = "--";
-        document.getElementById("val-error").textContent = "--";
-        document.getElementById("intraday-forecast").textContent = "Loading model status…";
-        document.getElementById("meta-date").textContent = "--";
-        document.getElementById("meta-time").textContent = "--";
-      }
-      document.getElementById("data-status").className = "rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 space-y-1";
-      document.getElementById("data-status-dot").className = "h-2.5 w-2.5 rounded-full bg-slate-400";
-      document.getElementById("session-dot").className = "w-2 h-2 rounded-full bg-slate-400";
-      document.getElementById("data-status-label").textContent = "Checking snapshot";
-      document.getElementById("data-status-message").textContent = `Loading data for ${requestedSymbol}.`;
-      document.getElementById("data-status-detail").textContent = "";
+      renderWatchlist();
+      document.getElementById("active-symbol").textContent = requestedSymbol;
+      const token = ++stockLoadToken;
 
-      const cb = Date.now();
-      const urlsToTry = [
-        `${GITHUB_RAW_BASE}/${encodeURIComponent(requestedSymbol)}_prediction.json?cb=${cb}`,
-        `./data_store/${encodeURIComponent(requestedSymbol)}_prediction.json?cb=${cb}`
-      ];
-
-      let data = null;
-      for (const url of urlsToTry) {
-        try {
-          const res = await fetch(url, { cache: 'no-store' });
-          if (res.ok) {
-            data = await res.json();
-            break;
-          }
-        } catch (e) {
-          console.error("Fetch error:", e);
-        }
-      }
-
-      if (requestToken !== stockLoadToken) return;
-      if (data && data.curves) {
+      try {
+        const data = await fetchJson(`${GITHUB_RAW_BASE}/${requestedSymbol}_prediction.json`);
+        if (token !== stockLoadToken) return;
         selectedStockData = data;
-        document.getElementById("meta-date").textContent = data.curves.date || "--";
-        document.getElementById("meta-time").textContent = data.curves.generated_at || "--";
-        renderChartAndDetails(data.curves, data.prediction, data.intraday_forecast, data.intraday_evidence, data.risk_execution_plan, data.technical_indicators);
+        document.getElementById("meta-date").textContent = data.curves?.date || "--";
+        document.getElementById("meta-time").textContent = data.curves?.generated_at || "--";
+        renderChartAndDetails(
+          data.curves || {},
+          data.prediction || {},
+          data.intraday_forecast || {},
+          data.intraday_evidence || {},
+          data.risk_execution_plan || {},
+          data.technical_indicators || {}
+        );
         renderDataStatus(data);
-      } else if (selectedStockData) {
-        renderDataStatus(selectedStockData, `Refresh failed for ${requestedSymbol}. Showing the last snapshot loaded successfully.`);
-      } else {
+      } catch (e) {
+        if (token !== stockLoadToken) return;
         selectedStockData = null;
         if (chartInstance) {
-          try { chartInstance.remove(); } catch (e) { try { chartInstance.destroy(); } catch (e2) {} }
+          try { chartInstance.remove(); } catch (err) {}
           chartInstance = null;
         }
         document.getElementById("meta-date").textContent = "--";
         document.getElementById("meta-time").textContent = "--";
-        document.getElementById("ai-rationale").textContent = `No published snapshot is available for ${requestedSymbol}.`;
+        document.getElementById("ai-rationale").textContent = `No snapshot for ${requestedSymbol}.`;
         document.getElementById("news-list").innerHTML = "";
-        document.getElementById("val-base").textContent = "--";
-        document.getElementById("val-target").textContent = "--";
-        document.getElementById("val-actual").textContent = "--";
-        document.getElementById("val-error").textContent = "--";
-        document.getElementById("intraday-forecast").textContent = "No model status is available.";
-        renderDataStatus(null, `Could not load a valid data snapshot for ${requestedSymbol}.`);
+        ["val-base","val-target","val-actual","val-error","val-vwap","val-rsi"].forEach(id => {
+          const n = document.getElementById(id); if (n) n.textContent = "--";
+        });
+        resetHorizonCards();
+        renderDataStatus(null, `Could not load ${requestedSymbol}.`);
       }
     }
 
@@ -456,28 +358,67 @@
       if (input) loadStock(input);
     }
 
+    function resetHorizonCards() {
+      ["15","30","60"].forEach(h => {
+        const ret = document.getElementById(`h${h}-ret`);
+        const px = document.getElementById(`h${h}-px`);
+        if (ret) { ret.textContent = "--"; ret.className = "text-sm font-mono font-semibold text-slate-300"; }
+        if (px) px.textContent = "--";
+      });
+      const st = document.getElementById("horizon-status");
+      if (st) st.textContent = "No short-horizon forecast in snapshot.";
+    }
+
+    function renderHorizonCards(intradayForecast) {
+      const root = intradayForecast || {};
+      const forecasts = root.forecasts || root;
+      let any = false;
+      ["15", "30", "60"].forEach(h => {
+        const f = forecasts[h] || forecasts[Number(h)];
+        const retEl = document.getElementById(`h${h}-ret`);
+        const pxEl = document.getElementById(`h${h}-px`);
+        if (!f || typeof f !== "object") {
+          retEl.textContent = "--";
+          pxEl.textContent = "--";
+          retEl.className = "text-sm font-mono font-semibold text-slate-500";
+          return;
+        }
+        any = true;
+        const ret = f.expected_return_pct;
+        const tp = f.target_price;
+        if (ret != null && Number.isFinite(Number(ret))) {
+          const v = Number(ret);
+          retEl.textContent = `${v >= 0 ? "+" : ""}${v.toFixed(2)}%`;
+          retEl.className = `text-sm font-mono font-semibold ${v > 0.05 ? "text-emerald-400" : v < -0.05 ? "text-rose-400" : "text-slate-300"}`;
+        } else {
+          retEl.textContent = "--";
+        }
+        pxEl.textContent = tp != null ? `₹${Number(tp).toFixed(2)}` : (f.status || "--");
+      });
+      const status = root.status || (any ? "ready" : "unavailable");
+      document.getElementById("horizon-status").textContent = any
+        ? `Status: ${status} · shadow/ready forecasts are short-horizon only (not the open→close trade call).`
+        : "Short-horizon model not present in this snapshot.";
+    }
+
     function renderChartAndDetails(curves, prediction, intradayForecast, intradayEvidence, riskPlan, tech) {
       const biasBadge = document.getElementById("bias-badge");
       const volumeBadge = document.getElementById("volume-badge");
       const bias = curves.bias || "NEUTRAL";
       biasBadge.innerText = bias;
-      
-      if (bias === "BULLISH") {
-        biasBadge.className = "px-3 py-0.5 rounded-full text-xs font-bold bg-emerald-950 text-emerald-400 border border-emerald-800";
-      } else if (bias === "BEARISH") {
-        biasBadge.className = "px-3 py-0.5 rounded-full text-xs font-bold bg-rose-950 text-rose-400 border border-rose-800";
-      } else {
-        biasBadge.className = "px-3 py-0.5 rounded-full text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700";
-      }
+      biasBadge.className = bias === "BULLISH"
+        ? "px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-950 text-emerald-400 border border-emerald-800"
+        : bias === "BEARISH"
+        ? "px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-950 text-rose-400 border border-rose-800"
+        : "px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-800 text-slate-300 border border-slate-700";
 
       const volRatio = prediction?.volume_ratio || 1.0;
       const hasSpike = prediction?.has_volume_spike || false;
-      volumeBadge.innerText = `Vol Ratio: ${volRatio}x`;
-      volumeBadge.className = hasSpike 
-        ? "px-2.5 py-0.5 rounded text-xs font-bold bg-amber-950 text-amber-400 border border-amber-800 animate-pulse" 
-        : "px-2.5 py-0.5 rounded text-xs font-semibold bg-slate-800 text-slate-400";
+      volumeBadge.innerText = `Vol ${volRatio}x`;
+      volumeBadge.className = hasSpike
+        ? "px-2 py-0.5 rounded text-[10px] font-bold bg-amber-950 text-amber-400 border border-amber-800"
+        : "px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-800 text-slate-400";
 
-      // --- Operator stance: TRADE / WATCH / IGNORE ---
       let stance = curves.operator_stance;
       if (!stance) {
         if (riskPlan && riskPlan.approved) stance = "TRADE";
@@ -490,29 +431,27 @@
       stanceLabel.textContent = stance;
       const reason = curves.rejection_reason || (riskPlan && riskPlan.rejection_reason) || "";
       if (stance === "TRADE") {
-        stanceBanner.className = "mb-3 rounded-lg border px-3 py-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 border-emerald-700/60 bg-emerald-950/40";
+        stanceBanner.className = "mb-2 rounded-md border px-2.5 py-1.5 flex flex-wrap items-center justify-between gap-1 border-emerald-700/60 bg-emerald-950/40";
         stanceLabel.className = "text-sm font-bold tracking-wide text-emerald-400";
-        stanceReason.textContent = reason || "Risk plan approved — size and stops in execution plan.";
+        stanceReason.textContent = reason || "Risk plan approved.";
       } else if (stance === "WATCH") {
-        stanceBanner.className = "mb-3 rounded-lg border px-3 py-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 border-amber-700/50 bg-amber-950/30";
+        stanceBanner.className = "mb-2 rounded-md border px-2.5 py-1.5 flex flex-wrap items-center justify-between gap-1 border-amber-700/50 bg-amber-950/30";
         stanceLabel.className = "text-sm font-bold tracking-wide text-amber-400";
-        stanceReason.textContent = reason || "Directional lean present but trade not approved — observe only.";
+        stanceReason.textContent = reason || "Lean present — not approved to trade.";
       } else {
-        stanceBanner.className = "mb-3 rounded-lg border px-3 py-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 border-slate-700 bg-slate-900/80";
+        stanceBanner.className = "mb-2 rounded-md border px-2.5 py-1.5 flex flex-wrap items-center justify-between gap-1 border-slate-700 bg-slate-950/80";
         stanceLabel.className = "text-sm font-bold tracking-wide text-slate-300";
-        stanceReason.textContent = reason || "No validated edge — do not trade off the chart.";
+        stanceReason.textContent = reason || "No validated edge — do not trade.";
       }
 
-      document.getElementById("ai-rationale").innerText = prediction?.reasoning || "Market analysis active.";
-
+      document.getElementById("ai-rationale").innerText = prediction?.reasoning || "—";
       const newsList = document.getElementById("news-list");
       if (prediction?.news_feed && prediction.news_feed.length > 0) {
-        newsList.innerHTML = prediction.news_feed.map(item => 
-          `<li class="truncate"><a href="${escapeHtml(item.link || '#')}" target="_blank" rel="noopener" class="text-blue-400 hover:underline">${escapeHtml(item.title)}</a>
-           <span class="text-slate-500"> · ${escapeHtml(item.publisher || '')}</span></li>`
+        newsList.innerHTML = prediction.news_feed.map(item =>
+          `<li class="truncate"><a href="${escapeHtml(item.link || '#')}" target="_blank" rel="noopener" class="text-blue-400 hover:underline">${escapeHtml(item.title)}</a></li>`
         ).join("");
       } else {
-        newsList.innerHTML = `<li class="text-slate-500">No headlines in this snapshot.</li>`;
+        newsList.innerHTML = `<li class="text-slate-600">No headlines</li>`;
       }
 
       const validActuals = curves.actual_curve ? curves.actual_curve.filter(v => v !== null) : [];
@@ -524,7 +463,7 @@
       if (curves.final_pred != null && lastPx != null) {
         const gap = lastPx - curves.final_pred;
         const gapPct = curves.final_pred ? (gap / curves.final_pred) * 100 : 0;
-        document.getElementById("val-error").textContent = `${gap >= 0 ? '+' : ''}₹${gap.toFixed(2)} (${gapPct >= 0 ? '+' : ''}${gapPct.toFixed(2)}%)`;
+        document.getElementById("val-error").textContent = `${gap >= 0 ? "+" : ""}₹${gap.toFixed(2)} (${gapPct >= 0 ? "+" : ""}${gapPct.toFixed(2)}%)`;
       } else {
         document.getElementById("val-error").textContent = "--";
       }
@@ -533,52 +472,61 @@
       const rsi = tech && tech.rsi_14 != null ? tech.rsi_14 : null;
       document.getElementById("val-rsi").textContent = rsi != null ? Number(rsi).toFixed(1) : "--";
 
-      // Intraday status text (unchanged pattern if element exists)
-      const idf = document.getElementById("intraday-forecast");
-      if (idf) {
-        if (intradayForecast && Object.keys(intradayForecast).length) {
-          idf.textContent = JSON.stringify(intradayForecast).slice(0, 180);
-        } else {
-          idf.textContent = "Short-horizon model status in snapshot when available.";
-        }
+      const gapText = document.getElementById("gap-callout-text");
+      if (curves.error_pct != null) {
+        gapText.textContent = `Session scored · error ${Number(curves.error_pct).toFixed(2)}% vs estimate.`;
+      } else {
+        gapText.textContent = "In progress — final score after close settle.";
       }
 
-      // --- Candlestick chart (Lightweight Charts) ---
+      renderHorizonCards(intradayForecast);
+
+      // Chart
       const container = document.getElementById("predictionChart");
       if (chartInstance) {
         try { chartInstance.remove(); } catch (e) {}
         chartInstance = null;
       }
       container.innerHTML = "";
-
       if (typeof LightweightCharts === "undefined") {
         container.innerHTML = `<p class="text-slate-500 text-xs p-4">Chart library failed to load.</p>`;
         return;
       }
 
       const chart = LightweightCharts.createChart(container, {
-        layout: {
-          background: { color: "#020617" },
-          textColor: "#94a3b8",
-        },
-        grid: {
-          vertLines: { color: "#1e293b" },
-          horzLines: { color: "#1e293b" },
-        },
+        layout: { background: { color: "#020617" }, textColor: "#94a3b8" },
+        grid: { vertLines: { color: "#1e293b" }, horzLines: { color: "#1e293b" } },
         rightPriceScale: { borderColor: "#334155" },
-        timeScale: { borderColor: "#334155", timeVisible: true, secondsVisible: false },
+        timeScale: {
+          borderColor: "#334155",
+          timeVisible: true,
+          secondsVisible: false,
+          tickMarkFormatter: (time) => {
+            const d = new Date(time * 1000);
+            return new Intl.DateTimeFormat("en-IN", {
+              timeZone: IST, hour: "2-digit", minute: "2-digit", hourCycle: "h23"
+            }).format(d);
+          },
+        },
+        localization: {
+          timeFormatter: (time) => {
+            const d = new Date(time * 1000);
+            return new Intl.DateTimeFormat("en-IN", {
+              timeZone: IST, hour: "2-digit", minute: "2-digit", hourCycle: "h23"
+            }).format(d);
+          },
+        },
         crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
         width: container.clientWidth,
-        height: container.clientHeight || 320,
+        height: container.clientHeight || 360,
       });
       chartInstance = chart;
 
       const day = curves.date || "2026-01-01";
       const tfs = curves.timeframes || [];
       const toTs = (tf) => {
-        // tf = "HH:MM" IST → unix seconds
         const [hh, mm] = tf.split(":").map(Number);
-        const iso = `${day}T${String(hh).padStart(2,"0")}:${String(mm).padStart(2,"0")}:00+05:30`;
+        const iso = `${day}T${String(hh).padStart(2, "0")}:${String(mm).padStart(2, "0")}:00+05:30`;
         return Math.floor(new Date(iso).getTime() / 1000);
       };
 
@@ -589,7 +537,6 @@
         if (!c || c.o == null) continue;
         candleData.push({ time: toTs(tfs[i]), open: c.o, high: c.h, low: c.l, close: c.c });
       }
-      // Fallback: close-only as synthetic candles if OHLC missing (old snapshots)
       if (candleData.length === 0 && curves.actual_curve) {
         for (let i = 0; i < tfs.length; i++) {
           const px = curves.actual_curve[i];
@@ -599,16 +546,12 @@
       }
 
       const candleSeries = chart.addCandlestickSeries({
-        upColor: "#34d399",
-        downColor: "#f87171",
-        borderUpColor: "#34d399",
-        borderDownColor: "#f87171",
-        wickUpColor: "#34d399",
-        wickDownColor: "#f87171",
+        upColor: "#34d399", downColor: "#f87171",
+        borderUpColor: "#34d399", borderDownColor: "#f87171",
+        wickUpColor: "#34d399", wickDownColor: "#f87171",
       });
       candleSeries.setData(candleData);
 
-      // VWAP line (context)
       const vwapData = [];
       const vwapLine = curves.vwap_line || [];
       for (let i = 0; i < tfs.length; i++) {
@@ -616,18 +559,12 @@
         vwapData.push({ time: toTs(tfs[i]), value: vwapLine[i] });
       }
       if (vwapData.length) {
-        const vwapSeries = chart.addLineSeries({
-          color: "#f59e0b",
-          lineWidth: 2,
-          lineStyle: LightweightCharts.LineStyle.Solid,
-          title: "VWAP",
-          lastValueVisible: false,
-          priceLineVisible: false,
-        });
-        vwapSeries.setData(vwapData);
+        chart.addLineSeries({
+          color: "#f59e0b", lineWidth: 2, title: "VWAP",
+          lastValueVisible: false, priceLineVisible: false,
+        }).setData(vwapData);
       }
 
-      // Guide to close (flat when IGNORE / NEUTRAL)
       const guide = curves.predicted_curve || [];
       const guideData = [];
       for (let i = 0; i < tfs.length; i++) {
@@ -635,179 +572,120 @@
         guideData.push({ time: toTs(tfs[i]), value: guide[i] });
       }
       if (guideData.length) {
-        const guideSeries = chart.addLineSeries({
-          color: "#60a5fa",
-          lineWidth: 2,
+        chart.addLineSeries({
+          color: "#60a5fa", lineWidth: 2,
           lineStyle: LightweightCharts.LineStyle.Dashed,
-          title: "Guide",
-          lastValueVisible: true,
-          priceLineVisible: false,
-        });
-        guideSeries.setData(guideData);
+          title: "Guide", lastValueVisible: true, priceLineVisible: false,
+        }).setData(guideData);
       }
 
-      // Volume histogram
       const volData = [];
       const vols = curves.actual_volume || [];
       for (let i = 0; i < tfs.length; i++) {
-        if (vols[i] == null || (candles[i] == null && curves.actual_curve && curves.actual_curve[i] == null)) continue;
+        if (!candles[i] && !(curves.actual_curve && curves.actual_curve[i] != null)) continue;
         const up = candles[i] ? candles[i].c >= candles[i].o : true;
-        volData.push({ time: toTs(tfs[i]), value: vols[i] || 0, color: up ? "rgba(52,211,153,0.35)" : "rgba(248,113,113,0.35)" });
+        volData.push({
+          time: toTs(tfs[i]), value: vols[i] || 0,
+          color: up ? "rgba(52,211,153,0.35)" : "rgba(248,113,113,0.35)",
+        });
       }
       if (volData.length) {
         const volSeries = chart.addHistogramSeries({
-          priceFormat: { type: "volume" },
-          priceScaleId: "vol",
-          lastValueVisible: false,
-          priceLineVisible: false,
+          priceFormat: { type: "volume" }, priceScaleId: "vol",
+          lastValueVisible: false, priceLineVisible: false,
         });
-        chart.priceScale("vol").applyOptions({ scaleMargins: { top: 0.8, bottom: 0 } });
+        chart.priceScale("vol").applyOptions({ scaleMargins: { top: 0.82, bottom: 0 } });
         volSeries.setData(volData);
       }
 
       chart.timeScale().fitContent();
-      window.addEventListener("resize", () => {
+      const ro = new ResizeObserver(() => {
         if (chartInstance === chart) {
-          chart.applyOptions({ width: container.clientWidth, height: container.clientHeight || 320 });
+          chart.applyOptions({ width: container.clientWidth, height: container.clientHeight || 360 });
         }
       });
+      ro.observe(container);
     }
 
-
     async function loadHistoryData() {
-      const tbody = document.getElementById("history-table-body");
-      const empty = document.getElementById("history-empty");
-      const bySym = document.getElementById("history-by-symbol");
-      if (!tbody) return;
       try {
-        let history = [];
-        let perf = performanceSnapshot;
-        for (const url of [`${GITHUB_RAW_BASE}/history.json?cb=${Date.now()}`, `./data_store/history.json?cb=${Date.now()}`]) {
-          try {
-            const res = await fetch(url, { cache: "no-store" });
-            if (res.ok) { history = await res.json(); break; }
-          } catch (_) {}
-        }
-        if (!perf) {
-          for (const url of [`${GITHUB_RAW_BASE}/performance_summary.json?cb=${Date.now()}`, `./data_store/performance_summary.json?cb=${Date.now()}`]) {
-            try {
-              const res = await fetch(url, { cache: "no-store" });
-              if (res.ok) { perf = await res.json(); break; }
-            } catch (_) {}
-          }
-        }
-        const o = perf?.overall || {};
-        const sessions = Number(o.sessions || (Array.isArray(history) ? history.length : 0)) || 0;
-        document.getElementById("hist-sessions").textContent = sessions || "--";
-        document.getElementById("hist-hit").textContent =
-          o.direction_hit_rate == null ? "--" : `${Math.round(o.direction_hit_rate * 100)}%`;
-        document.getElementById("hist-error").textContent =
-          o.mean_error_pct == null ? "--" : `${Number(o.mean_error_pct).toFixed(2)}%`;
-        document.getElementById("hist-baseline").textContent =
-          o.mean_flat_baseline_error_pct == null ? "--" : `${Number(o.mean_flat_baseline_error_pct).toFixed(2)}%`;
-        document.getElementById("history-sync-time").textContent = perf?.as_of
-          ? `As of ${perf.as_of}`
-          : (sessions ? `${sessions} scored rows` : "No scored sessions yet");
+        const [history, perf] = await Promise.all([
+          fetchJson(`${GITHUB_RAW_BASE}/history.json`).catch(() => []),
+          fetchJson(`${GITHUB_RAW_BASE}/performance_summary.json`).catch(() => ({})),
+        ]);
+        performanceSnapshot = perf;
+        const empty = document.getElementById("history-empty");
+        const tbody = document.getElementById("history-table-body");
+        const bySym = document.getElementById("history-by-symbol");
+        document.getElementById("history-sync-time").textContent = perf?.as_of ? `As of ${perf.as_of}` : "";
+
+        const overall = perf?.overall || {};
+        document.getElementById("hist-sessions").textContent = overall.sessions ?? (Array.isArray(history) ? history.length : "--");
+        document.getElementById("hist-hit").textContent = overall.direction_hit_rate != null ? `${(overall.direction_hit_rate * 100).toFixed(0)}%` : "--";
+        document.getElementById("hist-error").textContent = overall.mean_error_pct != null ? `${Number(overall.mean_error_pct).toFixed(2)}%` : "--";
+        document.getElementById("hist-baseline").textContent = overall.mean_flat_baseline_error_pct != null ? `${Number(overall.mean_flat_baseline_error_pct).toFixed(2)}%` : "--";
 
         if (!Array.isArray(history) || history.length === 0) {
           empty.classList.remove("hidden");
           tbody.innerHTML = "";
-          bySym.innerHTML = `<p class="text-xs text-slate-500 col-span-full">Per-symbol stats will appear after the first completed sessions.</p>`;
+          bySym.innerHTML = "";
           return;
         }
         empty.classList.add("hidden");
-        // newest first
         const rows = [...history].reverse();
         tbody.innerHTML = rows.slice(0, 100).map(item => {
           const hit = item.direction_hit;
           const hitLabel = hit === true ? "YES" : hit === false ? "NO" : "--";
           const hitCls = hit === true ? "text-emerald-400" : hit === false ? "text-rose-400" : "text-slate-500";
           return `<tr class="hover:bg-slate-900/50">
-            <td class="p-2.5 font-mono text-slate-400">${escapeHtml(item.date || item.session_date || "--")}</td>
-            <td class="p-2.5 font-bold text-white">${escapeHtml(item.symbol || "--")}</td>
-            <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] rounded font-semibold ${item.bias === 'BULLISH' ? 'bg-emerald-950 text-emerald-400' : item.bias === 'BEARISH' ? 'bg-rose-950 text-rose-400' : 'bg-slate-800 text-slate-300'}">${escapeHtml(item.bias || "--")}</span></td>
-            <td class="p-2.5 font-mono">${item.final_pred == null ? "--" : "₹" + Number(item.final_pred).toFixed(2)}</td>
-            <td class="p-2.5 font-mono">${item.final_actual == null ? "--" : "₹" + Number(item.final_actual).toFixed(2)}</td>
-            <td class="p-2.5 font-mono">${item.error_pct != null ? Number(item.error_pct).toFixed(2) + "%" : "--"}</td>
-            <td class="p-2.5 font-semibold ${hitCls}">${hitLabel}</td>
-            <td class="p-2.5 font-semibold ${item.trade_approved ? "text-emerald-400" : "text-slate-500"}">${item.trade_approved ? "YES" : (item.trade_action === "NO_TRADE" || item.tradeable_validated === false ? "NO" : "--")}</td>
-            <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] rounded font-semibold ${item.verdict === 'SUCCESS' ? 'bg-emerald-900/50 text-emerald-300' : item.verdict === 'PARTIAL' ? 'bg-amber-900/50 text-amber-300' : item.verdict === 'FAILED' ? 'bg-rose-900/50 text-rose-300' : 'bg-slate-800 text-slate-300'}">${escapeHtml(item.verdict || "--")}</span></td>
+            <td class="p-2 font-mono text-slate-400">${escapeHtml(item.date || "--")}</td>
+            <td class="p-2 font-bold text-white">${escapeHtml(item.symbol || "--")}</td>
+            <td class="p-2"><span class="px-1.5 py-0.5 text-[10px] rounded font-semibold ${item.bias === "BULLISH" ? "bg-emerald-950 text-emerald-400" : item.bias === "BEARISH" ? "bg-rose-950 text-rose-400" : "bg-slate-800 text-slate-300"}">${escapeHtml(item.bias || "--")}</span></td>
+            <td class="p-2 font-mono">${item.final_pred == null ? "--" : "₹" + Number(item.final_pred).toFixed(2)}</td>
+            <td class="p-2 font-mono">${item.final_actual == null ? "--" : "₹" + Number(item.final_actual).toFixed(2)}</td>
+            <td class="p-2 font-mono">${item.error_pct != null ? Number(item.error_pct).toFixed(2) + "%" : "--"}</td>
+            <td class="p-2 font-semibold ${hitCls}">${hitLabel}</td>
+            <td class="p-2 font-semibold ${item.trade_approved ? "text-emerald-400" : "text-slate-500"}">${item.trade_approved ? "YES" : "NO"}</td>
+            <td class="p-2">${escapeHtml(item.verdict || "--")}</td>
           </tr>`;
         }).join("");
 
         const by = perf?.by_symbol || {};
-        const cards = Object.keys(by).length ? Object.entries(by) : WATCHLIST.map(s => [s, {}]);
-        bySym.innerHTML = cards.map(([sym, s]) => {
-          const hit = s.direction_hit_rate == null ? "--" : Math.round(s.direction_hit_rate * 100) + "%";
-          const err = s.mean_error_pct == null ? "--" : Number(s.mean_error_pct).toFixed(2) + "%";
-          const n = s.sessions || s.days || 0;
-          return `<div class="bg-slate-950 border border-slate-800 rounded-lg p-3">
-            <div class="flex justify-between items-center mb-1">
-              <span class="font-bold text-white text-sm">${escapeHtml(sym)}</span>
-              <span class="text-[10px] text-slate-500">${n} sessions</span>
-            </div>
-            <div class="grid grid-cols-2 gap-1 text-[11px] text-slate-400">
-              <div>Hit rate: <span class="text-slate-200 font-mono">${hit}</span></div>
-              <div>Mean err: <span class="text-slate-200 font-mono">${err}</span></div>
-            </div>
-          </div>`;
-        }).join("");
+        bySym.innerHTML = Object.keys(by).length
+          ? Object.entries(by).map(([s, m]) =>
+              `<div class="bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs">
+                <div class="font-bold text-white">${escapeHtml(s)}</div>
+                <div class="text-slate-400 mt-1">Hit ${(m.direction_hit_rate != null ? (m.direction_hit_rate * 100).toFixed(0) : "--")}% · n=${m.sessions ?? "--"}</div>
+              </div>`).join("")
+          : "";
       } catch (e) {
-        empty.classList.remove("hidden");
-        empty.textContent = "Could not load history: " + (e.message || e);
-        tbody.innerHTML = "";
+        console.warn(e);
       }
     }
 
     async function loadAuditData() {
-      const tbody = document.getElementById("audit-table-body");
-      tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-slate-500">Loading forecast outcomes…</td></tr>`;
       try {
-        let data = null;
-        for (const url of [`${GITHUB_RAW_BASE}/eod_evaluation.json?cb=${Date.now()}`, `./data_store/eod_evaluation.json?cb=${Date.now()}`]) {
-          try {
-            const res = await fetch(url, { cache: 'no-store' });
-            if (res.ok) { data = await res.json(); break; }
-          } catch (_) { /* try next source */ }
-        }
-        if (!Array.isArray(data)) throw new Error("audit data unavailable");
-        if (data.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-slate-400">No scored sessions yet. Come back after the first full trading day closes.</td></tr>`;
-          document.getElementById("audit-sync-time").textContent = "Waiting for first completed session";
-          return;
-        }
-        const sessionDates = [...new Set(data.map(item => item.session_date).filter(Boolean))];
-        document.getElementById("audit-sync-time").textContent = sessionDates.length
-          ? `Session date: ${sessionDates.join(", ")}`
-          : "No scored session data";
-        tbody.innerHTML = data.map(item => 
+        const rows = await fetchJson(`${GITHUB_RAW_BASE}/eod_evaluation.json`).catch(() => []);
+        const tbody = document.getElementById("audit-table-body");
+        document.getElementById("audit-sync-time").textContent = rows[0]?.session_date ? `Session ${rows[0].session_date}` : "";
+        tbody.innerHTML = (rows || []).map(r =>
           `<tr class="hover:bg-slate-900/50">
-            <td class="p-2.5 font-bold text-white">${escapeHtml(item.symbol)}</td>
-            <td class="p-2.5">${escapeHtml(item.session_date || "--")}</td>
-            <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] rounded font-semibold ${item.bias === 'BULLISH' ? 'bg-emerald-950 text-emerald-400' : item.bias === 'BEARISH' ? 'bg-rose-950 text-rose-400' : 'bg-slate-800 text-slate-300'}">${escapeHtml(item.bias)}</span></td>
-            <td class="p-2.5 font-mono">${item.final_pred == null ? "--" : `₹${Number(item.final_pred).toFixed(2)}`}</td>
-            <td class="p-2.5 font-mono">${item.final_actual == null ? "--" : `₹${Number(item.final_actual).toFixed(2)}`}<span class="block text-[10px] text-slate-500">${item.verdict === "IN_PROGRESS" ? "Current mark" : item.final_actual == null ? "No observed price" : "Final close"}</span></td>
-            <td class="p-2.5 font-mono">${item.error_pct != null ? `${Number(item.error_pct).toFixed(2)}%` : '--'}</td>
-            <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] rounded font-semibold ${item.verdict === 'SUCCESS' ? 'bg-emerald-900/50 text-emerald-300' : item.verdict === 'PARTIAL' ? 'bg-amber-900/50 text-amber-300' : item.verdict === 'FAILED' ? 'bg-rose-900/50 text-rose-300' : 'bg-slate-800 text-slate-300'}">${escapeHtml(item.verdict)}</span></td>
+            <td class="p-2.5 font-bold text-white">${escapeHtml(r.symbol || "")}</td>
+            <td class="p-2.5 font-mono text-slate-400">${escapeHtml(r.session_date || r.date || "")}</td>
+            <td class="p-2.5">${escapeHtml(r.bias || "")}</td>
+            <td class="p-2.5 font-mono">${r.final_pred != null ? "₹" + Number(r.final_pred).toFixed(2) : "--"}</td>
+            <td class="p-2.5 font-mono">${r.final_actual != null ? "₹" + Number(r.final_actual).toFixed(2) : "--"}</td>
+            <td class="p-2.5 font-mono">${r.error_pct != null ? Number(r.error_pct).toFixed(2) + "%" : "--"}</td>
+            <td class="p-2.5">${escapeHtml(r.verdict || "")}</td>
           </tr>`
-        ).join('');
+        ).join("") || `<tr><td class="p-3 text-slate-500" colspan="7">No audit rows yet.</td></tr>`;
       } catch (e) {
-        tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-slate-400">No audit rows yet. Rows appear after a completed session is scored (typically after 15:30 IST on a trading day).</td></tr>`;
-        document.getElementById("audit-sync-time").textContent = "Snapshot date unavailable";
+        console.warn(e);
       }
     }
 
+    renderWatchlist();
     loadStock(activeSymbol);
-    refreshStatusData();
-
-    setInterval(() => {
-      loadStock(activeSymbol);
-      refreshStatusData();
-      const auditTab = document.getElementById("view-audit");
-      if (auditTab && !auditTab.classList.contains("hidden")) loadAuditData();
-      const histTab = document.getElementById("view-history");
-      if (histTab && !histTab.classList.contains("hidden")) loadHistoryData();
-    }, 5 * 60 * 1000);
-</script>
+  </script>
 </body>
 </html>

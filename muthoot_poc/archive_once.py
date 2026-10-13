@@ -835,8 +835,9 @@ def process_symbol(symbol, now):
         if not quant:       # with a quant forecast, quant_curves() above already chose the line; do NOT overwrite it with the LLM's
             opening_curve = (opening.get("curve") or frozen_curve(opening["base_price"], opening["target_pct"])) \
                 if opening else [None] * NUM_SLOTS
-            # LLM-only path: flatten guide when NEUTRAL
-            if display_bias == "NEUTRAL":
+            # LLM-only path: flatten guide when NEUTRAL *and* we have an opening forecast.
+            # No opening + no quant => keep None guide (honest "no blue line").
+            if opening is not None and display_bias == "NEUTRAL":
                 base = m["open_price"]
                 opening_curve = frozen_curve(base, 0.0)
                 display_target = round(base, 2)
