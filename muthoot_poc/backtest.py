@@ -24,7 +24,10 @@ from muthoot_poc import quant_model as qm
 
 DATA_DIR = os.getenv("DATA_DIR", "public/data_store")
 INDEX_TICKER = "^NSEI"
-WATCHLIST = ["MUTHOOTFIN", "RELIANCE", "TMPV", "INFY", "HDFCBANK", "ICICIBANK", "TCS", "SBIN", "BHARTIARTL", "LT", "SUNPHARMA"]
+try:
+    from muthoot_poc.universe import SYMBOLS as WATCHLIST
+except Exception:
+    WATCHLIST = ["RELIANCE", "HDFCBANK", "ICICIBANK", "SBIN", "INFY", "TCS", "BHARTIARTL", "TATASTEEL", "ITC", "AXISBANK"]
 # More liquid large caps = more training data. The model is volatility-scaled, so it transfers to the watchlist.
 UNIVERSE_EXTRA = ["ITC", "KOTAKBANK", "AXISBANK", "HINDUNILVR", "BAJFINANCE", "MARUTI", "ASIANPAINT", "TITAN",
                   "ULTRACEMCO", "WIPRO", "NTPC", "POWERGRID", "ONGC", "TATASTEEL", "JSWSTEEL", "HCLTECH", "TECHM",
@@ -109,7 +112,7 @@ def build_panel(daily, idx):
 
 
 # --------------------------------------------------------------------------- walk-forward
-def walk_forward(panel, init_days=504, step=21):
+def walk_forward(panel, init_days=504, step=21, dir_features=None):
     """Expanding window: fit on everything before a block, predict the block, move on. No row is ever predicted by
     a model that saw it (or anything after it)."""
     dates = np.array(sorted(panel["date"].unique()))
@@ -123,7 +126,9 @@ def walk_forward(panel, init_days=504, step=21):
             panel[(panel["date"] >= dates[s]) & (panel["date"] < dates[s + step])]
         if len(train) < MIN_TRAIN_ROWS or test.empty:
             continue
-        pred = qm.predict_rows(qm.fit_models(train), test)
+        _df = list(dir_features) if dir_features is not None else list(qm.DIR_FEATURES_V1)
+        fitted = qm.fit_models(train, dir_features=_df)
+        pred = qm.predict_rows(fitted, test, dir_features=_df)
         chunks.append(pd.concat([test[keep], pred], axis=1))
     if not chunks:
         return pd.DataFrame()
@@ -245,13 +250,14 @@ def evaluate(oos, cost_bps=6.0, n_boot=500, seed=0):
 
 
 # --------------------------------------------------------------------------- orchestration
-def run(daily, idx, cost_bps=6.0, n_boot=500, init_days=504, step=21):
+def run(daily, idx, cost_bps=6.0, n_boot=500, init_days=504, step=21, dir_features=None):
     panel = build_panel(daily, idx)
-    oos = walk_forward(panel, init_days=init_days, step=step)
+    dcols = list(dir_features) if dir_features is not None else list(qm.DIR_FEATURES_V1)
+    oos = walk_forward(panel, init_days=init_days, step=step, dir_features=dcols)
     if oos.empty:
         raise RuntimeError("Not enough history for a walk-forward test.")
     report = evaluate(oos, cost_bps=cost_bps, n_boot=n_boot)
-    models = qm.fit_models(panel)
+    models = qm.fit_models(panel, dir_features=dcols)
     gates = {"direction": report["direction"]["passes_gate"], "range": report["range"]["passes_gate"],
              "tradeable": report["direction"]["tradeable_after_costs"]}
     now = datetime.datetime.now(datetime.timezone.utc)
@@ -260,6 +266,8 @@ def run(daily, idx, cost_bps=6.0, n_boot=500, init_days=504, step=21):
              "n_obs": int(len(panel)), "n_symbols": int(panel["symbol"].nunique()),
              "data_span": [str(pd.Timestamp(panel["date"].min()).date()), str(pd.Timestamp(panel["date"].max()).date())],
              "gates": gates, "symbol_gates": symbol_gates, "dir": models["dir"], "rng": models["rng"],
+             "dir_features": dcols,
+             "feature_set": "v2" if len(dcols) > len(qm.DIR_FEATURES_V1) else "v1",
              "oos_summary": {"direction_hit_rate": report["direction"]["hit_rate"], "ic": report["direction"]["ic"],
                              "coverage_80": report["range"]["coverage_80"]}}
     report.update({"generated_at": now.isoformat(timespec="seconds"), "universe": sorted(daily.keys()), "gates": gates,
@@ -315,6 +323,8 @@ def main(argv=None):
     ap.add_argument("--cost-bps", type=float, default=6.0)
     ap.add_argument("--boot", type=int, default=500)
     ap.add_argument("--out", default=DATA_DIR)
+    ap.add_argument("--feature-set", choices=("v1", "v2"), default=os.getenv("QUANT_FEATURES", "v1"),
+                    help="v1=original (safe, matches current live model); v2=adds sector + US overnight features")
     a = ap.parse_args(argv)
 
     if a.synthetic:
@@ -327,7 +337,8 @@ def main(argv=None):
         daily = download_daily([f"{s}.NS" for s in dict.fromkeys(WATCHLIST + UNIVERSE_EXTRA)], a.period)
         if len(daily) < 8:
             sys.exit(f"Only {len(daily)} symbols downloaded - refusing to train on so little data.")
-    report, model = run(daily, idx, cost_bps=a.cost_bps, n_boot=a.boot)
+    dcols = list(qm.DIR_FEATURES_V2) if a.feature_set == "v2" else list(qm.DIR_FEATURES_V1)
+    report, model = run(daily, idx, cost_bps=a.cost_bps, n_boot=a.boot, dir_features=dcols)
     os.makedirs(a.out, exist_ok=True)
 
     summary = summary_text(report)

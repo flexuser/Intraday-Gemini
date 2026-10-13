@@ -66,7 +66,7 @@ except ImportError:
 
 IST = pytz.timezone("Asia/Kolkata")
 
-from muthoot_poc.universe import SYMBOLS, MIN_PROB_EDGE
+from muthoot_poc.universe import SYMBOLS, MIN_PROB_EDGE, SYMBOL_SECTOR, SECTOR_YAHOO, US_YAHOO
 
 DATA_DIR = os.getenv("DATA_DIR", "public/data_store")
 INTRADAY_HISTORY_PATH = os.path.join(DATA_DIR, "intraday_training_history.json")
@@ -80,6 +80,8 @@ INTRADAY_MODEL = None                   # five-minute 15/30/60-minute model, tra
 INTRADAY_REPORT = {}                    # latest evidence and collection progress for the dashboard
 _INDEX_LOCK = threading.Lock()
 _INDEX_CACHE = {}
+_SECTOR_CACHE = {}
+_US_CACHE = {}
 RETRIES = 3
 MAX_WORKERS = 1
 PROMPT_VERSION = "v3-context-risk"
@@ -225,21 +227,78 @@ def get_index_daily(today):
         return _INDEX_CACHE[today]
 
 
+def get_sector_daily(symbol, today):
+    """Best-effort sector index for symbol. Empty frame if unknown or download fails (V1 model unaffected)."""
+    bucket = SYMBOL_SECTOR.get(symbol)
+    ysym = SECTOR_YAHOO.get(bucket) if bucket else None
+    if not ysym:
+        return pd.DataFrame()
+    key = (today, ysym)
+    with _INDEX_LOCK:
+        if key not in _SECTOR_CACHE:
+            try:
+                _SECTOR_CACHE[key] = fetch_daily_ohlc(ysym)
+            except Exception as e:
+                print(f"[sector] {ysym}: {type(e).__name__}: {e}")
+                _SECTOR_CACHE[key] = pd.DataFrame()
+        return _SECTOR_CACHE[key]
+
+
+def get_us_daily(today):
+    """Prior US session proxy (^GSPC). Soft-fail to empty."""
+    with _INDEX_LOCK:
+        if today not in _US_CACHE:
+            try:
+                _US_CACHE[today] = fetch_daily_ohlc(US_YAHOO)
+            except Exception as e:
+                print(f"[us] {US_YAHOO}: {type(e).__name__}: {e}")
+                _US_CACHE[today] = pd.DataFrame()
+        return _US_CACHE[today]
+
+
 def compute_quant(symbol, ticker, m, now):
-    """Quant forecast from data known at the open. Returns None (and is retried next run) if anything is missing."""
+    """Quant forecast from data known at the open. Returns None (and is retried next run) if anything is missing.
+
+    Builds V1+V2 feature columns. The *loaded* quant_model.json decides which columns are used
+    (dir_features / weight length). Existing V1 models keep working unchanged.
+    """
     d, idx = fetch_daily_ohlc(ticker), get_index_daily(now.date())
     today = pd.Timestamp(now.date())
-    if d.empty or idx.empty or today not in idx.index:       # without today's index open the gap features would be stale
+    if d.empty or idx.empty or today not in idx.index:
         print(f"[{symbol}] quant: waiting for daily/index data")
         return None
-    d.loc[today, ["Open", "High", "Low", "Close"]] = m["open_price"]     # features read only today's Open
-    feats = qm.build_features(d, idx)
+    d.loc[today, ["Open", "High", "Low", "Close"]] = m["open_price"]
+    sector = get_sector_daily(symbol, now.date())
+    us = get_us_daily(now.date())
+    # Align optional frames so today's index open exists when sector has a bar
+    if not sector.empty and today not in sector.index and today in idx.index:
+        sector = sector.copy()
+        sector.loc[today, ["Open", "High", "Low", "Close"]] = idx.loc[today, ["Open", "High", "Low", "Close"]]
+    feats = qm.build_features(d, idx, sector=sector if not sector.empty else None, overseas=us if not us.empty else None)
+    if today not in feats.index:
+        print(f"[{symbol}] quant: incomplete features")
+        return None
     pred = qm.predict_today(QUANT, feats.loc[today], symbol=ticker, min_prob_edge=MIN_PROB_EDGE)
     if pred is None:
         print(f"[{symbol}] quant: incomplete features")
         return None
-    pred.update(made_at=now.isoformat(timespec="seconds"), open_price=round(m["open_price"], 2),
-                features={k: round(float(feats.loc[today, k]), 3) for k in qm.DIR_FEATURES})
+    used = pred.get("dir_features_used") or qm.dir_feature_list(QUANT)
+    feat_snap = {}
+    for k in used:
+        try:
+            feat_snap[k] = round(float(feats.loc[today, k]), 3)
+        except Exception:
+            pass
+    pred.update(
+        made_at=now.isoformat(timespec="seconds"),
+        open_price=round(m["open_price"], 2),
+        features=feat_snap,
+        context_sources={
+            "index": "^NSEI",
+            "sector": SECTOR_YAHOO.get(SYMBOL_SECTOR.get(symbol), None),
+            "us": US_YAHOO if not us.empty else None,
+        },
+    )
     return pred
 
 

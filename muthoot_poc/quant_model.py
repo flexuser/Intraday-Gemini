@@ -15,11 +15,30 @@ import math
 import numpy as np
 import pandas as pd
 
-DIR_FEATURES = ["gap_z", "rel_gap_z", "ret1_z", "ret5_z", "ret20_z", "idx_gap_z", "idx_ret1_z", "close_pos"]
+# V1 = original live model (existing quant_model.json keeps working).
+DIR_FEATURES_V1 = ["gap_z", "rel_gap_z", "ret1_z", "ret5_z", "ret20_z", "idx_gap_z", "idx_ret1_z", "close_pos"]
+# V2 = sector relative + overnight US (only after retrain with --feature-set v2).
+DIR_FEATURES_V2 = DIR_FEATURES_V1 + ["sec_gap_z", "sec_ret1_z", "us_ret1_z"]
+DIR_FEATURES = list(DIR_FEATURES_V1)  # import compatibility
 RNG_FEATURES = ["lr1", "lr5", "lr20", "abs_gap", "idx_lr1", "idx_lr5"]
-BAND_LO_Q, BAND_HI_Q = 0.10, 0.90                  # 80% band
+BAND_LO_Q, BAND_HI_Q = 0.10, 0.90
 RIDGE_LAMBDA = 10.0
 CLIP = 4.0
+
+
+def dir_feature_list(model=None):
+    """Feature names the loaded model was trained on. Default V1 — never breaks old JSON."""
+    if isinstance(model, dict):
+        names = model.get("dir_features")
+        if isinstance(names, (list, tuple)) and len(names) >= 4:
+            return list(names)
+        w = (model.get("dir") or {}).get("w")
+        if isinstance(w, (list, tuple)):
+            if len(w) == len(DIR_FEATURES_V2):
+                return list(DIR_FEATURES_V2)
+            if len(w) == len(DIR_FEATURES_V1):
+                return list(DIR_FEATURES_V1)
+    return list(DIR_FEATURES_V1)
 
 
 # --------------------------------------------------------------------------- features
@@ -44,8 +63,8 @@ def _vol20(d):
     return np.log(d["Close"]).diff().shift(1).rolling(20, min_periods=15).std()
 
 
-def _build_features(d, idx):
-    """Row t uses days < t and day t's Open only. (Day t's High/Low/Close are never read, except for the targets.)"""
+def _build_features(d, idx, sector=None, overseas=None):
+    """Row t uses days < t and day t's Open only. Optional sector / US frames add V2 columns."""
     d = clean_daily(d)
     idx = clean_daily(idx)
     if d.empty or idx.empty:
@@ -76,15 +95,37 @@ def _build_features(d, idx):
     f["idx_lr5"] = np.log(irng.shift(1).rolling(5).mean())
     f["sig"] = sig
     f["open"] = d["Open"]
-    f["r_oc"] = np.log(d["Close"] / d["Open"])        # targets: only meaningful for completed days
+    f["r_oc"] = np.log(d["Close"] / d["Open"])
     f["y_range"] = np.log(rng)
     f["z_oc"] = f["r_oc"] / sig
+
+    sec = clean_daily(sector) if sector is not None else pd.DataFrame()
+    if not sec.empty:
+        sec = sec.reindex(d.index).ffill()
+        ssig = _vol20(sec).replace(0, np.nan)
+        sgap = np.log(sec["Open"] / sec["Close"].shift(1))
+        slc = np.log(sec["Close"])
+        f["sec_gap_z"] = sgap / ssig
+        f["sec_ret1_z"] = (slc.shift(1) - slc.shift(2)) / ssig
+    else:
+        f["sec_gap_z"] = f["idx_gap_z"]
+        f["sec_ret1_z"] = f["idx_ret1_z"]
+
+    us = clean_daily(overseas) if overseas is not None else pd.DataFrame()
+    if not us.empty:
+        us = us.reindex(d.index).ffill()
+        usig = _vol20(us).replace(0, np.nan)
+        ulc = np.log(us["Close"])
+        f["us_ret1_z"] = (ulc.shift(1) - ulc.shift(2)) / usig
+    else:
+        f["us_ret1_z"] = 0.0
+
     return f.replace([np.inf, -np.inf], np.nan)
 
 
-def build_features(d, idx):
-    with np.errstate(divide="ignore", invalid="ignore"):          # log(0) etc. become NaN rows, which are dropped
-        return _build_features(d, idx)
+def build_features(d, idx, sector=None, overseas=None):
+    with np.errstate(divide="ignore", invalid="ignore"):
+        return _build_features(d, idx, sector=sector, overseas=overseas)
 
 
 # --------------------------------------------------------------------------- ridge
@@ -103,32 +144,41 @@ def ridge_predict(m, X):
     return Z @ np.array(m["w"]) + m["b"]
 
 
-def fit_models(panel, lam=RIDGE_LAMBDA):
-    """Fit both models on a training panel (rows = symbol-days with features and realised targets)."""
-    td = panel.dropna(subset=DIR_FEATURES + ["z_oc"])
-    dm = ridge_fit(td[DIR_FEATURES], td["z_oc"].clip(-CLIP, CLIP), lam)
-    dm["resid_sd"] = float(np.std(td["z_oc"].clip(-CLIP, CLIP).values - ridge_predict(dm, td[DIR_FEATURES])))
+def fit_models(panel, lam=RIDGE_LAMBDA, dir_features=None):
+    """Fit both models on a training panel (rows = symbol-days with features and realised targets).
+
+    dir_features: optional override (default V1 for compatibility). Pass DIR_FEATURES_V2 after
+    sector/US columns exist on the panel to train the extended model.
+    """
+    dcols = list(dir_features) if dir_features is not None else list(DIR_FEATURES_V1)
+    td = panel.dropna(subset=dcols + ["z_oc"])
+    dm = ridge_fit(td[dcols], td["z_oc"].clip(-CLIP, CLIP), lam)
+    dm["resid_sd"] = float(np.std(td["z_oc"].clip(-CLIP, CLIP).values - ridge_predict(dm, td[dcols])))
+    dm["feature_names"] = dcols
 
     tr = panel.dropna(subset=RNG_FEATURES + ["y_range", "r_oc"])
     rm = ridge_fit(tr[RNG_FEATURES], tr["y_range"], lam)
     resid = tr["y_range"].values - ridge_predict(rm, tr[RNG_FEATURES])
-    rm["smear"] = float(np.mean(np.exp(resid)))                       # Duan smearing: back-transform log -> level
+    rm["smear"] = float(np.mean(np.exp(resid)))
     forecast = np.exp(ridge_predict(rm, tr[RNG_FEATURES])) * rm["smear"]
-    u = tr["r_oc"].values / forecast                                  # close move in units of forecast range
+    u = tr["r_oc"].values / forecast
     rm["q_lo"], rm["q_hi"] = float(np.quantile(u, BAND_LO_Q)), float(np.quantile(u, BAND_HI_Q))
-    return {"dir": dm, "rng": rm}
+    return {"dir": dm, "rng": rm, "dir_features": dcols}
 
 
-def predict_rows(models, rows):
+def predict_rows(models, rows, dir_features=None):
     """Vectorised prediction for a frame of feature rows (used by the backtest and live)."""
+    dcols = list(dir_features) if dir_features is not None else list(
+        models.get("dir_features") or (models.get("dir") or {}).get("feature_names") or DIR_FEATURES_V1
+    )
     out = pd.DataFrame(index=rows.index)
-    ok_d = rows[DIR_FEATURES].notna().all(axis=1)
+    ok_d = rows[dcols].notna().all(axis=1) if all(c in rows.columns for c in dcols) else pd.Series(False, index=rows.index)
     ok_r = rows[RNG_FEATURES].notna().all(axis=1)
     out["mu_z"] = np.nan
     out["range_f"] = np.nan
     out["range_log"] = np.nan
     if ok_d.any():
-        out.loc[ok_d, "mu_z"] = ridge_predict(models["dir"], rows.loc[ok_d, DIR_FEATURES].values)
+        out.loc[ok_d, "mu_z"] = ridge_predict(models["dir"], rows.loc[ok_d, dcols].values)
     if ok_r.any():
         raw = ridge_predict(models["rng"], rows.loc[ok_r, RNG_FEATURES].values)
         out.loc[ok_r, "range_log"] = raw
@@ -165,12 +215,13 @@ def predict_today(model, feature_row, min_prob_edge=0.08, symbol=None):
         return None
 
     row = feature_row
-    req_cols = DIR_FEATURES + RNG_FEATURES + ["sig"]
+    dcols = dir_feature_list(model)
+    req_cols = dcols + RNG_FEATURES + ["sig"]
     if not all(col in row.index for col in req_cols) or row[req_cols].isna().any():
         return None
 
-    models = {"dir": model["dir"], "rng": model["rng"]}
-    p = predict_rows(models, row.to_frame().T.astype(float))
+    models = {"dir": model["dir"], "rng": model["rng"], "dir_features": dcols}
+    p = predict_rows(models, row.to_frame().T.astype(float), dir_features=dcols)
     if p.empty or p["mu_z"].isna().any() or p["range_f"].isna().any():
         return None
 
@@ -209,4 +260,6 @@ def predict_today(model, feature_row, min_prob_edge=0.08, symbol=None):
         "symbol_gate_available": symbol_gate_available,
         "symbol_gate_passed": (bool(symbol_gate and symbol_gate.get("direction")) if has_symbol_gates else None) if symbol else None,
         "model_version": model.get("version"),
+        "feature_set": "v2" if len(dcols) > len(DIR_FEATURES_V1) else "v1",
+        "dir_features_used": dcols,
     }
