@@ -1,10 +1,10 @@
 {
-  "as_of": "2026-10-12T16:00:50+05:30",
-  "status": "DEGRADED",
+  "as_of": "2026-10-13T09:45:54+05:30",
+  "status": "OK",
   "symbols_total": 10,
   "symbols_updated": 10,
-  "llm_fallback_count": 6,
-  "llm_error_count": 10,
+  "llm_fallback_count": 0,
+  "llm_error_count": 0,
   "llm_cooldown_until": null,
   "model": "gemini-3.8-flash",
   "prompt_version": "v3-context-risk",
@@ -17,7 +17,7 @@
       "tradeable": true
     }
   },
-  "sample_llm_error": "skipped: Gemini quota cooldown until 16:00 IST",
+  "sample_llm_error": null,
   "errors": [],
   "last_alert_at": "2026-10-12T16:00:50+05:30"
 }

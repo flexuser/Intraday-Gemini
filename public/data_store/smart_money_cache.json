@@ -1,21 +1,6 @@
 {
-  "fetched_at": "2026-10-12T04:01:01",
+  "fetched_at": "2026-10-13T04:15:59",
   "symbols": {
-    "MUTHOOTFIN": {
-      "oi_change_pct": 0.0,
-      "buildup_code": 0,
-      "oi_vs_avg": 1.0,
-      "bulk_buy_flag_5d": 0,
-      "bulk_sell_flag_5d": 0,
-      "bulk_net_value_cr": 0.0,
-      "block_buy_flag_5d": 0,
-      "insider_like_buy_flag": 0,
-      "promoter_delta_q": 0.0,
-      "fii_delta_q": 0.0,
-      "dii_delta_q": 0.0,
-      "delivery_pct": 44.48,
-      "delivery_vs_avg": 0.887
-    },
     "RELIANCE": {
       "oi_change_pct": 0.0,
       "buildup_code": 0,
@@ -28,38 +13,8 @@
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
       "dii_delta_q": 0.0,
-      "delivery_pct": 54.1,
-      "delivery_vs_avg": 0.963
-    },
-    "TMPV": {
-      "oi_change_pct": 0.0,
-      "buildup_code": 0,
-      "oi_vs_avg": 1.0,
-      "bulk_buy_flag_5d": 0,
-      "bulk_sell_flag_5d": 0,
-      "bulk_net_value_cr": 0.0,
-      "block_buy_flag_5d": 0,
-      "insider_like_buy_flag": 0,
-      "promoter_delta_q": 0.0,
-      "fii_delta_q": 0.0,
-      "dii_delta_q": 0.0,
-      "delivery_pct": 46.17,
-      "delivery_vs_avg": 1.095
-    },
-    "INFY": {
-      "oi_change_pct": 0.0,
-      "buildup_code": 0,
-      "oi_vs_avg": 1.0,
-      "bulk_buy_flag_5d": 0,
-      "bulk_sell_flag_5d": 0,
-      "bulk_net_value_cr": 0.0,
-      "block_buy_flag_5d": 0,
-      "insider_like_buy_flag": 0,
-      "promoter_delta_q": 0.0,
-      "fii_delta_q": 0.0,
-      "dii_delta_q": 0.0,
-      "delivery_pct": 50.88,
-      "delivery_vs_avg": 0.995
+      "delivery_pct": 53.63,
+      "delivery_vs_avg": 0.985
     },
     "HDFCBANK": {
       "oi_change_pct": 0.0,
@@ -73,8 +28,8 @@
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
       "dii_delta_q": 0.0,
-      "delivery_pct": 57.16,
-      "delivery_vs_avg": 1.01
+      "delivery_pct": 55.4,
+      "delivery_vs_avg": 1.008
     },
     "ICICIBANK": {
       "oi_change_pct": 0.0,
@@ -88,23 +43,8 @@
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
       "dii_delta_q": 0.0,
-      "delivery_pct": 64.68,
-      "delivery_vs_avg": 1.094
-    },
-    "TCS": {
-      "oi_change_pct": 0.0,
-      "buildup_code": 0,
-      "oi_vs_avg": 1.0,
-      "bulk_buy_flag_5d": 0,
-      "bulk_sell_flag_5d": 0,
-      "bulk_net_value_cr": 0.0,
-      "block_buy_flag_5d": 0,
-      "insider_like_buy_flag": 0,
-      "promoter_delta_q": 0.0,
-      "fii_delta_q": 0.0,
-      "dii_delta_q": 0.0,
-      "delivery_pct": 30.64,
-      "delivery_vs_avg": 0.76
+      "delivery_pct": 75.69,
+      "delivery_vs_avg": 1.221
     },
     "SBIN": {
       "oi_change_pct": 0.0,
@@ -118,8 +58,38 @@
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
       "dii_delta_q": 0.0,
-      "delivery_pct": 50.01,
-      "delivery_vs_avg": 0.96
+      "delivery_pct": 53.89,
+      "delivery_vs_avg": 1.064
+    },
+    "INFY": {
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 58.62,
+      "delivery_vs_avg": 1.076
+    },
+    "TCS": {
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.01,
+      "delivery_vs_avg": 1.066
     },
     "BHARTIARTL": {
       "oi_change_pct": 0.0,
@@ -133,10 +103,10 @@
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
       "dii_delta_q": 0.0,
-      "delivery_pct": 63.9,
-      "delivery_vs_avg": 0.968
+      "delivery_pct": 63.04,
+      "delivery_vs_avg": 0.989
     },
-    "LT": {
+    "TATASTEEL": {
       "oi_change_pct": 0.0,
       "buildup_code": 0,
       "oi_vs_avg": 1.0,
@@ -148,10 +118,10 @@
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
       "dii_delta_q": 0.0,
-      "delivery_pct": 61.75,
-      "delivery_vs_avg": 0.993
+      "delivery_pct": 48.14,
+      "delivery_vs_avg": 1.051
     },
-    "SUNPHARMA": {
+    "ITC": {
       "oi_change_pct": 0.0,
       "buildup_code": 0,
       "oi_vs_avg": 1.0,
@@ -163,8 +133,23 @@
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
       "dii_delta_q": 0.0,
-      "delivery_pct": 61.35,
-      "delivery_vs_avg": 0.983
+      "delivery_pct": 47.83,
+      "delivery_vs_avg": 0.948
+    },
+    "AXISBANK": {
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 68.19,
+      "delivery_vs_avg": 1.148
     }
   }
 }
