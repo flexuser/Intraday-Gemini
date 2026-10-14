@@ -1,108 +1,130 @@
 {
-  "n_obs": 70156,
-  "n_days": 1950,
-  "n_symbols": 36,
-  "oos_start": "2018-11-16",
-  "oos_end": "2026-10-09",
+  "n_obs": 62398,
+  "n_days": 1951,
+  "n_symbols": 32,
+  "oos_start": "2018-11-20",
+  "oos_end": "2026-10-14",
   "cost_bps_assumed": 6.0,
   "direction": {
-    "ic": 0.0662,
+    "ic": 0.0684,
     "ic_ci95": [
-      0.0489,
-      0.0855
+      0.049,
+      0.0887
     ],
-    "hit_rate": 0.5413,
+    "hit_rate": 0.5399,
     "hit_ci95": [
-      0.5342,
-      0.5472
+      0.5332,
+      0.5466
     ],
-    "mae_model_bps": 116.86,
-    "mae_flat_bps": 117.67,
-    "mean_net_bps_per_trade": 4.1,
+    "mae_model_bps": 115.39,
+    "mae_flat_bps": 116.17,
+    "mean_net_bps_per_trade": 3.81,
     "net_ci95": [
-      1.2274,
-      6.7167
+      1.0975,
+      6.8783
     ],
     "top_quintile": {
-      "hit_rate": 0.5738,
-      "mean_net_bps": 13.93
+      "hit_rate": 0.5726,
+      "mean_net_bps": 14.42
     },
     "baseline_hit_rates": {
-      "momentum": 0.4831,
-      "gap_fade": 0.5272,
-      "always_long": 0.4656
+      "momentum": 0.4826,
+      "gap_fade": 0.5267,
+      "always_long": 0.4668,
+      "always_short": 0.5292
     },
-    "always_long_net_bps": -13.16,
-    "hit_vs_always_long": 0.0757,
+    "always_long_net_bps": -12.89,
+    "hit_vs_always_long": 0.073,
     "hit_vs_always_long_ci95": [
-      0.0588,
-      0.0894
+      0.0595,
+      0.0881
     ],
-    "net_vs_always_long_bps": 17.26,
+    "net_vs_always_long_bps": 16.69,
     "net_vs_always_long_ci95": [
-      10.9301,
-      22.9118
+      10.9021,
+      22.3598
+    ],
+    "always_short_net_bps": 0.89,
+    "net_vs_always_short_ci95": [
+      -0.4679,
+      6.421
+    ],
+    "share_predicted_long": 0.2358,
+    "p_up_when_long": 0.5199,
+    "p_up_when_short": 0.4505,
+    "spread_up_prob": 0.0694,
+    "spread_up_prob_ci95": [
+      0.0554,
+      0.0837
     ],
     "passes_gate": true,
-    "tradeable_after_costs": true
+    "tradeable_after_costs": false
   },
   "range": {
-    "coverage_80": 0.8074,
+    "coverage_80": 0.8063,
     "coverage_ci95": [
-      0.8015,
-      0.8131
+      0.8002,
+      0.8118
     ],
-    "mae_logrange_model": 0.3063,
-    "mae_logrange_naive_5d_mean": 0.3358,
+    "mae_logrange_model": 0.3059,
+    "mae_logrange_naive_5d_mean": 0.3347,
     "passes_gate": true
   },
   "by_symbol": {
     "ASIANPAINT.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.558,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.559,
       "hit_ci95": [
-        0.5354,
-        0.5798
+        0.5387,
+        0.5821
       ],
-      "ic": 0.106,
+      "spread_up_prob_ci95": [
+        0.0557,
+        0.1532
+      ],
+      "ic": 0.104,
       "ic_ci95": [
-        0.0492,
-        0.162
+        0.0467,
+        0.1593
       ],
       "net_ci95": [
-        -0.2402,
-        11.6948
+        1.4944,
+        14.4945
       ],
       "mae_model_bps": 102.86,
-      "mae_flat_bps": 104.12,
-      "coverage_80": 0.818,
+      "mae_flat_bps": 104.19,
+      "coverage_80": 0.816,
       "gates": {
         "direction": true,
-        "tradeable": false,
+        "tradeable": true,
         "range": false
       }
     },
     "AXISBANK.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.519,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.513,
       "hit_ci95": [
-        0.4982,
-        0.5408
+        0.4918,
+        0.5351
       ],
-      "ic": -0.006,
+      "spread_up_prob_ci95": [
+        -0.0266,
+        0.0705
+      ],
+      "ic": -0.007,
       "ic_ci95": [
-        -0.0789,
-        0.0622
+        -0.0708,
+        0.0568
       ],
       "net_ci95": [
-        -8.2504,
-        7.4389
+        -9.7941,
+        6.1309
       ],
-      "mae_model_bps": 120.7,
-      "mae_flat_bps": 120.67,
-      "coverage_80": 0.818,
+      "mae_model_bps": 120.75,
+      "mae_flat_bps": 120.7,
+      "coverage_80": 0.814,
       "gates": {
         "direction": false,
         "tradeable": false,
@@ -110,51 +132,59 @@
       }
     },
     "BAJAJFINSV.NS": {
-      "n": 1948,
-      "n_days": 1948,
+      "n": 1950,
+      "n_days": 1950,
       "hit_rate": 0.559,
       "hit_ci95": [
-        0.5364,
-        0.5798
+        0.5369,
+        0.5815
       ],
-      "ic": 0.068,
+      "spread_up_prob_ci95": [
+        0.0498,
+        0.1637
+      ],
+      "ic": 0.061,
       "ic_ci95": [
-        0.0117,
-        0.13
+        -0.0081,
+        0.1279
       ],
       "net_ci95": [
-        0.6346,
-        16.9715
+        1.7125,
+        19.1077
       ],
-      "mae_model_bps": 129.45,
-      "mae_flat_bps": 130.9,
-      "coverage_80": 0.777,
+      "mae_model_bps": 129.68,
+      "mae_flat_bps": 131.09,
+      "coverage_80": 0.773,
       "gates": {
-        "direction": true,
-        "tradeable": true,
+        "direction": false,
+        "tradeable": false,
         "range": false
       }
     },
     "BAJFINANCE.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.539,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.543,
       "hit_ci95": [
-        0.5167,
-        0.5598
+        0.52,
+        0.5641
       ],
-      "ic": 0.029,
+      "spread_up_prob_ci95": [
+        0.0284,
+        0.1353
+      ],
+      "ic": 0.027,
       "ic_ci95": [
-        -0.0414,
-        0.0984
+        -0.0403,
+        0.1009
       ],
       "net_ci95": [
-        -5.3411,
-        11.9933
+        -2.6743,
+        14.6697
       ],
-      "mae_model_bps": 138.17,
+      "mae_model_bps": 138.15,
       "mae_flat_bps": 138.89,
-      "coverage_80": 0.789,
+      "coverage_80": 0.786,
       "gates": {
         "direction": false,
         "tradeable": false,
@@ -162,24 +192,28 @@
       }
     },
     "BHARTIARTL.NS": {
-      "n": 1949,
-      "n_days": 1949,
+      "n": 1950,
+      "n_days": 1950,
       "hit_rate": 0.565,
       "hit_ci95": [
-        0.5426,
-        0.5862
+        0.5428,
+        0.5872
       ],
-      "ic": 0.166,
+      "spread_up_prob_ci95": [
+        0.0733,
+        0.1706
+      ],
+      "ic": 0.172,
       "ic_ci95": [
-        0.1174,
-        0.2225
+        0.1172,
+        0.2211
       ],
       "net_ci95": [
-        3.6704,
-        18.4812
+        1.9663,
+        17.2067
       ],
-      "mae_model_bps": 120.3,
-      "mae_flat_bps": 121.97,
+      "mae_model_bps": 119.73,
+      "mae_flat_bps": 121.54,
       "coverage_80": 0.804,
       "gates": {
         "direction": true,
@@ -188,25 +222,29 @@
       }
     },
     "CIPLA.NS": {
-      "n": 1949,
-      "n_days": 1949,
+      "n": 1950,
+      "n_days": 1950,
       "hit_rate": 0.573,
       "hit_ci95": [
-        0.5511,
-        0.5939
+        0.5505,
+        0.5949
       ],
-      "ic": 0.136,
+      "spread_up_prob_ci95": [
+        0.0815,
+        0.1884
+      ],
+      "ic": 0.146,
       "ic_ci95": [
-        0.0654,
-        0.2002
+        0.0834,
+        0.2101
       ],
       "net_ci95": [
-        4.9492,
-        18.4493
+        6.8679,
+        19.9185
       ],
-      "mae_model_bps": 107.85,
-      "mae_flat_bps": 109.49,
-      "coverage_80": 0.81,
+      "mae_model_bps": 107.62,
+      "mae_flat_bps": 109.44,
+      "coverage_80": 0.809,
       "gates": {
         "direction": true,
         "tradeable": true,
@@ -214,51 +252,59 @@
       }
     },
     "COALINDIA.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.562,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.559,
       "hit_ci95": [
-        0.5418,
-        0.5852
+        0.5374,
+        0.5821
       ],
-      "ic": 0.072,
+      "spread_up_prob_ci95": [
+        0.0389,
+        0.1539
+      ],
+      "ic": 0.068,
       "ic_ci95": [
-        0.0108,
-        0.1399
+        0.0023,
+        0.129
       ],
       "net_ci95": [
-        2.8045,
-        18.7596
+        -1.1629,
+        14.446
       ],
-      "mae_model_bps": 128.48,
-      "mae_flat_bps": 129.96,
-      "coverage_80": 0.787,
+      "mae_model_bps": 128.64,
+      "mae_flat_bps": 130.1,
+      "coverage_80": 0.786,
       "gates": {
         "direction": true,
-        "tradeable": true,
+        "tradeable": false,
         "range": false
       }
     },
     "DRREDDY.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.538,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.536,
       "hit_ci95": [
-        0.5159,
-        0.5595
+        0.5151,
+        0.5587
       ],
-      "ic": 0.076,
+      "spread_up_prob_ci95": [
+        0.0041,
+        0.1075
+      ],
+      "ic": 0.083,
       "ic_ci95": [
-        0.0139,
-        0.1427
+        0.0177,
+        0.1403
       ],
       "net_ci95": [
-        -0.0657,
-        13.3614
+        -0.7814,
+        12.9106
       ],
-      "mae_model_bps": 102.79,
-      "mae_flat_bps": 103.69,
-      "coverage_80": 0.83,
+      "mae_model_bps": 102.81,
+      "mae_flat_bps": 103.85,
+      "coverage_80": 0.829,
       "gates": {
         "direction": true,
         "tradeable": false,
@@ -266,24 +312,28 @@
       }
     },
     "EICHERMOT.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.534,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.542,
       "hit_ci95": [
-        0.5108,
-        0.558
+        0.5195,
+        0.5623
       ],
-      "ic": 0.09,
+      "spread_up_prob_ci95": [
+        0.0274,
+        0.1355
+      ],
+      "ic": 0.087,
       "ic_ci95": [
-        0.0155,
-        0.1602
+        0.0092,
+        0.1596
       ],
       "net_ci95": [
-        1.2918,
-        18.2209
+        2.0638,
+        18.5616
       ],
-      "mae_model_bps": 129.34,
-      "mae_flat_bps": 130.26,
+      "mae_model_bps": 129.31,
+      "mae_flat_bps": 130.21,
       "coverage_80": 0.796,
       "gates": {
         "direction": true,
@@ -292,25 +342,29 @@
       }
     },
     "GRASIM.NS": {
-      "n": 1948,
-      "n_days": 1948,
-      "hit_rate": 0.555,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.564,
       "hit_ci95": [
-        0.5331,
-        0.5806
+        0.5397,
+        0.5856
       ],
-      "ic": 0.15,
+      "spread_up_prob_ci95": [
+        0.1186,
+        0.2197
+      ],
+      "ic": 0.145,
       "ic_ci95": [
-        0.0839,
-        0.2148
+        0.0832,
+        0.2037
       ],
       "net_ci95": [
-        0.807,
-        16.1016
+        2.5853,
+        16.9454
       ],
-      "mae_model_bps": 122.77,
-      "mae_flat_bps": 123.89,
-      "coverage_80": 0.804,
+      "mae_model_bps": 122.57,
+      "mae_flat_bps": 123.85,
+      "coverage_80": 0.802,
       "gates": {
         "direction": true,
         "tradeable": true,
@@ -318,25 +372,29 @@
       }
     },
     "HCLTECH.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.539,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.541,
       "hit_ci95": [
-        0.5162,
-        0.5608
+        0.5179,
+        0.5626
       ],
-      "ic": 0.063,
+      "spread_up_prob_ci95": [
+        0.0239,
+        0.1279
+      ],
+      "ic": 0.06,
       "ic_ci95": [
-        -0.0064,
-        0.1329
+        -0.005,
+        0.1282
       ],
       "net_ci95": [
-        -2.162,
-        11.062
+        -2.7574,
+        10.4962
       ],
-      "mae_model_bps": 110.83,
-      "mae_flat_bps": 111.72,
-      "coverage_80": 0.823,
+      "mae_model_bps": 110.96,
+      "mae_flat_bps": 111.79,
+      "coverage_80": 0.82,
       "gates": {
         "direction": false,
         "tradeable": false,
@@ -344,25 +402,29 @@
       }
     },
     "HDFCBANK.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.536,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.539,
       "hit_ci95": [
-        0.5102,
-        0.559
+        0.5172,
+        0.5618
       ],
-      "ic": 0.142,
+      "spread_up_prob_ci95": [
+        0.0349,
+        0.1315
+      ],
+      "ic": 0.136,
       "ic_ci95": [
-        0.0797,
-        0.1942
+        0.0721,
+        0.1928
       ],
       "net_ci95": [
-        -5.0155,
-        6.8327
+        -5.053,
+        7.5038
       ],
-      "mae_model_bps": 92.03,
-      "mae_flat_bps": 92.6,
-      "coverage_80": 0.831,
+      "mae_model_bps": 92.04,
+      "mae_flat_bps": 92.56,
+      "coverage_80": 0.832,
       "gates": {
         "direction": true,
         "tradeable": false,
@@ -370,25 +432,29 @@
       }
     },
     "HINDALCO.NS": {
-      "n": 1949,
-      "n_days": 1949,
+      "n": 1950,
+      "n_days": 1950,
       "hit_rate": 0.498,
       "hit_ci95": [
-        0.4754,
-        0.5192
+        0.4759,
+        0.5195
+      ],
+      "spread_up_prob_ci95": [
+        -0.0788,
+        0.0209
       ],
       "ic": -0.055,
       "ic_ci95": [
-        -0.114,
-        0.002
+        -0.1094,
+        0.0037
       ],
       "net_ci95": [
-        -18.3662,
-        -1.5423
+        -19.3637,
+        -2.3183
       ],
-      "mae_model_bps": 146.25,
-      "mae_flat_bps": 145.41,
-      "coverage_80": 0.791,
+      "mae_model_bps": 146.43,
+      "mae_flat_bps": 145.47,
+      "coverage_80": 0.789,
       "gates": {
         "direction": false,
         "tradeable": false,
@@ -396,25 +462,29 @@
       }
     },
     "HINDUNILVR.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.546,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.549,
       "hit_ci95": [
-        0.5251,
-        0.5695
+        0.5282,
+        0.5713
       ],
-      "ic": 0.054,
+      "spread_up_prob_ci95": [
+        0.0221,
+        0.1244
+      ],
+      "ic": 0.061,
       "ic_ci95": [
-        -0.014,
-        0.1156
+        -0.0077,
+        0.1233
       ],
       "net_ci95": [
-        -2.5561,
-        9.1283
+        -2.7346,
+        9.3677
       ],
-      "mae_model_bps": 93.93,
-      "mae_flat_bps": 94.77,
-      "coverage_80": 0.829,
+      "mae_model_bps": 94.11,
+      "mae_flat_bps": 94.96,
+      "coverage_80": 0.828,
       "gates": {
         "direction": false,
         "tradeable": false,
@@ -422,50 +492,28 @@
       }
     },
     "ICICIBANK.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.522,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.518,
       "hit_ci95": [
-        0.5008,
-        0.5459
+        0.4967,
+        0.5423
+      ],
+      "spread_up_prob_ci95": [
+        -0.0066,
+        0.0868
       ],
       "ic": 0.045,
       "ic_ci95": [
-        -0.0061,
-        0.0953
+        -0.0129,
+        0.1075
       ],
       "net_ci95": [
-        -7.9717,
-        4.9214
+        -10.7956,
+        2.4284
       ],
-      "mae_model_bps": 103.12,
-      "mae_flat_bps": 102.73,
-      "coverage_80": 0.829,
-      "gates": {
-        "direction": false,
-        "tradeable": false,
-        "range": false
-      }
-    },
-    "INFY.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.503,
-      "hit_ci95": [
-        0.4784,
-        0.5241
-      ],
-      "ic": -0.034,
-      "ic_ci95": [
-        -0.1008,
-        0.033
-      ],
-      "net_ci95": [
-        -15.1845,
-        -3.4318
-      ],
-      "mae_model_bps": 99.43,
-      "mae_flat_bps": 98.86,
+      "mae_model_bps": 103.22,
+      "mae_flat_bps": 102.75,
       "coverage_80": 0.825,
       "gates": {
         "direction": false,
@@ -473,52 +521,90 @@
         "range": false
       }
     },
-    "ITC.NS": {
+    "INFY.NS": {
       "n": 1950,
       "n_days": 1950,
-      "hit_rate": 0.566,
+      "hit_rate": 0.498,
       "hit_ci95": [
-        0.5443,
-        0.5877
+        0.4756,
+        0.5195
       ],
-      "ic": 0.062,
+      "spread_up_prob_ci95": [
+        -0.0696,
+        0.0219
+      ],
+      "ic": -0.036,
       "ic_ci95": [
-        -0.0001,
-        0.1138
+        -0.0996,
+        0.0293
       ],
       "net_ci95": [
-        2.4533,
-        14.2571
+        -16.259,
+        -4.3445
       ],
-      "mae_model_bps": 97.23,
-      "mae_flat_bps": 98.4,
-      "coverage_80": 0.822,
+      "mae_model_bps": 99.75,
+      "mae_flat_bps": 98.97,
+      "coverage_80": 0.824,
       "gates": {
         "direction": false,
         "tradeable": false,
         "range": false
       }
     },
-    "JSWSTEEL.NS": {
-      "n": 1946,
-      "n_days": 1946,
-      "hit_rate": 0.528,
+    "ITC.NS": {
+      "n": 1951,
+      "n_days": 1951,
+      "hit_rate": 0.562,
       "hit_ci95": [
-        0.5067,
-        0.5506
+        0.5402,
+        0.5838
       ],
-      "ic": 0.095,
+      "spread_up_prob_ci95": [
+        0.0408,
+        0.1573
+      ],
+      "ic": 0.064,
       "ic_ci95": [
-        0.0375,
+        0.0051,
+        0.1242
+      ],
+      "net_ci95": [
+        2.397,
+        14.6967
+      ],
+      "mae_model_bps": 97.29,
+      "mae_flat_bps": 98.44,
+      "coverage_80": 0.822,
+      "gates": {
+        "direction": true,
+        "tradeable": true,
+        "range": false
+      }
+    },
+    "JSWSTEEL.NS": {
+      "n": 1947,
+      "n_days": 1947,
+      "hit_rate": 0.527,
+      "hit_ci95": [
+        0.5072,
+        0.5496
+      ],
+      "spread_up_prob_ci95": [
+        0.0072,
+        0.1097
+      ],
+      "ic": 0.091,
+      "ic_ci95": [
+        0.0362,
         0.1517
       ],
       "net_ci95": [
-        -8.2162,
-        9.2041
+        -9.2025,
+        6.0159
       ],
-      "mae_model_bps": 137.71,
-      "mae_flat_bps": 138.33,
-      "coverage_80": 0.801,
+      "mae_model_bps": 137.49,
+      "mae_flat_bps": 138.15,
+      "coverage_80": 0.8,
       "gates": {
         "direction": true,
         "tradeable": false,
@@ -526,23 +612,27 @@
       }
     },
     "KOTAKBANK.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.539,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.534,
       "hit_ci95": [
-        0.5172,
-        0.5616
+        0.5097,
+        0.5577
+      ],
+      "spread_up_prob_ci95": [
+        0.0098,
+        0.1167
       ],
       "ic": 0.027,
       "ic_ci95": [
-        -0.0295,
-        0.082
+        -0.03,
+        0.0876
       ],
       "net_ci95": [
-        -4.1026,
-        9.6935
+        -3.2803,
+        10.0717
       ],
-      "mae_model_bps": 105.71,
+      "mae_model_bps": 105.74,
       "mae_flat_bps": 105.71,
       "coverage_80": 0.821,
       "gates": {
@@ -551,51 +641,29 @@
         "range": false
       }
     },
-    "LT.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.543,
-      "hit_ci95": [
-        0.5218,
-        0.5659
-      ],
-      "ic": -0.026,
-      "ic_ci95": [
-        -0.0882,
-        0.0408
-      ],
-      "net_ci95": [
-        -5.6679,
-        7.8811
-      ],
-      "mae_model_bps": 105.5,
-      "mae_flat_bps": 106.04,
-      "coverage_80": 0.819,
-      "gates": {
-        "direction": false,
-        "tradeable": false,
-        "range": false
-      }
-    },
     "MARUTI.NS": {
-      "n": 1948,
-      "n_days": 1948,
-      "hit_rate": 0.54,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.542,
       "hit_ci95": [
-        0.5169,
-        0.5634
+        0.5174,
+        0.5623
       ],
-      "ic": 0.049,
+      "spread_up_prob_ci95": [
+        0.0012,
+        0.1131
+      ],
+      "ic": 0.05,
       "ic_ci95": [
-        -0.0143,
-        0.113
+        -0.011,
+        0.1161
       ],
       "net_ci95": [
-        -3.5196,
-        12.0166
+        -3.0427,
+        10.9732
       ],
-      "mae_model_bps": 114.92,
-      "mae_flat_bps": 115.85,
+      "mae_model_bps": 114.87,
+      "mae_flat_bps": 115.77,
       "coverage_80": 0.813,
       "gates": {
         "direction": false,
@@ -603,52 +671,30 @@
         "range": false
       }
     },
-    "MUTHOOTFIN.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.562,
-      "hit_ci95": [
-        0.5382,
-        0.5821
-      ],
-      "ic": 0.044,
-      "ic_ci95": [
-        -0.0222,
-        0.1119
-      ],
-      "net_ci95": [
-        -0.6482,
-        15.9116
-      ],
-      "mae_model_bps": 139.99,
-      "mae_flat_bps": 141.54,
-      "coverage_80": 0.798,
-      "gates": {
-        "direction": false,
-        "tradeable": false,
-        "range": false
-      }
-    },
     "NESTLEIND.NS": {
-      "n": 1948,
-      "n_days": 1948,
-      "hit_rate": 0.548,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.547,
       "hit_ci95": [
-        0.5236,
-        0.5719
+        0.5259,
+        0.5669
       ],
-      "ic": 0.105,
+      "spread_up_prob_ci95": [
+        0.0348,
+        0.1325
+      ],
+      "ic": 0.109,
       "ic_ci95": [
-        0.0504,
-        0.1514
+        0.0582,
+        0.1625
       ],
       "net_ci95": [
-        -1.747,
-        10.3128
+        -1.6739,
+        9.6751
       ],
-      "mae_model_bps": 96.07,
-      "mae_flat_bps": 97.01,
-      "coverage_80": 0.835,
+      "mae_model_bps": 95.85,
+      "mae_flat_bps": 96.91,
+      "coverage_80": 0.836,
       "gates": {
         "direction": true,
         "tradeable": false,
@@ -656,25 +702,29 @@
       }
     },
     "NTPC.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.554,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.546,
       "hit_ci95": [
-        0.5316,
-        0.5752
+        0.5246,
+        0.5677
       ],
-      "ic": 0.112,
+      "spread_up_prob_ci95": [
+        0.0308,
+        0.1304
+      ],
+      "ic": 0.114,
       "ic_ci95": [
-        0.0543,
-        0.1627
+        0.0566,
+        0.1656
       ],
       "net_ci95": [
-        6.0265,
-        20.2641
+        5.3092,
+        19.5324
       ],
-      "mae_model_bps": 118.87,
-      "mae_flat_bps": 120.69,
-      "coverage_80": 0.801,
+      "mae_model_bps": 118.77,
+      "mae_flat_bps": 120.7,
+      "coverage_80": 0.798,
       "gates": {
         "direction": true,
         "tradeable": true,
@@ -682,51 +732,59 @@
       }
     },
     "ONGC.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.534,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.537,
       "hit_ci95": [
-        0.5125,
-        0.5557
+        0.5161,
+        0.5592
       ],
-      "ic": 0.069,
+      "spread_up_prob_ci95": [
+        -0.0033,
+        0.0964
+      ],
+      "ic": 0.064,
       "ic_ci95": [
-        0.0115,
-        0.1283
+        -0.0045,
+        0.1205
       ],
       "net_ci95": [
-        -3.7684,
-        13.1136
+        -3.0778,
+        13.7353
       ],
-      "mae_model_bps": 132.3,
-      "mae_flat_bps": 133.17,
-      "coverage_80": 0.807,
+      "mae_model_bps": 132.42,
+      "mae_flat_bps": 133.1,
+      "coverage_80": 0.805,
       "gates": {
-        "direction": true,
+        "direction": false,
         "tradeable": false,
         "range": false
       }
     },
     "POWERGRID.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.56,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.561,
       "hit_ci95": [
-        0.5393,
-        0.5818
+        0.5377,
+        0.581
       ],
-      "ic": 0.158,
+      "spread_up_prob_ci95": [
+        0.0911,
+        0.1885
+      ],
+      "ic": 0.161,
       "ic_ci95": [
-        0.0998,
-        0.2145
+        0.1068,
+        0.2173
       ],
       "net_ci95": [
-        2.4715,
-        16.6494
+        1.2939,
+        16.124
       ],
-      "mae_model_bps": 116.9,
-      "mae_flat_bps": 118.86,
-      "coverage_80": 0.793,
+      "mae_model_bps": 116.69,
+      "mae_flat_bps": 118.84,
+      "coverage_80": 0.792,
       "gates": {
         "direction": true,
         "tradeable": true,
@@ -734,24 +792,28 @@
       }
     },
     "RELIANCE.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.518,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.523,
       "hit_ci95": [
-        0.4946,
-        0.538
+        0.5008,
+        0.5457
+      ],
+      "spread_up_prob_ci95": [
+        -0.0329,
+        0.0683
       ],
       "ic": -0.015,
       "ic_ci95": [
-        -0.0745,
-        0.0419
+        -0.0748,
+        0.0444
       ],
       "net_ci95": [
-        -10.731,
-        2.1254
+        -9.7559,
+        4.4047
       ],
-      "mae_model_bps": 107.4,
-      "mae_flat_bps": 107.42,
+      "mae_model_bps": 107.43,
+      "mae_flat_bps": 107.33,
       "coverage_80": 0.796,
       "gates": {
         "direction": false,
@@ -760,77 +822,59 @@
       }
     },
     "SBIN.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.527,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.53,
       "hit_ci95": [
-        0.5077,
-        0.55
+        0.51,
+        0.5505
       ],
-      "ic": 0.037,
+      "spread_up_prob_ci95": [
+        -0.0053,
+        0.1101
+      ],
+      "ic": 0.036,
       "ic_ci95": [
-        -0.0259,
-        0.0986
+        -0.0201,
+        0.1009
       ],
       "net_ci95": [
-        -4.5361,
-        11.6356
+        -0.7214,
+        13.4402
       ],
-      "mae_model_bps": 121.7,
-      "mae_flat_bps": 122.14,
-      "coverage_80": 0.786,
+      "mae_model_bps": 121.72,
+      "mae_flat_bps": 122.1,
+      "coverage_80": 0.783,
       "gates": {
         "direction": false,
         "tradeable": false,
         "range": false
       }
     },
-    "SUNPHARMA.NS": {
-      "n": 1948,
-      "n_days": 1948,
-      "hit_rate": 0.561,
-      "hit_ci95": [
-        0.5387,
-        0.5837
-      ],
-      "ic": 0.159,
-      "ic_ci95": [
-        0.1068,
-        0.2108
-      ],
-      "net_ci95": [
-        4.3633,
-        18.6002
-      ],
-      "mae_model_bps": 111.21,
-      "mae_flat_bps": 112.67,
-      "coverage_80": 0.826,
-      "gates": {
-        "direction": true,
-        "tradeable": true,
-        "range": false
-      }
-    },
     "TATASTEEL.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.517,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.524,
       "hit_ci95": [
-        0.4969,
-        0.5401
+        0.501,
+        0.5467
       ],
-      "ic": 0.002,
+      "spread_up_prob_ci95": [
+        -0.0352,
+        0.0762
+      ],
+      "ic": 0.0,
       "ic_ci95": [
-        -0.0583,
-        0.0624
+        -0.0591,
+        0.0678
       ],
       "net_ci95": [
-        -8.7734,
-        9.3358
+        -10.0004,
+        7.396
       ],
-      "mae_model_bps": 143.93,
-      "mae_flat_bps": 144.19,
-      "coverage_80": 0.769,
+      "mae_model_bps": 143.92,
+      "mae_flat_bps": 144.12,
+      "coverage_80": 0.767,
       "gates": {
         "direction": false,
         "tradeable": false,
@@ -838,24 +882,28 @@
       }
     },
     "TCS.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.54,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.531,
       "hit_ci95": [
-        0.5192,
-        0.5618
+        0.512,
+        0.5518
       ],
-      "ic": 0.052,
+      "spread_up_prob_ci95": [
+        -0.0067,
+        0.0879
+      ],
+      "ic": 0.047,
       "ic_ci95": [
-        -0.0062,
-        0.1074
+        -0.0089,
+        0.1054
       ],
       "net_ci95": [
-        -4.5387,
-        7.1315
+        -6.6252,
+        4.811
       ],
-      "mae_model_bps": 99.94,
-      "mae_flat_bps": 100.71,
+      "mae_model_bps": 100.27,
+      "mae_flat_bps": 101.1,
       "coverage_80": 0.812,
       "gates": {
         "direction": false,
@@ -864,25 +912,29 @@
       }
     },
     "TECHM.NS": {
-      "n": 1948,
-      "n_days": 1948,
-      "hit_rate": 0.514,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.507,
       "hit_ci95": [
-        0.4923,
-        0.5375
+        0.4813,
+        0.5277
       ],
-      "ic": 0.029,
+      "spread_up_prob_ci95": [
+        -0.0471,
+        0.0538
+      ],
+      "ic": 0.02,
       "ic_ci95": [
-        -0.0277,
-        0.0892
+        -0.0495,
+        0.0757
       ],
       "net_ci95": [
-        -7.6696,
-        5.6764
+        -11.7841,
+        2.2974
       ],
-      "mae_model_bps": 120.34,
-      "mae_flat_bps": 119.91,
-      "coverage_80": 0.807,
+      "mae_model_bps": 120.73,
+      "mae_flat_bps": 120.15,
+      "coverage_80": 0.806,
       "gates": {
         "direction": false,
         "tradeable": false,
@@ -890,24 +942,28 @@
       }
     },
     "TITAN.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.55,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.549,
       "hit_ci95": [
-        0.5267,
-        0.5713
+        0.5269,
+        0.5708
       ],
-      "ic": 0.093,
+      "spread_up_prob_ci95": [
+        0.0457,
+        0.1474
+      ],
+      "ic": 0.088,
       "ic_ci95": [
-        0.0262,
-        0.1623
+        0.019,
+        0.1583
       ],
       "net_ci95": [
-        -1.4316,
-        12.3962
+        -1.0394,
+        12.2236
       ],
-      "mae_model_bps": 110.22,
-      "mae_flat_bps": 111.7,
+      "mae_model_bps": 110.31,
+      "mae_flat_bps": 111.81,
       "coverage_80": 0.816,
       "gates": {
         "direction": true,
@@ -915,78 +971,60 @@
         "range": false
       }
     },
-    "TMPV.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.552,
-      "hit_ci95": [
-        0.5326,
-        0.5749
-      ],
-      "ic": -0.065,
-      "ic_ci95": [
-        -0.1307,
-        -0.0103
-      ],
-      "net_ci95": [
-        -8.3357,
-        11.6585
-      ],
-      "mae_model_bps": 158.42,
-      "mae_flat_bps": 159.18,
-      "coverage_80": 0.778,
-      "gates": {
-        "direction": false,
-        "tradeable": false,
-        "range": false
-      }
-    },
     "ULTRACEMCO.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.546,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.555,
       "hit_ci95": [
-        0.5256,
-        0.5706
+        0.5349,
+        0.5775
       ],
-      "ic": 0.124,
+      "spread_up_prob_ci95": [
+        0.063,
+        0.176
+      ],
+      "ic": 0.117,
       "ic_ci95": [
-        0.0661,
-        0.1926
+        0.0589,
+        0.1802
       ],
       "net_ci95": [
-        -0.8926,
-        13.3418
+        2.1744,
+        16.7714
       ],
-      "mae_model_bps": 111.52,
-      "mae_flat_bps": 112.84,
-      "coverage_80": 0.793,
+      "mae_model_bps": 111.55,
+      "mae_flat_bps": 112.86,
+      "coverage_80": 0.79,
       "gates": {
         "direction": true,
-        "tradeable": false,
+        "tradeable": true,
         "range": false
       }
     },
     "WIPRO.NS": {
-      "n": 1949,
-      "n_days": 1949,
-      "hit_rate": 0.542,
+      "n": 1950,
+      "n_days": 1950,
+      "hit_rate": 0.544,
       "hit_ci95": [
-        0.5208,
-        0.5634
+        0.5213,
+        0.5672
       ],
-      "ic": 0.029,
+      "spread_up_prob_ci95": [
+        -0.0236,
+        0.0899
+      ],
+      "ic": 0.023,
       "ic_ci95": [
-        -0.0325,
-        0.0798
+        -0.0388,
+        0.0788
       ],
       "net_ci95": [
-        -1.7487,
-        10.8784
+        -2.0409,
+        12.1085
       ],
-      "mae_model_bps": 108.86,
-      "mae_flat_bps": 110.03,
-      "coverage_80": 0.813,
+      "mae_model_bps": 108.97,
+      "mae_flat_bps": 110.05,
+      "coverage_80": 0.812,
       "gates": {
         "direction": false,
         "tradeable": false,
@@ -994,7 +1032,7 @@
       }
     }
   },
-  "generated_at": "2026-10-10T08:43:27+00:00",
+  "generated_at": "2026-10-14T09:56:05+00:00",
   "universe": [
     "ASIANPAINT.NS",
     "AXISBANK.NS",
@@ -1015,28 +1053,24 @@
     "ITC.NS",
     "JSWSTEEL.NS",
     "KOTAKBANK.NS",
-    "LT.NS",
     "MARUTI.NS",
-    "MUTHOOTFIN.NS",
     "NESTLEIND.NS",
     "NTPC.NS",
     "ONGC.NS",
     "POWERGRID.NS",
     "RELIANCE.NS",
     "SBIN.NS",
-    "SUNPHARMA.NS",
     "TATASTEEL.NS",
     "TCS.NS",
     "TECHM.NS",
     "TITAN.NS",
-    "TMPV.NS",
     "ULTRACEMCO.NS",
     "WIPRO.NS"
   ],
   "gates": {
     "direction": true,
     "range": true,
-    "tradeable": true
+    "tradeable": false
   },
   "caveats": [
     "Out-of-sample means each day was predicted by a model trained only on earlier days.",
