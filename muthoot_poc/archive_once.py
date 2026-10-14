@@ -66,7 +66,10 @@ except ImportError:
 
 IST = pytz.timezone("Asia/Kolkata")
 
-from muthoot_poc.universe import SYMBOLS, MIN_PROB_EDGE, SYMBOL_SECTOR, SECTOR_YAHOO, US_YAHOO
+from muthoot_poc.universe import (
+    SYMBOLS, MIN_PROB_EDGE, SYMBOL_SECTOR, SECTOR_YAHOO, US_YAHOO,
+    MIN_SCORED_DAYS_FOR_TRUST,
+)
 
 DATA_DIR = os.getenv("DATA_DIR", "public/data_store")
 INTRADAY_HISTORY_PATH = os.path.join(DATA_DIR, "intraday_training_history.json")
@@ -94,6 +97,9 @@ PROBE_SYMBOL = "RELIANCE.NS"
 
 MARKET_OPEN = datetime.time(9, 15)
 LAST_RUN = datetime.time(16, 15)            # was 15:50: Yahoo's final bars arrive late, settling needs the extra time
+# LLM opening forecasts only count as day-ahead if captured before this IST clock time.
+OPENING_LLM_DEADLINE = datetime.time(10, 0)
+
 SETTLE_AFTER = datetime.time(15, 40)        # from here the official daily close is used if the 5-min feed stopped early
 SESSION_CLOSE = datetime.time(15, 30)
 NUM_SLOTS = 75
@@ -342,7 +348,7 @@ def score_quant(q, close_price):
     return {"bias": q["bias"], "target_pct": round(target, 3), "close_ret_pct": round(ret, 3),
             "open_price": base, "close_price": round(close_price, 2), "target_price": round(base * (1 + target / 100.0), 2),
             "direction_hit": dir_hit, "shadow_direction_hit": _hit(q["mu_pct"], close_price - base),
-            "error_pct": round(abs(ret - target), 3), "flat_error_pct": round(abs(ret), 3), "in_band": in_band,
+            "error_pct": round(abs(ret - target), 3), "baseline_error_pct": round(abs(ret), 3), "flat_error_pct": round(abs(ret), 3), "in_band": in_band,
             "range_validated": q["range_validated"], "direction_validated": q["direction_validated"],
             "p_up": q["p_up"], "expected_range_pct": q["expected_range_pct"],
             "verdict": "FAILED" if not in_band else ("PARTIAL" if dir_hit is False else "SUCCESS")}
@@ -658,6 +664,17 @@ def _hit(target_pct, move):
     return bool(move != 0 and (move > 0) == (target_pct > 0))
 
 
+
+def _is_day_ahead_llm(made_at):
+    """True if ISO timestamp is before OPENING_LLM_DEADLINE (IST wall clock on that day)."""
+    if not made_at:
+        return False
+    try:
+        dt = datetime.datetime.fromisoformat(made_at)
+        return dt.time() < OPENING_LLM_DEADLINE
+    except Exception:
+        return False
+
 def score_session(opening, close_price, log=None):
     """Score the FIRST LLM forecast of the day, each frozen baseline, and every later checkpoint forecast."""
     if not opening:
@@ -814,14 +831,22 @@ def process_symbol(symbol, now):
                         "target_price": round(m["open_price"] * (1 + pred["target_pct"] / 100.0), 2),
                         "price_at_forecast": round(m["last_close"], 2)})
             log = log[-20:]
-        new_opening = opening is None and pred["source"] == "llm"
+        # Day-ahead LLM opening only before OPENING_LLM_DEADLINE. Later LLM calls go to checkpoints only.
+        new_opening = (
+            opening is None
+            and pred["source"] == "llm"
+            and _is_day_ahead_llm(pred.get("made_at"))
+        )
         if new_opening:
             opening = {"bias": pred["bias"], "target_pct": pred["target_pct"], "archetype": pred["archetype"],
                        "base_price": round(m["open_price"], 2), "made_at": pred["made_at"], "model": pred["model"],
                        "prompt_version": pred.get("prompt_version", PROMPT_VERSION),
                        "gap_pct": gap_pct(m["open_price"], ctx),
-                       "baselines": baseline_targets(m["open_price"], ctx)}
+                       "baselines": baseline_targets(m["open_price"], ctx),
+                       "day_ahead": True}
             opening["curve"] = frozen_curve(opening["base_price"], opening["target_pct"])
+        elif opening is None and pred["source"] == "llm" and not _is_day_ahead_llm(pred.get("made_at")):
+            print(f"[{symbol}] LLM forecast at {pred.get('made_at')} after {OPENING_LLM_DEADLINE.strftime('%H:%M')} — not stored as day-ahead opening")
 
         target_price = round(m["open_price"] * (1 + pred["target_pct"] / 100.0), 2)
 
@@ -913,8 +938,29 @@ def process_symbol(symbol, now):
         score = score_session(opening, close_price, log) if complete else \
             {"verdict": "IN_PROGRESS", "error_pct": None, "baseline_error_pct": None,
              "direction_hit": None, "baselines": {}}
-        score = dict(score, quant=score_quant(quant, close_price) if (complete and quant) else None)
-        display_error = score["quant"]["error_pct"] if (complete and quant) else (score["error_pct"] if complete else None)
+        qscore = score_quant(quant, close_price) if (complete and quant) else None
+        score = dict(score, quant=qscore)
+        # Official track-record fields: prefer quant when present. LLM opening only if day-ahead.
+        if complete and qscore is not None:
+            score["primary_source"] = "quant"
+            score["error_pct"] = qscore.get("error_pct")
+            score["baseline_error_pct"] = qscore.get("baseline_error_pct", score.get("baseline_error_pct"))
+            if quant.get("direction_validated") and quant.get("bias") not in (None, "NEUTRAL"):
+                score["direction_hit"] = qscore.get("direction_hit")
+            else:
+                score["direction_hit"] = None  # no validated directional claim to score
+            score["in_band"] = qscore.get("in_band")
+            score["verdict"] = (
+                "SUCCESS" if (qscore.get("error_pct") is not None and qscore["error_pct"] <= 1.0)
+                else ("PARTIAL" if (qscore.get("error_pct") is not None and qscore["error_pct"] <= 2.5) else "FAILED")
+            )
+        elif complete and opening and opening.get("day_ahead"):
+            score["primary_source"] = "llm_day_ahead"
+        elif complete and opening and not opening.get("day_ahead"):
+            score["primary_source"] = "llm_late_excluded"
+            score["direction_hit"] = None
+            score["llm_opening_excluded"] = True
+        display_error = score["quant"]["error_pct"] if (complete and quant and score.get("quant")) else (score["error_pct"] if complete else None)
         if complete:
             training_history = io.merge_history(read_json(INTRADAY_HISTORY_PATH, []), intraday_observations)
             write_json(INTRADAY_HISTORY_PATH, training_history)
@@ -1040,7 +1086,7 @@ def summarize(history):
                 if c["made_at"] >= "11:00" and c.get("direction_hit") is not None]
         late_hits = sum(1 for c in late if c["direction_hit"])
         days = len({r["date"] for r in scored})
-        return {"sessions": len(scored), "days": days, "enough_data": days >= MIN_DAYS_FOR_CLAIMS,
+        return {"sessions": len(scored), "days": days, "enough_data": (days >= MIN_SCORED_DAYS_FOR_TRUST),
                 "direction_hit_rate": _rate([1 if d else 0 for d in directional]),
                 "directional_calls": len(directional), "direction_hit_ci95": _wilson(hits, len(directional)),
                 "mean_error_pct": _rate([r["error_pct"] for r in scored]),

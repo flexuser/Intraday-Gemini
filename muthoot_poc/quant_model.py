@@ -250,6 +250,7 @@ def predict_today(model, feature_row, min_prob_edge=0.08, symbol=None):
     return {
         "mu_pct": round((math.exp(mu_z * sig) - 1) * 100, 3),
         "p_up": round(p_up, 3),
+        "p_up_calibrated": False,  # model score in [0,1], not a calibrated probability
         "bias": bias,
         "expected_range_pct": round((math.exp(F) - 1) * 100, 2),
         "band_lo_pct": round((math.exp(lo) - 1) * 100, 2),

@@ -29,6 +29,13 @@
 <body class="bg-slate-950 text-slate-100 min-h-screen font-sans">
   <div class="max-w-[1400px] mx-auto px-3 md:px-5 py-3 space-y-3">
 
+    <div id="trust-banner" class="rounded-lg border border-amber-800/50 bg-amber-950/30 px-3 py-2 text-[11px] text-amber-200/90 leading-snug">
+      <strong class="text-amber-300">Experimental system.</strong>
+      Not financial advice. Open→close quant is the scored signal; stance IGNORE/WATCH/TRADE is binding.
+      Model score P(up) is <em>not</em> a calibrated probability. Need ~20 scored days before Track Record is meaningful.
+      15/30/60 horizons are unvalidated. Educational / testing only.
+    </div>
+
     <!-- Compact header -->
     <header class="flex flex-wrap items-center justify-between gap-2">
       <div class="flex items-center gap-2 min-w-0">
@@ -101,6 +108,8 @@
               <li class="flex justify-between gap-2"><span class="text-slate-500" id="target-label">Close target</span><span id="val-target" class="font-mono text-white">--</span></li>
               <li class="flex justify-between gap-2"><span class="text-slate-500">Last price</span><span id="val-actual" class="font-mono text-white">--</span></li>
               <li class="flex justify-between gap-2"><span class="text-slate-500" id="error-label">Gap to estimate</span><span id="val-error" class="font-mono text-white">--</span></li>
+              <li class="flex justify-between gap-2"><span class="text-slate-500">Model score P(up)</span><span id="val-pup" class="font-mono text-slate-300">--</span></li>
+              <li class="flex justify-between gap-2"><span class="text-slate-500">80% band</span><span id="val-band" class="font-mono text-slate-300">--</span></li>
             </ul>
             <div class="border-t border-slate-800 pt-2 space-y-1.5 text-xs">
               <div class="text-[10px] uppercase tracking-wider text-slate-600 font-semibold">Context only</div>
@@ -115,7 +124,7 @@
 
           <!-- 15 / 30 / 60 -->
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2 flex-1">
-            <div class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">15 / 30 / 60 min model</div>
+            <div class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">15 / 30 / 60 min (experimental, unvalidated)</div>
             <div id="horizon-cards" class="grid grid-cols-3 gap-1.5">
               <div class="rounded-md border border-slate-800 bg-slate-950 p-2 text-center">
                 <div class="text-[9px] text-slate-500">15m</div>
@@ -471,6 +480,28 @@
       document.getElementById("val-vwap").textContent = vwapVal != null ? `₹${Number(vwapVal).toFixed(2)}` : "--";
       const rsi = tech && tech.rsi_14 != null ? tech.rsi_14 : null;
       document.getElementById("val-rsi").textContent = rsi != null ? Number(rsi).toFixed(1) : "--";
+      const pupEl = document.getElementById("val-pup");
+      const bandEl = document.getElementById("val-band");
+      const quant = (typeof selectedStockData !== "undefined" && selectedStockData && selectedStockData.quant) ? selectedStockData.quant : null;
+      if (pupEl) {
+        if (quant && quant.p_up != null) {
+          pupEl.textContent = Number(quant.p_up).toFixed(3) + " (not calibrated %)";
+        } else {
+          pupEl.textContent = "--";
+        }
+      }
+      if (bandEl) {
+        if (quant && quant.range_validated && quant.band_lo_pct != null && quant.band_hi_pct != null && quant.open_price) {
+          const lo = quant.open_price * (1 + quant.band_lo_pct / 100);
+          const hi = quant.open_price * (1 + quant.band_hi_pct / 100);
+          bandEl.textContent = `₹${lo.toFixed(2)} – ₹${hi.toFixed(2)}`;
+        } else if (quant && !quant.range_validated) {
+          bandEl.textContent = "not validated";
+        } else {
+          bandEl.textContent = "--";
+        }
+      }
+
 
       const gapText = document.getElementById("gap-callout-text");
       if (curves.error_pct != null) {

@@ -89,11 +89,11 @@ class HardRiskGuardrail:
 
         # 2. Check Directional Confidence Thresholds
         if bias == "BULLISH" and p_up < self.min_p_up:
-            execution_plan["rejection_reason"] = f"P(up) {p_up:.3f} below bullish threshold {self.min_p_up}."
+            execution_plan["rejection_reason"] = (f"Model score P(up)={p_up:.3f} below bullish threshold {self.min_p_up} (score is not a calibrated probability).")
             return execution_plan
 
         if bias == "BEARISH" and p_up > self.max_p_down:
-            execution_plan["rejection_reason"] = f"P(up) {p_up:.3f} above bearish threshold {self.max_p_down}."
+            execution_plan["rejection_reason"] = (f"Model score P(up)={p_up:.3f} above bearish threshold {self.max_p_down} (score is not a calibrated probability).")
             return execution_plan
 
         if bias == "NEUTRAL":
