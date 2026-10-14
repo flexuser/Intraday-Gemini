@@ -54,3 +54,33 @@ def test_predict_today_and_roundtrip(planted, tmp_path):
     broken = feats.iloc[-1].copy(); broken["gap_z"] = float("nan")
     assert qm.predict_today(loaded, broken) is None                              # never guess on missing data
     assert qm.load_model(str(tmp_path / "missing.json")) is None
+
+
+@pytest.mark.parametrize("drift", [-0.08, 0.08])
+def test_drift_without_skill_cannot_pass_any_direction_gate(drift):
+    """Real open->close drift is negative (~46.6% up days). A model that only leans with the drift must not pass."""
+    daily, idx = bt.make_synthetic(n_days=1300, n_sym=6, beta=0.0, drift=drift, seed=12)
+    report, model = bt.run(daily, idx, n_boot=200, init_days=400)
+    d = report["direction"]
+    assert max(d["baseline_hit_rates"]["always_long"], d["baseline_hit_rates"]["always_short"]) > 0.52   # the drift is visible...
+    assert model["gates"]["direction"] is False                                                           # ...but it is not skill
+    assert sum(1 for g in model["symbol_gates"].values() if g["direction"]) <= 1                          # chance false positives only
+
+def test_planted_edge_passes_the_drift_immune_gate_globally_and_per_symbol(planted):
+    (report, model), _, _ = planted
+    d = report["direction"]
+    assert model["gates"]["direction"] is True and d["spread_up_prob_ci95"][0] > 0 and d["spread_up_prob"] > 0.03
+    assert sum(1 for g in model["symbol_gates"].values() if g["direction"]) >= 3
+
+def test_v2_features_never_read_the_future():
+    """Sector row of day t (H/L/C) and the SAME-DATE US session both happen after the Indian open and must not matter."""
+    daily, idx = bt.make_synthetic(n_days=250, n_sym=3, seed=21)
+    d, sec, us = daily["SYN0"], daily["SYN1"], daily["SYN2"]
+    last = d.index[-1]
+    cols = qm.DIR_FEATURES_V2 + qm.RNG_FEATURES + ["sig"]
+    f1 = qm.build_features(d, idx, sector=sec, overseas=us)
+    sec2, us2 = sec.copy(), us.copy()
+    sec2.loc[last, ["High", "Low", "Close"]] = sec.loc[last, ["High", "Low", "Close"]].values * 1.4
+    us2.loc[last, ["Open", "High", "Low", "Close"]] = us.loc[last, ["Open", "High", "Low", "Close"]].values * 1.4
+    f2 = qm.build_features(d, idx, sector=sec2, overseas=us2)
+    pd.testing.assert_series_equal(f1.loc[last, cols], f2.loc[last, cols])

@@ -151,11 +151,15 @@ def evaluate(oos, cost_bps=6.0, n_boot=500, seed=0):
     net = d * r * 1e4 - cost_bps                              # bps per trade if you traded the sign every time
     hit_long = (r > 0).astype(float)                          # ALWAYS-LONG baseline: captures pure drift / survivorship
     net_long = r * 1e4 - cost_bps
+    hit_short = (r < 0).astype(float)                         # always-short: the harder constant here (only ~46.6% of sessions are up)
+    net_short = -r * 1e4 - cost_bps
     inband = ((r >= oos["lo"].values) & (r <= oos["hi"].values)).astype(float)
 
     T = pd.DataFrame({"one": 1.0, "x": x, "y": y, "xy": x * y, "xx": x * x, "yy": y * y,
                       "hit": hit, "net": net, "inband": inband,
-                      "dhit": hit - hit_long, "dnet": net - net_long})
+                      "dhit": hit - hit_long, "dnet": net - net_long, "dnet_s": net - net_short, "dhit_s": hit - hit_short,
+                      "nL": (d > 0).astype(float), "upL": ((d > 0) & (r > 0)).astype(float),
+                      "nS": (d < 0).astype(float), "upS": ((d < 0) & (r > 0)).astype(float)})
     per = T.groupby(oos["date"].values).sum()                 # one row per trading day -> block bootstrap
     S, c = per.values, {k: i for i, k in enumerate(per.columns)}
     brng = np.random.default_rng(seed)
@@ -172,6 +176,16 @@ def evaluate(oos, cost_bps=6.0, n_boot=500, seed=0):
     net_ci = ci(lambda s: s[c["net"]] / s[c["one"]])
     dhit_ci = ci(lambda s: s[c["dhit"]] / s[c["one"]])        # model minus always-long, paired by day
     dnet_ci = ci(lambda s: s[c["dnet"]] / s[c["one"]])
+    dnet_s_ci = ci(lambda s: s[c["dnet_s"]] / s[c["one"]])
+
+    def _spread(s):                                           # P(up | model says long) - P(up | model says short)
+        if s[c["nL"]] == 0 or s[c["nS"]] == 0:
+            return float("nan")
+        return s[c["upL"]] / s[c["nL"]] - s[c["upS"]] / s[c["nS"]]
+
+    _sp = np.array([_spread(row) for row in draws])
+    _sp = _sp[np.isfinite(_sp)]
+    spread_ci = [round(float(np.quantile(_sp, 0.025)), 4), round(float(np.quantile(_sp, 0.975)), 4)] if len(_sp) > 50 else [float("nan")] * 2
     cov_ci = ci(lambda s: s[c["inband"]] / s[c["one"]])
 
     mae_model, mae_flat = float(np.mean(np.abs(r - mu_ret)) * 1e4), float(np.mean(np.abs(r)) * 1e4)
@@ -189,9 +203,11 @@ def evaluate(oos, cost_bps=6.0, n_boot=500, seed=0):
         gm, gy = gz * g["sig"].values, g["z_oc"].clip(-qm.CLIP, qm.CLIP).values
         sym_inband = ((gr >= g["lo"].values) & (gr <= g["hi"].values)).astype(float)
         sym_net = np.sign(gm) * gr * 1e4 - cost_bps
+        sL, sS = np.sign(gm) > 0, np.sign(gm) < 0
         sym_stats = pd.DataFrame({
             "one": 1.0, "x": gz, "y": gy, "xy": gz * gy, "xx": gz * gz, "yy": gy * gy,
             "hit": (np.sign(gm) == np.sign(gr)).astype(float), "net": sym_net, "inband": sym_inband,
+            "nL": sL.astype(float), "upL": (sL & (gr > 0)).astype(float), "nS": sS.astype(float), "upS": (sS & (gr > 0)).astype(float),
         }, index=g.index).groupby(g["date"].values).sum()
         sym_columns = {k: i for i, k in enumerate(sym_stats.columns)}
         sym_tot = sym_stats.values.sum(axis=0)
@@ -205,6 +221,10 @@ def evaluate(oos, cost_bps=6.0, n_boot=500, seed=0):
 
         sym_ic_ci = sym_ci(np.array([_corr(sample, sym_columns) for sample in sym_draws]))
         sym_hit_ci = sym_ci(sym_draws[:, sym_columns["hit"]] / sym_draws[:, sym_columns["one"]])
+        with np.errstate(divide="ignore", invalid="ignore"):
+            _ssp = sym_draws[:, sym_columns["upL"]] / sym_draws[:, sym_columns["nL"]] - sym_draws[:, sym_columns["upS"]] / sym_draws[:, sym_columns["nS"]]
+        _ssp = _ssp[np.isfinite(_ssp)]
+        sym_spread_ci = [round(float(np.quantile(_ssp, 0.025)), 4), round(float(np.quantile(_ssp, 0.975)), 4)] if len(_ssp) > 50 else [float("nan")] * 2
         sym_net_ci = sym_ci(sym_draws[:, sym_columns["net"]] / sym_draws[:, sym_columns["one"]])
         sym_mae = float(np.mean(np.abs(gr - gm)) * 1e4)
         sym_flat_mae = float(np.mean(np.abs(gr)) * 1e4)
@@ -212,13 +232,13 @@ def evaluate(oos, cost_bps=6.0, n_boot=500, seed=0):
         sym_range_naive = float(np.mean(np.abs(g["y_range"].values - g["lr5"].values)))
         sym_coverage = float(sym_tot[sym_columns["inband"]] / sym_tot[sym_columns["one"]])
         enough_days = len(sym_stats) >= 252
-        sym_direction = bool(enough_days and sym_ic_ci[0] > 0 and sym_hit_ci[0] > 0.5 and sym_mae <= sym_flat_mae)
+        sym_direction = bool(enough_days and sym_ic_ci[0] > 0 and sym_spread_ci[0] > 0 and sym_mae <= sym_flat_mae)   # drift-immune, not just hit > 0.5
         sym_tradeable = bool(sym_direction and sym_net_ci[0] > 0)
         sym_range_gate = bool(enough_days and abs(sym_coverage - 0.8) <= 0.04 and sym_range_mae < sym_range_naive)
 
         by_symbol[sym] = {
             "n": int(len(g)), "n_days": int(len(sym_stats)),
-            "hit_rate": round(float(sym_hit), 3), "hit_ci95": sym_hit_ci,
+            "hit_rate": round(float(sym_hit), 3), "hit_ci95": sym_hit_ci, "spread_up_prob_ci95": sym_spread_ci,
             "ic": round(float(sym_ic), 3), "ic_ci95": sym_ic_ci,
             "net_ci95": sym_net_ci,
             "mae_model_bps": round(sym_mae, 2), "mae_flat_bps": round(sym_flat_mae, 2),
@@ -238,9 +258,19 @@ def evaluate(oos, cost_bps=6.0, n_boot=500, seed=0):
     direction["hit_vs_always_long_ci95"] = dhit_ci
     direction["net_vs_always_long_bps"] = round(float(np.mean(net - net_long)), 2)
     direction["net_vs_always_long_ci95"] = dnet_ci
+    nL_tot, nS_tot = tot[c["nL"]], tot[c["nS"]]
+    direction["baseline_hit_rates"]["always_short"] = round(float(hit_short.mean()), 4)
+    direction["always_short_net_bps"] = round(float(net_short.mean()), 2)
+    direction["net_vs_always_short_ci95"] = dnet_s_ci
+    direction["share_predicted_long"] = round(float(nL_tot / max(nL_tot + nS_tot, 1)), 4)
+    direction["p_up_when_long"] = round(float(tot[c["upL"]] / nL_tot), 4) if nL_tot else None
+    direction["p_up_when_short"] = round(float(tot[c["upS"]] / nS_tot), 4) if nS_tot else None
+    direction["spread_up_prob"] = round(float(_spread(tot)), 4) if (nL_tot and nS_tot) else None
+    direction["spread_up_prob_ci95"] = spread_ci
     # The model must beat "just be long" - otherwise a drifting / survivorship-biased universe passes on drift alone.
-    direction["passes_gate"] = bool(ic_ci[0] > 0 and hit_ci[0] > 0.5 and dhit_ci[0] > 0 and mae_model <= mae_flat)
-    direction["tradeable_after_costs"] = bool(net_ci[0] > 0 and dnet_ci[0] > 0)
+    # Drift-immune skill test: does the model separate up-days from down-days? (A short bias in a down-drifting universe scores 0 here.)
+    direction["passes_gate"] = bool(ic_ci[0] > 0 and spread_ci[0] > 0 and mae_model <= mae_flat)
+    direction["tradeable_after_costs"] = bool(net_ci[0] > 0 and dnet_ci[0] > 0 and dnet_s_ci[0] > 0)
     rng_ = {"coverage_80": round(float(cov), 4), "coverage_ci95": cov_ci,
             "mae_logrange_model": round(log_model, 4), "mae_logrange_naive_5d_mean": round(log_naive, 4)}
     rng_["passes_gate"] = bool(abs(cov - 0.8) <= 0.04 and log_model < log_naive)
