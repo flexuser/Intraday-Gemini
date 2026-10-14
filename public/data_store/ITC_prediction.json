@@ -8,7 +8,7 @@
     "source": "fallback",
     "model": "gemini-3.8-flash",
     "llm_error": "no new forecasts after 15:00 IST",
-    "made_at": "2026-10-14T15:30:56+05:30",
+    "made_at": "2026-10-14T16:00:50+05:30",
     "volume_ratio": 1.83,
     "has_volume_spike": false,
     "news_feed": []
@@ -20,7 +20,7 @@
     "reasoning": "No AI commentary was available for this run.",
     "source": "fallback",
     "model": "gemini-3.8-flash",
-    "made_at": "2026-10-14T15:30:56+05:30",
+    "made_at": "2026-10-14T16:00:50+05:30",
     "llm_error": "no new forecasts after 15:00 IST",
     "prompt_version": "v3-context-risk"
   },
@@ -762,7 +762,7 @@
   },
   "curves": {
     "date": "2026-10-14",
-    "generated_at": "03:30 PM IST",
+    "generated_at": "04:00 PM IST",
     "symbol": "ITC",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -1835,19 +1835,37 @@
       0
     ],
     "final_pred": 260.5,
-    "final_actual": 261.6499938964844,
-    "error_pct": null,
+    "final_actual": 261.5,
+    "error_pct": 0.384,
     "operator_stance": "IGNORE",
     "rejection_reason": "Per-stock net performance has not passed validation.",
     "vwap": 261.44
   },
   "session": {
-    "complete": false,
-    "verdict": "IN_PROGRESS",
+    "complete": true,
+    "verdict": "NO_FORECAST",
     "error_pct": null,
     "baseline_error_pct": null,
     "direction_hit": null,
     "baselines": {},
-    "quant": null
+    "checkpoints": [],
+    "quant": {
+      "bias": "NEUTRAL",
+      "target_pct": 0.0,
+      "close_ret_pct": 0.384,
+      "open_price": 260.5,
+      "close_price": 261.5,
+      "target_price": 260.5,
+      "direction_hit": null,
+      "shadow_direction_hit": false,
+      "error_pct": 0.384,
+      "flat_error_pct": 0.384,
+      "in_band": true,
+      "range_validated": false,
+      "direction_validated": true,
+      "p_up": 0.489,
+      "expected_range_pct": 2.51,
+      "verdict": "SUCCESS"
+    }
   }
 }

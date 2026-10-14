@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-10-14T15:30:56+05:30",
+  "as_of": "2026-10-14T16:00:50+05:30",
   "status": "DEGRADED",
   "symbols_total": 10,
   "symbols_updated": 10,
   "llm_fallback_count": 10,
   "llm_error_count": 10,
-  "llm_cooldown_until": "2026-10-14T16:00:42+05:30",
+  "llm_cooldown_until": null,
   "model": "gemini-3.8-flash",
   "prompt_version": "v3-context-risk",
   "quant_model": {
@@ -19,5 +19,5 @@
   },
   "sample_llm_error": "no new forecasts after 15:00 IST",
   "errors": [],
-  "last_alert_at": "2026-10-14T14:31:03+05:30"
+  "last_alert_at": "2026-10-14T16:00:50+05:30"
 }
