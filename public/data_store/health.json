@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-14T15:00:48+05:30",
+  "as_of": "2026-10-14T15:30:56+05:30",
   "status": "DEGRADED",
   "symbols_total": 10,
   "symbols_updated": 10,
@@ -10,11 +10,11 @@
   "prompt_version": "v3-context-risk",
   "quant_model": {
     "loaded": true,
-    "version": "q2-20261010",
+    "version": "q2-20261014",
     "gates": {
       "direction": true,
       "range": true,
-      "tradeable": true
+      "tradeable": false
     }
   },
   "sample_llm_error": "no new forecasts after 15:00 IST",
