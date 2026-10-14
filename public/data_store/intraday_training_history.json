@@ -824353,20 +824353,20 @@
     "key": "INFY|2026-10-05T13:50:00+05:30",
     "symbol": "INFY",
     "bar_time": "2026-10-05T13:50:00+05:30",
-    "entry_price": 1019.0,
+    "entry_price": 98.5,
     "feature_version": "intraday-observation-v3",
     "features": {
-      "return_5m_pct": -0.0294,
-      "return_15m_pct": 0.0393,
-      "return_30m_pct": 0.172,
-      "move_since_open_pct": -3.0078,
-      "vwap_distance_pct": -0.31,
-      "rsi_14": 60.25,
-      "macd_hist": 1.0459,
-      "atr_pct": 0.25,
-      "last_bar_range_pct": 0.1423,
-      "last_bar_volume_ratio": 0.8389,
-      "session_volume_ratio": 0.84,
+      "return_5m_pct": -0.0282,
+      "return_15m_pct": -0.0845,
+      "return_30m_pct": -0.1689,
+      "move_since_open_pct": -1.5,
+      "vwap_distance_pct": -0.76,
+      "rsi_14": 0.0,
+      "macd_hist": -0.0025,
+      "atr_pct": 0.2,
+      "last_bar_range_pct": 0.203,
+      "last_bar_volume_ratio": 1.0,
+      "session_volume_ratio": 2.6,
       "minutes_since_open": 275,
       "oi_change_pct": 0.0,
       "buildup_code": 0,
@@ -824378,29 +824378,31 @@
       "insider_like_buy_flag": 0,
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
-      "dii_delta_q": 0.0
+      "dii_delta_q": 0.0,
+      "delivery_pct": 0.0,
+      "delivery_vs_avg": 1.0
     },
     "outcomes": {
       "15": {
         "target_at": "2026-10-05T14:05:00+05:30",
         "status": "scored",
         "actual_at": "2026-10-05T14:05:00+05:30",
-        "actual_price": 1019.4,
-        "actual_return_pct": 0.0393
+        "actual_price": 100.31,
+        "actual_return_pct": 1.8356
       },
       "30": {
         "target_at": "2026-10-05T14:20:00+05:30",
         "status": "scored",
         "actual_at": "2026-10-05T14:20:00+05:30",
-        "actual_price": 1019.5,
-        "actual_return_pct": 0.0491
+        "actual_price": 100.32,
+        "actual_return_pct": 1.8521
       },
       "60": {
         "target_at": "2026-10-05T14:50:00+05:30",
         "status": "scored",
         "actual_at": "2026-10-05T14:50:00+05:30",
-        "actual_price": 1019.6,
-        "actual_return_pct": 0.0589
+        "actual_price": 100.36,
+        "actual_return_pct": 1.885
       }
     }
   },
@@ -2326976,6 +2326978,120 @@
       "60": {
         "target_at": "2026-10-14T16:05:00+05:30",
         "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "INFY|2026-10-05T09:35:00+05:30",
+    "symbol": "INFY",
+    "bar_time": "2026-10-05T09:35:00+05:30",
+    "entry_price": 100.0,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0,
+      "return_15m_pct": 0.0,
+      "return_30m_pct": null,
+      "move_since_open_pct": 0.0,
+      "vwap_distance_pct": 0.0,
+      "rsi_14": 50.0,
+      "macd_hist": 0.0,
+      "atr_pct": 0.0,
+      "last_bar_range_pct": 0.2,
+      "last_bar_volume_ratio": 1.0,
+      "session_volume_ratio": 2.6,
+      "minutes_since_open": 20,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 0.0,
+      "delivery_vs_avg": 1.0
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-05T09:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-05T09:50:00+05:30",
+        "actual_price": 100.05,
+        "actual_return_pct": 0.0507
+      },
+      "30": {
+        "target_at": "2026-10-05T10:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-05T10:05:00+05:30",
+        "actual_price": 100.08,
+        "actual_return_pct": 0.0761
+      },
+      "60": {
+        "target_at": "2026-10-05T10:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-05T10:35:00+05:30",
+        "actual_price": 100.13,
+        "actual_return_pct": 0.1268
+      }
+    }
+  },
+  {
+    "key": "TCS|2026-10-05T09:35:00+05:30",
+    "symbol": "TCS",
+    "bar_time": "2026-10-05T09:35:00+05:30",
+    "entry_price": 100.0,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0,
+      "return_15m_pct": 0.0,
+      "return_30m_pct": null,
+      "move_since_open_pct": 0.0,
+      "vwap_distance_pct": 0.0,
+      "rsi_14": 50.0,
+      "macd_hist": 0.0,
+      "atr_pct": 0.0,
+      "last_bar_range_pct": 0.2,
+      "last_bar_volume_ratio": 1.0,
+      "session_volume_ratio": 2.6,
+      "minutes_since_open": 20,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 0.0,
+      "delivery_vs_avg": 1.0
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-05T09:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-05T09:50:00+05:30",
+        "actual_price": 100.0,
+        "actual_return_pct": 0.0
+      },
+      "30": {
+        "target_at": "2026-10-05T10:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-05T10:05:00+05:30",
+        "actual_price": 100.0,
+        "actual_return_pct": 0.0
+      },
+      "60": {
+        "target_at": "2026-10-05T10:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-05T10:35:00+05:30",
+        "actual_price": 100.0,
+        "actual_return_pct": 0.0
       }
     }
   }
