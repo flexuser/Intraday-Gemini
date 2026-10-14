@@ -8,8 +8,8 @@
     "source": "fallback",
     "model": "gemini-3.8-flash",
     "llm_error": "skipped: Gemini quota cooldown until 16:00 IST",
-    "made_at": "2026-10-14T10:00:42+05:30",
-    "volume_ratio": 0.68,
+    "made_at": "2026-10-14T10:30:54+05:30",
+    "volume_ratio": 0.36,
     "has_volume_spike": false,
     "news_feed": []
   },
@@ -20,7 +20,7 @@
     "reasoning": "No AI commentary was available for this run.",
     "source": "fallback",
     "model": "gemini-3.8-flash",
-    "made_at": "2026-10-14T10:00:42+05:30",
+    "made_at": "2026-10-14T10:30:54+05:30",
     "llm_error": "skipped: Gemini quota cooldown until 16:00 IST",
     "prompt_version": "v3-context-risk"
   },
@@ -63,14 +63,68 @@
       "outcomes": {
         "15": {
           "target_at": "2026-10-14T10:20:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-14T10:20:00+05:30",
+          "actual_price": 260.5,
+          "actual_return_pct": -0.0767
         },
         "30": {
           "target_at": "2026-10-14T10:35:00+05:30",
-          "status": "pending"
+          "status": "scored",
+          "actual_at": "2026-10-14T10:35:00+05:30",
+          "actual_price": 260.7,
+          "actual_return_pct": 0.0
         },
         "60": {
           "target_at": "2026-10-14T11:05:00+05:30",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "key": "ITC|2026-10-14T10:35:00+05:30",
+      "symbol": "ITC",
+      "bar_time": "2026-10-14T10:35:00+05:30",
+      "entry_price": 260.7,
+      "feature_version": "intraday-observation-v3",
+      "features": {
+        "return_5m_pct": 0.0768,
+        "return_15m_pct": 0.0768,
+        "return_30m_pct": 0.0,
+        "move_since_open_pct": 0.0768,
+        "vwap_distance_pct": -0.1,
+        "rsi_14": 79.67,
+        "macd_hist": 0.0,
+        "atr_pct": 0.4,
+        "last_bar_range_pct": 0.0,
+        "last_bar_volume_ratio": 0.0,
+        "session_volume_ratio": 0.36,
+        "minutes_since_open": 80,
+        "oi_change_pct": 0.0,
+        "buildup_code": 0,
+        "oi_vs_avg": 1.0,
+        "bulk_buy_flag_5d": 0,
+        "bulk_sell_flag_5d": 0,
+        "bulk_net_value_cr": 0.0,
+        "block_buy_flag_5d": 0,
+        "insider_like_buy_flag": 0,
+        "promoter_delta_q": 0.0,
+        "fii_delta_q": 0.0,
+        "dii_delta_q": 0.0,
+        "delivery_pct": 53.17,
+        "delivery_vs_avg": 1.07
+      },
+      "outcomes": {
+        "15": {
+          "target_at": "2026-10-14T10:50:00+05:30",
+          "status": "pending"
+        },
+        "30": {
+          "target_at": "2026-10-14T11:05:00+05:30",
+          "status": "pending"
+        },
+        "60": {
+          "target_at": "2026-10-14T11:35:00+05:30",
           "status": "pending"
         }
       }
@@ -80,24 +134,24 @@
     "status": "ready",
     "forecasts": {
       "15": {
-        "expected_return_pct": -0.0749,
-        "target_price": 260.5,
-        "band_low_pct": -0.3058,
-        "band_high_pct": 0.1561,
+        "expected_return_pct": -0.0521,
+        "target_price": 260.56,
+        "band_low_pct": -0.2831,
+        "band_high_pct": 0.1788,
         "status": "shadow"
       },
       "30": {
-        "expected_return_pct": -0.1363,
-        "target_price": 260.34,
-        "band_low_pct": -0.4309,
-        "band_high_pct": 0.1583,
+        "expected_return_pct": -0.132,
+        "target_price": 260.36,
+        "band_low_pct": -0.4266,
+        "band_high_pct": 0.1626,
         "status": "shadow"
       },
       "60": {
-        "expected_return_pct": -0.2084,
-        "target_price": 260.16,
-        "band_low_pct": -0.6439,
-        "band_high_pct": 0.2271,
+        "expected_return_pct": -0.1114,
+        "target_price": 260.41,
+        "band_low_pct": -0.5469,
+        "band_high_pct": 0.3241,
         "status": "shadow"
       }
     },
@@ -165,13 +219,13 @@
     }
   },
   "technical_indicators": {
-    "vwap": 261.16,
-    "rsi_14": 50.0,
+    "vwap": 260.97,
+    "rsi_14": 79.67,
     "macd_hist": 0.0,
-    "atr_14": 0.0,
-    "atr_pct": 0.0,
+    "atr_14": 1.04,
+    "atr_pct": 0.4,
     "bollinger_pct_b": 0.5,
-    "vwap_distance_pct": -0.18,
+    "vwap_distance_pct": -0.1,
     "technical_bias": "BEARISH"
   },
   "risk_execution_plan": {
@@ -195,7 +249,7 @@
   },
   "curves": {
     "date": "2026-10-14",
-    "generated_at": "10:00 AM IST",
+    "generated_at": "10:30 AM IST",
     "symbol": "ITC",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -286,12 +340,12 @@
       260.75,
       260.65,
       260.7,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
+      260.55,
+      260.35,
+      260.5,
+      260.3,
+      260.5,
+      260.7,
       null,
       null,
       null,
@@ -409,16 +463,46 @@
       },
       {
         "o": 260.6,
-        "h": 260.75,
+        "h": 260.8,
         "l": 260.55,
         "c": 260.7
       },
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
+      {
+        "o": 260.7,
+        "h": 260.8,
+        "l": 260.55,
+        "c": 260.55
+      },
+      {
+        "o": 260.55,
+        "h": 260.55,
+        "l": 260.3,
+        "c": 260.35
+      },
+      {
+        "o": 260.35,
+        "h": 260.7,
+        "l": 260.35,
+        "c": 260.5
+      },
+      {
+        "o": 260.5,
+        "h": 260.55,
+        "l": 260.25,
+        "c": 260.3
+      },
+      {
+        "o": 260.2,
+        "h": 260.55,
+        "l": 260.2,
+        "c": 260.5
+      },
+      {
+        "o": 260.7,
+        "h": 260.7,
+        "l": 260.7,
+        "c": 260.7
+      },
       null,
       null,
       null,
@@ -480,22 +564,22 @@
       null
     ],
     "vwap_line": [
-      261.16,
-      261.16,
-      261.16,
-      261.16,
-      261.16,
-      261.16,
-      261.16,
-      261.16,
-      261.16,
-      261.16,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
+      260.97,
+      260.97,
+      260.97,
+      260.97,
+      260.97,
+      260.97,
+      260.97,
+      260.97,
+      260.97,
+      260.97,
+      260.97,
+      260.97,
+      260.97,
+      260.97,
+      260.97,
+      260.97,
       null,
       null,
       null,
@@ -635,11 +719,17 @@
     ],
     "latest_forecast_curve": [
       260.75,
+      260.75,
       260.74,
       260.74,
+      260.74,
+      260.73,
       260.73,
       260.73,
       260.72,
+      260.72,
+      260.72,
+      260.71,
       260.71,
       260.71,
       260.7,
@@ -647,6 +737,8 @@
       260.7,
       260.69,
       260.69,
+      260.69,
+      260.68,
       260.68,
       260.68,
       260.67,
@@ -654,14 +746,17 @@
       260.67,
       260.66,
       260.66,
+      260.66,
       260.65,
       260.65,
       260.65,
       260.64,
       260.64,
+      260.64,
       260.63,
       260.63,
       260.63,
+      260.62,
       260.62,
       260.62,
       260.61,
@@ -672,13 +767,12 @@
       260.6,
       260.59,
       260.59,
+      260.59,
       260.58,
       260.58,
       260.58,
       260.57,
       260.57,
-      260.57,
-      260.56,
       260.56,
       260.56,
       260.56,
@@ -688,25 +782,15 @@
       260.54,
       260.54,
       260.54,
-      260.54,
       260.53,
       260.53,
       260.53,
-      260.53,
       260.52,
       260.52,
       260.52,
-      260.52,
-      260.52,
       260.51,
       260.51,
       260.51,
-      260.51,
-      260.51,
-      260.51,
-      260.5,
-      260.5,
-      260.5,
       260.5,
       260.5
     ],
@@ -890,12 +974,12 @@
       100048,
       89639,
       104699,
-      44812,
-      0,
-      0,
-      0,
-      0,
-      0,
+      66290,
+      97421,
+      146064,
+      86508,
+      147153,
+      47693,
       0,
       0,
       0,
@@ -962,7 +1046,7 @@
     "error_pct": null,
     "operator_stance": "IGNORE",
     "rejection_reason": "Direction model failed walk-forward edge test.",
-    "vwap": 261.16
+    "vwap": 260.97
   },
   "session": {
     "complete": false,
