@@ -838,7 +838,7 @@
   },
   "curves": {
     "date": "2026-10-15",
-    "generated_at": "03:30 PM IST",
+    "generated_at": "04:00 PM IST",
     "symbol": "SBIN",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -1179,9 +1179,9 @@
       null,
       null,
       {
-        "o": 954.8,
+        "o": 954.75,
         "h": 954.85,
-        "l": 954.8,
+        "l": 954.75,
         "c": 954.85
       },
       {
@@ -1906,19 +1906,40 @@
       0
     ],
     "final_pred": 955.3,
-    "final_actual": 958.1500244140625,
-    "error_pct": null,
+    "final_actual": 960.0,
+    "error_pct": 0.492,
     "operator_stance": "IGNORE",
     "rejection_reason": "Direction model failed walk-forward edge test.",
     "vwap": 956.82
   },
   "session": {
-    "complete": false,
-    "verdict": "IN_PROGRESS",
-    "error_pct": null,
-    "baseline_error_pct": null,
+    "complete": true,
+    "verdict": "SUCCESS",
+    "error_pct": 0.492,
+    "baseline_error_pct": 0.492,
     "direction_hit": null,
     "baselines": {},
-    "quant": null
+    "checkpoints": [],
+    "quant": {
+      "bias": "NEUTRAL",
+      "target_pct": 0.0,
+      "close_ret_pct": 0.492,
+      "open_price": 955.3,
+      "close_price": 960.0,
+      "target_price": 955.3,
+      "direction_hit": null,
+      "shadow_direction_hit": false,
+      "error_pct": 0.492,
+      "baseline_error_pct": 0.492,
+      "flat_error_pct": 0.492,
+      "in_band": true,
+      "range_validated": false,
+      "direction_validated": false,
+      "p_up": 0.49,
+      "expected_range_pct": 1.69,
+      "verdict": "SUCCESS"
+    },
+    "primary_source": "quant",
+    "in_band": true
   }
 }
