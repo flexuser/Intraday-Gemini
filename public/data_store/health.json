@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-10-14T16:00:50+05:30",
+  "as_of": "2026-10-15T09:30:58+05:30",
   "status": "DEGRADED",
   "symbols_total": 10,
   "symbols_updated": 10,
-  "llm_fallback_count": 10,
-  "llm_error_count": 10,
-  "llm_cooldown_until": null,
+  "llm_fallback_count": 7,
+  "llm_error_count": 7,
+  "llm_cooldown_until": "2026-10-15T09:35:58+05:30",
   "model": "gemini-3.8-flash",
   "prompt_version": "v3-context-risk",
   "quant_model": {
@@ -17,7 +17,7 @@
       "tradeable": false
     }
   },
-  "sample_llm_error": "no new forecasts after 15:00 IST",
+  "sample_llm_error": "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev",
   "errors": [],
-  "last_alert_at": "2026-10-14T16:00:50+05:30"
+  "last_alert_at": "2026-10-15T09:30:58+05:30"
 }
