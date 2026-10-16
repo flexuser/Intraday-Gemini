@@ -1,7 +1,7 @@
 {
   "overall": {
-    "sessions": 17,
-    "days": 3,
+    "sessions": 21,
+    "days": 4,
     "enough_data": false,
     "direction_hit_rate": 1.0,
     "directional_calls": 7,
@@ -9,24 +9,24 @@
       0.646,
       1.0
     ],
-    "mean_error_pct": 1.383,
-    "mean_flat_baseline_error_pct": 1.969,
-    "beat_flat_baseline_rate": 0.765,
+    "mean_error_pct": 1.375,
+    "mean_flat_baseline_error_pct": 1.85,
+    "beat_flat_baseline_rate": 0.619,
     "baselines": {
       "flat": {
-        "sessions": 17,
-        "mean_error_pct": 1.969,
+        "sessions": 21,
+        "mean_error_pct": 1.85,
         "direction_hit_rate": null
       },
       "gap_fade": {
-        "sessions": 17,
-        "mean_error_pct": 1.621,
-        "direction_hit_rate": 0.647
+        "sessions": 21,
+        "mean_error_pct": 1.686,
+        "direction_hit_rate": 0.524
       },
       "momentum": {
-        "sessions": 17,
-        "mean_error_pct": 1.935,
-        "direction_hit_rate": 0.647
+        "sessions": 21,
+        "mean_error_pct": 1.776,
+        "direction_hit_rate": 0.714
       }
     },
     "late_forecasts": {
@@ -41,24 +41,24 @@
     }
   },
   "quant": {
-    "forecasts": 40,
-    "days": 4,
-    "band_coverage": 0.625,
+    "forecasts": 50,
+    "days": 5,
+    "band_coverage": 0.64,
     "band_coverage_ci95": [
-      0.47,
-      0.758
+      0.501,
+      0.759
     ],
     "band_coverage_target": 0.8,
     "published_direction_calls": 0,
     "published_direction_hit_rate": null,
     "published_direction_ci95": null,
-    "shadow_direction_hit_rate": 0.525,
+    "shadow_direction_hit_rate": 0.48,
     "shadow_direction_ci95": [
-      0.375,
-      0.671
+      0.348,
+      0.615
     ],
-    "mean_error_pct": 1.455,
-    "mean_flat_error_pct": 1.455
+    "mean_error_pct": 1.374,
+    "mean_flat_error_pct": 1.374
   },
   "by_symbol": {
     "RELIANCE": {
@@ -100,30 +100,30 @@
       }
     },
     "HDFCBANK": {
-      "sessions": 2,
-      "days": 2,
+      "sessions": 3,
+      "days": 3,
       "enough_data": false,
       "direction_hit_rate": null,
       "directional_calls": 0,
       "direction_hit_ci95": null,
-      "mean_error_pct": 1.256,
-      "mean_flat_baseline_error_pct": 1.456,
-      "beat_flat_baseline_rate": 0.5,
+      "mean_error_pct": 0.881,
+      "mean_flat_baseline_error_pct": 1.014,
+      "beat_flat_baseline_rate": 0.333,
       "baselines": {
         "flat": {
-          "sessions": 2,
-          "mean_error_pct": 1.455,
+          "sessions": 3,
+          "mean_error_pct": 1.013,
           "direction_hit_rate": null
         },
         "gap_fade": {
-          "sessions": 2,
-          "mean_error_pct": 1.605,
-          "direction_hit_rate": 0.5
+          "sessions": 3,
+          "mean_error_pct": 1.16,
+          "direction_hit_rate": 0.333
         },
         "momentum": {
-          "sessions": 2,
-          "mean_error_pct": 1.78,
-          "direction_hit_rate": 0.5
+          "sessions": 3,
+          "mean_error_pct": 1.9,
+          "direction_hit_rate": 0.667
         }
       },
       "late_forecasts": {
@@ -179,8 +179,8 @@
       }
     },
     "SBIN": {
-      "sessions": 1,
-      "days": 1,
+      "sessions": 2,
+      "days": 2,
       "enough_data": false,
       "direction_hit_rate": 1.0,
       "directional_calls": 1,
@@ -188,23 +188,23 @@
         0.207,
         1.0
       ],
-      "mean_error_pct": 0.95,
-      "mean_flat_baseline_error_pct": 1.7,
-      "beat_flat_baseline_rate": 1.0,
+      "mean_error_pct": 0.506,
+      "mean_flat_baseline_error_pct": 0.881,
+      "beat_flat_baseline_rate": 0.5,
       "baselines": {
         "flat": {
-          "sessions": 1,
-          "mean_error_pct": 1.7,
+          "sessions": 2,
+          "mean_error_pct": 0.88,
           "direction_hit_rate": null
         },
         "gap_fade": {
-          "sessions": 1,
-          "mean_error_pct": 0.19,
-          "direction_hit_rate": 1.0
+          "sessions": 2,
+          "mean_error_pct": 0.23,
+          "direction_hit_rate": 0.5
         },
         "momentum": {
-          "sessions": 1,
-          "mean_error_pct": 0.33,
+          "sessions": 2,
+          "mean_error_pct": 0.4,
           "direction_hit_rate": 1.0
         }
       },
@@ -217,8 +217,8 @@
       }
     },
     "INFY": {
-      "sessions": 2,
-      "days": 2,
+      "sessions": 3,
+      "days": 3,
       "enough_data": false,
       "direction_hit_rate": 1.0,
       "directional_calls": 2,
@@ -226,24 +226,24 @@
         0.342,
         1.0
       ],
-      "mean_error_pct": 1.285,
-      "mean_flat_baseline_error_pct": 2.27,
-      "beat_flat_baseline_rate": 1.0,
+      "mean_error_pct": 1.853,
+      "mean_flat_baseline_error_pct": 2.51,
+      "beat_flat_baseline_rate": 0.667,
       "baselines": {
         "flat": {
-          "sessions": 2,
-          "mean_error_pct": 2.27,
+          "sessions": 3,
+          "mean_error_pct": 2.51,
           "direction_hit_rate": null
         },
         "gap_fade": {
-          "sessions": 2,
-          "mean_error_pct": 2.045,
-          "direction_hit_rate": 0.5
+          "sessions": 3,
+          "mean_error_pct": 2.887,
+          "direction_hit_rate": 0.333
         },
         "momentum": {
-          "sessions": 2,
-          "mean_error_pct": 2.27,
-          "direction_hit_rate": 0.5
+          "sessions": 3,
+          "mean_error_pct": 1.837,
+          "direction_hit_rate": 0.667
         }
       },
       "late_forecasts": {
@@ -296,8 +296,8 @@
       }
     },
     "BHARTIARTL": {
-      "sessions": 1,
-      "days": 1,
+      "sessions": 2,
+      "days": 2,
       "enough_data": false,
       "direction_hit_rate": 1.0,
       "directional_calls": 1,
@@ -305,23 +305,23 @@
         0.207,
         1.0
       ],
-      "mean_error_pct": 0.82,
-      "mean_flat_baseline_error_pct": 2.12,
-      "beat_flat_baseline_rate": 1.0,
+      "mean_error_pct": 1.499,
+      "mean_flat_baseline_error_pct": 2.149,
+      "beat_flat_baseline_rate": 0.5,
       "baselines": {
         "flat": {
-          "sessions": 1,
-          "mean_error_pct": 2.12,
+          "sessions": 2,
+          "mean_error_pct": 2.15,
           "direction_hit_rate": null
         },
         "gap_fade": {
-          "sessions": 1,
-          "mean_error_pct": 0.12,
-          "direction_hit_rate": 1.0
+          "sessions": 2,
+          "mean_error_pct": 1.43,
+          "direction_hit_rate": 0.5
         },
         "momentum": {
-          "sessions": 1,
-          "mean_error_pct": 2.09,
+          "sessions": 2,
+          "mean_error_pct": 1.455,
           "direction_hit_rate": 1.0
         }
       },
@@ -439,5 +439,5 @@
       }
     }
   },
-  "as_of": "2026-10-16T15:30:58+05:30"
+  "as_of": "2026-10-16T16:00:48+05:30"
 }
