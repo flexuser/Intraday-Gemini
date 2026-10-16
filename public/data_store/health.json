@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-10-15T16:00:54+05:30",
+  "as_of": "2026-10-16T09:30:50+05:30",
   "status": "DEGRADED",
   "symbols_total": 10,
   "symbols_updated": 10,
-  "llm_fallback_count": 0,
-  "llm_error_count": 10,
-  "llm_cooldown_until": "2026-10-15T18:00:49+05:30",
+  "llm_fallback_count": 6,
+  "llm_error_count": 6,
+  "llm_cooldown_until": "2026-10-16T15:30:50+05:30",
   "model": "gemini-3.8-flash",
   "prompt_version": "v3-context-risk",
   "quant_model": {
@@ -17,7 +17,7 @@
       "tradeable": false
     }
   },
-  "sample_llm_error": "skipped: Gemini quota cooldown until 18:00 IST",
+  "sample_llm_error": "ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}",
   "errors": [],
-  "last_alert_at": "2026-10-15T15:30:59+05:30"
+  "last_alert_at": "2026-10-16T09:30:50+05:30"
 }
