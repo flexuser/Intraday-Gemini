@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-19T09:30:47+05:30",
+  "as_of": "2026-10-19T10:00:48+05:30",
   "status": "OK",
   "symbols_total": 10,
   "symbols_updated": 10,
-  "llm_fallback_count": 1,
+  "llm_fallback_count": 0,
   "llm_error_count": 0,
   "llm_cooldown_until": null,
   "model": "gemini-3.8-flash",
