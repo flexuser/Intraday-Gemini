@@ -387,6 +387,82 @@
     "rejection_reason": "Direction model failed walk-forward edge test."
   },
   {
+    "date": "2026-10-21",
+    "symbol": "RELIANCE",
+    "bias": "NEUTRAL",
+    "target_pct": 0.3,
+    "source": "llm",
+    "final_pred": 1216.14,
+    "final_actual": 1209.0,
+    "close_source": "5m_bar",
+    "verdict": "SUCCESS",
+    "error_pct": 0.289,
+    "baseline_error_pct": 0.289,
+    "direction_hit": null,
+    "baselines": {
+      "flat": {
+        "target_pct": 0.0,
+        "error_pct": 0.29,
+        "direction_hit": null
+      },
+      "momentum": {
+        "target_pct": -0.76,
+        "error_pct": 0.47,
+        "direction_hit": true
+      },
+      "gap_fade": {
+        "target_pct": -0.87,
+        "error_pct": 0.58,
+        "direction_hit": true
+      }
+    },
+    "prompt_version": "v3-context-risk",
+    "checkpoints": [
+      {
+        "made_at": "09:30",
+        "target_price": 1216.14,
+        "price_at_forecast": 1223.4,
+        "direction_hit": true,
+        "error_pct": 0.58,
+        "flat_error_pct": 1.18
+      },
+      {
+        "made_at": "13:30",
+        "target_price": 1202.19,
+        "price_at_forecast": 1208.0,
+        "direction_hit": false,
+        "error_pct": 0.56,
+        "flat_error_pct": 0.08
+      }
+    ],
+    "quant": {
+      "bias": "NEUTRAL",
+      "target_pct": 0.0,
+      "close_ret_pct": -0.289,
+      "open_price": 1212.5,
+      "close_price": 1209.0,
+      "target_price": 1212.5,
+      "direction_hit": null,
+      "shadow_direction_hit": true,
+      "error_pct": 0.289,
+      "baseline_error_pct": 0.289,
+      "flat_error_pct": 0.289,
+      "in_band": true,
+      "range_validated": false,
+      "direction_validated": false,
+      "p_up": 0.462,
+      "expected_range_pct": 2.34,
+      "verdict": "SUCCESS"
+    },
+    "p_up": 0.462,
+    "direction_validated": false,
+    "range_validated": false,
+    "tradeable_validated": false,
+    "trade_approved": false,
+    "trade_action": "NO_TRADE",
+    "rejection_reason": "Direction model failed walk-forward edge test."
+  },
+  {
     "date": "2026-10-12",
     "symbol": "HDFCBANK",
     "bias": "NEUTRAL",
@@ -766,6 +842,82 @@
       "verdict": "FAILED"
     },
     "p_up": 0.456,
+    "direction_validated": true,
+    "range_validated": false,
+    "tradeable_validated": false,
+    "trade_approved": false,
+    "trade_action": "NO_TRADE",
+    "rejection_reason": "Per-stock net performance has not passed validation."
+  },
+  {
+    "date": "2026-10-21",
+    "symbol": "HDFCBANK",
+    "bias": "NEUTRAL",
+    "target_pct": 0.35,
+    "source": "llm",
+    "final_pred": 712.49,
+    "final_actual": 706.9500122070312,
+    "close_source": "5m_bar",
+    "verdict": "SUCCESS",
+    "error_pct": 0.43,
+    "baseline_error_pct": 0.43,
+    "direction_hit": null,
+    "baselines": {
+      "flat": {
+        "target_pct": 0.0,
+        "error_pct": 0.43,
+        "direction_hit": null
+      },
+      "momentum": {
+        "target_pct": -2.31,
+        "error_pct": 1.88,
+        "direction_hit": true
+      },
+      "gap_fade": {
+        "target_pct": 0.28,
+        "error_pct": 0.71,
+        "direction_hit": false
+      }
+    },
+    "prompt_version": "v3-context-risk",
+    "checkpoints": [
+      {
+        "made_at": "09:30",
+        "target_price": 712.49,
+        "price_at_forecast": 713.95,
+        "direction_hit": true,
+        "error_pct": 0.78,
+        "flat_error_pct": 0.98
+      },
+      {
+        "made_at": "13:30",
+        "target_price": 699.35,
+        "price_at_forecast": 700.45,
+        "direction_hit": false,
+        "error_pct": 1.09,
+        "flat_error_pct": 0.93
+      }
+    ],
+    "quant": {
+      "bias": "NEUTRAL",
+      "target_pct": 0.0,
+      "close_ret_pct": -0.43,
+      "open_price": 710.0,
+      "close_price": 706.95,
+      "target_price": 710.0,
+      "direction_hit": null,
+      "shadow_direction_hit": false,
+      "error_pct": 0.43,
+      "baseline_error_pct": 0.43,
+      "flat_error_pct": 0.43,
+      "in_band": true,
+      "range_validated": false,
+      "direction_validated": true,
+      "p_up": 0.533,
+      "expected_range_pct": 2.35,
+      "verdict": "SUCCESS"
+    },
+    "p_up": 0.533,
     "direction_validated": true,
     "range_validated": false,
     "tradeable_validated": false,
@@ -1161,6 +1313,82 @@
     "rejection_reason": "Direction model failed walk-forward edge test."
   },
   {
+    "date": "2026-10-21",
+    "symbol": "ICICIBANK",
+    "bias": "NEUTRAL",
+    "target_pct": 0.2,
+    "source": "llm",
+    "final_pred": 1405.31,
+    "final_actual": 1385.0,
+    "close_source": "5m_bar",
+    "verdict": "PARTIAL",
+    "error_pct": 1.248,
+    "baseline_error_pct": 1.248,
+    "direction_hit": null,
+    "baselines": {
+      "flat": {
+        "target_pct": 0.0,
+        "error_pct": 1.25,
+        "direction_hit": null
+      },
+      "momentum": {
+        "target_pct": -1.15,
+        "error_pct": 0.1,
+        "direction_hit": true
+      },
+      "gap_fade": {
+        "target_pct": -1.56,
+        "error_pct": 0.31,
+        "direction_hit": true
+      }
+    },
+    "prompt_version": "v3-context-risk",
+    "checkpoints": [
+      {
+        "made_at": "09:30",
+        "target_price": 1405.31,
+        "price_at_forecast": 1405.2,
+        "direction_hit": false,
+        "error_pct": 1.45,
+        "flat_error_pct": 1.44
+      },
+      {
+        "made_at": "13:30",
+        "target_price": 1387.77,
+        "price_at_forecast": 1388.4,
+        "direction_hit": true,
+        "error_pct": 0.2,
+        "flat_error_pct": 0.24
+      }
+    ],
+    "quant": {
+      "bias": "NEUTRAL",
+      "target_pct": 0.0,
+      "close_ret_pct": -1.248,
+      "open_price": 1402.5,
+      "close_price": 1385.0,
+      "target_price": 1402.5,
+      "direction_hit": null,
+      "shadow_direction_hit": true,
+      "error_pct": 1.248,
+      "baseline_error_pct": 1.248,
+      "flat_error_pct": 1.248,
+      "in_band": true,
+      "range_validated": false,
+      "direction_validated": false,
+      "p_up": 0.416,
+      "expected_range_pct": 2.57,
+      "verdict": "SUCCESS"
+    },
+    "p_up": 0.416,
+    "direction_validated": false,
+    "range_validated": false,
+    "tradeable_validated": false,
+    "trade_approved": false,
+    "trade_action": "NO_TRADE",
+    "rejection_reason": "Direction model failed walk-forward edge test."
+  },
+  {
     "date": "2026-10-12",
     "symbol": "SBIN",
     "bias": "NEUTRAL",
@@ -1499,6 +1727,49 @@
       "verdict": "FAILED"
     },
     "p_up": 0.498,
+    "direction_validated": false,
+    "range_validated": false,
+    "tradeable_validated": false,
+    "trade_approved": false,
+    "trade_action": "NO_TRADE",
+    "rejection_reason": "Direction model failed walk-forward edge test."
+  },
+  {
+    "date": "2026-10-21",
+    "symbol": "SBIN",
+    "bias": "NEUTRAL",
+    "target_pct": null,
+    "source": "fallback",
+    "final_pred": 973.8,
+    "final_actual": 963.0,
+    "close_source": "5m_bar",
+    "verdict": "PARTIAL",
+    "error_pct": 1.554,
+    "baseline_error_pct": 1.554,
+    "direction_hit": null,
+    "baselines": {},
+    "prompt_version": "v3-context-risk",
+    "checkpoints": [],
+    "quant": {
+      "bias": "NEUTRAL",
+      "target_pct": 0.0,
+      "close_ret_pct": -1.554,
+      "open_price": 978.2,
+      "close_price": 963.0,
+      "target_price": 978.2,
+      "direction_hit": null,
+      "shadow_direction_hit": true,
+      "error_pct": 1.554,
+      "baseline_error_pct": 1.554,
+      "flat_error_pct": 1.554,
+      "in_band": false,
+      "range_validated": false,
+      "direction_validated": false,
+      "p_up": 0.468,
+      "expected_range_pct": 2.03,
+      "verdict": "FAILED"
+    },
+    "p_up": 0.468,
     "direction_validated": false,
     "range_validated": false,
     "tradeable_validated": false,
@@ -1886,6 +2157,74 @@
     "rejection_reason": "Direction model failed walk-forward edge test."
   },
   {
+    "date": "2026-10-21",
+    "symbol": "INFY",
+    "bias": "BULLISH",
+    "target_pct": 1.35,
+    "source": "llm",
+    "final_pred": 1167.75,
+    "final_actual": 1168.0,
+    "close_source": "5m_bar",
+    "verdict": "PARTIAL",
+    "error_pct": 1.371,
+    "baseline_error_pct": 1.371,
+    "direction_hit": null,
+    "baselines": {
+      "flat": {
+        "target_pct": 0.0,
+        "error_pct": 1.37,
+        "direction_hit": null
+      },
+      "momentum": {
+        "target_pct": -2.63,
+        "error_pct": 4.0,
+        "direction_hit": false
+      },
+      "gap_fade": {
+        "target_pct": -1.9,
+        "error_pct": 3.27,
+        "direction_hit": false
+      }
+    },
+    "prompt_version": "v3-context-risk",
+    "checkpoints": [
+      {
+        "made_at": "09:30",
+        "target_price": 1167.75,
+        "price_at_forecast": 1166.55,
+        "direction_hit": true,
+        "error_pct": 0.02,
+        "flat_error_pct": 0.12
+      }
+    ],
+    "quant": {
+      "bias": "NEUTRAL",
+      "target_pct": 0.0,
+      "close_ret_pct": 1.371,
+      "open_price": 1152.2,
+      "close_price": 1168.0,
+      "target_price": 1152.2,
+      "direction_hit": null,
+      "shadow_direction_hit": false,
+      "error_pct": 1.371,
+      "baseline_error_pct": 1.371,
+      "flat_error_pct": 1.371,
+      "in_band": true,
+      "range_validated": false,
+      "direction_validated": false,
+      "p_up": 0.432,
+      "expected_range_pct": 3.35,
+      "verdict": "SUCCESS"
+    },
+    "p_up": 0.432,
+    "direction_validated": false,
+    "range_validated": false,
+    "tradeable_validated": false,
+    "trade_approved": false,
+    "trade_action": "NO_TRADE",
+    "rejection_reason": "Direction model failed walk-forward edge test."
+  },
+  {
     "date": "2026-10-12",
     "symbol": "TCS",
     "bias": "BEARISH",
@@ -2232,6 +2571,74 @@
     "rejection_reason": "Direction model failed walk-forward edge test."
   },
   {
+    "date": "2026-10-21",
+    "symbol": "TCS",
+    "bias": "BULLISH",
+    "target_pct": 1.6,
+    "source": "llm",
+    "final_pred": 2524.56,
+    "final_actual": 2529.0,
+    "close_source": "daily_bar",
+    "verdict": "PARTIAL",
+    "error_pct": 1.779,
+    "baseline_error_pct": 1.779,
+    "direction_hit": null,
+    "baselines": {
+      "flat": {
+        "target_pct": 0.0,
+        "error_pct": 1.78,
+        "direction_hit": null
+      },
+      "momentum": {
+        "target_pct": -0.17,
+        "error_pct": 1.95,
+        "direction_hit": false
+      },
+      "gap_fade": {
+        "target_pct": -0.97,
+        "error_pct": 2.75,
+        "direction_hit": false
+      }
+    },
+    "prompt_version": "v3-context-risk",
+    "checkpoints": [
+      {
+        "made_at": "09:30",
+        "target_price": 2524.56,
+        "price_at_forecast": 2519.5,
+        "direction_hit": true,
+        "error_pct": 0.18,
+        "flat_error_pct": 0.38
+      }
+    ],
+    "quant": {
+      "bias": "NEUTRAL",
+      "target_pct": 0.0,
+      "close_ret_pct": 1.779,
+      "open_price": 2484.8,
+      "close_price": 2529.0,
+      "target_price": 2484.8,
+      "direction_hit": null,
+      "shadow_direction_hit": false,
+      "error_pct": 1.779,
+      "baseline_error_pct": 1.779,
+      "flat_error_pct": 1.779,
+      "in_band": true,
+      "range_validated": false,
+      "direction_validated": false,
+      "p_up": 0.461,
+      "expected_range_pct": 3.14,
+      "verdict": "SUCCESS"
+    },
+    "p_up": 0.461,
+    "direction_validated": false,
+    "range_validated": false,
+    "tradeable_validated": false,
+    "trade_approved": false,
+    "trade_action": "NO_TRADE",
+    "rejection_reason": "Direction model failed walk-forward edge test."
+  },
+  {
     "date": "2026-10-12",
     "symbol": "BHARTIARTL",
     "bias": "NEUTRAL",
@@ -2529,6 +2936,74 @@
       "verdict": "SUCCESS"
     },
     "p_up": 0.465,
+    "direction_validated": true,
+    "range_validated": false,
+    "tradeable_validated": false,
+    "trade_approved": false,
+    "trade_action": "NO_TRADE",
+    "rejection_reason": "Per-stock net performance has not passed validation."
+  },
+  {
+    "date": "2026-10-21",
+    "symbol": "BHARTIARTL",
+    "bias": "NEUTRAL",
+    "target_pct": 0.3,
+    "source": "llm",
+    "final_pred": 1892.76,
+    "final_actual": 1891.699951171875,
+    "close_source": "5m_bar",
+    "verdict": "SUCCESS",
+    "error_pct": 0.244,
+    "baseline_error_pct": 0.244,
+    "direction_hit": null,
+    "baselines": {
+      "flat": {
+        "target_pct": 0.0,
+        "error_pct": 0.24,
+        "direction_hit": null
+      },
+      "momentum": {
+        "target_pct": -1.56,
+        "error_pct": 1.8,
+        "direction_hit": false
+      },
+      "gap_fade": {
+        "target_pct": -0.63,
+        "error_pct": 0.87,
+        "direction_hit": false
+      }
+    },
+    "prompt_version": "v3-context-risk",
+    "checkpoints": [
+      {
+        "made_at": "09:30",
+        "target_price": 1892.76,
+        "price_at_forecast": 1907.0,
+        "direction_hit": true,
+        "error_pct": 0.06,
+        "flat_error_pct": 0.8
+      }
+    ],
+    "quant": {
+      "bias": "NEUTRAL",
+      "target_pct": 0.0,
+      "close_ret_pct": 0.244,
+      "open_price": 1887.1,
+      "close_price": 1891.7,
+      "target_price": 1887.1,
+      "direction_hit": null,
+      "shadow_direction_hit": false,
+      "error_pct": 0.244,
+      "baseline_error_pct": 0.244,
+      "flat_error_pct": 0.244,
+      "in_band": true,
+      "range_validated": false,
+      "direction_validated": true,
+      "p_up": 0.477,
+      "expected_range_pct": 2.69,
+      "verdict": "SUCCESS"
+    },
+    "p_up": 0.477,
     "direction_validated": true,
     "range_validated": false,
     "tradeable_validated": false,
@@ -2858,6 +3333,74 @@
     "rejection_reason": "Direction model failed walk-forward edge test."
   },
   {
+    "date": "2026-10-21",
+    "symbol": "TATASTEEL",
+    "bias": "NEUTRAL",
+    "target_pct": 0.0,
+    "source": "llm",
+    "final_pred": 175.03,
+    "final_actual": 172.4499969482422,
+    "close_source": "5m_bar",
+    "verdict": "PARTIAL",
+    "error_pct": 1.474,
+    "baseline_error_pct": 1.474,
+    "direction_hit": null,
+    "baselines": {
+      "flat": {
+        "target_pct": 0.0,
+        "error_pct": 1.47,
+        "direction_hit": null
+      },
+      "momentum": {
+        "target_pct": -0.83,
+        "error_pct": 0.64,
+        "direction_hit": true
+      },
+      "gap_fade": {
+        "target_pct": -0.57,
+        "error_pct": 0.9,
+        "direction_hit": true
+      }
+    },
+    "prompt_version": "v3-context-risk",
+    "checkpoints": [
+      {
+        "made_at": "09:30",
+        "target_price": 175.03,
+        "price_at_forecast": 175.31,
+        "direction_hit": true,
+        "error_pct": 1.47,
+        "flat_error_pct": 1.63
+      }
+    ],
+    "quant": {
+      "bias": "NEUTRAL",
+      "target_pct": 0.0,
+      "close_ret_pct": -1.474,
+      "open_price": 175.03,
+      "close_price": 172.45,
+      "target_price": 175.03,
+      "direction_hit": null,
+      "shadow_direction_hit": true,
+      "error_pct": 1.474,
+      "baseline_error_pct": 1.474,
+      "flat_error_pct": 1.474,
+      "in_band": true,
+      "range_validated": false,
+      "direction_validated": false,
+      "p_up": 0.478,
+      "expected_range_pct": 2.18,
+      "verdict": "SUCCESS"
+    },
+    "p_up": 0.478,
+    "direction_validated": false,
+    "range_validated": false,
+    "tradeable_validated": false,
+    "trade_approved": false,
+    "trade_action": "NO_TRADE",
+    "rejection_reason": "Direction model failed walk-forward edge test."
+  },
+  {
     "date": "2026-10-12",
     "symbol": "ITC",
     "bias": "NEUTRAL",
@@ -3179,6 +3722,74 @@
     "rejection_reason": "Per-stock net performance has not passed validation."
   },
   {
+    "date": "2026-10-21",
+    "symbol": "ITC",
+    "bias": "NEUTRAL",
+    "target_pct": 0.4,
+    "source": "llm",
+    "final_pred": 262.45,
+    "final_actual": 262.0,
+    "close_source": "5m_bar",
+    "verdict": "SUCCESS",
+    "error_pct": 0.23,
+    "baseline_error_pct": 0.23,
+    "direction_hit": null,
+    "baselines": {
+      "flat": {
+        "target_pct": 0.0,
+        "error_pct": 0.23,
+        "direction_hit": null
+      },
+      "momentum": {
+        "target_pct": -1.02,
+        "error_pct": 1.25,
+        "direction_hit": false
+      },
+      "gap_fade": {
+        "target_pct": -0.23,
+        "error_pct": 0.46,
+        "direction_hit": false
+      }
+    },
+    "prompt_version": "v3-context-risk",
+    "checkpoints": [
+      {
+        "made_at": "09:30",
+        "target_price": 262.45,
+        "price_at_forecast": 264.25,
+        "direction_hit": true,
+        "error_pct": 0.17,
+        "flat_error_pct": 0.85
+      }
+    ],
+    "quant": {
+      "bias": "NEUTRAL",
+      "target_pct": 0.0,
+      "close_ret_pct": 0.23,
+      "open_price": 261.4,
+      "close_price": 262.0,
+      "target_price": 261.4,
+      "direction_hit": null,
+      "shadow_direction_hit": false,
+      "error_pct": 0.23,
+      "baseline_error_pct": 0.23,
+      "flat_error_pct": 0.23,
+      "in_band": true,
+      "range_validated": false,
+      "direction_validated": true,
+      "p_up": 0.496,
+      "expected_range_pct": 1.94,
+      "verdict": "SUCCESS"
+    },
+    "p_up": 0.496,
+    "direction_validated": true,
+    "range_validated": false,
+    "tradeable_validated": false,
+    "trade_approved": false,
+    "trade_action": "NO_TRADE",
+    "rejection_reason": "Per-stock net performance has not passed validation."
+  },
+  {
     "date": "2026-10-12",
     "symbol": "AXISBANK",
     "bias": "NEUTRAL",
@@ -3492,6 +4103,74 @@
       "verdict": "SUCCESS"
     },
     "p_up": 0.624,
+    "direction_validated": false,
+    "range_validated": false,
+    "tradeable_validated": false,
+    "trade_approved": false,
+    "trade_action": "NO_TRADE",
+    "rejection_reason": "Direction model failed walk-forward edge test."
+  },
+  {
+    "date": "2026-10-21",
+    "symbol": "AXISBANK",
+    "bias": "NEUTRAL",
+    "target_pct": 0.15,
+    "source": "llm",
+    "final_pred": 1241.86,
+    "final_actual": 1210.0,
+    "close_source": "5m_bar",
+    "verdict": "PARTIAL",
+    "error_pct": 2.419,
+    "baseline_error_pct": 2.419,
+    "direction_hit": null,
+    "baselines": {
+      "flat": {
+        "target_pct": 0.0,
+        "error_pct": 2.42,
+        "direction_hit": null
+      },
+      "momentum": {
+        "target_pct": -3.0,
+        "error_pct": 0.58,
+        "direction_hit": true
+      },
+      "gap_fade": {
+        "target_pct": -0.32,
+        "error_pct": 2.1,
+        "direction_hit": true
+      }
+    },
+    "prompt_version": "v3-context-risk",
+    "checkpoints": [
+      {
+        "made_at": "09:30",
+        "target_price": 1241.86,
+        "price_at_forecast": 1242.0,
+        "direction_hit": true,
+        "error_pct": 2.57,
+        "flat_error_pct": 2.58
+      }
+    ],
+    "quant": {
+      "bias": "NEUTRAL",
+      "target_pct": 0.0,
+      "close_ret_pct": -2.419,
+      "open_price": 1240.0,
+      "close_price": 1210.0,
+      "target_price": 1240.0,
+      "direction_hit": null,
+      "shadow_direction_hit": false,
+      "error_pct": 2.419,
+      "baseline_error_pct": 2.419,
+      "flat_error_pct": 2.419,
+      "in_band": false,
+      "range_validated": false,
+      "direction_validated": false,
+      "p_up": 0.501,
+      "expected_range_pct": 2.38,
+      "verdict": "FAILED"
+    },
+    "p_up": 0.501,
     "direction_validated": false,
     "range_validated": false,
     "tradeable_validated": false,

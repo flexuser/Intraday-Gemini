@@ -1,7 +1,7 @@
 {
   "overall": {
-    "sessions": 30,
-    "days": 5,
+    "sessions": 39,
+    "days": 6,
     "enough_data": false,
     "direction_hit_rate": 1.0,
     "directional_calls": 7,
@@ -9,137 +9,137 @@
       0.646,
       1.0
     ],
-    "mean_error_pct": 1.361,
-    "mean_flat_baseline_error_pct": 1.693,
-    "beat_flat_baseline_rate": 0.433,
+    "mean_error_pct": 1.29,
+    "mean_flat_baseline_error_pct": 1.545,
+    "beat_flat_baseline_rate": 0.333,
     "baselines": {
       "flat": {
-        "sessions": 30,
-        "mean_error_pct": 1.693,
+        "sessions": 39,
+        "mean_error_pct": 1.545,
         "direction_hit_rate": null
       },
       "gap_fade": {
-        "sessions": 30,
-        "mean_error_pct": 1.655,
-        "direction_hit_rate": 0.567
+        "sessions": 39,
+        "mean_error_pct": 1.579,
+        "direction_hit_rate": 0.538
       },
       "momentum": {
-        "sessions": 30,
-        "mean_error_pct": 1.822,
-        "direction_hit_rate": 0.667
+        "sessions": 39,
+        "mean_error_pct": 1.727,
+        "direction_hit_rate": 0.641
       }
     },
     "late_forecasts": {
-      "calls": 25,
+      "calls": 28,
       "direction_hit_ci95": [
-        0.335,
-        0.7
+        0.326,
+        0.674
       ],
-      "direction_hit_rate": 0.52,
-      "mean_error_pct": 0.548,
-      "mean_flat_error_pct": 0.504
+      "direction_hit_rate": 0.5,
+      "mean_error_pct": 0.555,
+      "mean_flat_error_pct": 0.495
     }
   },
   "quant": {
-    "forecasts": 60,
-    "days": 6,
-    "band_coverage": 0.65,
+    "forecasts": 70,
+    "days": 7,
+    "band_coverage": 0.671,
     "band_coverage_ci95": [
-      0.524,
-      0.758
+      0.555,
+      0.77
     ],
     "band_coverage_target": 0.8,
     "published_direction_calls": 0,
     "published_direction_hit_rate": null,
     "published_direction_ci95": null,
-    "shadow_direction_hit_rate": 0.5,
+    "shadow_direction_hit_rate": 0.486,
     "shadow_direction_ci95": [
-      0.377,
-      0.623
+      0.372,
+      0.6
     ],
-    "mean_error_pct": 1.374,
-    "mean_flat_error_pct": 1.374
+    "mean_error_pct": 1.335,
+    "mean_flat_error_pct": 1.335
   },
   "by_symbol": {
     "RELIANCE": {
-      "sessions": 4,
-      "days": 4,
+      "sessions": 5,
+      "days": 5,
       "enough_data": false,
       "direction_hit_rate": null,
       "directional_calls": 0,
       "direction_hit_ci95": null,
-      "mean_error_pct": 1.353,
-      "mean_flat_baseline_error_pct": 1.441,
-      "beat_flat_baseline_rate": 0.25,
+      "mean_error_pct": 1.14,
+      "mean_flat_baseline_error_pct": 1.21,
+      "beat_flat_baseline_rate": 0.2,
       "baselines": {
         "flat": {
-          "sessions": 4,
-          "mean_error_pct": 1.44,
+          "sessions": 5,
+          "mean_error_pct": 1.21,
           "direction_hit_rate": null
         },
         "gap_fade": {
-          "sessions": 4,
-          "mean_error_pct": 1.362,
-          "direction_hit_rate": 0.75
+          "sessions": 5,
+          "mean_error_pct": 1.206,
+          "direction_hit_rate": 0.8
         },
         "momentum": {
-          "sessions": 4,
-          "mean_error_pct": 1.193,
-          "direction_hit_rate": 0.75
+          "sessions": 5,
+          "mean_error_pct": 1.048,
+          "direction_hit_rate": 0.8
         }
       },
       "late_forecasts": {
-        "calls": 4,
+        "calls": 5,
         "direction_hit_ci95": [
-          0.301,
-          0.954
+          0.231,
+          0.882
         ],
-        "direction_hit_rate": 0.75,
-        "mean_error_pct": 0.782,
-        "mean_flat_error_pct": 0.917
+        "direction_hit_rate": 0.6,
+        "mean_error_pct": 0.738,
+        "mean_flat_error_pct": 0.75
       }
     },
     "HDFCBANK": {
-      "sessions": 4,
-      "days": 4,
+      "sessions": 5,
+      "days": 5,
       "enough_data": false,
       "direction_hit_rate": null,
       "directional_calls": 0,
       "direction_hit_ci95": null,
-      "mean_error_pct": 1.36,
-      "mean_flat_baseline_error_pct": 1.46,
-      "beat_flat_baseline_rate": 0.25,
+      "mean_error_pct": 1.174,
+      "mean_flat_baseline_error_pct": 1.254,
+      "beat_flat_baseline_rate": 0.2,
       "baselines": {
         "flat": {
-          "sessions": 4,
-          "mean_error_pct": 1.46,
+          "sessions": 5,
+          "mean_error_pct": 1.254,
           "direction_hit_rate": null
         },
         "gap_fade": {
-          "sessions": 4,
-          "mean_error_pct": 1.445,
-          "direction_hit_rate": 0.5
+          "sessions": 5,
+          "mean_error_pct": 1.298,
+          "direction_hit_rate": 0.4
         },
         "momentum": {
-          "sessions": 4,
-          "mean_error_pct": 2.195,
-          "direction_hit_rate": 0.5
+          "sessions": 5,
+          "mean_error_pct": 2.132,
+          "direction_hit_rate": 0.6
         }
       },
       "late_forecasts": {
-        "calls": 4,
+        "calls": 5,
         "direction_hit_ci95": [
-          0.15,
-          0.85
+          0.118,
+          0.769
         ],
-        "direction_hit_rate": 0.5,
-        "mean_error_pct": 0.38,
-        "mean_flat_error_pct": 0.345
+        "direction_hit_rate": 0.4,
+        "mean_error_pct": 0.522,
+        "mean_flat_error_pct": 0.462
       }
     },
     "ICICIBANK": {
-      "sessions": 4,
-      "days": 4,
+      "sessions": 5,
+      "days": 5,
       "enough_data": false,
       "direction_hit_rate": 1.0,
       "directional_calls": 1,
@@ -147,35 +147,35 @@
         0.207,
         1.0
       ],
-      "mean_error_pct": 1.569,
-      "mean_flat_baseline_error_pct": 1.832,
-      "beat_flat_baseline_rate": 0.5,
+      "mean_error_pct": 1.505,
+      "mean_flat_baseline_error_pct": 1.715,
+      "beat_flat_baseline_rate": 0.4,
       "baselines": {
         "flat": {
-          "sessions": 4,
-          "mean_error_pct": 1.833,
+          "sessions": 5,
+          "mean_error_pct": 1.716,
           "direction_hit_rate": null
         },
         "gap_fade": {
-          "sessions": 4,
-          "mean_error_pct": 1.61,
-          "direction_hit_rate": 0.5
+          "sessions": 5,
+          "mean_error_pct": 1.35,
+          "direction_hit_rate": 0.6
         },
         "momentum": {
-          "sessions": 4,
-          "mean_error_pct": 2.367,
-          "direction_hit_rate": 0.25
+          "sessions": 5,
+          "mean_error_pct": 1.914,
+          "direction_hit_rate": 0.4
         }
       },
       "late_forecasts": {
-        "calls": 4,
+        "calls": 5,
         "direction_hit_ci95": [
-          0.15,
-          0.85
+          0.231,
+          0.882
         ],
-        "direction_hit_rate": 0.5,
-        "mean_error_pct": 0.638,
-        "mean_flat_error_pct": 0.552
+        "direction_hit_rate": 0.6,
+        "mean_error_pct": 0.55,
+        "mean_flat_error_pct": 0.49
       }
     },
     "SBIN": {
@@ -220,8 +220,8 @@
       }
     },
     "INFY": {
-      "sessions": 4,
-      "days": 4,
+      "sessions": 5,
+      "days": 5,
       "enough_data": false,
       "direction_hit_rate": 1.0,
       "directional_calls": 2,
@@ -229,24 +229,24 @@
         0.342,
         1.0
       ],
-      "mean_error_pct": 1.875,
-      "mean_flat_baseline_error_pct": 2.368,
-      "beat_flat_baseline_rate": 0.5,
+      "mean_error_pct": 1.775,
+      "mean_flat_baseline_error_pct": 2.169,
+      "beat_flat_baseline_rate": 0.4,
       "baselines": {
         "flat": {
-          "sessions": 4,
-          "mean_error_pct": 2.368,
+          "sessions": 5,
+          "mean_error_pct": 2.168,
           "direction_hit_rate": null
         },
         "gap_fade": {
-          "sessions": 4,
-          "mean_error_pct": 2.825,
-          "direction_hit_rate": 0.25
+          "sessions": 5,
+          "mean_error_pct": 2.914,
+          "direction_hit_rate": 0.2
         },
         "momentum": {
-          "sessions": 4,
-          "mean_error_pct": 2.612,
-          "direction_hit_rate": 0.5
+          "sessions": 5,
+          "mean_error_pct": 2.89,
+          "direction_hit_rate": 0.4
         }
       },
       "late_forecasts": {
@@ -261,8 +261,8 @@
       }
     },
     "TCS": {
-      "sessions": 3,
-      "days": 3,
+      "sessions": 4,
+      "days": 4,
       "enough_data": false,
       "direction_hit_rate": 1.0,
       "directional_calls": 2,
@@ -270,24 +270,24 @@
         0.342,
         1.0
       ],
-      "mean_error_pct": 1.524,
-      "mean_flat_baseline_error_pct": 2.591,
-      "beat_flat_baseline_rate": 0.667,
+      "mean_error_pct": 1.588,
+      "mean_flat_baseline_error_pct": 2.388,
+      "beat_flat_baseline_rate": 0.5,
       "baselines": {
         "flat": {
-          "sessions": 3,
-          "mean_error_pct": 2.59,
+          "sessions": 4,
+          "mean_error_pct": 2.388,
           "direction_hit_rate": null
         },
         "gap_fade": {
-          "sessions": 3,
-          "mean_error_pct": 2.27,
-          "direction_hit_rate": 0.667
+          "sessions": 4,
+          "mean_error_pct": 2.39,
+          "direction_hit_rate": 0.5
         },
         "momentum": {
-          "sessions": 3,
-          "mean_error_pct": 3.483,
-          "direction_hit_rate": 0.667
+          "sessions": 4,
+          "mean_error_pct": 3.1,
+          "direction_hit_rate": 0.5
         }
       },
       "late_forecasts": {
@@ -302,8 +302,8 @@
       }
     },
     "BHARTIARTL": {
-      "sessions": 2,
-      "days": 2,
+      "sessions": 3,
+      "days": 3,
       "enough_data": false,
       "direction_hit_rate": 1.0,
       "directional_calls": 1,
@@ -311,24 +311,24 @@
         0.207,
         1.0
       ],
-      "mean_error_pct": 1.499,
-      "mean_flat_baseline_error_pct": 2.149,
-      "beat_flat_baseline_rate": 0.5,
+      "mean_error_pct": 1.081,
+      "mean_flat_baseline_error_pct": 1.514,
+      "beat_flat_baseline_rate": 0.333,
       "baselines": {
         "flat": {
-          "sessions": 2,
-          "mean_error_pct": 2.15,
+          "sessions": 3,
+          "mean_error_pct": 1.513,
           "direction_hit_rate": null
         },
         "gap_fade": {
-          "sessions": 2,
-          "mean_error_pct": 1.43,
-          "direction_hit_rate": 0.5
+          "sessions": 3,
+          "mean_error_pct": 1.243,
+          "direction_hit_rate": 0.333
         },
         "momentum": {
-          "sessions": 2,
-          "mean_error_pct": 1.455,
-          "direction_hit_rate": 1.0
+          "sessions": 3,
+          "mean_error_pct": 1.57,
+          "direction_hit_rate": 0.667
         }
       },
       "late_forecasts": {
@@ -340,29 +340,29 @@
       }
     },
     "TATASTEEL": {
-      "sessions": 2,
-      "days": 2,
+      "sessions": 3,
+      "days": 3,
       "enough_data": false,
       "direction_hit_rate": null,
       "directional_calls": 0,
       "direction_hit_ci95": null,
-      "mean_error_pct": 1.069,
-      "mean_flat_baseline_error_pct": 1.244,
-      "beat_flat_baseline_rate": 0.5,
+      "mean_error_pct": 1.204,
+      "mean_flat_baseline_error_pct": 1.321,
+      "beat_flat_baseline_rate": 0.333,
       "baselines": {
         "flat": {
-          "sessions": 2,
-          "mean_error_pct": 1.245,
+          "sessions": 3,
+          "mean_error_pct": 1.32,
           "direction_hit_rate": null
         },
         "gap_fade": {
-          "sessions": 2,
-          "mean_error_pct": 0.77,
+          "sessions": 3,
+          "mean_error_pct": 0.813,
           "direction_hit_rate": 1.0
         },
         "momentum": {
-          "sessions": 2,
-          "mean_error_pct": 0.455,
+          "sessions": 3,
+          "mean_error_pct": 0.517,
           "direction_hit_rate": 1.0
         }
       },
@@ -378,30 +378,30 @@
       }
     },
     "ITC": {
-      "sessions": 2,
-      "days": 2,
+      "sessions": 3,
+      "days": 3,
       "enough_data": false,
       "direction_hit_rate": null,
       "directional_calls": 0,
       "direction_hit_ci95": null,
-      "mean_error_pct": 0.646,
-      "mean_flat_baseline_error_pct": 0.746,
-      "beat_flat_baseline_rate": 0.5,
+      "mean_error_pct": 0.508,
+      "mean_flat_baseline_error_pct": 0.574,
+      "beat_flat_baseline_rate": 0.333,
       "baselines": {
         "flat": {
-          "sessions": 2,
-          "mean_error_pct": 0.745,
+          "sessions": 3,
+          "mean_error_pct": 0.573,
           "direction_hit_rate": null
         },
         "gap_fade": {
-          "sessions": 2,
-          "mean_error_pct": 1.44,
-          "direction_hit_rate": 0.5
+          "sessions": 3,
+          "mean_error_pct": 1.113,
+          "direction_hit_rate": 0.333
         },
         "momentum": {
-          "sessions": 2,
-          "mean_error_pct": 1.4,
-          "direction_hit_rate": 1.0
+          "sessions": 3,
+          "mean_error_pct": 1.35,
+          "direction_hit_rate": 0.667
         }
       },
       "late_forecasts": {
@@ -416,30 +416,30 @@
       }
     },
     "AXISBANK": {
-      "sessions": 2,
-      "days": 2,
+      "sessions": 3,
+      "days": 3,
       "enough_data": false,
       "direction_hit_rate": null,
       "directional_calls": 0,
       "direction_hit_ci95": null,
-      "mean_error_pct": 1.421,
-      "mean_flat_baseline_error_pct": 1.621,
-      "beat_flat_baseline_rate": 0.5,
+      "mean_error_pct": 1.753,
+      "mean_flat_baseline_error_pct": 1.887,
+      "beat_flat_baseline_rate": 0.333,
       "baselines": {
         "flat": {
-          "sessions": 2,
-          "mean_error_pct": 1.62,
+          "sessions": 3,
+          "mean_error_pct": 1.887,
           "direction_hit_rate": null
         },
         "gap_fade": {
-          "sessions": 2,
-          "mean_error_pct": 2.49,
-          "direction_hit_rate": 0.5
+          "sessions": 3,
+          "mean_error_pct": 2.36,
+          "direction_hit_rate": 0.667
         },
         "momentum": {
-          "sessions": 2,
-          "mean_error_pct": 1.135,
-          "direction_hit_rate": 0.5
+          "sessions": 3,
+          "mean_error_pct": 0.95,
+          "direction_hit_rate": 0.667
         }
       },
       "late_forecasts": {
@@ -454,5 +454,5 @@
       }
     }
   },
-  "as_of": "2026-10-21T15:31:02+05:30"
+  "as_of": "2026-10-21T16:00:54+05:30"
 }
