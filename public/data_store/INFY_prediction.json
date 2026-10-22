@@ -8,7 +8,7 @@
     "source": "fallback",
     "model": "gemini-3.8-flash",
     "llm_error": "no new forecasts after 15:00 IST",
-    "made_at": "2026-10-22T15:30:52+05:30",
+    "made_at": "2026-10-22T16:00:43+05:30",
     "volume_ratio": 0.0,
     "has_volume_spike": false,
     "news_feed": []
@@ -20,7 +20,7 @@
     "reasoning": "No AI commentary was available for this run.",
     "source": "fallback",
     "model": "gemini-3.8-flash",
-    "made_at": "2026-10-22T15:30:52+05:30",
+    "made_at": "2026-10-22T16:00:43+05:30",
     "llm_error": "no new forecasts after 15:00 IST",
     "prompt_version": "v3-context-risk"
   },
@@ -823,7 +823,7 @@
   },
   "curves": {
     "date": "2026-10-22",
-    "generated_at": "03:30 PM IST",
+    "generated_at": "04:00 PM IST",
     "symbol": "INFY",
     "bias": "NEUTRAL",
     "timeframes": [
@@ -1901,19 +1901,40 @@
       0
     ],
     "final_pred": 1166.2,
-    "final_actual": 1153.800048828125,
-    "error_pct": null,
+    "final_actual": 1153.3499755859375,
+    "error_pct": 1.102,
     "operator_stance": "IGNORE",
     "rejection_reason": "Direction model failed walk-forward edge test.",
     "vwap": 1157.47
   },
   "session": {
-    "complete": false,
-    "verdict": "IN_PROGRESS",
-    "error_pct": null,
-    "baseline_error_pct": null,
+    "complete": true,
+    "verdict": "PARTIAL",
+    "error_pct": 1.102,
+    "baseline_error_pct": 1.102,
     "direction_hit": null,
     "baselines": {},
-    "quant": null
+    "checkpoints": [],
+    "quant": {
+      "bias": "NEUTRAL",
+      "target_pct": 0.0,
+      "close_ret_pct": -1.102,
+      "open_price": 1166.2,
+      "close_price": 1153.35,
+      "target_price": 1166.2,
+      "direction_hit": null,
+      "shadow_direction_hit": true,
+      "error_pct": 1.102,
+      "baseline_error_pct": 1.102,
+      "flat_error_pct": 1.102,
+      "in_band": true,
+      "range_validated": false,
+      "direction_validated": false,
+      "p_up": 0.467,
+      "expected_range_pct": 2.52,
+      "verdict": "SUCCESS"
+    },
+    "primary_source": "quant",
+    "in_band": true
   }
 }
