@@ -1,6 +1,6 @@
 {
   "feature_version": "intraday-observation-v3",
-  "sessions_available": 67,
+  "sessions_available": 68,
   "minimum_sessions": 40,
   "horizons": {
     "15": {
