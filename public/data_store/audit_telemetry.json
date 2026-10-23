@@ -35770,17 +35770,17 @@
     }
   },
   {
-    "timestamp": "2026-10-23T04:27:20.279817+00:00",
+    "timestamp": "2026-10-23T04:35:32.206882+00:00",
     "session_date": "2026-10-23",
     "symbol": "RELIANCE",
     "indicators": {
-      "vwap": 1194.24,
+      "vwap": 1193.94,
       "rsi_14": 50.0,
       "macd_hist": 0.0,
       "atr_14": 0.0,
       "atr_pct": 0.0,
       "bollinger_pct_b": 0.5,
-      "vwap_distance_pct": -0.23,
+      "vwap_distance_pct": -0.52,
       "technical_bias": "BEARISH"
     },
     "quant_prediction": {
@@ -35808,7 +35808,7 @@
         "idx_ret1_z",
         "close_pos"
       ],
-      "made_at": "2026-10-23T09:55:37+05:30",
+      "made_at": "2026-10-23T10:03:31+05:30",
       "open_price": 1183.0,
       "features": {
         "gap_z": -0.078,
@@ -35826,13 +35826,13 @@
         "us": "^GSPC"
       }
     },
-    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock RELIANCE. Time now: 09:55 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 1183.00\n- Latest price: Rs 1191.50 (+0.72% since open)\n- Session VWAP: Rs 1194.24 (price is below VWAP)\n- Volume of the last completed 5-minute bar vs today's average ba...",
-    "llm_raw_response": "{\n  \"bias\": \"NEUTRAL\",\n  \"target_pct\": 0.2,\n  \"archetype\": \"MEAN_REVERSION\",\n  \"reasoning\": \"Although the price has gained 0.72% from the open of Rs 1183.00, it remains below the session VWAP of Rs 1194.24 on weak volume of 0.67x. Given the neutral RSI of 50.0 and overarching bearish technical bias, the morning bounce is expected to stall and consolidate near the open.\"\n}",
+    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock RELIANCE. Time now: 10:03 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 1183.00\n- Latest price: Rs 1187.70 (+0.40% since open)\n- Session VWAP: Rs 1193.94 (price is below VWAP)\n- Volume of the last completed 5-minute bar vs today's average ba...",
+    "llm_raw_response": "{\"bias\":\"NEUTRAL\",\"target_pct\":-0.2,\"archetype\":\"RANGE_BOUND\",\"reasoning\":\"RELIANCE is trading below its session VWAP of Rs 1193.94 on very light volume of 0.41x, while RSI stands at a neutral 50.0. With no directional momentum following yesterday's -2.03% decline, the stock is likely to remain range-bound near its open of Rs 1183.00.\"}",
     "risk_plan": {
       "symbol": "RELIANCE",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 1191.5,
+      "entry_price": 1187.7,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -35843,17 +35843,17 @@
     }
   },
   {
-    "timestamp": "2026-10-23T04:27:59.894252+00:00",
+    "timestamp": "2026-10-23T04:36:23.363119+00:00",
     "session_date": "2026-10-23",
     "symbol": "HDFCBANK",
     "indicators": {
-      "vwap": 693.92,
+      "vwap": 693.72,
       "rsi_14": 50.0,
       "macd_hist": 0.0,
       "atr_14": 0.0,
       "atr_pct": 0.0,
       "bollinger_pct_b": 0.5,
-      "vwap_distance_pct": 0.08,
+      "vwap_distance_pct": -0.25,
       "technical_bias": "BEARISH"
     },
     "quant_prediction": {
@@ -35881,7 +35881,7 @@
         "idx_ret1_z",
         "close_pos"
       ],
-      "made_at": "2026-10-23T09:55:37+05:30",
+      "made_at": "2026-10-23T10:03:31+05:30",
       "open_price": 693.0,
       "features": {
         "gap_z": -0.1,
@@ -35899,13 +35899,13 @@
         "us": "^GSPC"
       }
     },
-    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock HDFCBANK. Time now: 09:55 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 693.00\n- Latest price: Rs 694.50 (+0.22% since open)\n- Session VWAP: Rs 693.92 (price is above VWAP)\n- Volume of the last completed 5-minute bar vs today's average bar: ...",
-    "llm_raw_response": null,
+    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock HDFCBANK. Time now: 10:03 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 693.00\n- Latest price: Rs 692.00 (-0.14% since open)\n- Session VWAP: Rs 693.72 (price is below VWAP)\n- Volume of the last completed 5-minute bar vs today's average bar: ...",
+    "llm_raw_response": "{\n  \"bias\": \"BEARISH\",\n  \"target_pct\": -0.72,\n  \"archetype\": \"BREAKDOWN\",\n  \"reasoning\": \"HDFCBANK is trading below its session VWAP of Rs 693.72 with an overall bearish technical bias following yesterday's -1.82% decline. A continuation lower towards -0.72% from the open aligns with the typical 2.40% daily range despite subdued volume at 0.62x.\"\n}",
     "risk_plan": {
       "symbol": "HDFCBANK",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 694.5,
+      "entry_price": 692.0,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -35916,17 +35916,17 @@
     }
   },
   {
-    "timestamp": "2026-10-23T04:29:20.310933+00:00",
+    "timestamp": "2026-10-23T04:36:23.984315+00:00",
     "session_date": "2026-10-23",
     "symbol": "ICICIBANK",
     "indicators": {
-      "vwap": 1398.34,
+      "vwap": 1397.76,
       "rsi_14": 50.0,
       "macd_hist": 0.0,
       "atr_14": 0.0,
       "atr_pct": 0.0,
       "bollinger_pct_b": 0.5,
-      "vwap_distance_pct": 0.03,
+      "vwap_distance_pct": -0.28,
       "technical_bias": "BEARISH"
     },
     "quant_prediction": {
@@ -35954,7 +35954,7 @@
         "idx_ret1_z",
         "close_pos"
       ],
-      "made_at": "2026-10-23T09:55:37+05:30",
+      "made_at": "2026-10-23T10:03:31+05:30",
       "open_price": 1404.5,
       "features": {
         "gap_z": 0.306,
@@ -35972,13 +35972,13 @@
         "us": "^GSPC"
       }
     },
-    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock ICICIBANK. Time now: 09:55 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 1404.50\n- Latest price: Rs 1398.80 (-0.41% since open)\n- Session VWAP: Rs 1398.34 (price is above VWAP)\n- Volume of the last completed 5-minute bar vs today's average b...",
-    "llm_raw_response": "{\"bias\":\"NEUTRAL\",\"target_pct\":-0.35,\"archetype\":\"MEAN_REVERSION\",\"reasoning\":\"Price has faded its +0.43% opening gap to trade near VWAP of Rs 1398.34 and the previous close, indicating balanced two-way flow with an RSI at 50.0. Average volume (1.04x) suggests consolidation near current levels rather than an extended directional move.\"}",
+    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock ICICIBANK. Time now: 10:03 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 1404.50\n- Latest price: Rs 1393.80 (-0.76% since open)\n- Session VWAP: Rs 1397.76 (price is below VWAP)\n- Volume of the last completed 5-minute bar vs today's average b...",
+    "llm_raw_response": null,
     "risk_plan": {
       "symbol": "ICICIBANK",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 1398.8,
+      "entry_price": 1393.8,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -35989,17 +35989,17 @@
     }
   },
   {
-    "timestamp": "2026-10-23T04:32:44.435397+00:00",
+    "timestamp": "2026-10-23T04:36:24.497422+00:00",
     "session_date": "2026-10-23",
     "symbol": "SBIN",
     "indicators": {
-      "vwap": 966.48,
+      "vwap": 965.99,
       "rsi_14": 50.0,
       "macd_hist": 0.0,
       "atr_14": 0.0,
       "atr_pct": 0.0,
       "bollinger_pct_b": 0.5,
-      "vwap_distance_pct": -0.2,
+      "vwap_distance_pct": -0.37,
       "technical_bias": "BEARISH"
     },
     "quant_prediction": {
@@ -36027,7 +36027,7 @@
         "idx_ret1_z",
         "close_pos"
       ],
-      "made_at": "2026-10-23T09:55:37+05:30",
+      "made_at": "2026-10-23T10:03:31+05:30",
       "open_price": 969.65,
       "features": {
         "gap_z": -0.031,
@@ -36045,13 +36045,13 @@
         "us": "^GSPC"
       }
     },
-    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock SBIN. Time now: 09:55 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 969.65\n- Latest price: Rs 964.50 (-0.53% since open)\n- Session VWAP: Rs 966.48 (price is below VWAP)\n- Volume of the last completed 5-minute bar vs today's average bar: 0.42...",
-    "llm_raw_response": "{\"bias\":\"BEARISH\",\"target_pct\":-0.75,\"archetype\":\"BREAKDOWN\",\"reasoning\":\"SBIN is trading at Rs 964.50, down 0.53% from the open of Rs 969.65 and below its session VWAP of Rs 966.48 under a bearish technical bias. With weakness continuing below VWAP relative to the typical 1.99% full-day range, further downward extension toward the close is expected.\"}",
+    "llm_prompt_snippet": null,
+    "llm_raw_response": null,
     "risk_plan": {
       "symbol": "SBIN",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 964.5,
+      "entry_price": 962.4,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -36062,17 +36062,17 @@
     }
   },
   {
-    "timestamp": "2026-10-23T04:32:46.056526+00:00",
+    "timestamp": "2026-10-23T04:36:25.118876+00:00",
     "session_date": "2026-10-23",
     "symbol": "INFY",
     "indicators": {
-      "vwap": 1180.74,
+      "vwap": 1180.22,
       "rsi_14": 50.0,
       "macd_hist": 0.0,
       "atr_14": 0.0,
       "atr_pct": 0.0,
       "bollinger_pct_b": 0.5,
-      "vwap_distance_pct": -0.93,
+      "vwap_distance_pct": -0.51,
       "technical_bias": "BEARISH"
     },
     "quant_prediction": {
@@ -36100,7 +36100,7 @@
         "idx_ret1_z",
         "close_pos"
       ],
-      "made_at": "2026-10-23T09:55:37+05:30",
+      "made_at": "2026-10-23T10:03:31+05:30",
       "open_price": 1179.95,
       "features": {
         "gap_z": 0.999,
@@ -36118,13 +36118,13 @@
         "us": "^GSPC"
       }
     },
-    "llm_prompt_snippet": "Perform intraday quantitative analysis for NSE stock INFY. Time now: 09:55 IST (session 09:15-15:30).\n\nMarket data:\n- Open: Rs 1179.95\n- Latest price: Rs 1169.75 (-0.86% since open)\n- Session VWAP: Rs 1180.74 (price is below VWAP)\n- Volume of the last completed 5-minute bar vs today's average bar: 1...",
+    "llm_prompt_snippet": null,
     "llm_raw_response": null,
     "risk_plan": {
       "symbol": "INFY",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 1169.75,
+      "entry_price": 1174.2,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -36135,17 +36135,17 @@
     }
   },
   {
-    "timestamp": "2026-10-23T04:32:46.602034+00:00",
+    "timestamp": "2026-10-23T04:36:25.766189+00:00",
     "session_date": "2026-10-23",
     "symbol": "TCS",
     "indicators": {
-      "vwap": 2592.53,
+      "vwap": 2592.1,
       "rsi_14": 50.0,
       "macd_hist": 0.0,
       "atr_14": 0.0,
       "atr_pct": 0.0,
       "bollinger_pct_b": 0.5,
-      "vwap_distance_pct": -0.77,
+      "vwap_distance_pct": -0.58,
       "technical_bias": "BEARISH"
     },
     "quant_prediction": {
@@ -36173,7 +36173,7 @@
         "idx_ret1_z",
         "close_pos"
       ],
-      "made_at": "2026-10-23T09:55:37+05:30",
+      "made_at": "2026-10-23T10:03:31+05:30",
       "open_price": 2573.5,
       "features": {
         "gap_z": 0.78,
@@ -36197,7 +36197,7 @@
       "symbol": "TCS",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 2572.5,
+      "entry_price": 2577.0,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -36208,17 +36208,17 @@
     }
   },
   {
-    "timestamp": "2026-10-23T04:32:47.148785+00:00",
+    "timestamp": "2026-10-23T04:36:26.235156+00:00",
     "session_date": "2026-10-23",
     "symbol": "BHARTIARTL",
     "indicators": {
-      "vwap": 1907.01,
+      "vwap": 1906.53,
       "rsi_14": 50.0,
       "macd_hist": 0.0,
       "atr_14": 0.0,
       "atr_pct": 0.0,
       "bollinger_pct_b": 0.5,
-      "vwap_distance_pct": -0.39,
+      "vwap_distance_pct": -0.62,
       "technical_bias": "BEARISH"
     },
     "quant_prediction": {
@@ -36246,7 +36246,7 @@
         "idx_ret1_z",
         "close_pos"
       ],
-      "made_at": "2026-10-23T09:55:37+05:30",
+      "made_at": "2026-10-23T10:03:31+05:30",
       "open_price": 1906.5,
       "features": {
         "gap_z": 0.394,
@@ -36270,7 +36270,7 @@
       "symbol": "BHARTIARTL",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 1899.6,
+      "entry_price": 1894.7,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -36281,17 +36281,17 @@
     }
   },
   {
-    "timestamp": "2026-10-23T04:32:48.002319+00:00",
+    "timestamp": "2026-10-23T04:36:26.820981+00:00",
     "session_date": "2026-10-23",
     "symbol": "TATASTEEL",
     "indicators": {
-      "vwap": 169.03,
+      "vwap": 168.5,
       "rsi_14": 50.0,
       "macd_hist": 0.0,
       "atr_14": 0.0,
       "atr_pct": 0.0,
       "bollinger_pct_b": 0.5,
-      "vwap_distance_pct": -1.06,
+      "vwap_distance_pct": -0.71,
       "technical_bias": "BEARISH"
     },
     "quant_prediction": {
@@ -36319,7 +36319,7 @@
         "idx_ret1_z",
         "close_pos"
       ],
-      "made_at": "2026-10-23T09:55:37+05:30",
+      "made_at": "2026-10-23T10:03:31+05:30",
       "open_price": 170.86,
       "features": {
         "gap_z": -0.575,
@@ -36343,7 +36343,7 @@
       "symbol": "TATASTEEL",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 167.25,
+      "entry_price": 167.3,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
@@ -36354,17 +36354,17 @@
     }
   },
   {
-    "timestamp": "2026-10-23T04:32:48.715515+00:00",
+    "timestamp": "2026-10-23T04:36:27.411469+00:00",
     "session_date": "2026-10-23",
     "symbol": "ITC",
     "indicators": {
-      "vwap": 258.95,
+      "vwap": 258.83,
       "rsi_14": 50.0,
       "macd_hist": 0.0,
       "atr_14": 0.0,
       "atr_pct": 0.0,
       "bollinger_pct_b": 0.5,
-      "vwap_distance_pct": -0.54,
+      "vwap_distance_pct": -0.5,
       "technical_bias": "BEARISH"
     },
     "quant_prediction": {
@@ -36392,7 +36392,7 @@
         "idx_ret1_z",
         "close_pos"
       ],
-      "made_at": "2026-10-23T09:55:37+05:30",
+      "made_at": "2026-10-23T10:03:31+05:30",
       "open_price": 258.35,
       "features": {
         "gap_z": -0.099,
@@ -36427,17 +36427,17 @@
     }
   },
   {
-    "timestamp": "2026-10-23T04:32:49.405150+00:00",
+    "timestamp": "2026-10-23T04:36:27.921129+00:00",
     "session_date": "2026-10-23",
     "symbol": "AXISBANK",
     "indicators": {
-      "vwap": 1215.13,
+      "vwap": 1214.04,
       "rsi_14": 50.0,
       "macd_hist": 0.0,
       "atr_14": 0.0,
       "atr_pct": 0.0,
       "bollinger_pct_b": 0.5,
-      "vwap_distance_pct": -0.32,
+      "vwap_distance_pct": -0.31,
       "technical_bias": "BEARISH"
     },
     "quant_prediction": {
@@ -36465,7 +36465,7 @@
         "idx_ret1_z",
         "close_pos"
       ],
-      "made_at": "2026-10-23T09:55:37+05:30",
+      "made_at": "2026-10-23T10:03:31+05:30",
       "open_price": 1210.9,
       "features": {
         "gap_z": -0.048,
@@ -36489,7 +36489,7 @@
       "symbol": "AXISBANK",
       "approved": false,
       "action": "NO_TRADE",
-      "entry_price": 1211.2,
+      "entry_price": 1210.3,
       "stop_loss": 0.0,
       "take_profit": 0.0,
       "position_size_shares": 0,
