@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-10-22T16:00:43+05:30",
+  "as_of": "2026-10-23T09:55:37+05:30",
   "status": "DEGRADED",
   "symbols_total": 10,
   "symbols_updated": 10,
-  "llm_fallback_count": 10,
-  "llm_error_count": 10,
-  "llm_cooldown_until": null,
+  "llm_fallback_count": 7,
+  "llm_error_count": 7,
+  "llm_cooldown_until": "2026-10-23T15:55:37+05:30",
   "model": "gemini-3.8-flash",
   "prompt_version": "v3-context-risk",
   "quant_model": {
@@ -17,7 +17,7 @@
       "tradeable": false
     }
   },
-  "sample_llm_error": "no new forecasts after 15:00 IST",
+  "sample_llm_error": "ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}",
   "errors": [],
-  "last_alert_at": "2026-10-22T16:00:43+05:30"
+  "last_alert_at": "2026-10-23T09:55:37+05:30"
 }
