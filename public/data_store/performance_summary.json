@@ -1,7 +1,7 @@
 {
   "overall": {
-    "sessions": 39,
-    "days": 6,
+    "sessions": 41,
+    "days": 7,
     "enough_data": false,
     "direction_hit_rate": 1.0,
     "directional_calls": 7,
@@ -9,24 +9,24 @@
       0.646,
       1.0
     ],
-    "mean_error_pct": 1.29,
-    "mean_flat_baseline_error_pct": 1.545,
-    "beat_flat_baseline_rate": 0.333,
+    "mean_error_pct": 1.273,
+    "mean_flat_baseline_error_pct": 1.516,
+    "beat_flat_baseline_rate": 0.317,
     "baselines": {
       "flat": {
-        "sessions": 39,
-        "mean_error_pct": 1.545,
+        "sessions": 41,
+        "mean_error_pct": 1.515,
         "direction_hit_rate": null
       },
       "gap_fade": {
-        "sessions": 39,
-        "mean_error_pct": 1.579,
-        "direction_hit_rate": 0.538
+        "sessions": 41,
+        "mean_error_pct": 1.539,
+        "direction_hit_rate": 0.537
       },
       "momentum": {
-        "sessions": 39,
-        "mean_error_pct": 1.727,
-        "direction_hit_rate": 0.641
+        "sessions": 41,
+        "mean_error_pct": 1.73,
+        "direction_hit_rate": 0.61
       }
     },
     "late_forecasts": {
@@ -41,24 +41,24 @@
     }
   },
   "quant": {
-    "forecasts": 80,
-    "days": 8,
-    "band_coverage": 0.713,
+    "forecasts": 90,
+    "days": 9,
+    "band_coverage": 0.744,
     "band_coverage_ci95": [
-      0.605,
-      0.8
+      0.646,
+      0.823
     ],
     "band_coverage_target": 0.8,
     "published_direction_calls": 0,
     "published_direction_hit_rate": null,
     "published_direction_ci95": null,
-    "shadow_direction_hit_rate": 0.525,
+    "shadow_direction_hit_rate": 0.533,
     "shadow_direction_ci95": [
-      0.417,
-      0.631
+      0.431,
+      0.633
     ],
-    "mean_error_pct": 1.288,
-    "mean_flat_error_pct": 1.288
+    "mean_error_pct": 1.253,
+    "mean_flat_error_pct": 1.253
   },
   "by_symbol": {
     "RELIANCE": {
@@ -138,8 +138,8 @@
       }
     },
     "ICICIBANK": {
-      "sessions": 5,
-      "days": 5,
+      "sessions": 6,
+      "days": 6,
       "enough_data": false,
       "direction_hit_rate": 1.0,
       "directional_calls": 1,
@@ -147,24 +147,24 @@
         0.207,
         1.0
       ],
-      "mean_error_pct": 1.505,
-      "mean_flat_baseline_error_pct": 1.715,
-      "beat_flat_baseline_rate": 0.4,
+      "mean_error_pct": 1.376,
+      "mean_flat_baseline_error_pct": 1.551,
+      "beat_flat_baseline_rate": 0.333,
       "baselines": {
         "flat": {
-          "sessions": 5,
-          "mean_error_pct": 1.716,
+          "sessions": 6,
+          "mean_error_pct": 1.552,
           "direction_hit_rate": null
         },
         "gap_fade": {
-          "sessions": 5,
-          "mean_error_pct": 1.35,
-          "direction_hit_rate": 0.6
+          "sessions": 6,
+          "mean_error_pct": 1.175,
+          "direction_hit_rate": 0.667
         },
         "momentum": {
-          "sessions": 5,
-          "mean_error_pct": 1.914,
-          "direction_hit_rate": 0.4
+          "sessions": 6,
+          "mean_error_pct": 1.878,
+          "direction_hit_rate": 0.333
         }
       },
       "late_forecasts": {
@@ -179,8 +179,8 @@
       }
     },
     "SBIN": {
-      "sessions": 3,
-      "days": 3,
+      "sessions": 4,
+      "days": 4,
       "enough_data": false,
       "direction_hit_rate": 1.0,
       "directional_calls": 1,
@@ -188,24 +188,24 @@
         0.207,
         1.0
       ],
-      "mean_error_pct": 0.781,
-      "mean_flat_baseline_error_pct": 1.031,
-      "beat_flat_baseline_rate": 0.333,
+      "mean_error_pct": 0.871,
+      "mean_flat_baseline_error_pct": 1.058,
+      "beat_flat_baseline_rate": 0.25,
       "baselines": {
         "flat": {
-          "sessions": 3,
-          "mean_error_pct": 1.03,
+          "sessions": 4,
+          "mean_error_pct": 1.057,
           "direction_hit_rate": null
         },
         "gap_fade": {
-          "sessions": 3,
-          "mean_error_pct": 0.537,
-          "direction_hit_rate": 0.667
+          "sessions": 4,
+          "mean_error_pct": 0.698,
+          "direction_hit_rate": 0.5
         },
         "momentum": {
-          "sessions": 3,
-          "mean_error_pct": 0.62,
-          "direction_hit_rate": 1.0
+          "sessions": 4,
+          "mean_error_pct": 0.933,
+          "direction_hit_rate": 0.75
         }
       },
       "late_forecasts": {
@@ -454,5 +454,5 @@
       }
     }
   },
-  "as_of": "2026-10-23T15:31:01+05:30"
+  "as_of": "2026-10-23T16:00:50+05:30"
 }

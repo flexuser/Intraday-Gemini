@@ -2358564,5 +2358564,6185 @@
         "status": "pending"
       }
     }
+  },
+  {
+    "key": "RELIANCE|2026-10-23T10:05:00+05:30",
+    "symbol": "RELIANCE",
+    "bar_time": "2026-10-23T10:05:00+05:30",
+    "entry_price": 1187.7,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.2352,
+      "return_15m_pct": -0.2268,
+      "return_30m_pct": -0.4526,
+      "move_since_open_pct": 0.3973,
+      "vwap_distance_pct": -0.52,
+      "rsi_14": 50.0,
+      "macd_hist": 0.0,
+      "atr_pct": 0.0,
+      "last_bar_range_pct": 0.2189,
+      "last_bar_volume_ratio": 0.2598,
+      "session_volume_ratio": 0.41,
+      "minutes_since_open": 50,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 33.49,
+      "delivery_vs_avg": 0.71
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:20:00+05:30",
+        "actual_price": 1173.9,
+        "actual_return_pct": -1.1619
+      },
+      "30": {
+        "target_at": "2026-10-23T10:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:35:00+05:30",
+        "actual_price": 1175.7,
+        "actual_return_pct": -1.0104
+      },
+      "60": {
+        "target_at": "2026-10-23T11:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:05:00+05:30",
+        "actual_price": 1168.2,
+        "actual_return_pct": -1.6418
+      }
+    }
+  },
+  {
+    "key": "RELIANCE|2026-10-23T10:35:00+05:30",
+    "symbol": "RELIANCE",
+    "bar_time": "2026-10-23T10:35:00+05:30",
+    "entry_price": 1175.7,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0596,
+      "return_15m_pct": 0.1533,
+      "return_30m_pct": -0.8852,
+      "move_since_open_pct": -0.6171,
+      "vwap_distance_pct": -1.02,
+      "rsi_14": 47.07,
+      "macd_hist": 0.0,
+      "atr_pct": 0.54,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.73,
+      "minutes_since_open": 80,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 33.49,
+      "delivery_vs_avg": 0.71
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:50:00+05:30",
+        "actual_price": 1170.8,
+        "actual_return_pct": -0.4168
+      },
+      "30": {
+        "target_at": "2026-10-23T11:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:05:00+05:30",
+        "actual_price": 1168.2,
+        "actual_return_pct": -0.6379
+      },
+      "60": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 1169.5,
+        "actual_return_pct": -0.5273
+      }
+    }
+  },
+  {
+    "key": "RELIANCE|2026-10-23T11:05:00+05:30",
+    "symbol": "RELIANCE",
+    "bar_time": "2026-10-23T11:05:00+05:30",
+    "entry_price": 1168.2,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0,
+      "return_15m_pct": -0.2221,
+      "return_30m_pct": -0.4092,
+      "move_since_open_pct": -1.2511,
+      "vwap_distance_pct": -1.4,
+      "rsi_14": 37.11,
+      "macd_hist": 0.0,
+      "atr_pct": 0.44,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.48,
+      "minutes_since_open": 110,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 33.49,
+      "delivery_vs_avg": 0.71
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:20:00+05:30",
+        "actual_price": 1172.3,
+        "actual_return_pct": 0.351
+      },
+      "30": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 1169.5,
+        "actual_return_pct": 0.1113
+      },
+      "60": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 1164.9,
+        "actual_return_pct": -0.2825
+      }
+    }
+  },
+  {
+    "key": "RELIANCE|2026-10-23T11:35:00+05:30",
+    "symbol": "RELIANCE",
+    "bar_time": "2026-10-23T11:35:00+05:30",
+    "entry_price": 1169.5,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0684,
+      "return_15m_pct": -0.2389,
+      "return_30m_pct": -0.0085,
+      "move_since_open_pct": -1.1412,
+      "vwap_distance_pct": -1.15,
+      "rsi_14": 40.64,
+      "macd_hist": 0.3352,
+      "atr_pct": 0.38,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.52,
+      "minutes_since_open": 140,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 33.49,
+      "delivery_vs_avg": 0.71
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:50:00+05:30",
+        "actual_price": 1166.4,
+        "actual_return_pct": -0.2651
+      },
+      "30": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 1164.9,
+        "actual_return_pct": -0.3933
+      },
+      "60": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 1168.6,
+        "actual_return_pct": -0.077
+      }
+    }
+  },
+  {
+    "key": "RELIANCE|2026-10-23T12:05:00+05:30",
+    "symbol": "RELIANCE",
+    "bar_time": "2026-10-23T12:05:00+05:30",
+    "entry_price": 1164.9,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0,
+      "return_15m_pct": -0.1286,
+      "return_30m_pct": -0.2825,
+      "move_since_open_pct": -1.53,
+      "vwap_distance_pct": -1.35,
+      "rsi_14": 33.48,
+      "macd_hist": 0.1491,
+      "atr_pct": 0.31,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.55,
+      "minutes_since_open": 170,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 33.49,
+      "delivery_vs_avg": 0.71
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:20:00+05:30",
+        "actual_price": 1168.3,
+        "actual_return_pct": 0.2919
+      },
+      "30": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 1168.6,
+        "actual_return_pct": 0.3176
+      },
+      "60": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 1173.2,
+        "actual_return_pct": 0.7125
+      }
+    }
+  },
+  {
+    "key": "RELIANCE|2026-10-23T12:35:00+05:30",
+    "symbol": "RELIANCE",
+    "bar_time": "2026-10-23T12:35:00+05:30",
+    "entry_price": 1168.6,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0342,
+      "return_15m_pct": 0.0257,
+      "return_30m_pct": 0.3866,
+      "move_since_open_pct": -1.2172,
+      "vwap_distance_pct": -0.89,
+      "rsi_14": 46.95,
+      "macd_hist": 1.018,
+      "atr_pct": 0.27,
+      "last_bar_range_pct": 0.0856,
+      "last_bar_volume_ratio": 0.0568,
+      "session_volume_ratio": 0.94,
+      "minutes_since_open": 200,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 33.49,
+      "delivery_vs_avg": 0.71
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:50:00+05:30",
+        "actual_price": 1171.7,
+        "actual_return_pct": 0.2653
+      },
+      "30": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 1173.2,
+        "actual_return_pct": 0.3936
+      },
+      "60": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 1175.5,
+        "actual_return_pct": 0.5905
+      }
+    }
+  },
+  {
+    "key": "RELIANCE|2026-10-23T13:05:00+05:30",
+    "symbol": "RELIANCE",
+    "bar_time": "2026-10-23T13:05:00+05:30",
+    "entry_price": 1173.2,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0,
+      "return_15m_pct": 0.128,
+      "return_30m_pct": 0.2392,
+      "move_since_open_pct": -0.8284,
+      "vwap_distance_pct": -0.4,
+      "rsi_14": 57.5,
+      "macd_hist": 1.3264,
+      "atr_pct": 0.24,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.95,
+      "minutes_since_open": 230,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 33.49,
+      "delivery_vs_avg": 0.71
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:20:00+05:30",
+        "actual_price": 1173.0,
+        "actual_return_pct": -0.017
+      },
+      "30": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 1175.5,
+        "actual_return_pct": 0.196
+      },
+      "60": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 1184.3,
+        "actual_return_pct": 0.9461
+      }
+    }
+  },
+  {
+    "key": "RELIANCE|2026-10-23T13:35:00+05:30",
+    "symbol": "RELIANCE",
+    "bar_time": "2026-10-23T13:35:00+05:30",
+    "entry_price": 1175.5,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0596,
+      "return_15m_pct": 0.2131,
+      "return_30m_pct": 0.1619,
+      "move_since_open_pct": -0.634,
+      "vwap_distance_pct": -0.17,
+      "rsi_14": 62.69,
+      "macd_hist": 0.9062,
+      "atr_pct": 0.21,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 1.59,
+      "minutes_since_open": 260,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 33.49,
+      "delivery_vs_avg": 0.71
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:50:00+05:30",
+        "actual_price": 1184.7,
+        "actual_return_pct": 0.7826
+      },
+      "30": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 1184.3,
+        "actual_return_pct": 0.7486
+      },
+      "60": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 1185.4,
+        "actual_return_pct": 0.8422
+      }
+    }
+  },
+  {
+    "key": "RELIANCE|2026-10-23T14:05:00+05:30",
+    "symbol": "RELIANCE",
+    "bar_time": "2026-10-23T14:05:00+05:30",
+    "entry_price": 1184.3,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.1014,
+      "return_15m_pct": -0.0338,
+      "return_30m_pct": 0.7058,
+      "move_since_open_pct": 0.1099,
+      "vwap_distance_pct": 0.52,
+      "rsi_14": 69.07,
+      "macd_hist": 1.2628,
+      "atr_pct": 0.25,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.96,
+      "minutes_since_open": 290,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 33.49,
+      "delivery_vs_avg": 0.71
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:20:00+05:30",
+        "actual_price": 1186.4,
+        "actual_return_pct": 0.1773
+      },
+      "30": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 1185.4,
+        "actual_return_pct": 0.0929
+      },
+      "60": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 1183.0,
+        "actual_return_pct": -0.1098
+      }
+    }
+  },
+  {
+    "key": "RELIANCE|2026-10-23T14:35:00+05:30",
+    "symbol": "RELIANCE",
+    "bar_time": "2026-10-23T14:35:00+05:30",
+    "entry_price": 1185.4,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0084,
+      "return_15m_pct": -0.0843,
+      "return_30m_pct": 0.0338,
+      "move_since_open_pct": 0.2029,
+      "vwap_distance_pct": 0.55,
+      "rsi_14": 67.45,
+      "macd_hist": 0.374,
+      "atr_pct": 0.22,
+      "last_bar_range_pct": 0.0759,
+      "last_bar_volume_ratio": 0.2159,
+      "session_volume_ratio": 1.2,
+      "minutes_since_open": 320,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 33.49,
+      "delivery_vs_avg": 0.71
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:50:00+05:30",
+        "actual_price": 1184.2,
+        "actual_return_pct": -0.1012
+      },
+      "30": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 1183.0,
+        "actual_return_pct": -0.2025
+      },
+      "60": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "RELIANCE|2026-10-23T15:05:00+05:30",
+    "symbol": "RELIANCE",
+    "bar_time": "2026-10-23T15:05:00+05:30",
+    "entry_price": 1183.0,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0423,
+      "return_15m_pct": -0.1013,
+      "return_30m_pct": -0.3706,
+      "move_since_open_pct": 0.0,
+      "vwap_distance_pct": 0.3,
+      "rsi_14": 55.59,
+      "macd_hist": -0.611,
+      "atr_pct": 0.22,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 1.1,
+      "minutes_since_open": 350,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 33.49,
+      "delivery_vs_avg": 0.71
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T15:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:20:00+05:30",
+        "actual_price": 1185.5,
+        "actual_return_pct": 0.2113
+      },
+      "30": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      },
+      "60": {
+        "target_at": "2026-10-23T16:05:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "HDFCBANK|2026-10-23T10:10:00+05:30",
+    "symbol": "HDFCBANK",
+    "bar_time": "2026-10-23T10:10:00+05:30",
+    "entry_price": 692.0,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.1013,
+      "return_15m_pct": -0.3528,
+      "return_30m_pct": -0.1443,
+      "move_since_open_pct": -0.1443,
+      "vwap_distance_pct": -0.25,
+      "rsi_14": 50.0,
+      "macd_hist": 0.0,
+      "atr_pct": 0.0,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.62,
+      "minutes_since_open": 55,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 59.33,
+      "delivery_vs_avg": 1.028
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:25:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:25:00+05:30",
+        "actual_price": 689.4,
+        "actual_return_pct": -0.3757
+      },
+      "30": {
+        "target_at": "2026-10-23T10:40:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:40:00+05:30",
+        "actual_price": 688.1,
+        "actual_return_pct": -0.5636
+      },
+      "60": {
+        "target_at": "2026-10-23T11:10:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:10:00+05:30",
+        "actual_price": 689.7,
+        "actual_return_pct": -0.3324
+      }
+    }
+  },
+  {
+    "key": "HDFCBANK|2026-10-23T10:35:00+05:30",
+    "symbol": "HDFCBANK",
+    "bar_time": "2026-10-23T10:35:00+05:30",
+    "entry_price": 688.15,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0145,
+      "return_15m_pct": -0.0653,
+      "return_30m_pct": -0.4557,
+      "move_since_open_pct": -0.6999,
+      "vwap_distance_pct": -0.57,
+      "rsi_14": 48.68,
+      "macd_hist": 0.0,
+      "atr_pct": 0.36,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.58,
+      "minutes_since_open": 80,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 59.33,
+      "delivery_vs_avg": 1.028
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:50:00+05:30",
+        "actual_price": 690.2,
+        "actual_return_pct": 0.2979
+      },
+      "30": {
+        "target_at": "2026-10-23T11:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:05:00+05:30",
+        "actual_price": 688.4,
+        "actual_return_pct": 0.0363
+      },
+      "60": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 690.0,
+        "actual_return_pct": 0.2688
+      }
+    }
+  },
+  {
+    "key": "HDFCBANK|2026-10-23T11:05:00+05:30",
+    "symbol": "HDFCBANK",
+    "bar_time": "2026-10-23T11:05:00+05:30",
+    "entry_price": 688.4,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.1306,
+      "return_15m_pct": -0.2608,
+      "return_30m_pct": 0.1309,
+      "move_since_open_pct": -0.6638,
+      "vwap_distance_pct": -0.44,
+      "rsi_14": 48.49,
+      "macd_hist": 0.0,
+      "atr_pct": 0.31,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.46,
+      "minutes_since_open": 110,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 59.33,
+      "delivery_vs_avg": 1.028
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:20:00+05:30",
+        "actual_price": 691.8,
+        "actual_return_pct": 0.4939
+      },
+      "30": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 690.0,
+        "actual_return_pct": 0.2324
+      },
+      "60": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 692.1,
+        "actual_return_pct": 0.5375
+      }
+    }
+  },
+  {
+    "key": "HDFCBANK|2026-10-23T11:35:00+05:30",
+    "symbol": "HDFCBANK",
+    "bar_time": "2026-10-23T11:35:00+05:30",
+    "entry_price": 690.0,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.1447,
+      "return_15m_pct": -0.2602,
+      "return_30m_pct": 0.1742,
+      "move_since_open_pct": -0.4329,
+      "vwap_distance_pct": -0.16,
+      "rsi_14": 52.34,
+      "macd_hist": 0.2445,
+      "atr_pct": 0.27,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.56,
+      "minutes_since_open": 140,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 59.33,
+      "delivery_vs_avg": 1.028
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:50:00+05:30",
+        "actual_price": 691.45,
+        "actual_return_pct": 0.2101
+      },
+      "30": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 692.1,
+        "actual_return_pct": 0.3043
+      },
+      "60": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 692.5,
+        "actual_return_pct": 0.3623
+      }
+    }
+  },
+  {
+    "key": "HDFCBANK|2026-10-23T12:05:00+05:30",
+    "symbol": "HDFCBANK",
+    "bar_time": "2026-10-23T12:05:00+05:30",
+    "entry_price": 692.1,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0433,
+      "return_15m_pct": 0.094,
+      "return_30m_pct": 0.2462,
+      "move_since_open_pct": -0.1299,
+      "vwap_distance_pct": 0.13,
+      "rsi_14": 60.23,
+      "macd_hist": 0.3305,
+      "atr_pct": 0.22,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.86,
+      "minutes_since_open": 170,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 59.33,
+      "delivery_vs_avg": 1.028
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:20:00+05:30",
+        "actual_price": 694.6,
+        "actual_return_pct": 0.3612
+      },
+      "30": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 692.5,
+        "actual_return_pct": 0.0578
+      },
+      "60": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 692.9,
+        "actual_return_pct": 0.1156
+      }
+    }
+  },
+  {
+    "key": "HDFCBANK|2026-10-23T12:35:00+05:30",
+    "symbol": "HDFCBANK",
+    "bar_time": "2026-10-23T12:35:00+05:30",
+    "entry_price": 692.5,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0289,
+      "return_15m_pct": -0.3023,
+      "return_30m_pct": 0.0361,
+      "move_since_open_pct": -0.0722,
+      "vwap_distance_pct": 0.16,
+      "rsi_14": 56.66,
+      "macd_hist": 0.1892,
+      "atr_pct": 0.21,
+      "last_bar_range_pct": 0.065,
+      "last_bar_volume_ratio": 0.1019,
+      "session_volume_ratio": 0.67,
+      "minutes_since_open": 200,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 59.33,
+      "delivery_vs_avg": 1.028
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:50:00+05:30",
+        "actual_price": 692.5,
+        "actual_return_pct": 0.0
+      },
+      "30": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 692.9,
+        "actual_return_pct": 0.0578
+      },
+      "60": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 692.85,
+        "actual_return_pct": 0.0505
+      }
+    }
+  },
+  {
+    "key": "HDFCBANK|2026-10-23T13:05:00+05:30",
+    "symbol": "HDFCBANK",
+    "bar_time": "2026-10-23T13:05:00+05:30",
+    "entry_price": 692.9,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0,
+      "return_15m_pct": 0.0578,
+      "return_30m_pct": -0.0433,
+      "move_since_open_pct": -0.0144,
+      "vwap_distance_pct": 0.19,
+      "rsi_14": 56.33,
+      "macd_hist": -0.0086,
+      "atr_pct": 0.19,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.57,
+      "minutes_since_open": 230,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 59.33,
+      "delivery_vs_avg": 1.028
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:20:00+05:30",
+        "actual_price": 692.5,
+        "actual_return_pct": -0.0577
+      },
+      "30": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 692.85,
+        "actual_return_pct": -0.0072
+      },
+      "60": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 695.2,
+        "actual_return_pct": 0.3319
+      }
+    }
+  },
+  {
+    "key": "HDFCBANK|2026-10-23T13:35:00+05:30",
+    "symbol": "HDFCBANK",
+    "bar_time": "2026-10-23T13:35:00+05:30",
+    "entry_price": 692.85,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0361,
+      "return_15m_pct": 0.0505,
+      "return_30m_pct": -0.1009,
+      "move_since_open_pct": -0.0216,
+      "vwap_distance_pct": 0.17,
+      "rsi_14": 54.74,
+      "macd_hist": -0.1098,
+      "atr_pct": 0.18,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.49,
+      "minutes_since_open": 260,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 59.33,
+      "delivery_vs_avg": 1.028
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:50:00+05:30",
+        "actual_price": 695.6,
+        "actual_return_pct": 0.3969
+      },
+      "30": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 695.2,
+        "actual_return_pct": 0.3392
+      },
+      "60": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 693.5,
+        "actual_return_pct": 0.0938
+      }
+    }
+  },
+  {
+    "key": "HDFCBANK|2026-10-23T14:05:00+05:30",
+    "symbol": "HDFCBANK",
+    "bar_time": "2026-10-23T14:05:00+05:30",
+    "entry_price": 695.2,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0792,
+      "return_15m_pct": -0.0575,
+      "return_30m_pct": 0.2379,
+      "move_since_open_pct": 0.3175,
+      "vwap_distance_pct": 0.46,
+      "rsi_14": 59.73,
+      "macd_hist": 0.1406,
+      "atr_pct": 0.2,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.74,
+      "minutes_since_open": 290,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 59.33,
+      "delivery_vs_avg": 1.028
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:20:00+05:30",
+        "actual_price": 694.55,
+        "actual_return_pct": -0.0935
+      },
+      "30": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 693.5,
+        "actual_return_pct": -0.2445
+      },
+      "60": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 691.8,
+        "actual_return_pct": -0.4891
+      }
+    }
+  },
+  {
+    "key": "HDFCBANK|2026-10-23T14:35:00+05:30",
+    "symbol": "HDFCBANK",
+    "bar_time": "2026-10-23T14:35:00+05:30",
+    "entry_price": 693.5,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0216,
+      "return_15m_pct": -0.1512,
+      "return_30m_pct": -0.2804,
+      "move_since_open_pct": 0.0722,
+      "vwap_distance_pct": 0.18,
+      "rsi_14": 49.56,
+      "macd_hist": -0.1988,
+      "atr_pct": 0.2,
+      "last_bar_range_pct": 0.0937,
+      "last_bar_volume_ratio": 0.1121,
+      "session_volume_ratio": 0.65,
+      "minutes_since_open": 320,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 59.33,
+      "delivery_vs_avg": 1.028
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:50:00+05:30",
+        "actual_price": 691.25,
+        "actual_return_pct": -0.3244
+      },
+      "30": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 691.8,
+        "actual_return_pct": -0.2451
+      },
+      "60": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "HDFCBANK|2026-10-23T15:05:00+05:30",
+    "symbol": "HDFCBANK",
+    "bar_time": "2026-10-23T15:05:00+05:30",
+    "entry_price": 691.8,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.2028,
+      "return_15m_pct": 0.0796,
+      "return_30m_pct": -0.2811,
+      "move_since_open_pct": -0.1732,
+      "vwap_distance_pct": -0.05,
+      "rsi_14": 45.45,
+      "macd_hist": -0.4483,
+      "atr_pct": 0.2,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.82,
+      "minutes_since_open": 350,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 59.33,
+      "delivery_vs_avg": 1.028
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T15:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:20:00+05:30",
+        "actual_price": 691.5,
+        "actual_return_pct": -0.0434
+      },
+      "30": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      },
+      "60": {
+        "target_at": "2026-10-23T16:05:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "ICICIBANK|2026-10-23T10:10:00+05:30",
+    "symbol": "ICICIBANK",
+    "bar_time": "2026-10-23T10:10:00+05:30",
+    "entry_price": 1393.8,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0287,
+      "return_15m_pct": -0.2291,
+      "return_30m_pct": -0.4429,
+      "move_since_open_pct": -0.7618,
+      "vwap_distance_pct": -0.28,
+      "rsi_14": 50.0,
+      "macd_hist": 0.0,
+      "atr_pct": 0.0,
+      "last_bar_range_pct": 0.1507,
+      "last_bar_volume_ratio": 0.1781,
+      "session_volume_ratio": 0.88,
+      "minutes_since_open": 55,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 51.0,
+      "delivery_vs_avg": 0.877
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:25:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:25:00+05:30",
+        "actual_price": 1393.3,
+        "actual_return_pct": -0.0359
+      },
+      "30": {
+        "target_at": "2026-10-23T10:40:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:40:00+05:30",
+        "actual_price": 1391.9,
+        "actual_return_pct": -0.1363
+      },
+      "60": {
+        "target_at": "2026-10-23T11:10:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:10:00+05:30",
+        "actual_price": 1390.8,
+        "actual_return_pct": -0.2152
+      }
+    }
+  },
+  {
+    "key": "ICICIBANK|2026-10-23T10:35:00+05:30",
+    "symbol": "ICICIBANK",
+    "bar_time": "2026-10-23T10:35:00+05:30",
+    "entry_price": 1393.8,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0287,
+      "return_15m_pct": 0.1581,
+      "return_30m_pct": -0.0287,
+      "move_since_open_pct": -0.7618,
+      "vwap_distance_pct": -0.15,
+      "rsi_14": 21.26,
+      "macd_hist": 0.0,
+      "atr_pct": 0.34,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.48,
+      "minutes_since_open": 80,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 51.0,
+      "delivery_vs_avg": 0.877
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:50:00+05:30",
+        "actual_price": 1392.0,
+        "actual_return_pct": -0.1291
+      },
+      "30": {
+        "target_at": "2026-10-23T11:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:05:00+05:30",
+        "actual_price": 1389.0,
+        "actual_return_pct": -0.3444
+      },
+      "60": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 1388.5,
+        "actual_return_pct": -0.3803
+      }
+    }
+  },
+  {
+    "key": "ICICIBANK|2026-10-23T11:05:00+05:30",
+    "symbol": "ICICIBANK",
+    "bar_time": "2026-10-23T11:05:00+05:30",
+    "entry_price": 1389.0,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0432,
+      "return_15m_pct": -0.2155,
+      "return_30m_pct": -0.3015,
+      "move_since_open_pct": -1.1036,
+      "vwap_distance_pct": -0.45,
+      "rsi_14": 19.18,
+      "macd_hist": 0.0,
+      "atr_pct": 0.27,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.48,
+      "minutes_since_open": 110,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 51.0,
+      "delivery_vs_avg": 0.877
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:20:00+05:30",
+        "actual_price": 1390.9,
+        "actual_return_pct": 0.1368
+      },
+      "30": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 1388.5,
+        "actual_return_pct": -0.036
+      },
+      "60": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 1386.7,
+        "actual_return_pct": -0.1656
+      }
+    }
+  },
+  {
+    "key": "ICICIBANK|2026-10-23T11:35:00+05:30",
+    "symbol": "ICICIBANK",
+    "bar_time": "2026-10-23T11:35:00+05:30",
+    "entry_price": 1388.5,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.1223,
+      "return_15m_pct": -0.1726,
+      "return_30m_pct": -0.1007,
+      "move_since_open_pct": -1.1392,
+      "vwap_distance_pct": -0.42,
+      "rsi_14": 24.66,
+      "macd_hist": -0.0935,
+      "atr_pct": 0.23,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.72,
+      "minutes_since_open": 140,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 51.0,
+      "delivery_vs_avg": 0.877
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:50:00+05:30",
+        "actual_price": 1388.0,
+        "actual_return_pct": -0.036
+      },
+      "30": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 1386.7,
+        "actual_return_pct": -0.1296
+      },
+      "60": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 1387.1,
+        "actual_return_pct": -0.1008
+      }
+    }
+  },
+  {
+    "key": "ICICIBANK|2026-10-23T12:05:00+05:30",
+    "symbol": "ICICIBANK",
+    "bar_time": "2026-10-23T12:05:00+05:30",
+    "entry_price": 1386.7,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0216,
+      "return_15m_pct": -0.0937,
+      "return_30m_pct": -0.0937,
+      "move_since_open_pct": -1.2674,
+      "vwap_distance_pct": -0.5,
+      "rsi_14": 25.72,
+      "macd_hist": -0.1569,
+      "atr_pct": 0.19,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.62,
+      "minutes_since_open": 170,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 51.0,
+      "delivery_vs_avg": 0.877
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:20:00+05:30",
+        "actual_price": 1387.7,
+        "actual_return_pct": 0.0721
+      },
+      "30": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 1387.1,
+        "actual_return_pct": 0.0288
+      },
+      "60": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 1382.0,
+        "actual_return_pct": -0.3389
+      }
+    }
+  },
+  {
+    "key": "ICICIBANK|2026-10-23T12:35:00+05:30",
+    "symbol": "ICICIBANK",
+    "bar_time": "2026-10-23T12:35:00+05:30",
+    "entry_price": 1387.1,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0072,
+      "return_15m_pct": -0.0432,
+      "return_30m_pct": 0.0577,
+      "move_since_open_pct": -1.2389,
+      "vwap_distance_pct": -0.44,
+      "rsi_14": 30.58,
+      "macd_hist": 0.2153,
+      "atr_pct": 0.16,
+      "last_bar_range_pct": 0.0577,
+      "last_bar_volume_ratio": 0.0776,
+      "session_volume_ratio": 0.26,
+      "minutes_since_open": 200,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 51.0,
+      "delivery_vs_avg": 0.877
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:50:00+05:30",
+        "actual_price": 1386.3,
+        "actual_return_pct": -0.0577
+      },
+      "30": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 1382.0,
+        "actual_return_pct": -0.3677
+      },
+      "60": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 1381.7,
+        "actual_return_pct": -0.3893
+      }
+    }
+  },
+  {
+    "key": "ICICIBANK|2026-10-23T13:05:00+05:30",
+    "symbol": "ICICIBANK",
+    "bar_time": "2026-10-23T13:05:00+05:30",
+    "entry_price": 1382.0,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0072,
+      "return_15m_pct": -0.3102,
+      "return_30m_pct": -0.3461,
+      "move_since_open_pct": -1.602,
+      "vwap_distance_pct": -0.73,
+      "rsi_14": 25.73,
+      "macd_hist": -0.3341,
+      "atr_pct": 0.17,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 1.3,
+      "minutes_since_open": 230,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 51.0,
+      "delivery_vs_avg": 0.877
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:20:00+05:30",
+        "actual_price": 1379.7,
+        "actual_return_pct": -0.1664
+      },
+      "30": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 1381.7,
+        "actual_return_pct": -0.0217
+      },
+      "60": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 1390.7,
+        "actual_return_pct": 0.6295
+      }
+    }
+  },
+  {
+    "key": "ICICIBANK|2026-10-23T13:35:00+05:30",
+    "symbol": "ICICIBANK",
+    "bar_time": "2026-10-23T13:35:00+05:30",
+    "entry_price": 1381.7,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0507,
+      "return_15m_pct": 0.145,
+      "return_30m_pct": 0.0072,
+      "move_since_open_pct": -1.6234,
+      "vwap_distance_pct": -0.6,
+      "rsi_14": 34.6,
+      "macd_hist": -0.0817,
+      "atr_pct": 0.16,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.65,
+      "minutes_since_open": 260,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 51.0,
+      "delivery_vs_avg": 0.877
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:50:00+05:30",
+        "actual_price": 1390.9,
+        "actual_return_pct": 0.6658
+      },
+      "30": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 1390.7,
+        "actual_return_pct": 0.6514
+      },
+      "60": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 1388.3,
+        "actual_return_pct": 0.4777
+      }
+    }
+  },
+  {
+    "key": "ICICIBANK|2026-10-23T14:05:00+05:30",
+    "symbol": "ICICIBANK",
+    "bar_time": "2026-10-23T14:05:00+05:30",
+    "entry_price": 1390.7,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0576,
+      "return_15m_pct": -0.0144,
+      "return_30m_pct": 0.6368,
+      "move_since_open_pct": -0.9826,
+      "vwap_distance_pct": 0.06,
+      "rsi_14": 58.47,
+      "macd_hist": 1.2882,
+      "atr_pct": 0.2,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 1.3,
+      "minutes_since_open": 290,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 51.0,
+      "delivery_vs_avg": 0.877
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:20:00+05:30",
+        "actual_price": 1392.5,
+        "actual_return_pct": 0.1294
+      },
+      "30": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 1388.3,
+        "actual_return_pct": -0.1726
+      },
+      "60": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 1382.2,
+        "actual_return_pct": -0.6112
+      }
+    }
+  },
+  {
+    "key": "ICICIBANK|2026-10-23T14:35:00+05:30",
+    "symbol": "ICICIBANK",
+    "bar_time": "2026-10-23T14:35:00+05:30",
+    "entry_price": 1388.3,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.036,
+      "return_15m_pct": -0.3016,
+      "return_30m_pct": -0.3589,
+      "move_since_open_pct": -1.1534,
+      "vwap_distance_pct": -0.12,
+      "rsi_14": 49.72,
+      "macd_hist": 0.3767,
+      "atr_pct": 0.2,
+      "last_bar_range_pct": 0.0648,
+      "last_bar_volume_ratio": 0.087,
+      "session_volume_ratio": 0.84,
+      "minutes_since_open": 320,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 51.0,
+      "delivery_vs_avg": 0.877
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:50:00+05:30",
+        "actual_price": 1384.2,
+        "actual_return_pct": -0.2953
+      },
+      "30": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 1382.2,
+        "actual_return_pct": -0.4394
+      },
+      "60": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "ICICIBANK|2026-10-23T15:05:00+05:30",
+    "symbol": "ICICIBANK",
+    "bar_time": "2026-10-23T15:05:00+05:30",
+    "entry_price": 1382.2,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0651,
+      "return_15m_pct": -0.1445,
+      "return_30m_pct": -0.4394,
+      "move_since_open_pct": -1.5878,
+      "vwap_distance_pct": -0.49,
+      "rsi_14": 40.79,
+      "macd_hist": -0.8536,
+      "atr_pct": 0.21,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 2.15,
+      "minutes_since_open": 350,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 51.0,
+      "delivery_vs_avg": 0.877
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T15:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:30:00+05:30",
+        "actual_price": 1394.2,
+        "actual_return_pct": 0.8682
+      },
+      "30": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      },
+      "60": {
+        "target_at": "2026-10-23T16:05:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "SBIN|2026-10-23T10:10:00+05:30",
+    "symbol": "SBIN",
+    "bar_time": "2026-10-23T10:10:00+05:30",
+    "entry_price": 962.4,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0624,
+      "return_15m_pct": -0.1193,
+      "return_30m_pct": -0.6914,
+      "move_since_open_pct": -0.7477,
+      "vwap_distance_pct": -0.37,
+      "rsi_14": 50.0,
+      "macd_hist": 0.0,
+      "atr_pct": 0.0,
+      "last_bar_range_pct": 0.1714,
+      "last_bar_volume_ratio": 0.7542,
+      "session_volume_ratio": 0.54,
+      "minutes_since_open": 55,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 43.51,
+      "delivery_vs_avg": 0.887
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:25:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:25:00+05:30",
+        "actual_price": 963.5,
+        "actual_return_pct": 0.1143
+      },
+      "30": {
+        "target_at": "2026-10-23T10:40:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:40:00+05:30",
+        "actual_price": 956.7,
+        "actual_return_pct": -0.5923
+      },
+      "60": {
+        "target_at": "2026-10-23T11:10:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:10:00+05:30",
+        "actual_price": 955.0,
+        "actual_return_pct": -0.7689
+      }
+    }
+  },
+  {
+    "key": "SBIN|2026-10-23T10:35:00+05:30",
+    "symbol": "SBIN",
+    "bar_time": "2026-10-23T10:35:00+05:30",
+    "entry_price": 961.75,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.2334,
+      "return_15m_pct": -0.1868,
+      "return_30m_pct": -0.0052,
+      "move_since_open_pct": -0.8147,
+      "vwap_distance_pct": -0.41,
+      "rsi_14": 13.4,
+      "macd_hist": 0.0,
+      "atr_pct": 0.4,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.5,
+      "minutes_since_open": 80,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 43.51,
+      "delivery_vs_avg": 0.887
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:50:00+05:30",
+        "actual_price": 953.6,
+        "actual_return_pct": -0.8474
+      },
+      "30": {
+        "target_at": "2026-10-23T11:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:05:00+05:30",
+        "actual_price": 952.8,
+        "actual_return_pct": -0.9306
+      },
+      "60": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 954.0,
+        "actual_return_pct": -0.8058
+      }
+    }
+  },
+  {
+    "key": "SBIN|2026-10-23T11:05:00+05:30",
+    "symbol": "SBIN",
+    "bar_time": "2026-10-23T11:05:00+05:30",
+    "entry_price": 952.8,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0787,
+      "return_15m_pct": -0.0839,
+      "return_30m_pct": -0.7035,
+      "move_since_open_pct": -1.7377,
+      "vwap_distance_pct": -1.08,
+      "rsi_14": 12.66,
+      "macd_hist": 0.0,
+      "atr_pct": 0.36,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.21,
+      "minutes_since_open": 110,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 43.51,
+      "delivery_vs_avg": 0.887
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:20:00+05:30",
+        "actual_price": 957.75,
+        "actual_return_pct": 0.5195
+      },
+      "30": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 954.0,
+        "actual_return_pct": 0.1259
+      },
+      "60": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 953.95,
+        "actual_return_pct": 0.1207
+      }
+    }
+  },
+  {
+    "key": "SBIN|2026-10-23T11:35:00+05:30",
+    "symbol": "SBIN",
+    "bar_time": "2026-10-23T11:35:00+05:30",
+    "entry_price": 954.0,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0314,
+      "return_15m_pct": -0.3915,
+      "return_30m_pct": 0.0,
+      "move_since_open_pct": -1.614,
+      "vwap_distance_pct": -0.88,
+      "rsi_14": 21.77,
+      "macd_hist": -0.0253,
+      "atr_pct": 0.31,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.27,
+      "minutes_since_open": 140,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 43.51,
+      "delivery_vs_avg": 0.887
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:50:00+05:30",
+        "actual_price": 954.6,
+        "actual_return_pct": 0.0629
+      },
+      "30": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 953.95,
+        "actual_return_pct": -0.0052
+      },
+      "60": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 951.2,
+        "actual_return_pct": -0.2935
+      }
+    }
+  },
+  {
+    "key": "SBIN|2026-10-23T12:05:00+05:30",
+    "symbol": "SBIN",
+    "bar_time": "2026-10-23T12:05:00+05:30",
+    "entry_price": 953.95,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0419,
+      "return_15m_pct": -0.0681,
+      "return_30m_pct": -0.0629,
+      "move_since_open_pct": -1.6191,
+      "vwap_distance_pct": -0.85,
+      "rsi_14": 24.22,
+      "macd_hist": 0.2491,
+      "atr_pct": 0.25,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.35,
+      "minutes_since_open": 170,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 43.51,
+      "delivery_vs_avg": 0.887
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:20:00+05:30",
+        "actual_price": 954.5,
+        "actual_return_pct": 0.0577
+      },
+      "30": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 951.2,
+        "actual_return_pct": -0.2883
+      },
+      "60": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 952.65,
+        "actual_return_pct": -0.1363
+      }
+    }
+  },
+  {
+    "key": "SBIN|2026-10-23T12:35:00+05:30",
+    "symbol": "SBIN",
+    "bar_time": "2026-10-23T12:35:00+05:30",
+    "entry_price": 951.2,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0368,
+      "return_15m_pct": -0.3457,
+      "return_30m_pct": -0.3092,
+      "move_since_open_pct": -1.9027,
+      "vwap_distance_pct": -1.1,
+      "rsi_14": 21.52,
+      "macd_hist": 0.0399,
+      "atr_pct": 0.22,
+      "last_bar_range_pct": 0.1156,
+      "last_bar_volume_ratio": 0.0975,
+      "session_volume_ratio": 0.29,
+      "minutes_since_open": 200,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 43.51,
+      "delivery_vs_avg": 0.887
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:50:00+05:30",
+        "actual_price": 951.95,
+        "actual_return_pct": 0.0788
+      },
+      "30": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 952.65,
+        "actual_return_pct": 0.1524
+      },
+      "60": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 952.0,
+        "actual_return_pct": 0.0841
+      }
+    }
+  },
+  {
+    "key": "SBIN|2026-10-23T13:05:00+05:30",
+    "symbol": "SBIN",
+    "bar_time": "2026-10-23T13:05:00+05:30",
+    "entry_price": 952.65,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.021,
+      "return_15m_pct": 0.0735,
+      "return_30m_pct": 0.1682,
+      "move_since_open_pct": -1.7532,
+      "vwap_distance_pct": -0.9,
+      "rsi_14": 31.78,
+      "macd_hist": 0.2691,
+      "atr_pct": 0.2,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.27,
+      "minutes_since_open": 230,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 43.51,
+      "delivery_vs_avg": 0.887
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:20:00+05:30",
+        "actual_price": 951.6,
+        "actual_return_pct": -0.1102
+      },
+      "30": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 952.0,
+        "actual_return_pct": -0.0682
+      },
+      "60": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 957.1,
+        "actual_return_pct": 0.4671
+      }
+    }
+  },
+  {
+    "key": "SBIN|2026-10-23T13:35:00+05:30",
+    "symbol": "SBIN",
+    "bar_time": "2026-10-23T13:35:00+05:30",
+    "entry_price": 952.0,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0367,
+      "return_15m_pct": 0.042,
+      "return_30m_pct": -0.1102,
+      "move_since_open_pct": -1.8202,
+      "vwap_distance_pct": -0.92,
+      "rsi_14": 33.16,
+      "macd_hist": 0.2796,
+      "atr_pct": 0.17,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.38,
+      "minutes_since_open": 260,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 43.51,
+      "delivery_vs_avg": 0.887
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:50:00+05:30",
+        "actual_price": 958.9,
+        "actual_return_pct": 0.7248
+      },
+      "30": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 957.1,
+        "actual_return_pct": 0.5357
+      },
+      "60": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 956.35,
+        "actual_return_pct": 0.4569
+      }
+    }
+  },
+  {
+    "key": "SBIN|2026-10-23T14:05:00+05:30",
+    "symbol": "SBIN",
+    "bar_time": "2026-10-23T14:05:00+05:30",
+    "entry_price": 957.1,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0,
+      "return_15m_pct": -0.1877,
+      "return_30m_pct": 0.5093,
+      "move_since_open_pct": -1.2943,
+      "vwap_distance_pct": -0.35,
+      "rsi_14": 54.03,
+      "macd_hist": 0.8064,
+      "atr_pct": 0.21,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.29,
+      "minutes_since_open": 290,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 43.51,
+      "delivery_vs_avg": 0.887
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:20:00+05:30",
+        "actual_price": 958.0,
+        "actual_return_pct": 0.094
+      },
+      "30": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 956.35,
+        "actual_return_pct": -0.0784
+      },
+      "60": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 956.7,
+        "actual_return_pct": -0.0418
+      }
+    }
+  },
+  {
+    "key": "SBIN|2026-10-23T14:35:00+05:30",
+    "symbol": "SBIN",
+    "bar_time": "2026-10-23T14:35:00+05:30",
+    "entry_price": 956.35,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0418,
+      "return_15m_pct": -0.1722,
+      "return_30m_pct": -0.1983,
+      "move_since_open_pct": -1.3716,
+      "vwap_distance_pct": -0.4,
+      "rsi_14": 49.92,
+      "macd_hist": 0.14,
+      "atr_pct": 0.2,
+      "last_bar_range_pct": 0.068,
+      "last_bar_volume_ratio": 0.045,
+      "session_volume_ratio": 1.54,
+      "minutes_since_open": 320,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 43.51,
+      "delivery_vs_avg": 0.887
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:50:00+05:30",
+        "actual_price": 955.15,
+        "actual_return_pct": -0.1255
+      },
+      "30": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 956.7,
+        "actual_return_pct": 0.0366
+      },
+      "60": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "SBIN|2026-10-23T15:05:00+05:30",
+    "symbol": "SBIN",
+    "bar_time": "2026-10-23T15:05:00+05:30",
+    "entry_price": 956.7,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0628,
+      "return_15m_pct": 0.1623,
+      "return_30m_pct": -0.0888,
+      "move_since_open_pct": -1.3355,
+      "vwap_distance_pct": -0.34,
+      "rsi_14": 52.37,
+      "macd_hist": -0.0794,
+      "atr_pct": 0.2,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.57,
+      "minutes_since_open": 350,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 43.51,
+      "delivery_vs_avg": 0.887
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T15:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:20:00+05:30",
+        "actual_price": 955.65,
+        "actual_return_pct": -0.1097
+      },
+      "30": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      },
+      "60": {
+        "target_at": "2026-10-23T16:05:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "INFY|2026-10-23T10:10:00+05:30",
+    "symbol": "INFY",
+    "bar_time": "2026-10-23T10:10:00+05:30",
+    "entry_price": 1174.2,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.2305,
+      "return_15m_pct": -0.0681,
+      "return_30m_pct": -0.4282,
+      "move_since_open_pct": -0.4873,
+      "vwap_distance_pct": -0.51,
+      "rsi_14": 50.0,
+      "macd_hist": 0.0,
+      "atr_pct": 0.0,
+      "last_bar_range_pct": 0.2299,
+      "last_bar_volume_ratio": 0.1454,
+      "session_volume_ratio": 0.83,
+      "minutes_since_open": 55,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 54.75,
+      "delivery_vs_avg": 1.07
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:25:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:25:00+05:30",
+        "actual_price": 1166.55,
+        "actual_return_pct": -0.6515
+      },
+      "30": {
+        "target_at": "2026-10-23T10:40:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:40:00+05:30",
+        "actual_price": 1148.0,
+        "actual_return_pct": -2.2313
+      },
+      "60": {
+        "target_at": "2026-10-23T11:10:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:10:00+05:30",
+        "actual_price": 1152.95,
+        "actual_return_pct": -1.8097
+      }
+    }
+  },
+  {
+    "key": "INFY|2026-10-23T10:35:00+05:30",
+    "symbol": "INFY",
+    "bar_time": "2026-10-23T10:35:00+05:30",
+    "entry_price": 1166.85,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0729,
+      "return_15m_pct": -0.3501,
+      "return_30m_pct": -0.3969,
+      "move_since_open_pct": -1.1102,
+      "vwap_distance_pct": -0.93,
+      "rsi_14": 13.92,
+      "macd_hist": 0.0,
+      "atr_pct": 0.75,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.54,
+      "minutes_since_open": 80,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 54.75,
+      "delivery_vs_avg": 1.07
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:50:00+05:30",
+        "actual_price": 1161.0,
+        "actual_return_pct": -0.5013
+      },
+      "30": {
+        "target_at": "2026-10-23T11:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:05:00+05:30",
+        "actual_price": 1154.0,
+        "actual_return_pct": -1.1013
+      },
+      "60": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 1163.75,
+        "actual_return_pct": -0.2657
+      }
+    }
+  },
+  {
+    "key": "INFY|2026-10-23T11:05:00+05:30",
+    "symbol": "INFY",
+    "bar_time": "2026-10-23T11:05:00+05:30",
+    "entry_price": 1154.0,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0954,
+      "return_15m_pct": -0.6029,
+      "return_30m_pct": -0.4658,
+      "move_since_open_pct": -2.1992,
+      "vwap_distance_pct": -1.33,
+      "rsi_14": 26.86,
+      "macd_hist": 0.0,
+      "atr_pct": 0.77,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.71,
+      "minutes_since_open": 110,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 54.75,
+      "delivery_vs_avg": 1.07
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:20:00+05:30",
+        "actual_price": 1160.0,
+        "actual_return_pct": 0.5199
+      },
+      "30": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 1163.75,
+        "actual_return_pct": 0.8449
+      },
+      "60": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 1158.7,
+        "actual_return_pct": 0.4073
+      }
+    }
+  },
+  {
+    "key": "INFY|2026-10-23T11:35:00+05:30",
+    "symbol": "INFY",
+    "bar_time": "2026-10-23T11:35:00+05:30",
+    "entry_price": 1163.75,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.1592,
+      "return_15m_pct": 0.3233,
+      "return_30m_pct": 0.6051,
+      "move_since_open_pct": -1.3729,
+      "vwap_distance_pct": -0.37,
+      "rsi_14": 43.27,
+      "macd_hist": 1.16,
+      "atr_pct": 0.65,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.41,
+      "minutes_since_open": 140,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 54.75,
+      "delivery_vs_avg": 1.07
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:50:00+05:30",
+        "actual_price": 1159.8,
+        "actual_return_pct": -0.3394
+      },
+      "30": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 1158.7,
+        "actual_return_pct": -0.4339
+      },
+      "60": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 1156.55,
+        "actual_return_pct": -0.6187
+      }
+    }
+  },
+  {
+    "key": "INFY|2026-10-23T12:05:00+05:30",
+    "symbol": "INFY",
+    "bar_time": "2026-10-23T12:05:00+05:30",
+    "entry_price": 1158.7,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0259,
+      "return_15m_pct": -0.0949,
+      "return_30m_pct": -0.5706,
+      "move_since_open_pct": -1.8009,
+      "vwap_distance_pct": -0.73,
+      "rsi_14": 38.23,
+      "macd_hist": 0.7969,
+      "atr_pct": 0.53,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 1.02,
+      "minutes_since_open": 170,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 54.75,
+      "delivery_vs_avg": 1.07
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:20:00+05:30",
+        "actual_price": 1157.35,
+        "actual_return_pct": -0.1165
+      },
+      "30": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 1156.55,
+        "actual_return_pct": -0.1855
+      },
+      "60": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 1159.05,
+        "actual_return_pct": 0.0302
+      }
+    }
+  },
+  {
+    "key": "INFY|2026-10-23T12:35:00+05:30",
+    "symbol": "INFY",
+    "bar_time": "2026-10-23T12:35:00+05:30",
+    "entry_price": 1156.55,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0346,
+      "return_15m_pct": -0.0691,
+      "return_30m_pct": -0.1985,
+      "move_since_open_pct": -1.9831,
+      "vwap_distance_pct": -0.82,
+      "rsi_14": 37.47,
+      "macd_hist": 0.3413,
+      "atr_pct": 0.45,
+      "last_bar_range_pct": 0.16,
+      "last_bar_volume_ratio": 0.0836,
+      "session_volume_ratio": 0.48,
+      "minutes_since_open": 200,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 54.75,
+      "delivery_vs_avg": 1.07
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:50:00+05:30",
+        "actual_price": 1156.5,
+        "actual_return_pct": -0.0043
+      },
+      "30": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 1159.05,
+        "actual_return_pct": 0.2162
+      },
+      "60": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 1158.8,
+        "actual_return_pct": 0.1945
+      }
+    }
+  },
+  {
+    "key": "INFY|2026-10-23T13:05:00+05:30",
+    "symbol": "INFY",
+    "bar_time": "2026-10-23T13:05:00+05:30",
+    "entry_price": 1159.05,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0991,
+      "return_15m_pct": 0.2205,
+      "return_30m_pct": 0.082,
+      "move_since_open_pct": -1.7713,
+      "vwap_distance_pct": -0.56,
+      "rsi_14": 45.19,
+      "macd_hist": 0.6842,
+      "atr_pct": 0.37,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.62,
+      "minutes_since_open": 230,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 54.75,
+      "delivery_vs_avg": 1.07
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:20:00+05:30",
+        "actual_price": 1159.0,
+        "actual_return_pct": -0.0043
+      },
+      "30": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 1158.8,
+        "actual_return_pct": -0.0216
+      },
+      "60": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 1163.8,
+        "actual_return_pct": 0.4098
+      }
+    }
+  },
+  {
+    "key": "INFY|2026-10-23T13:35:00+05:30",
+    "symbol": "INFY",
+    "bar_time": "2026-10-23T13:35:00+05:30",
+    "entry_price": 1158.8,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.1253,
+      "return_15m_pct": -0.0173,
+      "return_30m_pct": -0.1034,
+      "move_since_open_pct": -1.7924,
+      "vwap_distance_pct": -0.53,
+      "rsi_14": 47.23,
+      "macd_hist": 0.4633,
+      "atr_pct": 0.33,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.52,
+      "minutes_since_open": 260,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 54.75,
+      "delivery_vs_avg": 1.07
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:50:00+05:30",
+        "actual_price": 1165.35,
+        "actual_return_pct": 0.5652
+      },
+      "30": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 1163.8,
+        "actual_return_pct": 0.4315
+      },
+      "60": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 1159.3,
+        "actual_return_pct": 0.0432
+      }
+    }
+  },
+  {
+    "key": "INFY|2026-10-23T14:05:00+05:30",
+    "symbol": "INFY",
+    "bar_time": "2026-10-23T14:05:00+05:30",
+    "entry_price": 1163.8,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0817,
+      "return_15m_pct": -0.133,
+      "return_30m_pct": 0.5009,
+      "move_since_open_pct": -1.3687,
+      "vwap_distance_pct": -0.09,
+      "rsi_14": 55.8,
+      "macd_hist": 0.9116,
+      "atr_pct": 0.33,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.73,
+      "minutes_since_open": 290,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 54.75,
+      "delivery_vs_avg": 1.07
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:20:00+05:30",
+        "actual_price": 1159.45,
+        "actual_return_pct": -0.3738
+      },
+      "30": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 1159.3,
+        "actual_return_pct": -0.3867
+      },
+      "60": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 1157.35,
+        "actual_return_pct": -0.5542
+      }
+    }
+  },
+  {
+    "key": "INFY|2026-10-23T14:35:00+05:30",
+    "symbol": "INFY",
+    "bar_time": "2026-10-23T14:35:00+05:30",
+    "entry_price": 1159.3,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0043,
+      "return_15m_pct": -0.0129,
+      "return_30m_pct": -0.4508,
+      "move_since_open_pct": -1.7501,
+      "vwap_distance_pct": -0.44,
+      "rsi_14": 46.37,
+      "macd_hist": -0.1419,
+      "atr_pct": 0.3,
+      "last_bar_range_pct": 0.0863,
+      "last_bar_volume_ratio": 0.1208,
+      "session_volume_ratio": 0.71,
+      "minutes_since_open": 320,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 54.75,
+      "delivery_vs_avg": 1.07
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:50:00+05:30",
+        "actual_price": 1159.2,
+        "actual_return_pct": -0.0086
+      },
+      "30": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 1157.35,
+        "actual_return_pct": -0.1682
+      },
+      "60": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "INFY|2026-10-23T15:05:00+05:30",
+    "symbol": "INFY",
+    "bar_time": "2026-10-23T15:05:00+05:30",
+    "entry_price": 1157.35,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.151,
+      "return_15m_pct": -0.1596,
+      "return_30m_pct": -0.1768,
+      "move_since_open_pct": -1.9153,
+      "vwap_distance_pct": -0.59,
+      "rsi_14": 42.29,
+      "macd_hist": -0.2147,
+      "atr_pct": 0.26,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.45,
+      "minutes_since_open": 350,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 54.75,
+      "delivery_vs_avg": 1.07
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T15:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:20:00+05:30",
+        "actual_price": 1154.0,
+        "actual_return_pct": -0.2895
+      },
+      "30": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      },
+      "60": {
+        "target_at": "2026-10-23T16:05:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "TCS|2026-10-23T10:10:00+05:30",
+    "symbol": "TCS",
+    "bar_time": "2026-10-23T10:10:00+05:30",
+    "entry_price": 2577.0,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.171,
+      "return_15m_pct": -0.2362,
+      "return_30m_pct": -0.2439,
+      "move_since_open_pct": 0.136,
+      "vwap_distance_pct": -0.58,
+      "rsi_14": 50.0,
+      "macd_hist": 0.0,
+      "atr_pct": 0.0,
+      "last_bar_range_pct": 0.1746,
+      "last_bar_volume_ratio": 0.0733,
+      "session_volume_ratio": 0.7,
+      "minutes_since_open": 55,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.86,
+      "delivery_vs_avg": 0.835
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:25:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:25:00+05:30",
+        "actual_price": 2563.0,
+        "actual_return_pct": -0.5433
+      },
+      "30": {
+        "target_at": "2026-10-23T10:40:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:40:00+05:30",
+        "actual_price": 2550.0,
+        "actual_return_pct": -1.0477
+      },
+      "60": {
+        "target_at": "2026-10-23T11:10:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:10:00+05:30",
+        "actual_price": 2548.9,
+        "actual_return_pct": -1.0904
+      }
+    }
+  },
+  {
+    "key": "TCS|2026-10-23T10:35:00+05:30",
+    "symbol": "TCS",
+    "bar_time": "2026-10-23T10:35:00+05:30",
+    "entry_price": 2563.6,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0546,
+      "return_15m_pct": -0.2374,
+      "return_30m_pct": -0.3498,
+      "move_since_open_pct": -0.3847,
+      "vwap_distance_pct": -0.96,
+      "rsi_14": 17.77,
+      "macd_hist": 0.0,
+      "atr_pct": 0.87,
+      "last_bar_range_pct": 0.1053,
+      "last_bar_volume_ratio": 0.0772,
+      "session_volume_ratio": 0.49,
+      "minutes_since_open": 80,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.86,
+      "delivery_vs_avg": 0.835
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:50:00+05:30",
+        "actual_price": 2555.0,
+        "actual_return_pct": -0.3355
+      },
+      "30": {
+        "target_at": "2026-10-23T11:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:05:00+05:30",
+        "actual_price": 2546.5,
+        "actual_return_pct": -0.667
+      },
+      "60": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 2555.6,
+        "actual_return_pct": -0.3121
+      }
+    }
+  },
+  {
+    "key": "TCS|2026-10-23T11:05:00+05:30",
+    "symbol": "TCS",
+    "bar_time": "2026-10-23T11:05:00+05:30",
+    "entry_price": 2546.5,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0707,
+      "return_15m_pct": -0.3327,
+      "return_30m_pct": -0.1725,
+      "move_since_open_pct": -1.0492,
+      "vwap_distance_pct": -1.46,
+      "rsi_14": 21.22,
+      "macd_hist": 0.0,
+      "atr_pct": 0.68,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.34,
+      "minutes_since_open": 110,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.86,
+      "delivery_vs_avg": 0.835
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:20:00+05:30",
+        "actual_price": 2556.0,
+        "actual_return_pct": 0.3731
+      },
+      "30": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 2555.6,
+        "actual_return_pct": 0.3574
+      },
+      "60": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 2539.0,
+        "actual_return_pct": -0.2945
+      }
+    }
+  },
+  {
+    "key": "TCS|2026-10-23T11:35:00+05:30",
+    "symbol": "TCS",
+    "bar_time": "2026-10-23T11:35:00+05:30",
+    "entry_price": 2555.6,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0705,
+      "return_15m_pct": -0.0156,
+      "return_30m_pct": 0.2,
+      "move_since_open_pct": -0.6955,
+      "vwap_distance_pct": -1.01,
+      "rsi_14": 37.51,
+      "macd_hist": 1.45,
+      "atr_pct": 0.54,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.26,
+      "minutes_since_open": 140,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.86,
+      "delivery_vs_avg": 0.835
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:50:00+05:30",
+        "actual_price": 2544.0,
+        "actual_return_pct": -0.4539
+      },
+      "30": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 2539.0,
+        "actual_return_pct": -0.6496
+      },
+      "60": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 2541.1,
+        "actual_return_pct": -0.5674
+      }
+    }
+  },
+  {
+    "key": "TCS|2026-10-23T12:05:00+05:30",
+    "symbol": "TCS",
+    "bar_time": "2026-10-23T12:05:00+05:30",
+    "entry_price": 2539.0,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0709,
+      "return_15m_pct": -0.1965,
+      "return_30m_pct": -0.8203,
+      "move_since_open_pct": -1.3406,
+      "vwap_distance_pct": -1.49,
+      "rsi_14": 29.77,
+      "macd_hist": -0.2223,
+      "atr_pct": 0.47,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.99,
+      "minutes_since_open": 170,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.86,
+      "delivery_vs_avg": 0.835
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:20:00+05:30",
+        "actual_price": 2547.0,
+        "actual_return_pct": 0.3151
+      },
+      "30": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 2541.1,
+        "actual_return_pct": 0.0827
+      },
+      "60": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 2536.8,
+        "actual_return_pct": -0.0866
+      }
+    }
+  },
+  {
+    "key": "TCS|2026-10-23T12:35:00+05:30",
+    "symbol": "TCS",
+    "bar_time": "2026-10-23T12:35:00+05:30",
+    "entry_price": 2541.1,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0551,
+      "return_15m_pct": -0.2316,
+      "return_30m_pct": 0.1143,
+      "move_since_open_pct": -1.259,
+      "vwap_distance_pct": -1.34,
+      "rsi_14": 38.68,
+      "macd_hist": 0.9709,
+      "atr_pct": 0.4,
+      "last_bar_range_pct": 0.1023,
+      "last_bar_volume_ratio": 0.0362,
+      "session_volume_ratio": 0.29,
+      "minutes_since_open": 200,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.86,
+      "delivery_vs_avg": 0.835
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:50:00+05:30",
+        "actual_price": 2529.1,
+        "actual_return_pct": -0.4722
+      },
+      "30": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 2536.8,
+        "actual_return_pct": -0.1692
+      },
+      "60": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 2522.4,
+        "actual_return_pct": -0.7359
+      }
+    }
+  },
+  {
+    "key": "TCS|2026-10-23T13:05:00+05:30",
+    "symbol": "TCS",
+    "bar_time": "2026-10-23T13:05:00+05:30",
+    "entry_price": 2536.8,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0158,
+      "return_15m_pct": 0.3045,
+      "return_30m_pct": -0.2203,
+      "move_since_open_pct": -1.4261,
+      "vwap_distance_pct": -1.44,
+      "rsi_14": 40.74,
+      "macd_hist": 0.5027,
+      "atr_pct": 0.34,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.35,
+      "minutes_since_open": 230,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.86,
+      "delivery_vs_avg": 0.835
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:20:00+05:30",
+        "actual_price": 2528.6,
+        "actual_return_pct": -0.3232
+      },
+      "30": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 2522.4,
+        "actual_return_pct": -0.5676
+      },
+      "60": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 2529.2,
+        "actual_return_pct": -0.2996
+      }
+    }
+  },
+  {
+    "key": "TCS|2026-10-23T13:35:00+05:30",
+    "symbol": "TCS",
+    "bar_time": "2026-10-23T13:35:00+05:30",
+    "entry_price": 2522.4,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0,
+      "return_15m_pct": -0.2452,
+      "return_30m_pct": -0.5637,
+      "move_since_open_pct": -1.9856,
+      "vwap_distance_pct": -1.88,
+      "rsi_14": 31.99,
+      "macd_hist": -0.3595,
+      "atr_pct": 0.3,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.53,
+      "minutes_since_open": 260,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.86,
+      "delivery_vs_avg": 0.835
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:50:00+05:30",
+        "actual_price": 2538.5,
+        "actual_return_pct": 0.6383
+      },
+      "30": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 2529.2,
+        "actual_return_pct": 0.2696
+      },
+      "60": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 2533.7,
+        "actual_return_pct": 0.448
+      }
+    }
+  },
+  {
+    "key": "TCS|2026-10-23T14:05:00+05:30",
+    "symbol": "TCS",
+    "bar_time": "2026-10-23T14:05:00+05:30",
+    "entry_price": 2529.2,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0752,
+      "return_15m_pct": -0.3664,
+      "return_30m_pct": 0.2457,
+      "move_since_open_pct": -1.7214,
+      "vwap_distance_pct": -1.48,
+      "rsi_14": 42.8,
+      "macd_hist": 1.2067,
+      "atr_pct": 0.31,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.38,
+      "minutes_since_open": 290,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.86,
+      "delivery_vs_avg": 0.835
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:20:00+05:30",
+        "actual_price": 2536.2,
+        "actual_return_pct": 0.2768
+      },
+      "30": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 2533.7,
+        "actual_return_pct": 0.1779
+      },
+      "60": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 2536.6,
+        "actual_return_pct": 0.2926
+      }
+    }
+  },
+  {
+    "key": "TCS|2026-10-23T14:35:00+05:30",
+    "symbol": "TCS",
+    "bar_time": "2026-10-23T14:35:00+05:30",
+    "entry_price": 2533.7,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0118,
+      "return_15m_pct": -0.0986,
+      "return_30m_pct": 0.1106,
+      "move_since_open_pct": -1.5465,
+      "vwap_distance_pct": -1.24,
+      "rsi_14": 48.07,
+      "macd_hist": 1.4189,
+      "atr_pct": 0.26,
+      "last_bar_range_pct": 0.0434,
+      "last_bar_volume_ratio": 0.0637,
+      "session_volume_ratio": 0.34,
+      "minutes_since_open": 320,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.86,
+      "delivery_vs_avg": 0.835
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:50:00+05:30",
+        "actual_price": 2535.0,
+        "actual_return_pct": 0.0513
+      },
+      "30": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 2536.6,
+        "actual_return_pct": 0.1145
+      },
+      "60": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "TCS|2026-10-23T15:05:00+05:30",
+    "symbol": "TCS",
+    "bar_time": "2026-10-23T15:05:00+05:30",
+    "entry_price": 2536.6,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0631,
+      "return_15m_pct": 0.0631,
+      "return_30m_pct": 0.0513,
+      "move_since_open_pct": -1.4338,
+      "vwap_distance_pct": -1.08,
+      "rsi_14": 51.78,
+      "macd_hist": 1.1504,
+      "atr_pct": 0.24,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.99,
+      "minutes_since_open": 350,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.86,
+      "delivery_vs_avg": 0.835
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T15:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:20:00+05:30",
+        "actual_price": 2525.6,
+        "actual_return_pct": -0.4336
+      },
+      "30": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      },
+      "60": {
+        "target_at": "2026-10-23T16:05:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "BHARTIARTL|2026-10-23T10:10:00+05:30",
+    "symbol": "BHARTIARTL",
+    "bar_time": "2026-10-23T10:10:00+05:30",
+    "entry_price": 1894.7,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0264,
+      "return_15m_pct": -0.3733,
+      "return_30m_pct": -0.7491,
+      "move_since_open_pct": -0.6189,
+      "vwap_distance_pct": -0.62,
+      "rsi_14": 50.0,
+      "macd_hist": 0.0,
+      "atr_pct": 0.0,
+      "last_bar_range_pct": 0.0897,
+      "last_bar_volume_ratio": 0.3062,
+      "session_volume_ratio": 1.05,
+      "minutes_since_open": 55,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 60.22,
+      "delivery_vs_avg": 0.934
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:25:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:25:00+05:30",
+        "actual_price": 1897.1,
+        "actual_return_pct": 0.1267
+      },
+      "30": {
+        "target_at": "2026-10-23T10:40:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:40:00+05:30",
+        "actual_price": 1897.4,
+        "actual_return_pct": 0.1425
+      },
+      "60": {
+        "target_at": "2026-10-23T11:10:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:10:00+05:30",
+        "actual_price": 1888.2,
+        "actual_return_pct": -0.3431
+      }
+    }
+  },
+  {
+    "key": "BHARTIARTL|2026-10-23T10:35:00+05:30",
+    "symbol": "BHARTIARTL",
+    "bar_time": "2026-10-23T10:35:00+05:30",
+    "entry_price": 1898.2,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0105,
+      "return_15m_pct": 0.2112,
+      "return_30m_pct": 0.1583,
+      "move_since_open_pct": -0.4354,
+      "vwap_distance_pct": -0.3,
+      "rsi_14": 30.53,
+      "macd_hist": 0.0,
+      "atr_pct": 0.46,
+      "last_bar_range_pct": 0.1001,
+      "last_bar_volume_ratio": 0.1818,
+      "session_volume_ratio": 0.63,
+      "minutes_since_open": 80,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 60.22,
+      "delivery_vs_avg": 0.934
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:50:00+05:30",
+        "actual_price": 1891.2,
+        "actual_return_pct": -0.3688
+      },
+      "30": {
+        "target_at": "2026-10-23T11:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:05:00+05:30",
+        "actual_price": 1888.4,
+        "actual_return_pct": -0.5163
+      },
+      "60": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 1885.4,
+        "actual_return_pct": -0.6743
+      }
+    }
+  },
+  {
+    "key": "BHARTIARTL|2026-10-23T11:05:00+05:30",
+    "symbol": "BHARTIARTL",
+    "bar_time": "2026-10-23T11:05:00+05:30",
+    "entry_price": 1888.4,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0476,
+      "return_15m_pct": -0.1481,
+      "return_30m_pct": -0.4533,
+      "move_since_open_pct": -0.9494,
+      "vwap_distance_pct": -0.71,
+      "rsi_14": 21.8,
+      "macd_hist": 0.0,
+      "atr_pct": 0.37,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.71,
+      "minutes_since_open": 110,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 60.22,
+      "delivery_vs_avg": 0.934
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:20:00+05:30",
+        "actual_price": 1889.5,
+        "actual_return_pct": 0.0583
+      },
+      "30": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 1885.4,
+        "actual_return_pct": -0.1589
+      },
+      "60": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 1878.9,
+        "actual_return_pct": -0.5031
+      }
+    }
+  },
+  {
+    "key": "BHARTIARTL|2026-10-23T11:35:00+05:30",
+    "symbol": "BHARTIARTL",
+    "bar_time": "2026-10-23T11:35:00+05:30",
+    "entry_price": 1885.4,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0796,
+      "return_15m_pct": -0.217,
+      "return_30m_pct": -0.0901,
+      "move_since_open_pct": -1.1067,
+      "vwap_distance_pct": -0.79,
+      "rsi_14": 27.27,
+      "macd_hist": -0.3373,
+      "atr_pct": 0.31,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.34,
+      "minutes_since_open": 140,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 60.22,
+      "delivery_vs_avg": 0.934
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:50:00+05:30",
+        "actual_price": 1883.4,
+        "actual_return_pct": -0.1061
+      },
+      "30": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 1878.9,
+        "actual_return_pct": -0.3448
+      },
+      "60": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 1863.7,
+        "actual_return_pct": -1.151
+      }
+    }
+  },
+  {
+    "key": "BHARTIARTL|2026-10-23T12:05:00+05:30",
+    "symbol": "BHARTIARTL",
+    "bar_time": "2026-10-23T12:05:00+05:30",
+    "entry_price": 1878.9,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0372,
+      "return_15m_pct": -0.2389,
+      "return_30m_pct": -0.5399,
+      "move_since_open_pct": -1.4477,
+      "vwap_distance_pct": -1.05,
+      "rsi_14": 25.09,
+      "macd_hist": -0.3655,
+      "atr_pct": 0.27,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.6,
+      "minutes_since_open": 170,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 60.22,
+      "delivery_vs_avg": 0.934
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:20:00+05:30",
+        "actual_price": 1875.8,
+        "actual_return_pct": -0.165
+      },
+      "30": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 1863.7,
+        "actual_return_pct": -0.809
+      },
+      "60": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 1871.6,
+        "actual_return_pct": -0.3885
+      }
+    }
+  },
+  {
+    "key": "BHARTIARTL|2026-10-23T12:35:00+05:30",
+    "symbol": "BHARTIARTL",
+    "bar_time": "2026-10-23T12:35:00+05:30",
+    "entry_price": 1863.7,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0965,
+      "return_15m_pct": -0.6451,
+      "return_30m_pct": -0.772,
+      "move_since_open_pct": -2.245,
+      "vwap_distance_pct": -1.69,
+      "rsi_14": 14.17,
+      "macd_hist": -1.3957,
+      "atr_pct": 0.26,
+      "last_bar_range_pct": 0.1771,
+      "last_bar_volume_ratio": 0.2426,
+      "session_volume_ratio": 1.38,
+      "minutes_since_open": 200,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 60.22,
+      "delivery_vs_avg": 0.934
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:50:00+05:30",
+        "actual_price": 1862.5,
+        "actual_return_pct": -0.0644
+      },
+      "30": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 1871.6,
+        "actual_return_pct": 0.4239
+      },
+      "60": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 1876.0,
+        "actual_return_pct": 0.66
+      }
+    }
+  },
+  {
+    "key": "BHARTIARTL|2026-10-23T13:05:00+05:30",
+    "symbol": "BHARTIARTL",
+    "bar_time": "2026-10-23T13:05:00+05:30",
+    "entry_price": 1871.6,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0,
+      "return_15m_pct": 0.4886,
+      "return_30m_pct": 0.3431,
+      "move_since_open_pct": -1.8306,
+      "vwap_distance_pct": -1.11,
+      "rsi_14": 37.97,
+      "macd_hist": 0.5784,
+      "atr_pct": 0.24,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.35,
+      "minutes_since_open": 230,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 60.22,
+      "delivery_vs_avg": 0.934
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:20:00+05:30",
+        "actual_price": 1873.2,
+        "actual_return_pct": 0.0855
+      },
+      "30": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 1876.0,
+        "actual_return_pct": 0.2351
+      },
+      "60": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 1881.8,
+        "actual_return_pct": 0.545
+      }
+    }
+  },
+  {
+    "key": "BHARTIARTL|2026-10-23T13:35:00+05:30",
+    "symbol": "BHARTIARTL",
+    "bar_time": "2026-10-23T13:35:00+05:30",
+    "entry_price": 1876.0,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0053,
+      "return_15m_pct": 0.1495,
+      "return_30m_pct": 0.1762,
+      "move_since_open_pct": -1.5998,
+      "vwap_distance_pct": -0.84,
+      "rsi_14": 48.28,
+      "macd_hist": 1.8734,
+      "atr_pct": 0.2,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.29,
+      "minutes_since_open": 260,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 60.22,
+      "delivery_vs_avg": 0.934
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:50:00+05:30",
+        "actual_price": 1882.8,
+        "actual_return_pct": 0.3625
+      },
+      "30": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 1881.8,
+        "actual_return_pct": 0.3092
+      },
+      "60": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 1884.9,
+        "actual_return_pct": 0.4744
+      }
+    }
+  },
+  {
+    "key": "BHARTIARTL|2026-10-23T14:05:00+05:30",
+    "symbol": "BHARTIARTL",
+    "bar_time": "2026-10-23T14:05:00+05:30",
+    "entry_price": 1881.8,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0691,
+      "return_15m_pct": -0.0531,
+      "return_30m_pct": 0.149,
+      "move_since_open_pct": -1.2956,
+      "vwap_distance_pct": -0.5,
+      "rsi_14": 56.16,
+      "macd_hist": 1.7926,
+      "atr_pct": 0.21,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.35,
+      "minutes_since_open": 290,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 60.22,
+      "delivery_vs_avg": 0.934
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:20:00+05:30",
+        "actual_price": 1885.1,
+        "actual_return_pct": 0.1754
+      },
+      "30": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 1884.9,
+        "actual_return_pct": 0.1647
+      },
+      "60": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 1882.2,
+        "actual_return_pct": 0.0213
+      }
+    }
+  },
+  {
+    "key": "BHARTIARTL|2026-10-23T14:35:00+05:30",
+    "symbol": "BHARTIARTL",
+    "bar_time": "2026-10-23T14:35:00+05:30",
+    "entry_price": 1884.9,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0,
+      "return_15m_pct": -0.0106,
+      "return_30m_pct": 0.0425,
+      "move_since_open_pct": -1.133,
+      "vwap_distance_pct": -0.32,
+      "rsi_14": 59.36,
+      "macd_hist": 1.088,
+      "atr_pct": 0.17,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.47,
+      "minutes_since_open": 320,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 60.22,
+      "delivery_vs_avg": 0.934
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:50:00+05:30",
+        "actual_price": 1882.1,
+        "actual_return_pct": -0.1486
+      },
+      "30": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 1882.2,
+        "actual_return_pct": -0.1432
+      },
+      "60": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "BHARTIARTL|2026-10-23T15:05:00+05:30",
+    "symbol": "BHARTIARTL",
+    "bar_time": "2026-10-23T15:05:00+05:30",
+    "entry_price": 1882.2,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0585,
+      "return_15m_pct": 0.0053,
+      "return_30m_pct": -0.0372,
+      "move_since_open_pct": -1.2746,
+      "vwap_distance_pct": -0.42,
+      "rsi_14": 52.82,
+      "macd_hist": -0.0314,
+      "atr_pct": 0.18,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.61,
+      "minutes_since_open": 350,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 60.22,
+      "delivery_vs_avg": 0.934
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T15:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:20:00+05:30",
+        "actual_price": 1884.5,
+        "actual_return_pct": 0.1222
+      },
+      "30": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      },
+      "60": {
+        "target_at": "2026-10-23T16:05:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "TATASTEEL|2026-10-23T10:10:00+05:30",
+    "symbol": "TATASTEEL",
+    "bar_time": "2026-10-23T10:10:00+05:30",
+    "entry_price": 167.3,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.006,
+      "return_15m_pct": -0.7946,
+      "return_30m_pct": -1.1521,
+      "move_since_open_pct": -2.0836,
+      "vwap_distance_pct": -0.71,
+      "rsi_14": 50.0,
+      "macd_hist": 0.0,
+      "atr_pct": 0.0,
+      "last_bar_range_pct": 0.269,
+      "last_bar_volume_ratio": 0.2512,
+      "session_volume_ratio": 1.14,
+      "minutes_since_open": 55,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.96,
+      "delivery_vs_avg": 0.844
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:25:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:25:00+05:30",
+        "actual_price": 167.25,
+        "actual_return_pct": -0.0299
+      },
+      "30": {
+        "target_at": "2026-10-23T10:40:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:40:00+05:30",
+        "actual_price": 166.65,
+        "actual_return_pct": -0.3885
+      },
+      "60": {
+        "target_at": "2026-10-23T11:10:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:10:00+05:30",
+        "actual_price": 165.87,
+        "actual_return_pct": -0.8548
+      }
+    }
+  },
+  {
+    "key": "TATASTEEL|2026-10-23T10:35:00+05:30",
+    "symbol": "TATASTEEL",
+    "bar_time": "2026-10-23T10:35:00+05:30",
+    "entry_price": 167.18,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0898,
+      "return_15m_pct": 0.1318,
+      "return_30m_pct": -0.0658,
+      "move_since_open_pct": -2.1538,
+      "vwap_distance_pct": -0.65,
+      "rsi_14": 16.96,
+      "macd_hist": 0.0,
+      "atr_pct": 0.51,
+      "last_bar_range_pct": 0.1077,
+      "last_bar_volume_ratio": 0.0462,
+      "session_volume_ratio": 0.47,
+      "minutes_since_open": 80,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.96,
+      "delivery_vs_avg": 0.844
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:50:00+05:30",
+        "actual_price": 166.6,
+        "actual_return_pct": -0.3469
+      },
+      "30": {
+        "target_at": "2026-10-23T11:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:05:00+05:30",
+        "actual_price": 165.5,
+        "actual_return_pct": -1.0049
+      },
+      "60": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 165.97,
+        "actual_return_pct": -0.7238
+      }
+    }
+  },
+  {
+    "key": "TATASTEEL|2026-10-23T11:05:00+05:30",
+    "symbol": "TATASTEEL",
+    "bar_time": "2026-10-23T11:05:00+05:30",
+    "entry_price": 165.5,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0847,
+      "return_15m_pct": -0.6603,
+      "return_30m_pct": -0.6304,
+      "move_since_open_pct": -3.1371,
+      "vwap_distance_pct": -1.2,
+      "rsi_14": 14.96,
+      "macd_hist": 0.0,
+      "atr_pct": 0.46,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 1.99,
+      "minutes_since_open": 110,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.96,
+      "delivery_vs_avg": 0.844
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:20:00+05:30",
+        "actual_price": 166.49,
+        "actual_return_pct": 0.5982
+      },
+      "30": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 165.97,
+        "actual_return_pct": 0.284
+      },
+      "60": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 165.5,
+        "actual_return_pct": 0.0
+      }
+    }
+  },
+  {
+    "key": "TATASTEEL|2026-10-23T11:35:00+05:30",
+    "symbol": "TATASTEEL",
+    "bar_time": "2026-10-23T11:35:00+05:30",
+    "entry_price": 165.97,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0482,
+      "return_15m_pct": -0.3123,
+      "return_30m_pct": 0.1871,
+      "move_since_open_pct": -2.862,
+      "vwap_distance_pct": -0.81,
+      "rsi_14": 29.12,
+      "macd_hist": 0.0747,
+      "atr_pct": 0.39,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.3,
+      "minutes_since_open": 140,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.96,
+      "delivery_vs_avg": 0.844
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:50:00+05:30",
+        "actual_price": 165.85,
+        "actual_return_pct": -0.0723
+      },
+      "30": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 165.5,
+        "actual_return_pct": -0.2832
+      },
+      "60": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 163.97,
+        "actual_return_pct": -1.205
+      }
+    }
+  },
+  {
+    "key": "TATASTEEL|2026-10-23T12:05:00+05:30",
+    "symbol": "TATASTEEL",
+    "bar_time": "2026-10-23T12:05:00+05:30",
+    "entry_price": 165.5,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0363,
+      "return_15m_pct": -0.211,
+      "return_30m_pct": -0.3012,
+      "move_since_open_pct": -3.1371,
+      "vwap_distance_pct": -1.02,
+      "rsi_14": 26.13,
+      "macd_hist": 0.0664,
+      "atr_pct": 0.32,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.63,
+      "minutes_since_open": 170,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.96,
+      "delivery_vs_avg": 0.844
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:20:00+05:30",
+        "actual_price": 165.08,
+        "actual_return_pct": -0.2538
+      },
+      "30": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 163.97,
+        "actual_return_pct": -0.9245
+      },
+      "60": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 164.59,
+        "actual_return_pct": -0.5499
+      }
+    }
+  },
+  {
+    "key": "TATASTEEL|2026-10-23T12:35:00+05:30",
+    "symbol": "TATASTEEL",
+    "bar_time": "2026-10-23T12:35:00+05:30",
+    "entry_price": 163.97,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.1522,
+      "return_15m_pct": -0.6724,
+      "return_30m_pct": -0.7445,
+      "move_since_open_pct": -4.0325,
+      "vwap_distance_pct": -1.73,
+      "rsi_14": 18.31,
+      "macd_hist": -0.0624,
+      "atr_pct": 0.34,
+      "last_bar_range_pct": 0.3415,
+      "last_bar_volume_ratio": 0.1815,
+      "session_volume_ratio": 2.18,
+      "minutes_since_open": 200,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.96,
+      "delivery_vs_avg": 0.844
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:50:00+05:30",
+        "actual_price": 163.79,
+        "actual_return_pct": -0.1098
+      },
+      "30": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 164.59,
+        "actual_return_pct": 0.3781
+      },
+      "60": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 165.63,
+        "actual_return_pct": 1.0124
+      }
+    }
+  },
+  {
+    "key": "TATASTEEL|2026-10-23T13:05:00+05:30",
+    "symbol": "TATASTEEL",
+    "bar_time": "2026-10-23T13:05:00+05:30",
+    "entry_price": 164.59,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0061,
+      "return_15m_pct": 0.4884,
+      "return_30m_pct": 0.4639,
+      "move_since_open_pct": -3.6697,
+      "vwap_distance_pct": -1.18,
+      "rsi_14": 38.54,
+      "macd_hist": 0.0764,
+      "atr_pct": 0.32,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.81,
+      "minutes_since_open": 230,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.96,
+      "delivery_vs_avg": 0.844
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:20:00+05:30",
+        "actual_price": 165.19,
+        "actual_return_pct": 0.3645
+      },
+      "30": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 165.63,
+        "actual_return_pct": 0.6319
+      },
+      "60": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 166.48,
+        "actual_return_pct": 1.1483
+      }
+    }
+  },
+  {
+    "key": "TATASTEEL|2026-10-23T13:35:00+05:30",
+    "symbol": "TATASTEEL",
+    "bar_time": "2026-10-23T13:35:00+05:30",
+    "entry_price": 165.63,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0544,
+      "return_15m_pct": 0.2664,
+      "return_30m_pct": 0.2785,
+      "move_since_open_pct": -3.061,
+      "vwap_distance_pct": -0.46,
+      "rsi_14": 54.12,
+      "macd_hist": 0.2569,
+      "atr_pct": 0.3,
+      "last_bar_range_pct": 0.1026,
+      "last_bar_volume_ratio": 0.0955,
+      "session_volume_ratio": 0.64,
+      "minutes_since_open": 260,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.96,
+      "delivery_vs_avg": 0.844
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:50:00+05:30",
+        "actual_price": 166.67,
+        "actual_return_pct": 0.6279
+      },
+      "30": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 166.48,
+        "actual_return_pct": 0.5132
+      },
+      "60": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 167.2,
+        "actual_return_pct": 0.9479
+      }
+    }
+  },
+  {
+    "key": "TATASTEEL|2026-10-23T14:05:00+05:30",
+    "symbol": "TATASTEEL",
+    "bar_time": "2026-10-23T14:05:00+05:30",
+    "entry_price": 166.48,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0902,
+      "return_15m_pct": -0.114,
+      "return_30m_pct": 0.5314,
+      "move_since_open_pct": -2.5635,
+      "vwap_distance_pct": 0.03,
+      "rsi_14": 58.06,
+      "macd_hist": 0.2332,
+      "atr_pct": 0.35,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 1.33,
+      "minutes_since_open": 290,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.96,
+      "delivery_vs_avg": 0.844
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:20:00+05:30",
+        "actual_price": 167.34,
+        "actual_return_pct": 0.5166
+      },
+      "30": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 167.2,
+        "actual_return_pct": 0.4325
+      },
+      "60": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 167.41,
+        "actual_return_pct": 0.5586
+      }
+    }
+  },
+  {
+    "key": "TATASTEEL|2026-10-23T14:35:00+05:30",
+    "symbol": "TATASTEEL",
+    "bar_time": "2026-10-23T14:35:00+05:30",
+    "entry_price": 167.2,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0658,
+      "return_15m_pct": -0.0837,
+      "return_30m_pct": 0.1917,
+      "move_since_open_pct": -2.1421,
+      "vwap_distance_pct": 0.42,
+      "rsi_14": 62.2,
+      "macd_hist": 0.1476,
+      "atr_pct": 0.31,
+      "last_bar_range_pct": 0.0897,
+      "last_bar_volume_ratio": 0.0802,
+      "session_volume_ratio": 1.0,
+      "minutes_since_open": 320,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.96,
+      "delivery_vs_avg": 0.844
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:50:00+05:30",
+        "actual_price": 167.26,
+        "actual_return_pct": 0.0359
+      },
+      "30": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 167.41,
+        "actual_return_pct": 0.1256
+      },
+      "60": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "TATASTEEL|2026-10-23T15:05:00+05:30",
+    "symbol": "TATASTEEL",
+    "bar_time": "2026-10-23T15:05:00+05:30",
+    "entry_price": 167.41,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0837,
+      "return_15m_pct": 0.0897,
+      "return_30m_pct": -0.0179,
+      "move_since_open_pct": -2.0192,
+      "vwap_distance_pct": 0.5,
+      "rsi_14": 61.3,
+      "macd_hist": 0.0249,
+      "atr_pct": 0.28,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 1.02,
+      "minutes_since_open": 350,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 42.96,
+      "delivery_vs_avg": 0.844
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T15:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:20:00+05:30",
+        "actual_price": 166.95,
+        "actual_return_pct": -0.2748
+      },
+      "30": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      },
+      "60": {
+        "target_at": "2026-10-23T16:05:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "ITC|2026-10-23T10:10:00+05:30",
+    "symbol": "ITC",
+    "bar_time": "2026-10-23T10:10:00+05:30",
+    "entry_price": 257.55,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0583,
+      "return_15m_pct": -0.2904,
+      "return_30m_pct": -0.4253,
+      "move_since_open_pct": -0.3097,
+      "vwap_distance_pct": -0.5,
+      "rsi_14": 50.0,
+      "macd_hist": 0.0,
+      "atr_pct": 0.0,
+      "last_bar_range_pct": 0.0971,
+      "last_bar_volume_ratio": 0.2359,
+      "session_volume_ratio": 0.6,
+      "minutes_since_open": 55,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 55.15,
+      "delivery_vs_avg": 0.919
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:25:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:25:00+05:30",
+        "actual_price": 257.35,
+        "actual_return_pct": -0.0777
+      },
+      "30": {
+        "target_at": "2026-10-23T10:40:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:40:00+05:30",
+        "actual_price": 257.25,
+        "actual_return_pct": -0.1165
+      },
+      "60": {
+        "target_at": "2026-10-23T11:10:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:10:00+05:30",
+        "actual_price": 256.0,
+        "actual_return_pct": -0.6018
+      }
+    }
+  },
+  {
+    "key": "ITC|2026-10-23T10:35:00+05:30",
+    "symbol": "ITC",
+    "bar_time": "2026-10-23T10:35:00+05:30",
+    "entry_price": 257.5,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.1166,
+      "return_15m_pct": 0.1556,
+      "return_30m_pct": 0.0389,
+      "move_since_open_pct": -0.329,
+      "vwap_distance_pct": -0.34,
+      "rsi_14": 9.22,
+      "macd_hist": 0.0,
+      "atr_pct": 0.37,
+      "last_bar_range_pct": 0.1165,
+      "last_bar_volume_ratio": 0.1836,
+      "session_volume_ratio": 0.73,
+      "minutes_since_open": 80,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 55.15,
+      "delivery_vs_avg": 0.919
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:50:00+05:30",
+        "actual_price": 257.5,
+        "actual_return_pct": 0.0
+      },
+      "30": {
+        "target_at": "2026-10-23T11:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:05:00+05:30",
+        "actual_price": 256.2,
+        "actual_return_pct": -0.5048
+      },
+      "60": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 255.65,
+        "actual_return_pct": -0.7184
+      }
+    }
+  },
+  {
+    "key": "ITC|2026-10-23T11:05:00+05:30",
+    "symbol": "ITC",
+    "bar_time": "2026-10-23T11:05:00+05:30",
+    "entry_price": 256.2,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0195,
+      "return_15m_pct": -0.5048,
+      "return_30m_pct": -0.3694,
+      "move_since_open_pct": -0.8322,
+      "vwap_distance_pct": -0.69,
+      "rsi_14": 11.24,
+      "macd_hist": 0.0,
+      "atr_pct": 0.31,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.84,
+      "minutes_since_open": 110,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 55.15,
+      "delivery_vs_avg": 0.919
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:20:00+05:30",
+        "actual_price": 257.05,
+        "actual_return_pct": 0.3318
+      },
+      "30": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 255.65,
+        "actual_return_pct": -0.2147
+      },
+      "60": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 255.0,
+        "actual_return_pct": -0.4684
+      }
+    }
+  },
+  {
+    "key": "ITC|2026-10-23T11:35:00+05:30",
+    "symbol": "ITC",
+    "bar_time": "2026-10-23T11:35:00+05:30",
+    "entry_price": 255.65,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0391,
+      "return_15m_pct": -0.5446,
+      "return_30m_pct": -0.0977,
+      "move_since_open_pct": -1.0451,
+      "vwap_distance_pct": -0.7,
+      "rsi_14": 22.85,
+      "macd_hist": -0.0351,
+      "atr_pct": 0.3,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 1.93,
+      "minutes_since_open": 140,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 55.15,
+      "delivery_vs_avg": 0.919
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:50:00+05:30",
+        "actual_price": 255.25,
+        "actual_return_pct": -0.1565
+      },
+      "30": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 255.0,
+        "actual_return_pct": -0.2543
+      },
+      "60": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 257.3,
+        "actual_return_pct": 0.6454
+      }
+    }
+  },
+  {
+    "key": "ITC|2026-10-23T12:05:00+05:30",
+    "symbol": "ITC",
+    "bar_time": "2026-10-23T12:05:00+05:30",
+    "entry_price": 255.0,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0196,
+      "return_15m_pct": -0.0979,
+      "return_30m_pct": -0.3906,
+      "move_since_open_pct": -1.2967,
+      "vwap_distance_pct": -0.84,
+      "rsi_14": 23.36,
+      "macd_hist": -0.047,
+      "atr_pct": 0.26,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.84,
+      "minutes_since_open": 170,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 55.15,
+      "delivery_vs_avg": 0.919
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:20:00+05:30",
+        "actual_price": 256.2,
+        "actual_return_pct": 0.4706
+      },
+      "30": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 257.3,
+        "actual_return_pct": 0.902
+      },
+      "60": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 257.1,
+        "actual_return_pct": 0.8235
+      }
+    }
+  },
+  {
+    "key": "ITC|2026-10-23T12:35:00+05:30",
+    "symbol": "ITC",
+    "bar_time": "2026-10-23T12:35:00+05:30",
+    "entry_price": 257.3,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.4098,
+      "return_15m_pct": 0.4293,
+      "return_30m_pct": 0.7439,
+      "move_since_open_pct": -0.4064,
+      "vwap_distance_pct": 0.09,
+      "rsi_14": 52.7,
+      "macd_hist": 0.2607,
+      "atr_pct": 0.27,
+      "last_bar_range_pct": 0.447,
+      "last_bar_volume_ratio": 2.9665,
+      "session_volume_ratio": 0.5,
+      "minutes_since_open": 200,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 55.15,
+      "delivery_vs_avg": 0.919
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:50:00+05:30",
+        "actual_price": 256.7,
+        "actual_return_pct": -0.2332
+      },
+      "30": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 257.1,
+        "actual_return_pct": -0.0777
+      },
+      "60": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 256.4,
+        "actual_return_pct": -0.3498
+      }
+    }
+  },
+  {
+    "key": "ITC|2026-10-23T13:05:00+05:30",
+    "symbol": "ITC",
+    "bar_time": "2026-10-23T13:05:00+05:30",
+    "entry_price": 257.1,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0195,
+      "return_15m_pct": 0.1558,
+      "return_30m_pct": 0.0,
+      "move_since_open_pct": -0.4838,
+      "vwap_distance_pct": 0.02,
+      "rsi_14": 51.89,
+      "macd_hist": 0.2273,
+      "atr_pct": 0.22,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.33,
+      "minutes_since_open": 230,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 55.15,
+      "delivery_vs_avg": 0.919
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:20:00+05:30",
+        "actual_price": 256.15,
+        "actual_return_pct": -0.3695
+      },
+      "30": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 256.4,
+        "actual_return_pct": -0.2723
+      },
+      "60": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 258.5,
+        "actual_return_pct": 0.5445
+      }
+    }
+  },
+  {
+    "key": "ITC|2026-10-23T13:35:00+05:30",
+    "symbol": "ITC",
+    "bar_time": "2026-10-23T13:35:00+05:30",
+    "entry_price": 256.4,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0585,
+      "return_15m_pct": 0.0976,
+      "return_30m_pct": -0.0779,
+      "move_since_open_pct": -0.7548,
+      "vwap_distance_pct": -0.23,
+      "rsi_14": 46.17,
+      "macd_hist": 0.0316,
+      "atr_pct": 0.2,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 1.46,
+      "minutes_since_open": 260,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 55.15,
+      "delivery_vs_avg": 0.919
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:50:00+05:30",
+        "actual_price": 258.0,
+        "actual_return_pct": 0.624
+      },
+      "30": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 258.5,
+        "actual_return_pct": 0.819
+      },
+      "60": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 257.75,
+        "actual_return_pct": 0.5265
+      }
+    }
+  },
+  {
+    "key": "ITC|2026-10-23T14:05:00+05:30",
+    "symbol": "ITC",
+    "bar_time": "2026-10-23T14:05:00+05:30",
+    "entry_price": 258.5,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0774,
+      "return_15m_pct": 0.1938,
+      "return_30m_pct": 0.8387,
+      "move_since_open_pct": 0.0581,
+      "vwap_distance_pct": 0.56,
+      "rsi_14": 64.94,
+      "macd_hist": 0.2438,
+      "atr_pct": 0.23,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.92,
+      "minutes_since_open": 290,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 55.15,
+      "delivery_vs_avg": 0.919
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:20:00+05:30",
+        "actual_price": 257.85,
+        "actual_return_pct": -0.2514
+      },
+      "30": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 257.75,
+        "actual_return_pct": -0.2901
+      },
+      "60": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 256.75,
+        "actual_return_pct": -0.677
+      }
+    }
+  },
+  {
+    "key": "ITC|2026-10-23T14:35:00+05:30",
+    "symbol": "ITC",
+    "bar_time": "2026-10-23T14:35:00+05:30",
+    "entry_price": 257.75,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0775,
+      "return_15m_pct": -0.0388,
+      "return_30m_pct": -0.3287,
+      "move_since_open_pct": -0.2322,
+      "vwap_distance_pct": 0.23,
+      "rsi_14": 54.32,
+      "macd_hist": 0.0287,
+      "atr_pct": 0.21,
+      "last_bar_range_pct": 0.097,
+      "last_bar_volume_ratio": 1.1601,
+      "session_volume_ratio": 0.74,
+      "minutes_since_open": 320,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 55.15,
+      "delivery_vs_avg": 0.919
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:50:00+05:30",
+        "actual_price": 257.0,
+        "actual_return_pct": -0.291
+      },
+      "30": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 256.75,
+        "actual_return_pct": -0.388
+      },
+      "60": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "ITC|2026-10-23T15:05:00+05:30",
+    "symbol": "ITC",
+    "bar_time": "2026-10-23T15:05:00+05:30",
+    "entry_price": 256.75,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.039,
+      "return_15m_pct": -0.0973,
+      "return_30m_pct": -0.3687,
+      "move_since_open_pct": -0.6193,
+      "vwap_distance_pct": -0.15,
+      "rsi_14": 43.79,
+      "macd_hist": -0.167,
+      "atr_pct": 0.19,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 2.06,
+      "minutes_since_open": 350,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 55.15,
+      "delivery_vs_avg": 0.919
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T15:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:20:00+05:30",
+        "actual_price": 257.15,
+        "actual_return_pct": 0.1558
+      },
+      "30": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      },
+      "60": {
+        "target_at": "2026-10-23T16:05:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "AXISBANK|2026-10-23T10:10:00+05:30",
+    "symbol": "AXISBANK",
+    "bar_time": "2026-10-23T10:10:00+05:30",
+    "entry_price": 1210.3,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0165,
+      "return_15m_pct": -0.1897,
+      "return_30m_pct": -0.4606,
+      "move_since_open_pct": -0.0495,
+      "vwap_distance_pct": -0.31,
+      "rsi_14": 50.0,
+      "macd_hist": 0.0,
+      "atr_pct": 0.0,
+      "last_bar_range_pct": 0.1074,
+      "last_bar_volume_ratio": 0.3533,
+      "session_volume_ratio": 0.42,
+      "minutes_since_open": 55,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 70.92,
+      "delivery_vs_avg": 1.113
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:25:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:25:00+05:30",
+        "actual_price": 1200.0,
+        "actual_return_pct": -0.851
+      },
+      "30": {
+        "target_at": "2026-10-23T10:40:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:40:00+05:30",
+        "actual_price": 1203.2,
+        "actual_return_pct": -0.5866
+      },
+      "60": {
+        "target_at": "2026-10-23T11:10:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:10:00+05:30",
+        "actual_price": 1204.2,
+        "actual_return_pct": -0.504
+      }
+    }
+  },
+  {
+    "key": "AXISBANK|2026-10-23T10:35:00+05:30",
+    "symbol": "AXISBANK",
+    "bar_time": "2026-10-23T10:35:00+05:30",
+    "entry_price": 1201.1,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0749,
+      "return_15m_pct": -0.0832,
+      "return_30m_pct": -0.7765,
+      "move_since_open_pct": -0.8093,
+      "vwap_distance_pct": -0.68,
+      "rsi_14": 10.55,
+      "macd_hist": 0.0,
+      "atr_pct": 0.53,
+      "last_bar_range_pct": 0.1332,
+      "last_bar_volume_ratio": 0.2031,
+      "session_volume_ratio": 0.94,
+      "minutes_since_open": 80,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 70.92,
+      "delivery_vs_avg": 1.113
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T10:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T10:50:00+05:30",
+        "actual_price": 1206.2,
+        "actual_return_pct": 0.4246
+      },
+      "30": {
+        "target_at": "2026-10-23T11:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:05:00+05:30",
+        "actual_price": 1203.6,
+        "actual_return_pct": 0.2081
+      },
+      "60": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 1199.8,
+        "actual_return_pct": -0.1082
+      }
+    }
+  },
+  {
+    "key": "AXISBANK|2026-10-23T11:05:00+05:30",
+    "symbol": "AXISBANK",
+    "bar_time": "2026-10-23T11:05:00+05:30",
+    "entry_price": 1203.6,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0083,
+      "return_15m_pct": -0.2156,
+      "return_30m_pct": 0.0665,
+      "move_since_open_pct": -0.6029,
+      "vwap_distance_pct": -0.37,
+      "rsi_14": 24.95,
+      "macd_hist": 0.0,
+      "atr_pct": 0.42,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 1.94,
+      "minutes_since_open": 110,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 70.92,
+      "delivery_vs_avg": 1.113
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:20:00+05:30",
+        "actual_price": 1207.5,
+        "actual_return_pct": 0.324
+      },
+      "30": {
+        "target_at": "2026-10-23T11:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:35:00+05:30",
+        "actual_price": 1199.8,
+        "actual_return_pct": -0.3157
+      },
+      "60": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 1204.0,
+        "actual_return_pct": 0.0332
+      }
+    }
+  },
+  {
+    "key": "AXISBANK|2026-10-23T11:35:00+05:30",
+    "symbol": "AXISBANK",
+    "bar_time": "2026-10-23T11:35:00+05:30",
+    "entry_price": 1199.8,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.1165,
+      "return_15m_pct": -0.6377,
+      "return_30m_pct": -0.183,
+      "move_since_open_pct": -0.9167,
+      "vwap_distance_pct": -0.6,
+      "rsi_14": 28.93,
+      "macd_hist": 0.1237,
+      "atr_pct": 0.39,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.95,
+      "minutes_since_open": 140,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 70.92,
+      "delivery_vs_avg": 1.113
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T11:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T11:50:00+05:30",
+        "actual_price": 1202.4,
+        "actual_return_pct": 0.2167
+      },
+      "30": {
+        "target_at": "2026-10-23T12:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:05:00+05:30",
+        "actual_price": 1204.0,
+        "actual_return_pct": 0.3501
+      },
+      "60": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 1203.4,
+        "actual_return_pct": 0.3001
+      }
+    }
+  },
+  {
+    "key": "AXISBANK|2026-10-23T12:05:00+05:30",
+    "symbol": "AXISBANK",
+    "bar_time": "2026-10-23T12:05:00+05:30",
+    "entry_price": 1204.0,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0415,
+      "return_15m_pct": 0.1331,
+      "return_30m_pct": 0.325,
+      "move_since_open_pct": -0.5698,
+      "vwap_distance_pct": -0.15,
+      "rsi_14": 41.38,
+      "macd_hist": 0.5485,
+      "atr_pct": 0.29,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.45,
+      "minutes_since_open": 170,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 70.92,
+      "delivery_vs_avg": 1.113
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:20:00+05:30",
+        "actual_price": 1204.7,
+        "actual_return_pct": 0.0581
+      },
+      "30": {
+        "target_at": "2026-10-23T12:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:35:00+05:30",
+        "actual_price": 1203.4,
+        "actual_return_pct": -0.0498
+      },
+      "60": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 1203.6,
+        "actual_return_pct": -0.0332
+      }
+    }
+  },
+  {
+    "key": "AXISBANK|2026-10-23T12:35:00+05:30",
+    "symbol": "AXISBANK",
+    "bar_time": "2026-10-23T12:35:00+05:30",
+    "entry_price": 1203.4,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": -0.0083,
+      "return_15m_pct": -0.1079,
+      "return_30m_pct": -0.0581,
+      "move_since_open_pct": -0.6194,
+      "vwap_distance_pct": -0.19,
+      "rsi_14": 41.56,
+      "macd_hist": 0.5199,
+      "atr_pct": 0.25,
+      "last_bar_range_pct": 0.0748,
+      "last_bar_volume_ratio": 0.0756,
+      "session_volume_ratio": 0.31,
+      "minutes_since_open": 200,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 70.92,
+      "delivery_vs_avg": 1.113
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T12:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T12:50:00+05:30",
+        "actual_price": 1204.3,
+        "actual_return_pct": 0.0748
+      },
+      "30": {
+        "target_at": "2026-10-23T13:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:05:00+05:30",
+        "actual_price": 1203.6,
+        "actual_return_pct": 0.0166
+      },
+      "60": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 1201.8,
+        "actual_return_pct": -0.133
+      }
+    }
+  },
+  {
+    "key": "AXISBANK|2026-10-23T13:05:00+05:30",
+    "symbol": "AXISBANK",
+    "bar_time": "2026-10-23T13:05:00+05:30",
+    "entry_price": 1203.6,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0,
+      "return_15m_pct": -0.0581,
+      "return_30m_pct": -0.1493,
+      "move_since_open_pct": -0.6029,
+      "vwap_distance_pct": -0.16,
+      "rsi_14": 44.39,
+      "macd_hist": 0.2918,
+      "atr_pct": 0.22,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.34,
+      "minutes_since_open": 230,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 70.92,
+      "delivery_vs_avg": 1.113
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:20:00+05:30",
+        "actual_price": 1198.7,
+        "actual_return_pct": -0.4071
+      },
+      "30": {
+        "target_at": "2026-10-23T13:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:35:00+05:30",
+        "actual_price": 1201.8,
+        "actual_return_pct": -0.1495
+      },
+      "60": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 1211.2,
+        "actual_return_pct": 0.6314
+      }
+    }
+  },
+  {
+    "key": "AXISBANK|2026-10-23T13:35:00+05:30",
+    "symbol": "AXISBANK",
+    "bar_time": "2026-10-23T13:35:00+05:30",
+    "entry_price": 1201.8,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0916,
+      "return_15m_pct": 0.2586,
+      "return_30m_pct": -0.0914,
+      "move_since_open_pct": -0.7515,
+      "vwap_distance_pct": -0.25,
+      "rsi_14": 44.75,
+      "macd_hist": -0.0801,
+      "atr_pct": 0.23,
+      "last_bar_range_pct": 0.1498,
+      "last_bar_volume_ratio": 0.1348,
+      "session_volume_ratio": 0.43,
+      "minutes_since_open": 260,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 70.92,
+      "delivery_vs_avg": 1.113
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T13:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T13:50:00+05:30",
+        "actual_price": 1211.3,
+        "actual_return_pct": 0.7905
+      },
+      "30": {
+        "target_at": "2026-10-23T14:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:05:00+05:30",
+        "actual_price": 1211.2,
+        "actual_return_pct": 0.7822
+      },
+      "60": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 1214.9,
+        "actual_return_pct": 1.09
+      }
+    }
+  },
+  {
+    "key": "AXISBANK|2026-10-23T14:05:00+05:30",
+    "symbol": "AXISBANK",
+    "bar_time": "2026-10-23T14:05:00+05:30",
+    "entry_price": 1211.2,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0165,
+      "return_15m_pct": -0.0083,
+      "return_30m_pct": 0.7654,
+      "move_since_open_pct": 0.0248,
+      "vwap_distance_pct": 0.51,
+      "rsi_14": 63.2,
+      "macd_hist": 1.2332,
+      "atr_pct": 0.23,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 0.65,
+      "minutes_since_open": 290,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 70.92,
+      "delivery_vs_avg": 1.113
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:20:00+05:30",
+        "actual_price": 1214.5,
+        "actual_return_pct": 0.2725
+      },
+      "30": {
+        "target_at": "2026-10-23T14:35:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:35:00+05:30",
+        "actual_price": 1214.9,
+        "actual_return_pct": 0.3055
+      },
+      "60": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 1215.2,
+        "actual_return_pct": 0.3302
+      }
+    }
+  },
+  {
+    "key": "AXISBANK|2026-10-23T14:35:00+05:30",
+    "symbol": "AXISBANK",
+    "bar_time": "2026-10-23T14:35:00+05:30",
+    "entry_price": 1214.9,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0329,
+      "return_15m_pct": 0.0329,
+      "return_30m_pct": 0.1649,
+      "move_since_open_pct": 0.3303,
+      "vwap_distance_pct": 0.74,
+      "rsi_14": 67.68,
+      "macd_hist": 0.8187,
+      "atr_pct": 0.2,
+      "last_bar_range_pct": 0.0659,
+      "last_bar_volume_ratio": 0.2097,
+      "session_volume_ratio": 0.85,
+      "minutes_since_open": 320,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 70.92,
+      "delivery_vs_avg": 1.113
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T14:50:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T14:50:00+05:30",
+        "actual_price": 1214.3,
+        "actual_return_pct": -0.0494
+      },
+      "30": {
+        "target_at": "2026-10-23T15:05:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:05:00+05:30",
+        "actual_price": 1215.2,
+        "actual_return_pct": 0.0247
+      },
+      "60": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      }
+    }
+  },
+  {
+    "key": "AXISBANK|2026-10-23T15:05:00+05:30",
+    "symbol": "AXISBANK",
+    "bar_time": "2026-10-23T15:05:00+05:30",
+    "entry_price": 1215.2,
+    "feature_version": "intraday-observation-v3",
+    "features": {
+      "return_5m_pct": 0.0741,
+      "return_15m_pct": 0.0741,
+      "return_30m_pct": -0.1151,
+      "move_since_open_pct": 0.3551,
+      "vwap_distance_pct": 0.65,
+      "rsi_14": 61.88,
+      "macd_hist": 0.0117,
+      "atr_pct": 0.21,
+      "last_bar_range_pct": 0.0,
+      "last_bar_volume_ratio": 0.0,
+      "session_volume_ratio": 1.23,
+      "minutes_since_open": 350,
+      "oi_change_pct": 0.0,
+      "buildup_code": 0,
+      "oi_vs_avg": 1.0,
+      "bulk_buy_flag_5d": 0,
+      "bulk_sell_flag_5d": 0,
+      "bulk_net_value_cr": 0.0,
+      "block_buy_flag_5d": 0,
+      "insider_like_buy_flag": 0,
+      "promoter_delta_q": 0.0,
+      "fii_delta_q": 0.0,
+      "dii_delta_q": 0.0,
+      "delivery_pct": 70.92,
+      "delivery_vs_avg": 1.113
+    },
+    "outcomes": {
+      "15": {
+        "target_at": "2026-10-23T15:20:00+05:30",
+        "status": "scored",
+        "actual_at": "2026-10-23T15:30:00+05:30",
+        "actual_price": 1217.5,
+        "actual_return_pct": 0.1893
+      },
+      "30": {
+        "target_at": "2026-10-23T15:35:00+05:30",
+        "status": "pending"
+      },
+      "60": {
+        "target_at": "2026-10-23T16:05:00+05:30",
+        "status": "pending"
+      }
+    }
   }
 ]
