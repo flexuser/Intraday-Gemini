@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-23T04:33:39",
+  "fetched_at": "2026-10-26T05:31:02",
   "symbols": {
     "RELIANCE": {
       "oi_change_pct": 0.0,
@@ -13,8 +13,8 @@
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
       "dii_delta_q": 0.0,
-      "delivery_pct": 33.49,
-      "delivery_vs_avg": 0.71
+      "delivery_pct": 51.22,
+      "delivery_vs_avg": 1.113
     },
     "HDFCBANK": {
       "oi_change_pct": 0.0,
@@ -28,8 +28,8 @@
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
       "dii_delta_q": 0.0,
-      "delivery_pct": 59.33,
-      "delivery_vs_avg": 1.028
+      "delivery_pct": 54.47,
+      "delivery_vs_avg": 0.963
     },
     "ICICIBANK": {
       "oi_change_pct": 0.0,
@@ -43,8 +43,8 @@
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
       "dii_delta_q": 0.0,
-      "delivery_pct": 51.0,
-      "delivery_vs_avg": 0.877
+      "delivery_pct": 64.31,
+      "delivery_vs_avg": 1.092
     },
     "SBIN": {
       "oi_change_pct": 0.0,
@@ -58,8 +58,8 @@
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
       "dii_delta_q": 0.0,
-      "delivery_pct": 43.51,
-      "delivery_vs_avg": 0.887
+      "delivery_pct": 52.23,
+      "delivery_vs_avg": 1.048
     },
     "INFY": {
       "oi_change_pct": 0.0,
@@ -73,8 +73,8 @@
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
       "dii_delta_q": 0.0,
-      "delivery_pct": 54.75,
-      "delivery_vs_avg": 1.07
+      "delivery_pct": 52.81,
+      "delivery_vs_avg": 1.018
     },
     "TCS": {
       "oi_change_pct": 0.0,
@@ -88,8 +88,8 @@
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
       "dii_delta_q": 0.0,
-      "delivery_pct": 42.86,
-      "delivery_vs_avg": 0.835
+      "delivery_pct": 34.36,
+      "delivery_vs_avg": 0.724
     },
     "BHARTIARTL": {
       "oi_change_pct": 0.0,
@@ -103,8 +103,8 @@
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
       "dii_delta_q": 0.0,
-      "delivery_pct": 60.22,
-      "delivery_vs_avg": 0.934
+      "delivery_pct": 63.13,
+      "delivery_vs_avg": 0.979
     },
     "TATASTEEL": {
       "oi_change_pct": 0.0,
@@ -118,8 +118,8 @@
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
       "dii_delta_q": 0.0,
-      "delivery_pct": 42.96,
-      "delivery_vs_avg": 0.844
+      "delivery_pct": 44.71,
+      "delivery_vs_avg": 0.889
     },
     "ITC": {
       "oi_change_pct": 0.0,
@@ -133,8 +133,8 @@
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
       "dii_delta_q": 0.0,
-      "delivery_pct": 55.15,
-      "delivery_vs_avg": 0.919
+      "delivery_pct": 54.54,
+      "delivery_vs_avg": 0.941
     },
     "AXISBANK": {
       "oi_change_pct": 0.0,
@@ -148,8 +148,8 @@
       "promoter_delta_q": 0.0,
       "fii_delta_q": 0.0,
       "dii_delta_q": 0.0,
-      "delivery_pct": 70.92,
-      "delivery_vs_avg": 1.113
+      "delivery_pct": 62.47,
+      "delivery_vs_avg": 1.003
     }
   }
 }
