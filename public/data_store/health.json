@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-28T14:31:05+05:30",
+  "as_of": "2026-10-28T15:00:55+05:30",
   "status": "DEGRADED",
   "symbols_total": 10,
   "symbols_updated": 10,
@@ -17,7 +17,7 @@
       "tradeable": false
     }
   },
-  "sample_llm_error": "skipped: Gemini quota cooldown until 16:00 IST",
+  "sample_llm_error": "no new forecasts after 15:00 IST",
   "errors": [],
-  "last_alert_at": "2026-10-28T14:00:50+05:30"
+  "last_alert_at": "2026-10-28T15:00:55+05:30"
 }
