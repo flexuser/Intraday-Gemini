@@ -41,24 +41,24 @@
     }
   },
   "quant": {
-    "forecasts": 150,
-    "days": 15,
-    "band_coverage": 0.78,
+    "forecasts": 160,
+    "days": 16,
+    "band_coverage": 0.775,
     "band_coverage_ci95": [
-      0.707,
-      0.839
+      0.704,
+      0.833
     ],
     "band_coverage_target": 0.8,
     "published_direction_calls": 0,
     "published_direction_hit_rate": null,
     "published_direction_ci95": null,
-    "shadow_direction_hit_rate": 0.517,
+    "shadow_direction_hit_rate": 0.516,
     "shadow_direction_ci95": [
-      0.437,
-      0.596
+      0.439,
+      0.592
     ],
-    "mean_error_pct": 1.218,
-    "mean_flat_error_pct": 1.218
+    "mean_error_pct": 1.241,
+    "mean_flat_error_pct": 1.241
   },
   "by_symbol": {
     "RELIANCE": {
@@ -454,5 +454,5 @@
       }
     }
   },
-  "as_of": "2026-11-03T15:30:59+05:30"
+  "as_of": "2026-11-03T16:00:57+05:30"
 }
